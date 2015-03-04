@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+      <include
+        android:id="@+id/register_head_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_head_bar_height"
+        layout="@layout/common_header_bar" />
+    <TextView
+        android:id="@+id/account_trans_time"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_above_background"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="交易时间：2013-11-21" />
+    <TextView
+        android:id="@+id/account_trans_type"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_mid_backgroud"
+         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="交易类型：购彩" />
+ <TextView
+        android:id="@+id/account_left_total"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+       android:background="@drawable/list_mid_backgroud"
+         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="当前余额：1元" />
+  <TextView
+        android:id="@+id/account_income"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_mid_backgroud"
+         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="进账金额：1元" />
+  <TextView
+        android:id="@+id/account_cost"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+      android:background="@drawable/list_mid_backgroud"
+          android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="出账金额：1元" />
+    <TextView
+        android:id="@+id/account_freeze"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_mid_backgroud"
+         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="冻结金额：1.00元"/>
+  <TextView
+        android:id="@+id/account_unfreeze"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_mid_backgroud"
+         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="解冻金额：￥ 1.00"/>
+  <TextView
+        android:id="@+id/account_freezeamount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_mid_backgroud"
+         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="冻结总额：￥ 1.00"/>
+
+  <TextView
+        android:id="@+id/trans_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_below_background"
+         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="交易描述："/>
+
+</LinearLayout>

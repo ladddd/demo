@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">快赢彩票</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_betting">购彩大厅 </string>
+    <string name="navigation_issue">开奖信息</string>
+    <string name="navigation_member">我的帐号 </string>
+    <string name="navigation_group">参与合买</string>
+    <string name="navigation_buycenter"> 购彩大厅</string>
+    <string name="navigation_awardinfo">开奖结果</string>
+    <string name="navigation_groupbuy">合买中心</string>
+    <string name="navigation_mylottery">我的彩票</string>
+    <string name="navigation_more">更多</string>
+    <string name="submit">提交</string>
+    <string name="yilou">遗漏</string>
+    <string name="smartzhuihao">智能追号</string>
+    <string name="startgroupbuy">发起合买</string>
+    <string name="k3_hz_rulehint">玩法规则:猜开奖号码相加的和</string>
+    <string name="k3_threesame_rulehint">玩法规则:猜豹子号(3个号相同)</string>
+    <string name="k3_twosame_rulehint">玩法规则:猜对子号(有2个号相同)</string>
+    <string name="k3_two_single">选择同号和不同号的组合,奖金80元</string>
+    <string name="k3_samenum">同号</string>
+    <string name="k3_two_mutiple">猜开奖中两个指定的相同号码,奖金15元</string>
+    <string name="k3_difnum">不同号</string>
+    <string name="k3_three_diff_num">猜开奖的三个不同号码,奖金40元</string>
+    <string name="k3_three_same_num">123/234/345/456任意开出即中10元</string>
+    <string name="k3_two_diff_num">猜开奖号码中2个指定的不同号码,奖金8元</string>
+    <string name="k3_drag3_num">猜开奖的3个不同号码,奖金40元</string>
+    <string name="k3_drag2_num">猜开奖号码中2个指定的不同号码,奖金8元</string>
+    <string name="k3_danma">胆码</string>
+    <string name="k3_tuoma">托码</string>
+    <string name="ssc_fivestar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从五位各选至少1个或多个号码投注,选号与开奖号码一致(位置也相同)即中奖100,000元</font></body> </html> ]]></string>
+    <string name="ssc_fivestar_fuxuan"><![CDATA[<html><head></head><body style="text-align:justify;color:gray;background-color:white;"><font color="#0072E3" size="2">投注说明:从五位各选至少1个或多个号码投注,单注最高奖金101110元。如购买:4|5|6|7|8,该票共8元,由以下4注:45678(五星)、678(三星)、78(二星)、8(一星)构成</font></body> </html> ]]></string>
+    <string name="ssc_fivestar_tongxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从五位各选1个或多个号码投注,选号与开奖号码一致(位置也相同)即中2万元,前三或后三位按位一致即中200元,前二或后二位按位一致即中20元</font></body> </html> ]]></string>
+    <string name="ssc_threestar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从三位各选1个或多个号码,选号与开奖号码后三位一致(位置也相同)即中奖1000元</font></body> </html> ]]></string>
+    <string name="ssc_threestar_fuxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从三位各选至少1个或多个号码投注,单注最高奖金1110元,如购买:6|7|8,该票共6元,由以下3注:678(三星)、78(二星)、8(一星)构成</font></body> </html> ]]></string>
+    <string name="ssc_twostar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从两位各选1个或多个号码,选号与开奖号后两位一致(位置也相同)即中奖100元</font></body> </html> ]]></string>
+    <string name="ssc_twostar_fuxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从两位各选至少1个或多个号码投注,单注最高奖金110元,如购买:7|8,该票共4元,由以下2注:78(二星)、8(一星)构成</font></body> </html> ]]></string>
+    <string name="ssc_twostar_zhixuanhezhi"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择1个和值投注(选号分位),所选和值与开奖号码后两位和值一致即中奖100元</font></body> </html> ]]></string>
+    <string name="ssc_twostar_zuxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择一组1+1的数字,若开奖号码后两位不相同且和投注号码一致,则中50元</font></body> </html> ]]></string>
+    <string name="ssc_twostar_zuxuanhezhi"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择1个和值投注(选号不分位),所选和值与开奖号码后两位和值一致即中奖50元</font></body> </html> ]]></string>
+    <string name="ssc_onestar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从个位选择1个或多个号码,选号与开奖号码个位一致即中奖10元</font></body> </html> ]]></string>
+    <string name="ssc_dxds"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:对十、个位进行大小单双投注,所选大小单双与开奖号码十、个位大小单双一致即中奖4元</font></body> </html> ]]></string>
+    <string name="ssc_twostar_zuxuan_baohao"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:至少选择2个号码,选号与开奖号码后两位(不为对子)一致(位置不限)即中奖50元</font></body> </html> ]]></string>
+    <string name="jx_ssc_fivestar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从五位各选至少1个或多个号码投注,选号与开奖号码一致(位置也相同)即中奖116,000元</font></body> </html> ]]></string>
+    <string name="jx_ssc_fivestar_fuxuan"><![CDATA[<html><head></head><body style="text-align:justify;color:gray;background-color:white;"><font color="#0072E3" size="2">投注说明:从五位各选至少1个或多个号码投注,同时投注五星、四星、三星、二星和一星玩法</font></body> </html> ]]></string>
+    <string name="jx_ssc_fivestar_tongxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从五位各选1个或多个号码投注,选号与开奖号码一致(位置也相同)即中2万元,前三或后三位按位一致即中200元,前二或后二位按位一致即中30元</font></body> </html> ]]></string>
+    <string name="jx_ssc_fourstar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从四位各选1个或多个号码,选号与开奖号后四位按位一致即中1万元,与中间三位或后三位按位一致即中88元</font></body> </html> ]]></string>
+    <string name="jx_ssc_fourstar_fuxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从四位各选1个或多个号码,同时投注四星、三星、二星和一星玩法</font></body> </html> ]]></string>
+    <string name="jx_ssc_threestar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从三位各选1个或多个号码,选号与开奖号码后三位一致(位置也相同)即中奖1160元</font></body> </html> ]]></string>
+    <string name="jx_ssc_threestar_fuxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从三位各选1个或多个号码,同时投注三星、二星和一星玩法</font></body> </html> ]]></string>
+    <string name="jx_ssc_threestar_zhixuanhezhi"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择1个和值投注(选号分位),所选和值与开奖号码后三位和值一致即中奖1160元</font></body> </html> ]]></string>
+    <string name="jx_ssc_threestar_zusan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择一组2+1的数字,即三个号码中有两个相同,若开奖号码后三位出现相同的2+1,则中385元</font></body> </html> ]]></string>
+    <string name="jx_ssc_threestar_zusanbaohao"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择2个或2个以上数字,若开奖号码后三位有2个数字相同并且都在所选号码中,即中奖金385元</font></body> </html> ]]></string>
+    <string name="jx_ssc_threestar_zusanhezhi"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择1个数字,若开奖号码后三位有2个数字相同并且相加之和与它一样就中奖385元</font></body> </html> ]]></string>
+    <string name="jx_ssc_threestar_zuliu"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择3个数字各不相同,若开奖号码后三位不重复且与投注号码一样即中奖金190元</font></body> </html> ]]></string>
+    <string name="jx_ssc_threestar_zuliubaohao"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择3个或3以上数字,若开奖号码后三位不重复且包含投注内容即中奖金190元</font></body> </html> ]]></string>
+    <string name="jx_ssc_threestar_zuliuhezhi"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择1个数字,若开奖号码后三位不重复并且相加之和与它一样就中奖190元</font></body> </html> ]]></string>
+    <string name="jx_ssc_twostar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从两位各选1个或多个号码,选号与开奖号后两位一致(位置也相同)即中奖116元</font></body> </html> ]]></string>
+    <string name="jx_ssc_twostar_fuxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从两位各选1个或多个号码,同时投注二星和一星玩法</font></body> </html> ]]></string>
+    <string name="jx_ssc_twostar_zhixuanhezhi"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择1个和值投注(选号分位),所选和值与开奖号码后两位和值一致即中奖116元</font></body> </html> ]]></string>
+    <string name="jx_ssc_twostar_zuxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择一组1+1的数字,若开奖号码后两位不相同且和投注号码一致,则中58元</font></body> </html> ]]></string>
+    <string name="jx_ssc_twostar_zuxuanhezhi"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择1个和值投注(选号不分位且不为对子),所选和值与开奖号码后两位和值一致即中奖58元</font></body> </html> ]]></string>
+    <string name="jx_ssc_onestar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从个位选择1个或多个号码,选号与开奖号码个位一致即中奖11元</font></body> </html> ]]></string>
+    <string name="jx_ssc_dxds"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:对十、个位进行大小单双投注,所选大小单双与开奖号码十、个位大小单双一致即中奖4元</font></body> </html> ]]></string>
+    <string name="jx_ssc_twostar_zuxuan_baohao"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:至少选择2个号码,选号与开奖号码后两位(不为对子)一致(位置不限)即中奖58元</font></body> </html> ]]></string>
+    <string name="jx_ssc_renxuan_two"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从5位中定位选择2个或更多号码,选号与开奖号码对应位置的两位号码一致即中奖116元</font></body> </html> ]]></string>
+    <string name="jx_ssc_renxuan_one"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从5位中定位选择1个或更多号码,选号与开奖号码对应位置的一位号码一致即中奖11元</font></body> </html> ]]></string>
+
+    
+        <string name="bet_option">投注选项：</string>
+    <string name="bet_option_setting">投注选项设置</string>
+    <string name="stop_following">中奖后停止追号</string>
+    <string name="times_bet">倍投</string>
+    <string name="times">倍</string>
+    <string name="follow_bet">追号</string>
+        <string name="smart_follow">智能追号</string>
+    <string name="alter_follow_plan">修改追号方案</string>
+    <string name="one">1</string>
+    
+        <string name="pull_to_refresh_pull_label">下拉可以刷新</string>
+    <string name="pull_to_refresh_release_label">松开可以刷新</string>
+    <string name="pull_to_refresh_refreshing_label">加载中&#8230;</string>
+    <string name="pull_to_refresh_update">最近更新：%s</string>
+    
+    <string name = "user_realname">真实姓名</string>
+    <string name = "user_cardID">身份证号</string>
+    <string name = "card_type">收款银行</string>
+    <string name = "tikuan_amount">提款金额</string>
+    <string name = "card_openspace">开户行名称</string>
+    <string name = "card_number">银行卡号</string>
+    
+    <!--  <string name = "user_realname_hint">例如：张三</string> -->
+<!--     <string name = "user_cardID_hint">例如：512311197812******</string>
+    <string name = "card_type_hint">-请选择收款银行-</string>
+    <string name = "tikuan_amount_hint">最少10元</string>
+    <string name = "card_openspace_hint">例如：杭州分行文晖支行(支付宝可不填写)</string>
+    <string name = "card_number_hint">银行卡号或支付宝账户</string>
+    
+    <string name = "cardbind_hint">温馨提示：绑定的银行卡的开户信息必须与本系统的个人资料保持一致，如果个人资料有误，请联系客服修改！ 客服热线：0571-88824019</string>
+    
+    <string name="btn_tikuan">提款</string>
+    <string name="btn_bind">绑  定</string>
+    <string name="btn_unbind">取消绑定</string>
+    <string name="get_tikuan_info">正在获取提款信息</string>
+    <string name="get_user_info">正在获取身份信息</string> -->
+    <!-- 
+    <string name="netword_hint">当前网络不可用，请设置</string> -->
+   <!--  <string name="username">用户名</string>
+    <string name="username_hint">请输入用户名</string>
+     <string name="password">密    码</string>
+    <string name="password_hint">请输入密码</string>
+    <string name="remember_pwd">记住密码</string>
+    <string name="btn_login">登   录</string>
+    <string name="btn_register">免费注册</string> -->
+    
+     <string name="netword_hint">当前网络不可用，请设置</string>
+    <string name="username">用户名</string>
+    <string name="username_hint">请输入用户名</string>
+     <string name="password">密&#160;&#160;&#160;&#160;码</string>
+    <string name="password_hint">请输入密码</string>
+    <string name="remember_pwd">记住密码</string>
+    <string name="btn_login">登   录</string>
+    <string name="btn_register">免费注册</string>
+    
+    <string name="btn_cz">立即充值</string>
+    <string name="remote_call_failed">Failure calling remote service</string>
+    
+    	
+	<string name="confirm_install_hint">"安装提示"</string>	
+	<string name="confirm_install">"为保证您的交易安全，需要您安装支付宝安全支付服务，才能进行付款。\n\n点击确定，立即安装。"</string>
+	
+	
+	<string name="Ensure">"确定"</string>
+	<string name="Cancel">"取消"</string>
+	<string name="check_sign_failed">您的订单信息已被非法篡改。</string> 
+	
+	<string name="kjxx_title">开奖信息</string>
+	<string name="empty_hint">您最近没有记录，点击刷新！</string>
+	<string name="hemai_jindu_sort">进度排序</string>
+	<string name="hemai_jine_sort">总金额排序</string>
+	
+	<string name="setting_help">帮助中心</string>
+	<string name="setting_introduce">玩法介绍</string>
+	<string name="setting_invite">邀请好友使用</string>
+	<string name="setting_call">点击拨打客服热线：4006&#8211;999&#8211;721</string>
+	<string name="setting_update">检测更新</string>
+	<string name="setting_about">关于</string>
+	<string name="setting_exit">退出系统</string>
+	
+	 <string name = "user_realname_hint">例如：张三</string>
+    <string name = "user_cardID_hint">例如：512311197812******</string>
+    <string name = "card_type_hint">-请选择收款银行-</string>
+    <string name = "tikuan_input_hint">请输入充值金额</string>
+    <string name = "tikuan_amount_hint">(最低充值10元)</string>
+     <string name = "tikuan_friend_hint">温馨提示：</string>
+      <string name = "tikuan_friend_hintcontent">1.充值0手续费，充值后及时到账！</string>
+    <string name = "card_openspace_hint">例如：杭州分行文晖支行(支付宝可不填写)</string>
+    <string name = "card_number_hint">银行卡号或支付宝账户</string>
+    
+    <string name = "cardbind_hint">温馨提示：绑定的银行卡的开户信息必须与本系统的个人资料保持一致，如果个人资料有误，请联系客服修改！ 客服热线：0571&#8211;88824019</string>
+    
+    <string name="btn_tikuan">提款</string>
+    <string name="btn_bind">绑  定</string>
+    <string name="btn_unbind">取消绑定</string>
+    <string name="get_tikuan_info">正在获取提款信息</string>
+    <string name="get_user_info">正在获取身份信息</string>
+    
+    <string name="version_name">1.0</string>
+    <string name="about_version">版本:</string>
+    <string name="about_owner">版权:</string>
+    <string name="about_owner_content">杭州商帝网络技术有限公司</string>
+    <string name="about_home">官网:</string>
+    <string name="about_home_content">http://www.kuaiwin.com</string>
+    <string name="about_tel">客服电话</string>
+    <string name="about_tel_content">4006&#8211;999&#8211;721</string>
+
+	<string name="chart">走势图</string>
+    
+</resources>

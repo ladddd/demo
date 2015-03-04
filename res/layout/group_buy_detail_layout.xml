@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+<include
+        android:id="@+id/hemaidetail_head_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_head_bar_height"
+        layout="@layout/common_header_bar" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="1.0" >
+
+        <ListView
+            android:id="@+id/group_buy_detail_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@android:color/transparent"
+            android:listSelector="@android:color/transparent"
+            android:fadingEdge="none"
+            android:headerDividersEnabled="true" />
+        <TextView 
+        android:id="@+id/empty_mylotterylistview" 
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent" 
+        android:text="获取数据失败，点击刷新！" 
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:visibility="gone" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/pay_panel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffffff"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="fill_parent"
+            android:layout_height="2.0dip"
+            android:background="#ffe3e1db" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8.0dip" >
+
+            <View
+                android:id="@+id/stub_focus"
+                android:layout_width="0.0dip"
+                android:layout_height="0.0dip"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+
+            <TextView
+                android:id="@+id/tv_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4.0dip"
+                android:drawableRight="@drawable/btn_sub"
+                android:gravity="center_vertical"
+                android:text="购买"
+                android:textSize="16.0sp" />
+
+            <EditText
+                android:id="@+id/number_to_buy"
+                android:layout_width="80.0sp"
+                android:layout_height="27.0dip"
+                android:layout_marginTop="1.0px"
+                  android:background="@drawable/input_bg"
+                android:ellipsize="middle"
+                android:gravity="center"
+                android:hint="1"
+                android:inputType="numberDecimal"
+                android:digits="1234567890"  
+                android:textColorHint="#ffcccccc"
+                android:textSize="16.0sp" />
+
+            <TextView
+                android:id="@+id/tv_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="-1.0dip"
+                android:drawableLeft="@drawable/btn_add"
+                android:gravity="center_vertical"
+                android:text="份"
+                android:textSize="16.0sp" />
+
+            <TextView
+                android:id="@+id/tv_remain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4.0dip"
+                android:text="(剩余12份)"
+                android:textSize="16.0sp" />
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
+        <RelativeLayout
+            style="@style/bottom"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+             android:background="@color/white"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/money_to_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8.0dip"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:textSize="12.0sp" />
+
+            <TextView
+                android:id="@+id/sumbit_insure"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@color/footer_blue"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="4dp"
+                android:text="确认投注"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

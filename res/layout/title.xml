@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+	<View android:id="@+id/bar_divider"
+	      android:layout_width="match_parent"
+	      android:layout_height="0.5dp"
+	      android:layout_alignParentBottom="true"
+	      android:background="#71849a"/>
+
+	<!--<RelativeLayout-->
+	<!--android:id="@+id/left_button"-->
+	<!--android:layout_width="40dp"-->
+	<!--android:layout_height="match_parent">-->
+	<!--<ImageView-->
+	<!--android:layout_width="wrap_content"-->
+	<!--android:layout_height="20dp"-->
+	<!--android:layout_gravity="center"-->
+	<!--android:layout_marginLeft="10dp"-->
+	<!--android:layout_marginTop="10dp"-->
+	<!--android:layout_alignParentLeft="true"-->
+	<!--android:layout_alignParentStart="true"-->
+	<!--android:src="@drawable/icon_back"/>-->
+
+	<!--</RelativeLayout>-->
+
+
+	<RelativeLayout android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_centerVertical="true"
+	                android:layout_marginLeft="10dp">
+		<TextView
+				android:id="@+id/text_first"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textSize="14sp"
+				android:textColor="@color/chart_black"
+				android:text="据12期截止："
+				android:visibility="gone"/>
+
+		<TextView
+				android:id="@+id/text_second"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_toRightOf="@+id/text_first"
+				android:textSize="14sp"
+				android:textColor="@color/title_orange"
+				android:text="00:00"
+				android:visibility="gone"/>
+
+	</RelativeLayout>
+
+	<RelativeLayout
+			android:id="@+id/finish_btn"
+			android:layout_width="60dp"
+			android:layout_height="30dp"
+			android:layout_marginRight="10dp"
+			android:layout_centerVertical="true"
+			android:layout_alignParentRight="true"
+			android:layout_alignParentEnd="true">
+		<ImageView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:src="@drawable/title_btn_bg"
+				android:scaleType="fitXY"/>
+
+		<TextView
+				android:layout_width="60dp"
+				android:layout_height="30dp"
+				android:text="完成"
+				android:textColor="@color/chart_white"
+				android:gravity="center"
+				android:textSize="16dp"/>
+
+	</RelativeLayout>
+
+
+</RelativeLayout>

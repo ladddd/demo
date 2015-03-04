@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            style="@style/simple_corner"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:padding="4.0dip" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="第1位"
+                    android:textColor="@color/deep_red"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="至少选择1个球"
+                    android:textColor="@color/gray_333"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <com.jincaizi.kuaiwin.widget.MyGridView
+                android:id="@+id/pls_one_ball_group"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:horizontalSpacing="0.0dip"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="auto_fit"
+                android:columnWidth="67px"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="0.0dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/simple_corner"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:padding="4.0dip" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="第2位"
+                    android:textColor="@color/deep_red"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="至少选择1个球"
+                    android:textColor="@color/gray_333"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <com.jincaizi.kuaiwin.widget.MyGridView
+                android:id="@+id/pls_two_ball_group"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:horizontalSpacing="0.0dip"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="auto_fit"
+                android:columnWidth="67px"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="0.0dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/simple_corner"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:padding="4.0dip" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="第3位"
+                    android:textColor="@color/deep_red"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="至少选择1个球"
+                    android:textColor="@color/gray_333"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <com.jincaizi.kuaiwin.widget.MyGridView
+                android:id="@+id/pls_three_ball_group"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:horizontalSpacing="0.0dip"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="auto_fit"
+                android:columnWidth="67px"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="0.0dip" />
+        </LinearLayout>
+<LinearLayout
+            style="@style/simple_corner"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:padding="4.0dip" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="第4位"
+                    android:textColor="@color/deep_red"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="至少选择1个球"
+                    android:textColor="@color/gray_333"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <com.jincaizi.kuaiwin.widget.MyGridView
+                android:id="@+id/pls_four_ball_group"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:horizontalSpacing="0.0dip"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="auto_fit"
+                android:columnWidth="67px"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="0.0dip" />
+        </LinearLayout>
+        <LinearLayout
+            style="@style/simple_corner"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:padding="4.0dip" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="第5位"
+                    android:textColor="@color/deep_red"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="至少选择1个球"
+                    android:textColor="@color/gray_333"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <com.jincaizi.kuaiwin.widget.MyGridView
+                android:id="@+id/pls_five_ball_group"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:horizontalSpacing="0.0dip"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="auto_fit"
+                android:columnWidth="67px"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="0.0dip" />
+        </LinearLayout>
+        <LinearLayout
+            style="@style/simple_corner"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:padding="4.0dip" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="第6位"
+                    android:textColor="@color/deep_red"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="至少选择1个球"
+                    android:textColor="@color/gray_333"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <com.jincaizi.kuaiwin.widget.MyGridView
+                android:id="@+id/pls_six_ball_group"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:horizontalSpacing="0.0dip"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="auto_fit"
+                android:columnWidth="67px"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="0.0dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/simple_corner"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:padding="4.0dip" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="第7位"
+                    android:textColor="@color/deep_red"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:text="至少选择1个球"
+                    android:textColor="@color/gray_333"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <com.jincaizi.kuaiwin.widget.MyGridView
+                android:id="@+id/pls_seven_ball_group"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:horizontalSpacing="0.0dip"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="auto_fit"
+                android:columnWidth="67px"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="0.0dip" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

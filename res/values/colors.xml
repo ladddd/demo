@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="footer_blue">#0072E3</color>
+  <color name="footer_black">#4F4F4F</color>
+  
+  <color name="white">#ffeeeeee</color>
+  <color name="title_bg">#4D7cdcff</color>
+  <color name="widget_bar_bg_n">#ff2f3030</color>
+  <color name="red">#ffb00f0f</color>
+  <color name="green">#ff6e940e</color>
+  <color name = "blue">#2F51E6</color>
+   <color name="gray_333">#ff333333</color>
+     <color name="full_red">#ffff0000</color>
+      <color name="deep_red">#ff9d0909</color>
+      
+       <color name="tc_red">#ffc33f51</color>
+    <color name="tc_green">#ff479e12</color>
+    <color name="tc_gray">#ffd6d7d9</color>
+    <color name="tc_blue">#ff2167bc</color>
+    <color name="tc_default">#ff938268</color>
+    
+    <color name="light_orange">#FFF3EE</color>
+    <color name="light_yellow">#FFE4CA</color>
+    <color name="light_blue">#ACD6FF</color>
+    <color name="half_orange">#FFAD86</color>
+    <color name="k3_orange">#ff8040</color>
+    <color name="orange_44">#ffcc66</color>
+    <color name="orange_33">#ffcc99</color>
+    <color name="tc_toggle_off">#ff4e4234</color>
+    <color name="tc_bet_money">#fff3ce6b</color>
+     <color name="title_btn_pressed">#ff8e1124</color>
+      <color name="black">#ff433a1f</color>
+      
+      <color name="orange">#E6B92F</color>
+      <color name="gray_111">#F7F3F3</color>
+       <color name="modena">#ff973b0e</color>
+       <color name="table_spacing_line">#ffdddddd</color>
+
+	<!--chart-->
+	<color name="chart_black">#000000</color>
+
+	<color name="three_equal_bg">#c23535</color>
+	<color name="three_not_equal_bg">#0fa11c</color>
+
+	<color name="result_mark">#00dd00</color>
+	<color name="title_orange">#ffb400</color>
+	<color name="chart_white">#ffffff</color>
+	<color name="mark_green">#257e34</color>
+	<color name="row_bg">#f4e2ce</color>
+
+	<color name="small_counter_bg">#06360e</color>
+
+	<color name="counter_first">#05ca18</color>
+	<color name="counter_second">#df3535</color>
+	<color name="counter_third">#baac0f</color>
+	<color name="counter_forth">#5598de</color>
+	<color name="bottom_bg">#fbf7f8</color>
+
+	<color name="setting_text">#979494</color>
+	<color name="setting_bg">#f5f6f0</color>
+
+	<color name="shadow_start">#80000000</color>
+	<color name="shadow_end">#00000000</color>
+    
+</resources>

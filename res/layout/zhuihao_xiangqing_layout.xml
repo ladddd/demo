@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/zhuihao_xiangqing_headbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_head_bar_height"
+        layout="@layout/common_header_bar" />
+<RelativeLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    >
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:text="期号"
+        />
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:text="开奖状态"
+        />
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:text="追号状态"
+        />
+    
+</RelativeLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#E6E4E4" />
+    <ListView
+        android:id="@+id/zhuihao_detail_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/white"
+        android:cacheColorHint="#00000000"
+        android:divider="#E6E4E4"
+        android:dividerHeight="1dip"
+        android:fadingEdge="none" >
+    </ListView>
+ <TextView 
+        android:id="@+id/empty_mylotterylistview" 
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent" 
+        android:text="您最近没有记录，点击刷新！" 
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:visibility="gone" /> 
+</LinearLayout>

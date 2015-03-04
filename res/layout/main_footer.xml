@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="@dimen/main_head_bar_height"
+    android:orientation="vertical"
+     >
+     <View 
+           android:layout_width="match_parent"
+           android:layout_height="1dp"
+         android:background="@android:color/darker_gray"
+         />
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <RadioButton
+        android:id="@+id/radio_button0"
+        style="@style/main_footbar_radio"
+        android:drawableTop="@drawable/widget_buycenter"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:text="@string/navigation_buycenter" />
+     <RadioButton
+        android:id="@+id/radio_button2"
+        style="@style/main_footbar_radio"
+        android:drawableTop="@drawable/widget_groupbuy"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:text="@string/navigation_groupbuy" />
+    <RadioButton
+        android:id="@+id/radio_button1"
+        style="@style/main_footbar_radio"
+        android:drawableTop="@drawable/widget_awardinfo"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:text="@string/navigation_awardinfo" />
+    <RadioButton
+        android:id="@+id/radio_button3"
+        style="@style/main_footbar_radio"
+        android:drawableTop="@drawable/widget_mylottery"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:text="@string/navigation_mylottery" />
+    <RadioButton
+        android:id="@+id/radio_button4"
+        style="@style/main_footbar_radio"
+        android:drawableTop="@drawable/widget_more"
+        android:textStyle="bold"
+        android:layout_weight="1"
+        android:text="@string/navigation_more" />
+
+</LinearLayout>
+</LinearLayout>

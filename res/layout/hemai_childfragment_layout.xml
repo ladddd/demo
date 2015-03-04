@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <!-- The PullToRefreshExpandableListView replaces a standard ExpandableListView widget. -->
+
+    <com.sd.jincaizi.widget.PullToRefreshExpandableListView
+        android:id="@+id/hemai_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:divider="@android:color/transparent"
+        android:childDivider="@drawable/shadow"
+        />
+
+    <LinearLayout
+        android:id="@+id/panel_time_num"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/jczq_pick_time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:drawableRight="@drawable/icon_down"
+            android:gravity="center"
+            android:paddingBottom="4.0dip"
+            android:paddingRight="8.0dip"
+            android:paddingTop="4.0dip"
+            android:text="2013-12-13 星期二  34场比赛可投"
+            android:textColor="@color/tc_default" />
+
+        <ImageView
+            android:id="@+id/shandow"
+            android:layout_width="fill_parent"
+            android:layout_height="4.0dip"
+            android:background="@drawable/shadow"
+            android:contentDescription="@null"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/empty_mylotterylistview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:text="您最近没有记录，点击刷新！"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+</RelativeLayout>

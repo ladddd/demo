@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="30dp"
+              android:minHeight="30dp"
+              android:orientation="vertical"
+              android:background="@color/chart_white">
+	<View
+			android:id="@+id/divide"
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="#000000"
+			android:visibility="gone"/>
+
+
+	<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="30dp"
+			android:minHeight="30dp"
+			android:weightSum="61">
+
+		<LinearLayout
+				android:id="@+id/normal_table_header"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="25"
+				android:orientation="horizontal"
+				android:weightSum="5">
+			<TextView
+					android:id="@+id/issue"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="3"
+					android:gravity="center"
+					android:textColor="#000000"/>
+
+			<View android:layout_width="1dp"
+			      android:layout_height="match_parent"
+			      android:background="@drawable/separator_table"/>
+
+			<TextView
+					android:id="@+id/result"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="2"
+					android:gravity="center"
+					android:textColor="@color/mark_green"
+					android:text="开奖号"/>
+
+		</LinearLayout>
+
+		<TextView
+				android:id="@+id/sub_table_header"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="25"
+				android:orientation="horizontal"
+				android:gravity="center"
+				android:visibility="gone"/>
+
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:id="@+id/one_one"
+				android:gravity="center"
+				android:textColor="@color/mark_green"
+				android:text="11"
+				android:layout_weight="6"/>
+
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:id="@+id/two_two"
+				android:gravity="center"
+				android:textColor="@color/mark_green"
+				android:text="22"
+				android:layout_weight="6"/>
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:id="@+id/three_three"
+				android:gravity="center"
+				android:textColor="@color/mark_green"
+				android:text="33"
+				android:layout_weight="6"/>
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:id="@+id/four_four"
+				android:gravity="center"
+				android:textColor="@color/mark_green"
+				android:text="44"
+				android:layout_weight="6"/>
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:id="@+id/five_five"
+				android:gravity="center"
+				android:textColor="@color/mark_green"
+				android:text="55"
+				android:layout_weight="6"/>
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:id="@+id/six_six"
+				android:gravity="center"
+				android:textColor="@color/mark_green"
+				android:text="66"
+				android:layout_weight="6"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

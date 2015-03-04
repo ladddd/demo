@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+        <ViewStub
+        android:id="@+id/vs_lotterycenter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_footer_bar"
+        android:layout="@layout/layout_lotterycenter" />
+
+    <ViewStub
+        android:id="@+id/vs_hemaicenter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_footer_bar"
+        android:layout="@layout/layout_hemaicenter" />
+
+    <ViewStub
+        android:id="@+id/vs_kjcenter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_footer_bar"
+        android:layout="@layout/layout_kjcenter" />
+
+    <ViewStub
+        android:id="@+id/vs_personcenter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_footer_bar"
+        android:layout="@layout/layout_personcenter" />
+    
+      <ViewStub
+        android:id="@+id/vs_morecenter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_footer_bar"
+        android:layout="@layout/layout_morecenter" />
+
+    <include
+        android:id="@+id/main_footer_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        layout="@layout/main_footer" />
+
+</RelativeLayout>

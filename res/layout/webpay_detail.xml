@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        style="@style/title"
+        android:layout_width="fill_parent" >
+
+        <ImageView
+            android:id="@+id/web_leftmenu"
+            android:layout_width="54dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/digital_head_btn_bg"
+            android:contentDescription="@null"
+            android:gravity="center"
+            android:src="@drawable/return_back"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:layout_width="0.5dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/web_leftmenu"
+            android:background="@android:color/white"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:paddingLeft="10.0dip"
+            android:text="支付"
+            android:textColor="@color/white"
+            android:textSize="17.0sp" />
+
+        <ProgressBar
+            android:id="@+id/webloading_progress"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/right_divider"
+            android:indeterminateDrawable="@drawable/common_loading4" />
+
+        <ImageView
+            android:id="@+id/right_divider"
+            android:layout_width="0.5dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@+id/pre_page"
+            android:background="@android:color/white"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/pre_page"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:drawableRight="@drawable/back_to_pre"
+            android:gravity="center"
+            android:paddingLeft="10.0dip"
+            android:text="上一页"
+            android:textColor="@color/white"
+            android:layout_marginRight="10dp"
+            android:textSize="12.0sp" />
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/webPayView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+</LinearLayout>

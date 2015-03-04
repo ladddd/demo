@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rv_touzhu_item"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/pick_item_selector" 
+    android:layout_marginTop="-1dp"
+    >
+    
+    <TextView 
+        android:id = "@+id/tv_pls_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/deep_red"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:paddingTop="10dp"
+        android:text="112"
+        />
+    <TextView 
+        android:id="@+id/tv_pls_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/darker_gray"
+        android:layout_below= "@+id/tv_pls_item"
+        android:layout_marginLeft="20dp"
+         android:paddingTop="2dp"
+        android:paddingBottom="10dp"
+        android:text="[直选]"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="10dp"
+        android:contentDescription="@null"
+        android:src="@drawable/list_arrow" />
+   
+</RelativeLayout>

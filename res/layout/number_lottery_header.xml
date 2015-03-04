@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_title"
+        style="@style/title"
+        android:layout_width="fill_parent"
+        android:layout_alignParentTop="true"
+        android:padding="3.0dip" >
+
+        <ImageView
+            android:id="@+id/touzhu_leftmenu"
+            android:layout_width="54dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/digital_head_btn_bg"
+            android:contentDescription="@null"
+            android:gravity="center"
+            android:src="@drawable/return_back"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/left_divider"
+          style="@style/main_head_divider"
+        android:layout_marginRight="2dip"
+            android:layout_toRightOf="@+id/touzhu_leftmenu"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/current_lottery"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:minWidth="150dp"
+            android:gravity="center"
+            android:drawableRight="@drawable/triangle_white"
+            android:drawablePadding="10dp"
+            android:textColor="@color/white"
+            android:textSize="16.0sp" />
+
+    </RelativeLayout>

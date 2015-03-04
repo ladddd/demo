@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_head_bar_height"
+        layout="@layout/common_header_bar" />
+    
+        <EditText
+            android:id="@+id/pay_num"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/list_alone_nor"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:drawableRight="@null"
+            android:inputType="numberSigned"
+            android:digits="0123456789."
+             android:textSize="14sp"
+            android:hint="@string/tikuan_input_hint" />
+        <TextView 
+           android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="12sp"
+            android:text="@string/tikuan_amount_hint"
+            />
+    
+    <Button
+                android:id="@+id/goto_alipay"
+                style="@style/button_general"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="login"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/btn_cz"
+                android:textColor="@android:color/white"
+                android:textSize="16.0sp" />
+    <TextView 
+           android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:textSize="14sp"
+            android:text="@string/tikuan_friend_hint"
+            />
+<TextView 
+           android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp"
+            android:text="@string/tikuan_friend_hintcontent"
+            />
+</LinearLayout>

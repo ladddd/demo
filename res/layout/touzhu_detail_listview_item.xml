@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rv_touzhu_item"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/pick_item_selector"  >
+    <ImageView
+        android:id="@+id/right_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"
+        android:contentDescription="@null"
+        android:src="@drawable/list_arrow" />
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/lv_redball_bet"
+        android:layout_toLeftOf="@+id/right_arrow"
+        android:layout_alignParentLeft="true"
+        >
+     <TextView
+        android:id="@+id/tv_title_redball"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:paddingLeft="10dp"
+        android:text="红球："
+        android:textColor="@color/red" />
+    <TextView
+        android:id="@+id/tv_red_ball_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="01 02 03 04 05 06"
+        android:textColor="@color/red" />
+    </LinearLayout>
+   <LinearLayout 
+        android:id="@+id/lv_blueball_bet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/lv_redball_bet"
+        android:layout_alignParentLeft="true"
+         android:layout_toLeftOf="@+id/right_arrow"
+        >
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="2dp"
+        android:paddingLeft="10dp"
+        android:text="蓝球："
+        android:textColor="@color/blue" />
+    <TextView
+        android:id="@+id/tv_blue_ball_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="2dp"
+        android:text=" 08"
+        android:textColor="@color/blue" />
+</LinearLayout>
+    <TextView
+        android:id="@+id/tv_type_count"
+        android:layout_below="@+id/lv_blueball_bet"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:paddingBottom="2dp"
+         android:paddingLeft="10dp"
+        android:text="单式投注  1注 2元"
+        android:textColor="@color/orange" />
+</RelativeLayout>

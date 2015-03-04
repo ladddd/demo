@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="30dp"
+              android:minHeight="30dp"
+              android:orientation="vertical"
+              android:background="@color/chart_white">
+	<View
+			android:id="@+id/divide"
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="@color/mark_green"
+			android:visibility="gone"/>
+
+
+	<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="30dp"
+			android:minHeight="30dp"
+			android:weightSum="20">
+
+		<LinearLayout
+				android:id="@+id/normal_table_header"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="11"
+				android:orientation="horizontal"
+				android:weightSum="11">
+			<TextView
+					android:id="@+id/issue"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="3"
+					android:gravity="center"
+					android:textColor="@color/mark_green"/>
+
+			<View android:layout_width="1dp"
+			      android:layout_height="match_parent"
+			      android:background="@drawable/separator_table_first"/>
+
+			<TextView
+					android:id="@+id/result"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="3"
+					android:gravity="center"
+					android:textColor="@color/mark_green"
+					android:text="开奖号"/>
+
+			<View android:layout_width="0.5dp"
+			      android:layout_height="match_parent"
+			      android:background="@drawable/separator_table"/>
+
+			<TextView
+					android:id="@+id/sum"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="2.5"
+					android:gravity="center"
+					android:textColor="@color/mark_green"
+					android:text="和值"/>
+
+			<View android:layout_width="0.5dp"
+			      android:layout_height="match_parent"
+			      android:background="@drawable/separator_table"/>
+
+			<TextView
+					android:id="@+id/span"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="2.5"
+					android:gravity="center"
+					android:textColor="@color/mark_green"
+					android:text="跨度"/>
+		</LinearLayout>
+
+		<TextView
+				android:id="@+id/sub_table_header"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="11"
+				android:orientation="horizontal"
+				android:weightSum="11"
+				android:gravity="center"
+				android:visibility="gone"/>
+
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<RelativeLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1.5">
+			<TextView
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:id="@+id/number1"
+					android:gravity="center"
+					android:textColor="@color/mark_green"
+					android:text="1"/>
+
+			<TextView
+					android:id="@+id/number1_bg"
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:background="@drawable/round_bg"
+					android:gravity="center"
+					android:textColor="#ffffff"
+					android:text="1"
+					android:visibility="gone"/>
+
+			<TextView
+					android:id="@+id/number1_count"
+					android:layout_width="12dp"
+					android:layout_height="12dp"
+					android:background="@drawable/counter_bg"
+					android:layout_alignParentRight="true"
+					android:layout_alignParentEnd="true"
+					android:text="2"
+					android:textSize="9sp"
+					android:gravity="center"
+					android:textColor="@color/chart_white"
+					android:visibility="gone"/>
+		</RelativeLayout>
+
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<RelativeLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1.5">
+			<TextView
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:id="@+id/number2"
+					android:gravity="center"
+					android:textColor="@color/mark_green"
+					android:text="2"/>
+
+			<TextView
+					android:id="@+id/number2_bg"
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:background="@drawable/round_bg"
+					android:gravity="center"
+					android:textColor="#ffffff"
+					android:text="2"
+					android:visibility="gone"/>
+
+			<TextView
+					android:id="@+id/number2_count"
+					android:layout_width="12dp"
+					android:layout_height="12dp"
+					android:background="@drawable/counter_bg"
+					android:layout_alignParentRight="true"
+					android:layout_alignParentEnd="true"
+					android:text="2"
+					android:textSize="9sp"
+					android:gravity="center"
+					android:textColor="@color/chart_white"
+					android:visibility="gone"/>
+		</RelativeLayout>
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<RelativeLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1.5">
+			<TextView
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:id="@+id/number3"
+					android:gravity="center"
+					android:textColor="@color/mark_green"
+					android:text="3"/>
+
+			<TextView
+					android:id="@+id/number3_bg"
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:background="@drawable/round_bg"
+					android:gravity="center"
+					android:textColor="#ffffff"
+					android:text="3"
+					android:visibility="gone"/>
+
+			<TextView
+					android:id="@+id/number3_count"
+					android:layout_width="12dp"
+					android:layout_height="12dp"
+					android:background="@drawable/counter_bg"
+					android:layout_alignParentRight="true"
+					android:layout_alignParentEnd="true"
+					android:text="2"
+					android:textSize="9sp"
+					android:gravity="center"
+					android:textColor="@color/chart_white"
+					android:visibility="gone"/>
+		</RelativeLayout>
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<RelativeLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1.5">
+			<TextView
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:id="@+id/number4"
+					android:gravity="center"
+					android:textColor="@color/mark_green"
+					android:text="4"/>
+
+			<TextView
+					android:id="@+id/number4_bg"
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:background="@drawable/round_bg"
+					android:gravity="center"
+					android:textColor="#ffffff"
+					android:text="4"
+					android:visibility="gone"/>
+
+			<TextView
+					android:id="@+id/number4_count"
+					android:layout_width="12dp"
+					android:layout_height="12dp"
+					android:background="@drawable/counter_bg"
+					android:layout_alignParentRight="true"
+					android:layout_alignParentEnd="true"
+					android:text="2"
+					android:textSize="9sp"
+					android:gravity="center"
+					android:textColor="@color/chart_white"
+					android:visibility="gone"/>
+		</RelativeLayout>
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<RelativeLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1.5">
+			<TextView
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:id="@+id/number5"
+					android:gravity="center"
+					android:textColor="@color/mark_green"
+					android:text="5"/>
+
+			<TextView
+					android:id="@+id/number5_bg"
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:background="@drawable/round_bg"
+					android:gravity="center"
+					android:textColor="#ffffff"
+					android:text="5"
+					android:visibility="gone"/>
+
+			<TextView
+					android:id="@+id/number5_count"
+					android:layout_width="12dp"
+					android:layout_height="12dp"
+					android:background="@drawable/counter_bg"
+					android:layout_alignParentRight="true"
+					android:layout_alignParentEnd="true"
+					android:text="2"
+					android:textSize="9sp"
+					android:gravity="center"
+					android:textColor="@color/chart_white"
+					android:visibility="gone"/>
+		</RelativeLayout>
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<RelativeLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1.5">
+			<TextView
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:id="@+id/number6"
+					android:gravity="center"
+					android:textColor="@color/mark_green"
+					android:text="6"/>
+
+			<TextView
+					android:id="@+id/number6_bg"
+					android:layout_width="30dp"
+					android:layout_height="30dp"
+					android:background="@drawable/round_bg"
+					android:gravity="center"
+					android:textColor="#ffffff"
+					android:text="6"
+					android:visibility="gone"/>
+
+			<TextView
+					android:id="@+id/number6_count"
+					android:layout_width="12dp"
+					android:layout_height="12dp"
+					android:background="@drawable/counter_bg"
+					android:layout_alignParentRight="true"
+					android:layout_alignParentEnd="true"
+					android:text="2"
+					android:textSize="9sp"
+					android:gravity="center"
+					android:textColor="@color/chart_white"
+					android:visibility="gone"/>
+		</RelativeLayout>
+
+	</LinearLayout>
+
+</LinearLayout>
+

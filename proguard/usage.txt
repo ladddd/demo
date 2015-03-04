@@ -1,0 +1,541 @@
+android.support.v4.accessibilityservice.AccessibilityServiceInfoCompatIcs:
+    26:26:AccessibilityServiceInfoCompatIcs()
+android.support.v4.app.ActionBarDrawerToggle:
+    private static final int ID_HOME
+android.support.v4.app.ActionBarDrawerToggleHoneycomb:
+    private static final java.lang.String TAG
+    39:92:ActionBarDrawerToggleHoneycomb()
+android.support.v4.app.ActivityCompatHoneycomb:
+    27:27:ActivityCompatHoneycomb()
+    34:35:static void dump(android.app.Activity,java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[])
+android.support.v4.app.ActivityCompatJB:
+    24:24:ActivityCompatJB()
+android.support.v4.app.BackStackRecord:
+    static final java.lang.String TAG
+    static final int OP_NULL
+    static final int OP_ADD
+    static final int OP_REPLACE
+    static final int OP_REMOVE
+    static final int OP_HIDE
+    static final int OP_SHOW
+    static final int OP_DETACH
+    static final int OP_ATTACH
+    779:779:public int getTransition()
+    783:783:public int getTransitionStyle()
+android.support.v4.app.DialogFragment:
+    private static final java.lang.String SAVED_DIALOG_STATE_TAG
+    private static final java.lang.String SAVED_STYLE
+    private static final java.lang.String SAVED_THEME
+    private static final java.lang.String SAVED_CANCELABLE
+    private static final java.lang.String SAVED_SHOWS_DIALOG
+    private static final java.lang.String SAVED_BACK_STACK_ID
+android.support.v4.app.Fragment:
+    static final int INITIALIZING
+    static final int CREATED
+    static final int ACTIVITY_CREATED
+    static final int STOPPED
+    static final int STARTED
+    static final int RESUMED
+    1410:1416:android.support.v4.app.Fragment findFragmentByWho(java.lang.String)
+android.support.v4.app.FragmentActivity:
+    private static final java.lang.String TAG
+    static final java.lang.String FRAGMENTS_TAG
+    private static final int HONEYCOMB
+    static final int MSG_REALLY_STOPPED
+    static final int MSG_RESUME_PENDING
+android.support.v4.app.FragmentActivity$FragmentTag:
+    public static final int Fragment_id
+    public static final int Fragment_name
+    public static final int Fragment_tag
+    129:129:FragmentActivity$FragmentTag()
+android.support.v4.app.FragmentManagerImpl:
+    static final java.lang.String TAG
+    static final java.lang.String TARGET_REQUEST_CODE_STATE_TAG
+    static final java.lang.String TARGET_STATE_TAG
+    static final java.lang.String VIEW_STATE_TAG
+    static final java.lang.String USER_VISIBLE_HINT_TAG
+    static final int ANIM_DUR
+    public static final int ANIM_STYLE_OPEN_ENTER
+    public static final int ANIM_STYLE_OPEN_EXIT
+    public static final int ANIM_STYLE_CLOSE_ENTER
+    public static final int ANIM_STYLE_CLOSE_EXIT
+    public static final int ANIM_STYLE_FADE_ENTER
+    public static final int ANIM_STYLE_FADE_EXIT
+    1314:1322:public android.support.v4.app.Fragment findFragmentByWho(java.lang.String)
+android.support.v4.app.FragmentPagerAdapter:
+    private static final java.lang.String TAG
+    private static final boolean DEBUG
+android.support.v4.app.FragmentStatePagerAdapter:
+    private static final java.lang.String TAG
+    private static final boolean DEBUG
+android.support.v4.app.ListFragment:
+    static final int INTERNAL_EMPTY_ID
+    static final int INTERNAL_PROGRESS_CONTAINER_ID
+    static final int INTERNAL_LIST_CONTAINER_ID
+android.support.v4.app.LoaderManagerImpl:
+    static final java.lang.String TAG
+    boolean mRetainingStarted
+android.support.v4.app.NavUtils:
+    private static final java.lang.String TAG
+android.support.v4.app.NavUtilsJB:
+    23:23:NavUtilsJB()
+android.support.v4.app.NotificationCompatHoneycomb:
+    25:25:NotificationCompatHoneycomb()
+android.support.v4.app.NotificationCompatIceCreamSandwich:
+    25:25:NotificationCompatIceCreamSandwich()
+android.support.v4.app.ShareCompat$IntentReader:
+    private static final java.lang.String TAG
+android.support.v4.app.ShareCompatICS:
+    private static final java.lang.String HISTORY_FILENAME_PREFIX
+    25:25:ShareCompatICS()
+android.support.v4.app.ShareCompatJB:
+    21:21:ShareCompatJB()
+android.support.v4.app.TaskStackBuilder:
+    private static final java.lang.String TAG
+android.support.v4.app.TaskStackBuilder$TaskStackBuilderImplJellybean
+android.support.v4.app.TaskStackBuilderJellybean
+android.support.v4.content.AsyncTaskLoader:
+    static final java.lang.String TAG
+    static final boolean DEBUG
+android.support.v4.content.ContextCompatHoneycomb:
+    25:25:ContextCompatHoneycomb()
+android.support.v4.content.ContextCompatJellybean:
+    23:23:ContextCompatJellybean()
+android.support.v4.content.FileProvider:
+    private static final java.lang.String META_DATA_FILE_PROVIDER_PATHS
+    private static final java.lang.String TAG_ROOT_PATH
+    private static final java.lang.String TAG_FILES_PATH
+    private static final java.lang.String TAG_CACHE_PATH
+    private static final java.lang.String TAG_EXTERNAL
+    private static final java.lang.String ATTR_NAME
+    private static final java.lang.String ATTR_PATH
+android.support.v4.content.IntentCompatHoneycomb:
+    22:22:IntentCompatHoneycomb()
+android.support.v4.content.IntentCompatIcsMr1:
+    21:21:IntentCompatIcsMr1()
+android.support.v4.content.LocalBroadcastManager:
+    private static final java.lang.String TAG
+    private static final boolean DEBUG
+    static final int MSG_EXEC_PENDING_BROADCASTS
+android.support.v4.content.ModernAsyncTask:
+    private static final java.lang.String LOG_TAG
+    private static final int CORE_POOL_SIZE
+    private static final int MAXIMUM_POOL_SIZE
+    private static final int KEEP_ALIVE
+    private static final int MESSAGE_POST_RESULT
+    private static final int MESSAGE_POST_PROGRESS
+    106:107:public static void init()
+    111:112:public static void setDefaultExecutor(java.util.concurrent.Executor)
+    169:169:public final android.support.v4.content.ModernAsyncTask$Status getStatus()
+    321:321:public final java.lang.Object get()
+    341:341:public final java.lang.Object get(long,java.util.concurrent.TimeUnit)
+    371:371:public final varargs android.support.v4.content.ModernAsyncTask execute(java.lang.Object[])
+    433:434:public static void execute(java.lang.Runnable)
+    451:455:protected final varargs void publishProgress(java.lang.Object[])
+android.support.v4.net.ConnectivityManagerCompatGingerbread:
+    33:33:ConnectivityManagerCompatGingerbread()
+android.support.v4.net.ConnectivityManagerCompatHoneycombMR2:
+    35:35:ConnectivityManagerCompatHoneycombMR2()
+android.support.v4.net.ConnectivityManagerCompatJellyBean:
+    24:24:ConnectivityManagerCompatJellyBean()
+android.support.v4.os.ParcelableCompatCreatorHoneycombMR2Stub:
+    22:22:ParcelableCompatCreatorHoneycombMR2Stub()
+android.support.v4.util.TimeUtils:
+    private static final int SECONDS_PER_MINUTE
+    private static final int SECONDS_PER_HOUR
+    private static final int SECONDS_PER_DAY
+android.support.v4.view.AccessibilityDelegateCompatIcs:
+    28:30:AccessibilityDelegateCompatIcs()
+android.support.v4.view.AccessibilityDelegateCompatJellyBean:
+    30:32:AccessibilityDelegateCompatJellyBean()
+android.support.v4.view.GestureDetectorCompat$GestureDetectorCompatImplBase:
+    private static final int SHOW_PRESS
+    private static final int LONG_PRESS
+    private static final int TAP
+android.support.v4.view.GravityCompatJellybeanMr1:
+    23:23:GravityCompatJellybeanMr1()
+android.support.v4.view.KeyEventCompat$BaseKeyEventVersionImpl:
+    private static final int META_MODIFIER_MASK
+    private static final int META_ALL_MASK
+android.support.v4.view.KeyEventCompatEclair:
+    22:22:KeyEventCompatEclair()
+android.support.v4.view.KeyEventCompatHoneycomb:
+    24:24:KeyEventCompatHoneycomb()
+android.support.v4.view.MenuItemCompatHoneycomb:
+    25:25:MenuItemCompatHoneycomb()
+android.support.v4.view.MotionEventCompatEclair:
+    24:24:MotionEventCompatEclair()
+android.support.v4.view.PagerTabStrip:
+    private static final java.lang.String TAG
+    private static final int INDICATOR_HEIGHT
+    private static final int MIN_PADDING_BOTTOM
+    private static final int TAB_PADDING
+    private static final int TAB_SPACING
+    private static final int MIN_TEXT_SPACING
+    private static final int FULL_UNDERLINE_HEIGHT
+    private static final int MIN_STRIP_HEIGHT
+android.support.v4.view.PagerTitleStrip:
+    private static final java.lang.String TAG
+    private static final float SIDE_ALPHA
+    private static final int TEXT_SPACING
+android.support.v4.view.PagerTitleStripIcs:
+    26:31:PagerTitleStripIcs()
+android.support.v4.view.PagerTitleStripIcs$SingleLineAllCapsTransform:
+    private static final java.lang.String TAG
+android.support.v4.view.VelocityTrackerCompatHoneycomb:
+    24:24:VelocityTrackerCompatHoneycomb()
+android.support.v4.view.ViewCompat:
+    private static final long FAKE_FRAME_TIME
+android.support.v4.view.ViewCompatGingerbread:
+    21:21:ViewCompatGingerbread()
+android.support.v4.view.ViewCompatHC:
+    23:23:ViewCompatHC()
+android.support.v4.view.ViewCompatICS:
+    27:27:ViewCompatICS()
+android.support.v4.view.ViewCompatJellybeanMr1:
+    25:25:ViewCompatJellybeanMr1()
+android.support.v4.view.ViewConfigurationCompatFroyo:
+    24:24:ViewConfigurationCompatFroyo()
+android.support.v4.view.ViewGroupCompatHC:
+    23:24:private ViewGroupCompatHC()
+android.support.v4.view.ViewGroupCompatIcs:
+    26:26:ViewGroupCompatIcs()
+android.support.v4.view.ViewPager:
+    private static final java.lang.String TAG
+    private static final boolean DEBUG
+    private static final boolean USE_CACHE
+    private static final int DEFAULT_OFFSCREEN_PAGES
+    private static final int MAX_SETTLE_DURATION
+    private static final int MIN_DISTANCE_FOR_FLING
+    private static final int DEFAULT_GUTTER_SIZE
+    private static final int MIN_FLING_VELOCITY
+    private boolean mIgnoreGutter
+    private static final int INVALID_POINTER
+    private static final int CLOSE_ENOUGH
+    private static final int DRAW_ORDER_DEFAULT
+    private static final int DRAW_ORDER_FORWARD
+    private static final int DRAW_ORDER_REVERSE
+    775:776:void smoothScrollTo(int,int)
+android.support.v4.view.accessibility.AccessibilityEventCompatIcs:
+    25:25:AccessibilityEventCompatIcs()
+android.support.v4.view.accessibility.AccessibilityManagerCompatIcs:
+    28:30:AccessibilityManagerCompatIcs()
+android.support.v4.view.accessibility.AccessibilityNodeInfoCompatIcs:
+    28:28:AccessibilityNodeInfoCompatIcs()
+android.support.v4.view.accessibility.AccessibilityNodeInfoCompatJellyBean:
+    26:26:AccessibilityNodeInfoCompatJellyBean()
+android.support.v4.view.accessibility.AccessibilityNodeProviderCompatJellyBean:
+    28:29:AccessibilityNodeProviderCompatJellyBean()
+android.support.v4.view.accessibility.AccessibilityRecordCompatIcs:
+    28:28:AccessibilityRecordCompatIcs()
+android.support.v4.view.accessibility.AccessibilityRecordCompatIcsMr1:
+    24:24:AccessibilityRecordCompatIcsMr1()
+android.support.v4.view.accessibility.AccessibilityRecordCompatJellyBean:
+    25:25:AccessibilityRecordCompatJellyBean()
+android.support.v4.widget.DrawerLayout:
+    private static final java.lang.String TAG
+    private static final int MIN_DRAWER_MARGIN
+    private static final int DEFAULT_SCRIM_COLOR
+    private static final int PEEK_DELAY
+    private static final int MIN_FLING_VELOCITY
+    private static final boolean ALLOW_EDGE_LOCK
+    532:540:void moveDrawerToOffset(android.view.View,float)
+android.support.v4.widget.EdgeEffectCompatIcs:
+    28:28:EdgeEffectCompatIcs()
+android.support.v4.widget.ScrollerCompatGingerbread:
+    24:24:ScrollerCompatGingerbread()
+android.support.v4.widget.ScrollerCompatIcs:
+    24:24:ScrollerCompatIcs()
+android.support.v4.widget.SearchViewCompat:
+    264:266:private SearchViewCompat(android.content.Context)
+android.support.v4.widget.SearchViewCompatHoneycomb:
+    30:37:SearchViewCompatHoneycomb()
+android.support.v4.widget.SearchViewCompatIcs:
+    26:28:SearchViewCompatIcs()
+android.support.v4.widget.SlidingPaneLayout:
+    private static final java.lang.String TAG
+    private static final int DEFAULT_OVERHANG_SIZE
+    private static final int DEFAULT_FADE_COLOR
+    private static final int MIN_FLING_VELOCITY
+android.support.v4.widget.ViewDragHelper:
+    private static final java.lang.String TAG
+    private static final int EDGE_SIZE
+    private static final int BASE_SETTLE_DURATION
+    private static final int MAX_SETTLE_DURATION
+com.alipay.android.app.IAliPay$Stub:
+    private static final java.lang.String DESCRIPTOR
+    static final int TRANSACTION_Pay
+    static final int TRANSACTION_test
+    static final int TRANSACTION_registerCallback
+    static final int TRANSACTION_unregisterCallback
+com.alipay.android.app.IAliPay$Stub$Proxy:
+    106:106:public java.lang.String getInterfaceDescriptor()
+com.alipay.android.app.IAlixPay$Stub:
+    private static final java.lang.String DESCRIPTOR
+    static final int TRANSACTION_Pay
+    static final int TRANSACTION_test
+    static final int TRANSACTION_registerCallback
+    static final int TRANSACTION_unregisterCallback
+    static final int TRANSACTION_prePay
+com.alipay.android.app.IAlixPay$Stub$Proxy:
+    112:112:public java.lang.String getInterfaceDescriptor()
+com.alipay.android.app.IRemoteServiceCallback$Stub:
+    private static final java.lang.String DESCRIPTOR
+    static final int TRANSACTION_startActivity
+    static final int TRANSACTION_payEnd
+    static final int TRANSACTION_isHideLoadingScreen
+com.alipay.android.app.IRemoteServiceCallback$Stub$Proxy:
+    105:105:public java.lang.String getInterfaceDescriptor()
+com.alipay.android.app.sdk.WapPayActivity:
+    private static final java.lang.String PAY_RESULT_TAG
+com.alipay.android.app.sdk.WapPayActivity$InJavaScriptLocalObj:
+    116:135:public void showSource(java.lang.String)
+    112:112:static synthetic com.alipay.android.app.sdk.WapPayActivity access$0(com.alipay.android.app.sdk.WapPayActivity$InJavaScriptLocalObj)
+com.alipay.android.app.sdk.WapPayActivity$InJavaScriptLocalObj$1
+com.alipay.android.app.util.LogUtils:
+    private static final boolean DEBUG
+    private static final java.lang.String TAG
+com.alipay.android.app.util.StoreUtils:
+    private static final java.lang.String SETTING_INFOS
+com.alipay.android.app.util.Utils:
+    private static final java.lang.String MSP_PACKAGE_NAME
+    private static final java.lang.String ALIPAY_PACKAGE_NAME
+    private static final java.lang.String ALIPAY_VERSION
+    private static final java.lang.String MSP_VERSION
+com.alipay.android.app.widget.CustomAlertDialog:
+    private android.widget.ListView mListView
+    private android.widget.ListAdapter mListAdapter
+    private android.content.DialogInterface$OnClickListener mOnClickListener
+com.alipay.android.app.widget.CustomAlertDialog$ButtonHandler:
+    private static final int MSG_DISMISS_DIALOG
+com.google.gson.DefaultDateTypeAdapter:
+    53:54:DefaultDateTypeAdapter(int)
+com.google.gson.FieldAttributes:
+    146:146:java.lang.Object get(java.lang.Object)
+    155:155:boolean isSynthetic()
+com.google.gson.Gson:
+    static final boolean DEFAULT_JSON_NON_EXECUTABLE
+    private static final java.lang.String JSON_NON_EXECUTABLE_PREFIX
+com.google.gson.JsonArray:
+    45:49:com.google.gson.JsonArray deepCopy()
+    33:33:bridge synthetic com.google.gson.JsonElement deepCopy()
+com.google.gson.JsonElement:
+    abstract com.google.gson.JsonElement deepCopy()
+com.google.gson.JsonNull:
+    45:45:com.google.gson.JsonNull deepCopy()
+    26:26:bridge synthetic com.google.gson.JsonElement deepCopy()
+com.google.gson.JsonObject:
+    38:42:com.google.gson.JsonObject deepCopy()
+    32:32:bridge synthetic com.google.gson.JsonElement deepCopy()
+com.google.gson.JsonPrimitive:
+    90:90:com.google.gson.JsonPrimitive deepCopy()
+    33:33:bridge synthetic com.google.gson.JsonElement deepCopy()
+com.google.gson.internal.Excluder:
+    private static final double IGNORE_VERSIONS
+com.google.gson.internal.bind.TypeAdapters$23:
+    private static final java.lang.String YEAR
+    private static final java.lang.String MONTH
+    private static final java.lang.String DAY_OF_MONTH
+    private static final java.lang.String HOUR_OF_DAY
+    private static final java.lang.String MINUTE
+    private static final java.lang.String SECOND
+com.google.gson.stream.JsonReader:
+    private static final long MIN_INCOMPLETE_INTEGER
+    private static final int PEEKED_NONE
+    private static final int PEEKED_BEGIN_OBJECT
+    private static final int PEEKED_END_OBJECT
+    private static final int PEEKED_BEGIN_ARRAY
+    private static final int PEEKED_END_ARRAY
+    private static final int PEEKED_TRUE
+    private static final int PEEKED_FALSE
+    private static final int PEEKED_NULL
+    private static final int PEEKED_SINGLE_QUOTED
+    private static final int PEEKED_DOUBLE_QUOTED
+    private static final int PEEKED_UNQUOTED
+    private static final int PEEKED_BUFFERED
+    private static final int PEEKED_SINGLE_QUOTED_NAME
+    private static final int PEEKED_DOUBLE_QUOTED_NAME
+    private static final int PEEKED_UNQUOTED_NAME
+    private static final int PEEKED_LONG
+    private static final int PEEKED_NUMBER
+    private static final int PEEKED_EOF
+    private static final int NUMBER_CHAR_NONE
+    private static final int NUMBER_CHAR_SIGN
+    private static final int NUMBER_CHAR_DIGIT
+    private static final int NUMBER_CHAR_DECIMAL
+    private static final int NUMBER_CHAR_FRACTION_DIGIT
+    private static final int NUMBER_CHAR_EXP_E
+    private static final int NUMBER_CHAR_EXP_SIGN
+    private static final int NUMBER_CHAR_EXP_DIGIT
+com.google.gson.stream.JsonScope:
+    static final int EMPTY_ARRAY
+    static final int NONEMPTY_ARRAY
+    static final int EMPTY_OBJECT
+    static final int DANGLING_NAME
+    static final int NONEMPTY_OBJECT
+    static final int EMPTY_DOCUMENT
+    static final int NONEMPTY_DOCUMENT
+    static final int CLOSED
+com.jincaizi.adapters.ZhuihaoDetailAdapter:
+    private static final java.lang.String TAG
+com.jincaizi.application.AppManager:
+    private static final java.lang.String TAG
+    47:47:private java.lang.Object readResolve()
+com.jincaizi.application.AppManager$SingletonHolder:
+    29:29:private AppManager$SingletonHolder()
+com.jincaizi.kuaiwin.buycenter.K3_hz_fragment:
+    private static final int HEZHI
+    private static final int THREESAME
+    private static final int TWOSAME
+    private static final int THREEDIF
+    private static final int TWODIF
+    private static final int DISMISS
+com.jincaizi.kuaiwin.buycenter.SmartFollow:
+    private static final int LOGINREQUESTCODE
+com.jincaizi.kuaiwin.buycenter.SumbitGroupBuy:
+    private java.lang.String[] itemContents
+com.jincaizi.kuaiwin.buycenter.SyxwPick:
+    337:337:private int _getBetMoney()
+com.jincaizi.kuaiwin.buycenter.sharexicai.DltPick:
+    private static final int MAXBEISHU
+    private static final int MINBEISHU
+    private static final int MAXQISHU
+    private static final int MINQISHU
+com.jincaizi.kuaiwin.buycenter.sharexicai.FcsdPick:
+    private static final int MAXBEISHU
+    private static final int MINBEISHU
+    private static final int MAXQISHU
+    private static final int MINQISHU
+com.jincaizi.kuaiwin.buycenter.sharexicai.GroupBuyXiCai:
+    491:545:private void _postSFCFormData(java.lang.String,java.lang.String,java.lang.String)
+com.jincaizi.kuaiwin.buycenter.sharexicai.PlsPick:
+    private static final int MAXBEISHU
+    private static final int MINBEISHU
+    private static final int MAXQISHU
+    private static final int MINQISHU
+com.jincaizi.kuaiwin.buycenter.sharexicai.PlwPick:
+    private static final int MAXBEISHU
+    private static final int MINBEISHU
+    private static final int MAXQISHU
+    private static final int MINQISHU
+com.jincaizi.kuaiwin.buycenter.sharexicai.QlcPick:
+    private static final int MAXBEISHU
+    private static final int MINBEISHU
+    private static final int MAXQISHU
+    private static final int MINQISHU
+com.jincaizi.kuaiwin.buycenter.sharexicai.QxcPick:
+    private static final int MAXBEISHU
+    private static final int MINBEISHU
+    private static final int MAXQISHU
+    private static final int MINQISHU
+com.jincaizi.kuaiwin.buycenter.sharexicai.SsqPick:
+    private static final int MAXBEISHU
+    private static final int MINBEISHU
+    private static final int MAXQISHU
+    private static final int MINQISHU
+com.jincaizi.kuaiwin.hemaicenter.HemaiDetailActivity:
+    private static final java.lang.String TAG
+    private static final int LOGINREQUESTCODE
+com.jincaizi.kuaiwin.hemaicenter.HemaiJinduFragment:
+    private static final java.lang.String PAGESIZE
+com.jincaizi.kuaiwin.hemaicenter.HemaiZongjineFragment:
+    private static final java.lang.String PAGESIZE
+com.jincaizi.kuaiwin.kjxx.QiCiDetailActivity:
+    private static final java.lang.String TAG
+com.jincaizi.kuaiwin.kjxx.ShuZiCaiHistoryKJ:
+    private static final java.lang.String TAG
+    private static final java.lang.String PAGESIZE
+com.jincaizi.kuaiwin.mylottery.CardBinding:
+    private static final int LOGINREQUESTCODE
+    private static final java.lang.String TAG
+com.jincaizi.kuaiwin.mylottery.EmailAuth:
+    private static final java.lang.String TAG
+com.jincaizi.kuaiwin.mylottery.Login:
+    private static final int REGISTER
+com.jincaizi.kuaiwin.mylottery.LotteryDetailActivity:
+    private static final java.lang.String TAG
+com.jincaizi.kuaiwin.mylottery.ModifyPwdActivity:
+    private static final int LOGINREQUESTCODE
+com.jincaizi.kuaiwin.mylottery.MyAccountChongzhiFragment:
+    private static final java.lang.String PAGESIZE
+com.jincaizi.kuaiwin.mylottery.MyAccountDetailFragment:
+    private static final java.lang.String PAGESIZE
+com.jincaizi.kuaiwin.mylottery.MyAccountTikuanFragment:
+    private static final java.lang.String PAGESIZE
+com.jincaizi.kuaiwin.mylottery.MyLotteryRecordDaigou:
+    private static final java.lang.String TAG
+    private static final java.lang.String PAGESIZE
+com.jincaizi.kuaiwin.mylottery.MyLotteryRecordHemai:
+    private static final java.lang.String TAG
+    private static final java.lang.String PAGESIZE
+com.jincaizi.kuaiwin.mylottery.MyLotteryRecordZuihao:
+    private static final java.lang.String TAG
+    private static final java.lang.String PAGESIZE
+com.jincaizi.kuaiwin.mylottery.MySeftChooseActivity:
+    private static final java.lang.String TAG
+    private static final java.lang.String PAGESIZE
+com.jincaizi.kuaiwin.mylottery.MyTikuan:
+    private static final int LOGINREQUESTCODE
+    private static final java.lang.String TAG
+com.jincaizi.kuaiwin.mylottery.PhoneAuth:
+    private static final java.lang.String TAG
+com.jincaizi.kuaiwin.mylottery.RealnameAuth:
+    private static final java.lang.String TAG
+com.jincaizi.kuaiwin.mylottery.Register:
+    private static final java.lang.String TAG
+com.jincaizi.kuaiwin.mylottery.ZhuiHaoFangAList:
+    private static final java.lang.String TAG
+    private static final java.lang.String PAGESIZE
+com.jincaizi.kuaiwin.mylottery.ZhuiHaoXiangqingList:
+    private static final java.lang.String PAGESIZE
+com.jincaizi.kuaiwin.mylottery.epay.Base64:
+    private static final int BASELENGTH
+    private static final int LOOKUPLENGTH
+    private static final int TWENTYFOURBITGROUP
+    private static final int EIGHTBIT
+    private static final int SIXTEENBIT
+    private static final int FOURBYTE
+    private static final int SIGN
+    private static final char PAD
+    private static final boolean fDebug
+com.jincaizi.kuaiwin.mylottery.epay.EpayQuick:
+    private static final int RQF_PAY
+com.jincaizi.kuaiwin.mylottery.epay.Rsa:
+    private static final java.lang.String ALGORITHM
+com.jincaizi.kuaiwin.utils.SafeAsyncTask:
+    private static final java.lang.String TAG
+com.jincaizi.kuaiwin.utils.Utils:
+    private static final java.lang.String TAG
+com.jincaizi.kuaiwin.widget.CustomScrollView:
+    static final int ANIMATED_SCROLL_GAP
+    static final float MAX_SCROLL_FACTOR
+    private static final int INVALID_POINTER
+com.jincaizi.kuaiwin.widget.PullToRefreshListView:
+    private static final java.lang.String TAG
+    private static final int PULL_TO_REFRESH
+    private static final int RELEASE_TO_REFRESH
+    private static final int REFRESHING
+    private static final int DONE
+com.jincaizi.kuaiwin.widget.datepicker.NumericWheelAdapter:
+    private static final int DEFAULT_MIN_VALUE
+com.jincaizi.kuaiwin.widget.datepicker.WheelView:
+    private static final int SCROLLING_DURATION
+    private static final int MIN_DELTA_FOR_SCROLLING
+    private static final int VALUE_TEXT_COLOR
+    private static final int ITEMS_TEXT_COLOR
+    private static final int ADDITIONAL_ITEM_HEIGHT
+    private static final int ADDITIONAL_ITEMS_SPACE
+    private static final int LABEL_OFFSET
+    private static final int PADDING
+    private static final int DEF_VISIBLE_ITEMS
+com.jincaizi.vendor.http.AsyncHttpResponseHandler:
+    private static final java.lang.String LOG_TAG
+com.jincaizi.vendor.http.PersistentCookieStore:
+    private static final java.lang.String LOG_TAG
+    private static final java.lang.String COOKIE_PREFS
+    private static final java.lang.String COOKIE_NAME_STORE
+    private static final java.lang.String COOKIE_NAME_PREFIX
+com.jincaizi.vendor.http.SimpleMultipartEntity:
+    private static final java.lang.String LOG_TAG
+    private static final java.lang.String APPLICATION_OCTET_STREAM
+    107:108:public void addPart(java.lang.String,java.io.File)

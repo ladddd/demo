@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+       <RelativeLayout
+        style="@style/title"
+         android:layout_gravity="center_horizontal"
+        android:layout_width="fill_parent" >
+
+        <ImageView
+            android:id="@+id/touzhu_leftmenu"
+            android:layout_width="54dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:background="@drawable/digital_head_btn_bg"
+            android:contentDescription="@null"
+            android:gravity="center"
+            android:src="@drawable/return_back"
+            android:textColor="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/left_divider"
+          style="@style/main_head_divider"
+        android:layout_marginRight="2dip"
+            android:layout_toRightOf="@+id/touzhu_leftmenu"
+            android:contentDescription="@null" />
+      <ProgressBar 
+            android:id="@+id/smartfollow_pb"
+            android:layout_toLeftOf="@+id/current_lottery"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="4dp"
+            android:indeterminateDrawable="@drawable/common_loading4"
+            android:visibility="gone"
+            />
+        <TextView
+            android:id="@+id/current_lottery"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:paddingLeft="10.0dip"
+            android:textColor="@color/white"
+            android:textSize="17.0sp" />
+       
+ <TextView 
+      android:id="@+id/ps_info"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
+      android:layout_alignParentBottom="true"
+      android:visibility="gone"
+      android:textColor="@color/half_orange"
+      android:textSize="12sp"
+      />
+        <ImageView
+            android:id="@+id/right_divider"
+            style="@style/main_head_divider"
+        android:layout_marginRight="2dip"
+            android:layout_toLeftOf="@+id/dataPicker"
+            android:visibility="gone"
+            android:contentDescription="@null" />
+         
+         <ImageView
+            android:id="@+id/dataPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+              android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:contentDescription="@null"
+            android:background="@drawable/icon_date"
+             android:visibility="gone"
+             />
+    </RelativeLayout>
+      <ListView
+        android:id="@+id/shuzicaikj_history_list"
+        android:background="@android:color/white"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="#00000000"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="1dip"
+        android:fadingEdge="none">
+    </ListView>  
+       <TextView 
+        android:id="@+id/empty_mylotterylistview" 
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent" 
+        android:text="您最近没有记录，点击刷新！" 
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:visibility="gone" /> 
+
+</LinearLayout>

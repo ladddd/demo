@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res/com.jincaizi"
+    android:baselineAligned="false"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/list_item_bg" >
+
+    <LinearLayout
+        android:id="@+id/lv_left"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/group_lottery_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="混合过关" />
+
+        <com.jincaizi.kuaiwin.widget.RoundProgressBar
+            android:id="@+id/group_roundProgressBar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android_custom:roundColor="#D0CECE"
+            android_custom:roundProgressColor="@color/red"
+            android_custom:roundWidth="6dp"
+            android_custom:baodiTextColor="@color/orange"
+            android_custom:baodiTextSize="10sp"
+            android_custom:textColor="@color/black"
+            android_custom:textIsDisplayable="true"
+            android_custom:textSize="12sp" 
+            android:layout_marginTop="4dp"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/lv_left"
+        android:layout_toLeftOf="@+id/group_rightarrow"
+        android:layout_alignTop="@+id/lv_left"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/group_faqiren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:drawableLeft="@drawable/user_icon"
+            android:drawablePadding="4dp"
+            android:layout_marginLeft="4dp"
+            android:text="王五" />
+
+        <View
+            android:id="@+id/group_divider"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="4dp"
+            android:layout_below="@+id/group_faqiren"
+            android:background="#E6E4E4" />
+
+        <TextView
+            android:id="@+id/group_zongjine_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/group_divider"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:text="总金额"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/group_zongjine_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/group_zongjine_title"
+             android:layout_alignParentLeft="true"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:text="1203元"
+            android:textColor="@android:color/black" />
+               <TextView
+            android:id="@+id/group_jineaverage_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/group_divider"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:text="每份金额"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/group_jineaverag_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/group_jineaverage_title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:text="2元"
+            android:textColor="@android:color/black" />
+                       <TextView
+            android:id="@+id/group_left_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/group_divider"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:text="剩余"
+            android:textColor="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/group_left_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/group_left_title"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:text="23份"
+            android:textColor="@android:color/black" />
+
+    </RelativeLayout>
+            <ImageView
+                android:id="@+id/group_rightarrow"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5.0dip"
+        android:layout_marginLeft="5dp"
+        android:contentDescription="@null"
+        android:src="@drawable/arrow" />
+</RelativeLayout>

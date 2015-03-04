@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pop_listview"
+        android:divider="@null"
+        android:dividerHeight="1dp"
+        android:scrollbarStyle="@null"
+        android:layout_width="fill_parent"
+        android:layout_gravity="bottom"
+        android:numColumns="auto_fit"
+        android:columnWidth="80dp"
+        android:verticalSpacing="4dp"
+        android:horizontalSpacing="2dp"
+        android:listSelector="@android:color/transparent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="fill_parent">
+
+    </GridView>

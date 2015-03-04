@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="30dp"
+		android:minHeight="30dp"
+		android:weightSum="6"
+		android:background="@color/chart_white">
+
+	<TextView
+			android:id="@+id/issue"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:textColor="@color/chart_black"
+			android:gravity="center"
+			/>
+	<View android:layout_width="1dp"
+	      android:layout_height="match_parent"
+	      android:background="@drawable/separator_table"/>
+
+	<TextView
+			android:id="@+id/sum"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:text="和值"
+			android:textColor="@color/mark_green"
+			android:gravity="center"
+			/>
+	<View android:layout_width="1dp"
+	      android:layout_height="match_parent"
+	      android:background="@drawable/separator_table"/>
+
+	<TextView
+			android:id="@+id/span"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:text="跨度"
+			android:textColor="@color/mark_green"
+			android:gravity="center"
+			/>
+	<View android:layout_width="1dp"
+	      android:layout_height="match_parent"
+	      android:background="@drawable/separator_table"/>
+
+	<TextView
+			android:id="@+id/big_small_ration"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:text="大小比"
+			android:textColor="@color/mark_green"
+			android:gravity="center"
+			/>
+	<View android:layout_width="1dp"
+	      android:layout_height="match_parent"
+	      android:background="@drawable/separator_table"/>
+
+	<TextView
+			android:id="@+id/odd_even_ration"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:text="奇偶比"
+			android:textColor="@color/mark_green"
+			android:gravity="center"
+			/>
+	<View android:layout_width="1dp"
+	      android:layout_height="match_parent"
+	      android:background="@drawable/separator_table"/>
+
+	<TextView
+			android:id="@+id/prime_composite_ration"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:layout_weight="1"
+			android:text="质合比"
+			android:textColor="@color/mark_green"
+			android:gravity="center"
+			/>
+
+</LinearLayout>

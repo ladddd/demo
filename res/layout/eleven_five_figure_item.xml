@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="30dp"
+              android:background="@color/chart_white">
+
+	<View
+			android:id="@+id/divide"
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="#000000"
+			android:visibility="gone"/>
+
+	<LinearLayout android:orientation="horizontal"
+	              android:layout_width="match_parent"
+	              android:layout_height="match_parent"
+	              android:minHeight="30dp"
+	              android:weightSum="13">
+
+		<TextView
+				android:id="@+id/issue"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="2"
+		        android:textColor="@color/chart_black"
+		        android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/one"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="01"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/two"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="02"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/three"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="03"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/four"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="04"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/five"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="05"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/six"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="06"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/seven"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="07"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/eight"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="08"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/nine"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="09"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/ten"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="10"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/eleven"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="11"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+
+	</LinearLayout>
+</LinearLayout>

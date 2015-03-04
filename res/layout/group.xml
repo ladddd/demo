@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/hemaicenter_head_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_head_bar_height"
+        layout="@layout/number_lottery_header" />
+      <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/sort_jindu"
+            android:layout_width="0.0dip"
+            android:layout_height="35dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/sort_bg"
+            android:drawablePadding="8.0dip"
+            android:drawableRight="@drawable/sort_down"
+            android:gravity="right|center"
+            android:paddingRight="50.0dip"
+            android:singleLine="true"
+            android:text="进度排序"
+            android:checked="true"
+            android:textColor="@color/black"
+            android:textSize="13.0sp" />
+
+        <RadioButton
+            android:id="@+id/sort_jine"
+            android:layout_width="0.0dip"
+            android:layout_height="35dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/sort_bg"
+            android:drawablePadding="8.0dip"
+            android:drawableRight="@drawable/sort_null"
+            android:gravity="right|center"
+            android:paddingRight="50.0dip"
+            android:singleLine="true"
+            android:text="总金额排序"
+            android:textColor="@color/black"
+            android:textSize="13.0sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2.0dip"
+        android:background="#ee164fe2" />
+    <FrameLayout
+        android:id="@+id/hemai_child_fragment_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        />
+</LinearLayout>

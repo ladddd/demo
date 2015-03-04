@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jincaizi"
+    android:versionCode="5"
+    android:versionName="1.05" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.hardware.sensor.accelerometer" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <application
+        android:name=".application.AppContext"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Light.NoTitleBar"  >
+        <activity
+            android:name=".kuaiwin.MainActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.Syxw"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.ShiyiyunPick"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.Syiyunjin"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.SyxwPick"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.GroupBuy"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.K3"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.SSC_CQ"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.SSC_JX"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.SmartFollow"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.K3Pick"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.SscPick"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+        
+         <activity
+            android:name=".kuaiwin.buycenter.sharexicai.Ssq"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.sharexicai.SsqPick"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+          <activity
+            android:name=".kuaiwin.buycenter.sharexicai.Dlt"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.sharexicai.DltPick"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+          <activity
+            android:name=".kuaiwin.buycenter.sharexicai.Fcsd"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.sharexicai.FcsdPick"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+          <activity
+            android:name=".kuaiwin.buycenter.sharexicai.Pls"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.sharexicai.PlsPick"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+          <activity
+            android:name=".kuaiwin.buycenter.sharexicai.Plw"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.sharexicai.PlwPick"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+          <activity
+            android:name=".kuaiwin.buycenter.sharexicai.Qlc"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.sharexicai.QlcPick"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+          <activity
+            android:name=".kuaiwin.buycenter.sharexicai.Qxc"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.sharexicai.QxcPick"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+          <activity
+            android:name=".kuaiwin.buycenter.sharexicai.GroupBuyXiCai"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+        
+        
+        
+        <activity
+            android:name=".kuaiwin.hemaicenter.HemaiDetailActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.CardBinding"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.EpayWithAliPay"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.Login"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.LotteryDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.ModifyPwdActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.MyAccountDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.MyAccountTransDetail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.MyLotteryRecordDaigou"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.MyLotteryRecordHemai"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.MyLotteryRecordZuihao"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.MySeftChooseActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.MyTikuan"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.Register"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.ZhuiHaoFangAList"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.ZhuiHaoXiangqingList"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.ZuiHaoDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        
+         <activity
+            android:name=".kuaiwin.mylottery.IdAuthActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <activity
+            android:name=".kuaiwin.mylottery.RealnameAuth"
+            android:screenOrientation="portrait" >
+        </activity>
+         <activity
+            android:name=".kuaiwin.mylottery.PhoneAuth"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.mylottery.EmailAuth"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <activity
+            android:name=".kuaiwin.kjxx.QiCiDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+            <activity
+            android:name=".kuaiwin.kjxx.ShuZiCaiHistoryKJ"
+            android:screenOrientation="portrait" >
+        </activity>
+         <activity
+            android:name=".kuaiwin.setting.AboutActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <activity
+            android:name=".kuaiwin.setting.HelpCenterActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <activity
+            android:name=".kuaiwin.setting.WanfaDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.setting.WanFaIntroActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+       
+        <activity
+            android:name=".kuaiwin.buycenter.yilou.SyxwYilou"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        
+         <activity
+            android:name=".kuaiwin.buycenter.yilou.CustomYilou"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".kuaiwin.buycenter.SumbitGroupBuy"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <activity
+            android:name="com.alipay.android.app.sdk.WapPayActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5305ab6c56240b6faf1acac1" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="百度应用中心" >
+        </meta-data>
+
+        <service
+            android:name="com.umeng.common.net.DownloadingService"
+            android:exported="true"
+            android:process=":DownloadingService" >
+        </service>
+    </application>
+
+</manifest>

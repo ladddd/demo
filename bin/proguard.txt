@@ -1,0 +1,247 @@
+# view AndroidManifest.xml #generated:296
+-keep class com.alipay.android.app.sdk.WapPayActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:21
+-keep class com.jincaizi.application.AppContext { <init>(...); }
+
+# view res/layout/layout_lotterycenter.xml #generated:6
+-keep class com.jincaizi.kuaiwin.BuyCenter { <init>(...); }
+
+# view AndroidManifest.xml #generated:28
+-keep class com.jincaizi.kuaiwin.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:53
+-keep class com.jincaizi.kuaiwin.buycenter.GroupBuy { <init>(...); }
+
+# view AndroidManifest.xml #generated:57
+-keep class com.jincaizi.kuaiwin.buycenter.K3 { <init>(...); }
+
+# view AndroidManifest.xml #generated:75
+-keep class com.jincaizi.kuaiwin.buycenter.K3Pick { <init>(...); }
+
+# view AndroidManifest.xml #generated:61
+-keep class com.jincaizi.kuaiwin.buycenter.SSC_CQ { <init>(...); }
+
+# view AndroidManifest.xml #generated:65
+-keep class com.jincaizi.kuaiwin.buycenter.SSC_JX { <init>(...); }
+
+# view AndroidManifest.xml #generated:41
+-keep class com.jincaizi.kuaiwin.buycenter.ShiyiyunPick { <init>(...); }
+
+# view AndroidManifest.xml #generated:69
+-keep class com.jincaizi.kuaiwin.buycenter.SmartFollow { <init>(...); }
+
+# view AndroidManifest.xml #generated:81
+-keep class com.jincaizi.kuaiwin.buycenter.SscPick { <init>(...); }
+
+# view AndroidManifest.xml #generated:291
+-keep class com.jincaizi.kuaiwin.buycenter.SumbitGroupBuy { <init>(...); }
+
+# view AndroidManifest.xml #generated:45
+-keep class com.jincaizi.kuaiwin.buycenter.Syiyunjin { <init>(...); }
+
+# view AndroidManifest.xml #generated:37
+-keep class com.jincaizi.kuaiwin.buycenter.Syxw { <init>(...); }
+
+# view AndroidManifest.xml #generated:49
+-keep class com.jincaizi.kuaiwin.buycenter.SyxwPick { <init>(...); }
+
+# view AndroidManifest.xml #generated:98
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.Dlt { <init>(...); }
+
+# view AndroidManifest.xml #generated:102
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.DltPick { <init>(...); }
+
+# view AndroidManifest.xml #generated:108
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.Fcsd { <init>(...); }
+
+# view AndroidManifest.xml #generated:112
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.FcsdPick { <init>(...); }
+
+# view AndroidManifest.xml #generated:158
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.GroupBuyXiCai { <init>(...); }
+
+# view AndroidManifest.xml #generated:118
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.Pls { <init>(...); }
+
+# view AndroidManifest.xml #generated:122
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.PlsPick { <init>(...); }
+
+# view AndroidManifest.xml #generated:128
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.Plw { <init>(...); }
+
+# view AndroidManifest.xml #generated:132
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.PlwPick { <init>(...); }
+
+# view AndroidManifest.xml #generated:138
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.Qlc { <init>(...); }
+
+# view AndroidManifest.xml #generated:142
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.QlcPick { <init>(...); }
+
+# view AndroidManifest.xml #generated:148
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.Qxc { <init>(...); }
+
+# view AndroidManifest.xml #generated:152
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.QxcPick { <init>(...); }
+
+# view AndroidManifest.xml #generated:88
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.Ssq { <init>(...); }
+
+# view AndroidManifest.xml #generated:92
+-keep class com.jincaizi.kuaiwin.buycenter.sharexicai.SsqPick { <init>(...); }
+
+# view AndroidManifest.xml #generated:287
+-keep class com.jincaizi.kuaiwin.buycenter.yilou.CustomYilou { <init>(...); }
+
+# view AndroidManifest.xml #generated:281
+-keep class com.jincaizi.kuaiwin.buycenter.yilou.SyxwYilou { <init>(...); }
+
+# view res/layout/layout_hemaicenter.xml #generated:6
+-keep class com.jincaizi.kuaiwin.hemaicenter.HemaiCenter { <init>(...); }
+
+# view AndroidManifest.xml #generated:167
+-keep class com.jincaizi.kuaiwin.hemaicenter.HemaiDetailActivity { <init>(...); }
+
+# view res/layout/layout_kjcenter.xml #generated:6
+-keep class com.jincaizi.kuaiwin.kjxx.Kjxx { <init>(...); }
+
+# view AndroidManifest.xml #generated:256
+-keep class com.jincaizi.kuaiwin.kjxx.QiCiDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:260
+-keep class com.jincaizi.kuaiwin.kjxx.ShuZiCaiHistoryKJ { <init>(...); }
+
+# view AndroidManifest.xml #generated:173
+-keep class com.jincaizi.kuaiwin.mylottery.CardBinding { <init>(...); }
+
+# view AndroidManifest.xml #generated:251
+-keep class com.jincaizi.kuaiwin.mylottery.EmailAuth { <init>(...); }
+
+# view AndroidManifest.xml #generated:177
+-keep class com.jincaizi.kuaiwin.mylottery.EpayWithAliPay { <init>(...); }
+
+# view AndroidManifest.xml #generated:239
+-keep class com.jincaizi.kuaiwin.mylottery.IdAuthActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:181
+-keep class com.jincaizi.kuaiwin.mylottery.Login { <init>(...); }
+
+# view AndroidManifest.xml #generated:185
+-keep class com.jincaizi.kuaiwin.mylottery.LotteryDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:189
+-keep class com.jincaizi.kuaiwin.mylottery.ModifyPwdActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:193
+-keep class com.jincaizi.kuaiwin.mylottery.MyAccountDetail { <init>(...); }
+
+# view AndroidManifest.xml #generated:197
+-keep class com.jincaizi.kuaiwin.mylottery.MyAccountTransDetail { <init>(...); }
+
+# view res/layout/layout_personcenter.xml #generated:6
+-keep class com.jincaizi.kuaiwin.mylottery.MyLotteryFragment { <init>(...); }
+
+# view AndroidManifest.xml #generated:201
+-keep class com.jincaizi.kuaiwin.mylottery.MyLotteryRecordDaigou { <init>(...); }
+
+# view AndroidManifest.xml #generated:205
+-keep class com.jincaizi.kuaiwin.mylottery.MyLotteryRecordHemai { <init>(...); }
+
+# view AndroidManifest.xml #generated:209
+-keep class com.jincaizi.kuaiwin.mylottery.MyLotteryRecordZuihao { <init>(...); }
+
+# view AndroidManifest.xml #generated:213
+-keep class com.jincaizi.kuaiwin.mylottery.MySeftChooseActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:217
+-keep class com.jincaizi.kuaiwin.mylottery.MyTikuan { <init>(...); }
+
+# view AndroidManifest.xml #generated:247
+-keep class com.jincaizi.kuaiwin.mylottery.PhoneAuth { <init>(...); }
+
+# view AndroidManifest.xml #generated:243
+-keep class com.jincaizi.kuaiwin.mylottery.RealnameAuth { <init>(...); }
+
+# view AndroidManifest.xml #generated:221
+-keep class com.jincaizi.kuaiwin.mylottery.Register { <init>(...); }
+
+# view AndroidManifest.xml #generated:225
+-keep class com.jincaizi.kuaiwin.mylottery.ZhuiHaoFangAList { <init>(...); }
+
+# view AndroidManifest.xml #generated:229
+-keep class com.jincaizi.kuaiwin.mylottery.ZhuiHaoXiangqingList { <init>(...); }
+
+# view AndroidManifest.xml #generated:233
+-keep class com.jincaizi.kuaiwin.mylottery.ZuiHaoDetailActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:264
+-keep class com.jincaizi.kuaiwin.setting.AboutActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:268
+-keep class com.jincaizi.kuaiwin.setting.HelpCenterActivity { <init>(...); }
+
+# view res/layout/layout_morecenter.xml #generated:6
+-keep class com.jincaizi.kuaiwin.setting.SettingFragment { <init>(...); }
+
+# view AndroidManifest.xml #generated:276
+-keep class com.jincaizi.kuaiwin.setting.WanFaIntroActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:272
+-keep class com.jincaizi.kuaiwin.setting.WanfaDetailActivity { <init>(...); }
+
+# view res/layout/custom_yilou.xml #generated:74
+-keep class com.jincaizi.kuaiwin.widget.CustomScrollView { <init>(...); }
+
+# view res/layout/doublecolor_drag_layout.xml #generated:100
+# view res/layout/doublecolor_drag_layout.xml #generated:23
+# view res/layout/doublecolor_drag_layout.xml #generated:50
+# view res/layout/doublecolor_drag_layout.xml #generated:74
+# view res/layout/doublecolor_nor_layout.xml #generated:41
+# view res/layout/doublecolor_nor_layout.xml #generated:84
+# view res/layout/pls_fragment_layout.xml #generated:140
+# view res/layout/pls_fragment_layout.xml #generated:183
+# view res/layout/pls_fragment_layout.xml #generated:229
+# view res/layout/pls_fragment_layout.xml #generated:50
+# view res/layout/pls_fragment_layout.xml #generated:96
+# view res/layout/qxc.xml #generated:122
+# view res/layout/qxc.xml #generated:163
+# view res/layout/qxc.xml #generated:204
+# view res/layout/qxc.xml #generated:245
+# view res/layout/qxc.xml #generated:288
+# view res/layout/qxc.xml #generated:39
+# view res/layout/qxc.xml #generated:81
+-keep class com.jincaizi.kuaiwin.widget.MyGridView { <init>(...); }
+
+# view res/layout/accountdetail_childfragment.xml #generated:7
+# view res/layout/hemai_child_pulllistview_layout.xml #generated:8
+# view res/layout/main_reward_num.xml #generated:22
+# view res/layout/mylottery_record_layout.xml #generated:43
+-keep class com.jincaizi.kuaiwin.widget.PullToRefreshListView { <init>(...); }
+
+# view res/layout/group_listview_item.xml #generated:24
+# view res/layout/hemai_type_jindu.xml #generated:16
+-keep class com.jincaizi.kuaiwin.widget.RoundProgressBar { <init>(...); }
+
+# view res/layout/timepicker.xml #generated:27
+# view res/layout/timepicker.xml #generated:33
+# view res/layout/timepicker.xml #generated:39
+# view res/layout/timepicker.xml #generated:45
+# view res/layout/timepicker.xml #generated:51
+-keep class com.jincaizi.kuaiwin.widget.datepicker.WheelView { <init>(...); }
+
+# view res/layout/hemai_childfragment_layout.xml #generated:8
+-keep class com.sd.jincaizi.widget.PullToRefreshExpandableListView { <init>(...); }
+
+# view AndroidManifest.xml #generated:310
+-keep class com.umeng.common.net.DownloadingService { <init>(...); }
+
+# onClick res/layout/cardbinding.xml #generated:195
+# onClick res/layout/epay_quick.xml #generated:40
+# onClick res/layout/login.xml #generated:143
+-keepclassmembers class * { *** login(...); }
+
+# onClick res/layout/cardbinding.xml #generated:183
+# onClick res/layout/login.xml #generated:131
+-keepclassmembers class * { *** register(...); }
+

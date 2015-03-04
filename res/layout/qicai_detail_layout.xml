@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/shuzicai_qicidetail_head_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_head_bar_height"
+        layout="@layout/common_header_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@+id/qici_lottery_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="15dp"
+                    android:text="双色球"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/qici_qihao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@+id/qici_lottery_name"
+                    android:text="第20131110期"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/qici_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="25.0dip"
+                    android:layout_marginTop="2dp"
+                    android:text="2013-11-13"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/qici_result"
+                    style="@style/list_red_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/qici_qihao"
+                    android:layout_marginTop="10dp"
+                    android:text="01 03 17 19 18 14 15"
+                    android:textColor="@color/red"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+            <Button 
+                android:id="@+id/checkMatchDetail"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:layout_margin="4dp"
+                android:text="点击查看对阵详情"
+                android:visibility="gone"
+                />
+            <LinearLayout
+                android:id="@+id/jiangchi_panel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="4dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/jiangxiang_panel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:orientation="vertical" >
+            </LinearLayout>
+
+            <!--
+    <ViewStub
+        android:id="@+id/viewstub_qici_dlt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout="@layout/qici_dlt_viewstub" />
+
+    <ViewStub
+        android:id="@+id/viewstub_qici_ssq"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout="@layout/qici_ssq_viewstub" />
+            -->
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

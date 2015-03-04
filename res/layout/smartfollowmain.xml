@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sf_root_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+ <include
+        android:id="@+id/smartfollow_headerbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_head_bar_height"
+        layout="@layout/common_header_bar" />
+   <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/count_down_bg"
+        android:orientation="horizontal"
+       >
+    <TextView
+        android:id="@+id/period_qihao_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:paddingBottom="6.0dip"
+        android:paddingTop="3.0dip"
+        android:textSize="14.0sp" />
+     <TextView
+        android:id="@+id/period_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6.0dip"
+        android:paddingTop="3.0dip"
+        android:textColor="@color/red"
+        android:textSize="14.0sp" />
+</LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/tv_plan_info"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="6.0dip"
+            android:layout_weight="1.0"
+            android:gravity="center_vertical"
+            android:paddingLeft="12.0dip"
+            android:textColor="#ff606060"
+            android:textSize="16.0sp" />
+
+        <Button
+            android:id="@+id/smartfollow_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4.0dip"
+            android:layout_marginRight="5.0dip"
+            android:layout_marginTop="4.0dip"
+            android:background="@drawable/smartfollow_change_plan_bg"
+            android:paddingBottom="6.0dip"
+            android:paddingLeft="14.0dip"
+            android:paddingRight="14.0dip"
+            android:paddingTop="4.0dip"
+            android:text="修改"
+            android:textColor="@color/tc_toggle_off"
+            android:textSize="20.0sp"
+            android:typeface="sans" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="1.0px"
+        android:background="#ffe5dfdf" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+    <TextView
+            android:id="@+id/zhushu_list_title1"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="2.0"
+            android:gravity="center"
+            android:text="序号"
+            android:textColor="#ffa5998b" />
+
+        <TextView
+            android:layout_width="1.0px"
+            android:layout_height="fill_parent"
+            android:background="#ffe5dfdf" />
+
+        <TextView
+            android:id="@+id/sf_list_title2"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="2.0"
+            android:gravity="center"
+            android:text="期号"
+            android:textColor="#ffa5998b" />
+
+        <TextView
+            android:layout_width="1.0px"
+            android:layout_height="fill_parent"
+            android:background="#ffe5dfdf" />
+
+        <TextView
+            android:id="@+id/sf_list_title3"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="7.0"
+            android:gravity="center"
+            android:text="倍数"
+            android:textColor="#ffa5998b" />
+        
+
+        <TextView
+            android:layout_width="1.0px"
+            android:layout_height="fill_parent"
+            android:background="#ffe5dfdf" />
+        
+            
+
+        <TextView
+            android:id="@+id/total_count"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="4.0"
+            android:gravity="center"
+            android:padding="2.0dip"
+            android:text="累计投入(元)"
+            android:textColor="#ffa5998b" />
+
+        <TextView
+            android:layout_width="1.0px"
+            android:layout_height="fill_parent"
+            android:background="#ffe5dfdf" />
+
+        <TextView
+            android:id="@+id/profit_count"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="4.0"
+            android:gravity="center"
+            android:padding="2.0dip"
+            android:text="中奖盈利(元)"
+            android:textColor="#ffa5998b" />
+
+        <TextView
+            android:layout_width="1.0px"
+            android:layout_height="fill_parent"
+            android:background="#ffe5dfdf" />
+
+        <TextView
+            android:id="@+id/profit_precent"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="4.0"
+            android:gravity="center"
+            android:padding="2.0dip"
+            android:text="盈利率"
+            android:textColor="#ffa5998b" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1.0px"
+        android:background="#ffe5dfdf" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="1.0"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/follow_plan_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollingCache="false" />
+    </LinearLayout>
+
+  
+         <include
+        android:id="@+id/smartfollow_footerbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_head_bar_height"
+        layout="@layout/common_footer" />
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rv_network_hint"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/contact_info_item_height"
+    android:background="@drawable/network_hint_bg"
+    android:gravity="center_vertical"
+    android:visibility="gone"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/network_hint_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/verify_hint"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:text="当前网络不可用，请设置"
+        android:textColor="#F33030" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@null"
+        android:contentDescription="@null"
+        android:gravity="center_vertical"
+        android:src="@drawable/list_arrow" />
+
+</RelativeLayout>

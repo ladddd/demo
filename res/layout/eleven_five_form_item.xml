@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="30dp"
+              android:background="@color/chart_white">
+
+	<View
+			android:id="@+id/divide"
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="#000000"
+			android:visibility="gone"/>
+
+	<LinearLayout android:orientation="horizontal"
+	              android:layout_width="match_parent"
+	              android:layout_height="match_parent"
+	              android:minHeight="30dp"
+	              android:weightSum="17">
+
+		<TextView
+				android:id="@+id/issue"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="3"
+				android:textColor="@color/chart_black"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/odd"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="2"
+				android:text="奇"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/even"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="2"
+				android:text="偶"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/prime"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="2"
+				android:text="质"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/composite"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="2"
+				android:text="合"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/zero"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="2"
+				android:text="0路"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/one"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="2"
+				android:text="1路"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:id="@+id/two"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="2"
+				android:text="2路"
+				android:textColor="@color/mark_green"
+				android:gravity="center"
+				/>
+
+	</LinearLayout>
+
+</LinearLayout>

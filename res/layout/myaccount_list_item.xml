@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/account_trans_detail_bg"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/trans_time_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:text="交易时间：" />
+
+    <TextView
+        android:id="@+id/trans_time_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/trans_time_title"
+        android:text="2013-11-21" />
+
+    <TextView
+        android:id="@+id/trans_type_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/trans_time_title"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="4dp"
+        android:text="交易类型：" />
+
+    <TextView
+        android:id="@+id/trans_type_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/trans_time_content"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/trans_type_title"
+        android:text="购彩" />
+
+    <TextView
+        android:id="@+id/trans_jine_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/bankcard_title"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="4dp"
+        android:drawableLeft="@drawable/icon_account_incoming"
+        android:gravity="center"
+        android:text="￥ 1.00"
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/bank_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/trans_type_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="收款银行：" />
+
+    <TextView
+        android:id="@+id/bank_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/trans_type_content"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/bank_title"
+        android:ellipsize="marquee"
+        android:visibility="gone"
+        android:gravity="center"
+        android:text="￥ 1.00" />
+
+    <TextView
+        android:id="@+id/bankcard_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/bank_title"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="4dp"
+        android:visibility="gone"
+        android:gravity="center"
+        android:text="银行账号：" />
+
+    <TextView
+        android:id="@+id/bankcard_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bank_content"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/bankcard_title"
+        android:ellipsize="marquee"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="￥ 1.00"
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/trans_left_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/trans_jine_content"
+        android:layout_marginTop="4dp"
+        android:layout_toLeftOf="@+id/trans_left_content"
+        android:gravity="center"
+        android:text="余额：" />
+
+    <TextView
+        android:id="@+id/trans_left_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+       android:layout_alignBottom="@+id/trans_jine_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="￥ 1.00"
+        android:textColor="@color/red" />
+
+</RelativeLayout>

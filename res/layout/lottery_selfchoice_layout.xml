@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+     <include
+        android:id="@+id/lottery_selfchoice_head_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_head_bar_height"
+        layout="@layout/common_header_bar" />
+      <ExpandableListView
+        android:id="@+id/mylottery_detail_list"
+        android:background="@android:color/white"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="#00000000"
+        android:divider="#f0f0f0"
+        android:dividerHeight="1dip"
+        android:fadingEdge="none"
+        android:listSelector="@drawable/paper_content_selected" >
+    </ExpandableListView>  
+           <TextView 
+        android:id="@+id/empty_mylotterylistview" 
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent" 
+        android:text="您最近没有记录，点击刷新！" 
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:visibility="gone" /> 
+
+</LinearLayout>

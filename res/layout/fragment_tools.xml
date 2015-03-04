@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/preference_head_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_head_bar_height"
+        layout="@layout/common_header_bar" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/preference_head_bar"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:scrollbars="none" >
+
+       <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin" >
+
+            <TextView
+                android:id="@+id/tv_helpcenter"
+                style="@style/property_textview_above"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/help2"
+                android:text="@string/setting_help" />
+
+
+            <TextView
+                android:id="@+id/tv_playintro"
+                style="@style/property_textview_mid"
+                android:drawableLeft="@drawable/info"
+                android:text="@string/setting_introduce" />
+
+            <TextView
+                android:id="@+id/tv_share"
+                style="@style/property_textview_mid"
+                android:drawableLeft="@drawable/share"
+                android:text="@string/setting_invite" />
+
+            <TextView
+                android:id="@+id/tv_call"
+                style="@style/property_textview_mid"
+                android:drawableLeft="@drawable/phone"
+                android:text="@string/setting_call" />
+
+            <TextView
+                android:id="@+id/tv_update"
+                style="@style/property_textview_below"
+                android:drawableLeft="@drawable/update"
+                android:text="@string/setting_update" />
+            <!--
+            <TextView
+                android:id="@+id/set_communication_type"
+                style="@style/property_textview_below"
+                android:text="@string/preference_set_comm" />
+            -->
+
+            <TextView
+                android:id="@+id/tv_about"
+                style="@style/property_textview_alone"
+                android:layout_width="match_parent"
+                android:drawableLeft="@drawable/about"
+                android:text="@string/setting_about" />
+
+            <Button
+                android:id="@+id/btn_logout"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_general"
+                android:text="@string/setting_exit"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

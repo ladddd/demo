@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+      <include
+        android:id="@+id/pl3_head_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_head_bar_height"
+        android:layout_alignParentTop="true"
+        layout="@layout/common_header_bar" />
+
+    <RelativeLayout
+        android:id="@+id/layout_win_num"
+        style="@style/history_issue"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-4dp"
+        android:layout_below="@+id/pl3_head_bar" >
+
+        <TextView
+            android:id="@+id/pre_num_str"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="正在获取期号"
+            android:textSize="12.0sp" />
+
+        <TextView
+            android:id="@+id/pre_win_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="3.0dip"
+            android:layout_toRightOf="@+id/pre_num_str"
+            android:textColor="@color/red"
+            android:textSize="12.0sp" />
+
+        <TextView
+            android:id="@+id/my_pls_shake_pick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawableTop="@drawable/shake_bg"
+            android:text="摇一摇机选"
+            android:textSize="12.0sp" />
+       
+    </RelativeLayout>
+     <View 
+         android:id="@+id/shadow"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/shadow"
+            android:layout_marginTop="4dp"
+            android:layout_below="@+id/layout_win_num"
+            />
+ <FrameLayout
+        android:id="@+id/fl_pls_pickarea"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pl3_footer_bar"
+        android:layout_below="@+id/shadow" >
+    </FrameLayout>
+
+         <include
+        android:id="@+id/pl3_footer_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_head_bar_height"
+        android:layout_alignParentBottom="true"
+        layout="@layout/common_footer" />
+
+</RelativeLayout>

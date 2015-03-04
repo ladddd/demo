@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="300dp"
+              android:layout_height="wrap_content"
+              android:background="@color/setting_bg">
+
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:background="@color/chart_white">
+
+		<ImageView
+				android:id="@+id/title_icon"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="10dp"
+				android:src="@drawable/setting_title_icon"/>
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="5dp"
+				android:layout_toRightOf="@+id/title_icon"
+				android:textSize="22sp"
+				android:text="走势图设置"
+				android:textColor="@color/setting_text"/>
+	</RelativeLayout>
+
+	<View
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="@drawable/separator_table_first"/>
+
+	<RelativeLayout
+			android:id="@+id/line_setting_layout"
+			android:layout_marginTop="10dp"
+			android:layout_width="match_parent"
+			android:layout_height="40dp">
+
+		<TextView
+				android:id="@+id/line_setting_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:layout_marginStart="10dp"
+				android:layout_centerVertical="true"
+				android:text="折线："
+				android:textSize="18sp"
+				android:textColor="@color/setting_text"/>
+
+		<RadioGroup
+				android:id="@+id/line_radio_group"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:layout_toRightOf="@+id/line_setting_text"
+				android:layout_toEndOf="@+id/line_setting_text"
+				android:layout_centerVertical="true"
+				android:weightSum="2">
+			<RadioButton
+					android:id="@+id/show_line"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:button="@drawable/setting_check_box_selector"
+					android:text="显示折线"
+					android:textColor="@color/setting_text"
+					android:textSize="18sp"
+					android:layout_weight="1"/>
+			<RadioButton
+					android:id="@+id/hide_line"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:button="@drawable/setting_check_box_selector"
+					android:text="隐藏折线"
+					android:layout_marginLeft="10dp"
+					android:layout_marginStart="10dp"
+					android:textColor="@color/setting_text"
+					android:textSize="18sp"
+					android:layout_weight="1"/>
+		</RadioGroup>
+
+	</RelativeLayout>
+
+	<RelativeLayout
+			android:layout_marginTop="5dp"
+			android:layout_width="match_parent"
+			android:layout_height="40dp">
+
+		<TextView
+				android:id="@+id/miss_setting_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:layout_centerVertical="true"
+				android:text="遗漏："
+				android:textSize="18sp"
+				android:textColor="@color/setting_text"/>
+
+		<RadioGroup
+				android:id="@+id/miss_radio_group"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:layout_toRightOf="@+id/miss_setting_text"
+				android:layout_toEndOf="@+id/miss_setting_text"
+				android:layout_centerVertical="true"
+				android:weightSum="2">
+			<RadioButton
+					android:id="@+id/show_miss"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="显示遗漏"
+					android:button="@drawable/setting_check_box_selector"
+					android:textColor="@color/setting_text"
+					android:textSize="18sp"
+					android:layout_weight="1"/>
+			<RadioButton
+					android:id="@+id/hide_miss"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:button="@drawable/setting_check_box_selector"
+					android:layout_marginLeft="10dp"
+					android:layout_marginStart="10dp"
+					android:text="隐藏遗漏"
+					android:textColor="@color/setting_text"
+					android:textSize="18sp"
+					android:layout_weight="1"/>
+		</RadioGroup>
+
+	</RelativeLayout>
+
+	<RelativeLayout
+			android:layout_marginTop="5dp"
+			android:layout_width="match_parent"
+			android:layout_height="40dp">
+
+		<TextView
+				android:id="@+id/count_setting_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:layout_marginStart="10dp"
+				android:layout_centerVertical="true"
+				android:text="统计："
+				android:textSize="18sp"
+				android:textColor="@color/setting_text"/>
+
+		<RadioGroup
+				android:id="@+id/count_radio_group"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:layout_toRightOf="@+id/count_setting_text"
+				android:layout_toEndOf="@+id/count_setting_text"
+				android:layout_centerVertical="true"
+				android:weightSum="2">
+			<RadioButton
+					android:id="@+id/show_count"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="显示统计"
+					android:button="@drawable/setting_check_box_selector"
+					android:textColor="@color/setting_text"
+					android:textSize="18sp"
+					android:layout_weight="1"/>
+			<RadioButton
+					android:id="@+id/hide_count"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:button="@drawable/setting_check_box_selector"
+					android:layout_marginLeft="10dp"
+					android:layout_marginStart="10dp"
+					android:text="隐藏统计"
+					android:textColor="@color/setting_text"
+					android:textSize="18sp"
+					android:layout_weight="1"/>
+		</RadioGroup>
+
+	</RelativeLayout>
+
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="(走势图底部的出现次数等统计数据)"
+				android:textSize="14sp"
+				android:layout_alignParentRight="true"
+				android:layout_alignParentEnd="true"
+				android:layout_marginRight="10dp"
+				android:textColor="@android:color/darker_gray"/>
+	</RelativeLayout>
+
+	<View
+			android:layout_marginTop="10dp"
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="@drawable/separator_table_first"/>
+
+	<LinearLayout android:layout_width="300dp"
+	              android:layout_height="wrap_content"
+	              android:orientation="horizontal"
+	              android:weightSum="2">
+		<TextView
+				android:id="@+id/cancel_btn"
+				android:layout_width="0dp"
+				android:layout_height="35dp"
+				android:layout_weight="1"
+				android:text="取消"
+				android:gravity="center"
+				android:background="@drawable/cancel_btn_bg"
+				android:layout_marginTop="3dp"
+				android:layout_marginRight="5dp"
+				android:layout_marginEnd="5dp"
+				android:layout_marginLeft="5dp"
+				android:layout_marginStart="5dp"
+				android:layout_marginBottom="3dp"
+				android:textSize="18sp"
+				android:textColor="@color/setting_text"/>
+		<TextView
+				android:id="@+id/ok_btn"
+				android:layout_width="0dp"
+				android:layout_height="35dp"
+				android:layout_weight="1"
+				android:text="确认"
+				android:gravity="center"
+				android:background="@drawable/ok_btn_bg"
+				android:layout_marginTop="3dp"
+				android:layout_marginRight="5dp"
+				android:layout_marginEnd="5dp"
+				android:layout_marginLeft="5dp"
+				android:layout_marginStart="5dp"
+				android:layout_marginBottom="3dp"
+				android:textSize="18sp"
+				android:textColor="@color/chart_white"/>
+	</LinearLayout>
+
+</LinearLayout>

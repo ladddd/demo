@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    >
+    <include
+        android:id="@+id/wanfa_detail_headbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_head_bar_height"
+        layout="@layout/common_header_bar" />
+
+<FrameLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center"
+        android:layout_marginTop="60.0dip"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="80.0dip"
+                android:layout_height="80.0dip"
+                android:layout_marginRight="12.0dip"
+                android:contentDescription="@null"
+                android:background="@drawable/ic_launcher" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32.0dip"
+            android:layout_marginRight="32.0dip"
+            android:layout_marginTop="20.0dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12.0dip"
+                android:gravity="right"
+                android:minEms="3"
+                android:text="@string/about_version"
+                android:textColor="#ff898c97"
+                android:textSize="14.0sp" />
+
+            <TextView
+                android:id="@+id/version"
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:autoLink="web"
+                android:gravity="left"
+                android:singleLine="false"
+                android:text="@string/version_name"
+                android:textColor="#ff898c97"
+                android:textSize="14.0sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32.0dip"
+            android:layout_marginRight="32.0dip"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12.0dip"
+                android:gravity="right"
+                android:minEms="3"
+                android:padding="0.0dip"
+                android:text="@string/about_home"
+                android:textColor="#ff898c97"
+                android:textSize="14.0sp" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:autoLink="web"
+                android:singleLine="false"
+                android:text="@string/about_home_content"
+                android:textColor="#ff898c97"
+                android:textSize="14.0sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32.0dip"
+            android:layout_marginRight="32.0dip"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12.0dip"
+                android:gravity="right"
+                android:minEms="3"
+                android:padding="0.0dip"
+                android:text="@string/about_owner"
+                android:textColor="#ff898c97"
+                android:textSize="14.0sp" />
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:gravity="left"
+                android:singleLine="false"
+                android:text="@string/about_owner_content"
+                android:textColor="#ff898c97"
+                android:textSize="14.0sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical" >
+
+        <View
+            android:id="@+id/View03"
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:layout_marginTop="12.0dip"
+            android:background="#ffe5e3df" />
+
+        <LinearLayout
+            android:id="@+id/tel_panel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="12.0dip"
+            android:paddingTop="12.0dip" >
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32.0dip"
+                android:layout_weight="1.0"
+                android:text="@string/about_tel"
+                android:textColor="#ff000000"
+                android:textSize="16.0sp" />
+
+            <TextView
+                android:id="@+id/tv_tel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="32.0dip"
+                android:singleLine="false"
+                android:text="@string/about_tel_content"
+                android:textColor="#ff145cd1"
+                android:textSize="16.0sp" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/View04"
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:layout_marginBottom="12.0dip"
+            android:background="#ffe5e3df" />
+    </LinearLayout>
+
+
+</FrameLayout>
+    
+</LinearLayout>

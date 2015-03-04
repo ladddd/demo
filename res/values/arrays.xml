@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name = "tikuan_card_kind">
+        <item>中国工商银行</item>
+        <item>招商银行</item>
+        <item>中国农业银行</item>
+        <item>中国建设银行</item>
+        <item>中国银行</item>
+        <item>北京银行</item>
+        <item>交通银行</item>
+        <item>兴业银行</item>
+        <item>南京银行</item>
+        <item>中国民生银行</item>
+        <item>中国光大银行</item>
+        <item>平安银行</item>
+        <item>渤海银行</item>
+        <item>华夏银行</item>
+        <item>东亚银行</item>
+        <item>中信银行</item>
+        <item>深圳发展银行</item>
+        <item>上海浦东发展银行</item>
+        <item>广东发展银行</item>
+        <item>广州市农信社</item>
+        <item>广州市商业银行</item>
+        <item>顺德农信社</item>
+        <item>上海农村商业银行</item>
+        <item>支付宝</item>
+        <item>中国邮政储蓄</item>
+    </string-array>
+    
+    <string-array name="help_wanfa_name_items">
+        <item>11运夺金玩法说明</item>
+        <item>江西11选5玩法说明</item>
+        <item>广东11选5玩法说明</item>
+        <item>安徽11选5玩法说明</item>
+        <item>重庆11选5玩法说明</item>
+        <item>辽宁11选5玩法说明</item>
+        <item>上海11选5玩法说明</item>
+        <item>黑龙江11选5玩法说明</item>
+        <item>江苏快3玩法说明</item>
+        <item>安徽快3玩法说明</item>
+        <item>内蒙古快3玩法说明</item>
+        <item>重庆时时彩玩法说明</item>
+        <item>江西时时彩玩法说明</item>
+    </string-array>
+           <string-array name="help_wanfa_url_items">
+        <item>file:///android_asset/help_wanfa/sd_11x5.html</item>
+        <item>file:///android_asset/help_wanfa/jx_11x5.html</item>
+        <item>file:///android_asset/help_wanfa/gd_11x5.html</item>
+        <item>file:///android_asset/help_wanfa/ah_11x5.html</item>
+        <item>file:///android_asset/help_wanfa/cq_11x5.html</item>
+        <item>file:///android_asset/help_wanfa/ln_11x5.html</item>
+        <item>file:///android_asset/help_wanfa/sh_11x5.html</item>
+        <item>file:///android_asset/help_wanfa/hlj_11x5.html</item>
+        <item>file:///android_asset/help_wanfa/js_k3.html</item>
+        <item>file:///android_asset/help_wanfa/ah_k3.html</item>
+        <item>file:///android_asset/help_wanfa/nmg_k3.html</item>
+        <item>file:///android_asset/help_wanfa/cq_ssc.html</item>
+        <item>file:///android_asset/help_wanfa/jx_ssc.html</item>
+    </string-array>
+    
+</resources>

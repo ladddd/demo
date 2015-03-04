@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2.0dip"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            style="@style/simple_corner"
+            android:orientation="vertical"
+            android:padding="4.0dip" >
+
+            <TextView
+                android:id="@+id/front_red＿name"
+                style="@style/pick_title"
+                android:text="胆码区-红球，至少选择1个，最多选择4个"
+                android:textSize="14sp" />
+            <com.jincaizi.kuaiwin.widget.MyGridView
+                android:id="@+id/gv_red_dan_drag"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:horizontalSpacing="0.0dip"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="auto_fit"
+                android:columnWidth="67px"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="0.0dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lv_dan_blue"
+            style="@style/simple_corner"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:padding="4.0dip" >
+
+            <TextView
+                android:id="@+id/front_blue＿name"
+                style="@style/pick_title"
+                android:text="胆码区-蓝球，至少选择1个"
+                android:textColor="@color/footer_blue"
+                android:textSize="14sp" />
+
+            <com.jincaizi.kuaiwin.widget.MyGridView
+                android:id="@+id/gv_blue_dan_group"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:horizontalSpacing="0.0dip"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="auto_fit"
+                android:columnWidth="67px"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="0.0dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/simple_corner"
+            android:orientation="vertical"
+            android:padding="4.0dip" >
+
+            <TextView
+                android:id="@+id/behand_red＿name"
+                style="@style/pick_title"
+                android:text="托码区-红球，至少选择2个"
+                android:textSize="14sp" />
+
+            <com.jincaizi.kuaiwin.widget.MyGridView
+                android:id="@+id/gv_red_tuo_group"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:horizontalSpacing="0.0dip"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="auto_fit"
+                android:columnWidth="67px"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="0.0dip" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lv_behind_blue_pickarea"
+            style="@style/simple_corner"
+            android:orientation="vertical"
+            android:padding="4.0dip" >
+
+            <TextView
+                android:id="@+id/behand_blue＿name"
+                style="@style/pick_title"
+                android:text="托码区-蓝球，至少选择1个"
+                 android:textColor="@color/footer_blue"
+                android:textSize="14sp" />
+
+            <com.jincaizi.kuaiwin.widget.MyGridView
+                android:id="@+id/gv_blue_tuo_group"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:horizontalSpacing="0.0dip"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="auto_fit"
+                android:columnWidth="67px"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="0.0dip" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

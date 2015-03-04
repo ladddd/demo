@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/main_head_bar_height"
+        layout="@layout/number_lottery_header" />
+
+    <LinearLayout
+        android:id="@+id/realname_auth"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/list_above_background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/list_arrow"
+            android:gravity="center_vertical"
+            android:text="实名认证"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+          android:id="@+id/phone_auth"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/list_mid_backgroud"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+          
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/list_arrow"
+            android:gravity="center_vertical"
+            android:text="手机认证"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+           android:id="@+id/email_auth"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/list_below_background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/list_arrow"
+            android:gravity="center_vertical"
+            android:text="邮箱认证"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>

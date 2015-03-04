@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="dexedLibs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/bin/dexedLibs/android-support-v4-ccf0926e7bb088eda2b7f9d8ff4ffde3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/dexedLibs/umeng_sdk-03e616fd575450822f402f2d09541a15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/dexedLibs/alipay-3411f24a79814d0fa6a9eab417782148.jar!/" />
+      <root url="jar://$PROJECT_DIR$/bin/dexedLibs/gson-2.2.4-b226b363cfbef82379f11bc1e514126b.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

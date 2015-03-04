@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="30dp"
+              android:background="@color/bottom_bg">
+
+	<View
+			android:id="@+id/divide"
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="#000000"
+			android:visibility="gone"/>
+
+	<LinearLayout android:orientation="horizontal"
+	              android:layout_width="match_parent"
+	              android:layout_height="match_parent"
+	              android:minHeight="30dp"
+	              android:weightSum="40">
+
+		<TextView
+				android:id="@+id/chose_title"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="12"
+				android:textColor="@color/chart_black"
+				android:gravity="center"
+				android:text="选号(三不同号)"
+				android:textSize="12sp"
+				/>
+
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@android:color/transparent"/>
+
+		<RelativeLayout
+				android:id="@+id/special_layout"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="10"
+				>
+
+			<ImageView
+					android:layout_width="match_parent"
+					android:layout_height="20dp"
+					android:paddingLeft="2dp"
+					android:paddingRight="2dp"
+					android:layout_centerInParent="true"
+					android:scaleType="fitXY"
+					android:src="@drawable/bottom_item_bg"/>
+
+			<TextView
+					android:id="@+id/bottom_special"
+					android:layout_width="match_parent"
+					android:layout_height="19dp"
+					android:textColor="@drawable/bottom_number_color_selector"
+					android:textSize="12sp"
+					android:gravity="center"
+					android:text="三连号通选"
+					android:layout_centerInParent="true"/>
+
+		</RelativeLayout>
+
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@android:color/transparent"/>
+
+		<RelativeLayout
+				android:id="@+id/bottom_one"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="3">
+			<ImageView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:padding="2dp"
+					android:layout_centerInParent="true"
+					android:scaleType="fitCenter"
+					android:src="@drawable/bottom_item_bg"/>
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@drawable/bottom_number_color_selector"
+					android:textSize="16sp"
+					android:textStyle="bold"
+					android:gravity="center"
+					android:text="1"
+					android:typeface="serif"
+					android:layout_centerInParent="true"/>
+		</RelativeLayout>
+
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@android:color/transparent"/>
+
+		<RelativeLayout
+				android:id="@+id/bottom_two"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="3">
+			<ImageView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:padding="2dp"
+					android:layout_centerInParent="true"
+					android:scaleType="fitCenter"
+					android:src="@drawable/bottom_item_bg"/>
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@drawable/bottom_number_color_selector"
+					android:textSize="16sp"
+					android:textStyle="bold"
+					android:gravity="center"
+					android:text="2"
+					android:typeface="serif"
+					android:layout_centerInParent="true"/>
+		</RelativeLayout>
+
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@android:color/transparent"/>
+
+		<RelativeLayout
+				android:id="@+id/bottom_three"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="3">
+			<ImageView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:padding="2dp"
+					android:layout_centerInParent="true"
+					android:scaleType="fitCenter"
+					android:src="@drawable/bottom_item_bg"/>
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@drawable/bottom_number_color_selector"
+					android:textSize="16sp"
+					android:textStyle="bold"
+					android:gravity="center"
+					android:text="3"
+					android:typeface="serif"
+					android:layout_centerInParent="true"/>
+		</RelativeLayout>
+
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@android:color/transparent"/>
+
+		<RelativeLayout
+				android:id="@+id/bottom_four"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="3">
+			<ImageView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:padding="2dp"
+					android:layout_centerInParent="true"
+					android:scaleType="fitCenter"
+					android:src="@drawable/bottom_item_bg"/>
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@drawable/bottom_number_color_selector"
+					android:textSize="16sp"
+					android:textStyle="bold"
+					android:gravity="center"
+					android:text="4"
+					android:typeface="serif"
+					android:layout_centerInParent="true"/>
+		</RelativeLayout>
+
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@android:color/transparent"/>
+
+		<RelativeLayout
+				android:id="@+id/bottom_five"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="3">
+			<ImageView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:padding="2dp"
+					android:layout_centerInParent="true"
+					android:scaleType="fitCenter"
+					android:src="@drawable/bottom_item_bg"/>
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@drawable/bottom_number_color_selector"
+					android:textSize="16sp"
+					android:textStyle="bold"
+					android:gravity="center"
+					android:text="5"
+					android:typeface="serif"
+					android:layout_centerInParent="true"/>
+		</RelativeLayout>
+
+		<View android:layout_width="1dp"
+		      android:layout_height="match_parent"
+		      android:background="@android:color/transparent"/>
+
+		<RelativeLayout
+				android:id="@+id/bottom_six"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="3">
+			<ImageView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:padding="2dp"
+					android:layout_centerInParent="true"
+					android:scaleType="fitCenter"
+					android:src="@drawable/bottom_item_bg"/>
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@drawable/bottom_number_color_selector"
+					android:textSize="16sp"
+					android:textStyle="bold"
+					android:gravity="center"
+					android:text="6"
+					android:typeface="serif"
+					android:layout_centerInParent="true"/>
+		</RelativeLayout>
+
+	</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="30dp"
+              android:minHeight="30dp"
+              android:orientation="vertical"
+              android:background="@color/chart_white">
+	<View
+			android:id="@+id/divide"
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="@color/mark_green"
+			android:visibility="gone"/>
+
+
+	<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="30dp"
+			android:minHeight="30dp"
+			android:weightSum="7">
+
+		<LinearLayout
+				android:id="@+id/normal_table_header"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="3"
+				android:orientation="horizontal"
+				android:weightSum="3">
+			<TextView
+					android:id="@+id/issue"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="2"
+					android:gravity="center"
+					android:textColor="@color/chart_black"/>
+
+			<View android:layout_width="1dp"
+			      android:layout_height="match_parent"
+			      android:background="@drawable/separator_table"/>
+
+			<TextView
+					android:id="@+id/result"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:gravity="center"
+					android:textColor="@color/mark_green"
+					android:text="开奖号"/>
+
+		</LinearLayout>
+
+		<TextView
+				android:id="@+id/sub_table_header"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="3"
+				android:orientation="horizontal"
+				android:gravity="center"
+				android:visibility="gone"/>
+
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:id="@+id/three_equal"
+				android:gravity="center"
+				android:textColor="@color/mark_green"
+				android:text="三同号"
+				android:layout_weight="1"/>
+
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:id="@+id/three_not_equal"
+				android:gravity="center"
+				android:textColor="@color/mark_green"
+				android:text="三不同"
+				android:layout_weight="1"/>
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:id="@+id/two_equal"
+				android:gravity="center"
+				android:textColor="@color/mark_green"
+				android:text="二同号"
+				android:layout_weight="1"/>
+
+		<View android:layout_width="0.5dp"
+		      android:layout_height="match_parent"
+		      android:background="@drawable/separator_table"/>
+
+		<TextView
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:id="@+id/two_not_equal"
+				android:gravity="center"
+				android:textColor="@color/mark_green"
+				android:text="二不同"
+				android:layout_weight="1"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

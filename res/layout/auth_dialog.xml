@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_dialog_bg"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/phone_auth_title"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@color/footer_blue"
+        android:gravity="center"
+        android:text="手机验证"
+        android:textColor="#ffffffff"
+        android:textSize="16.0sp" />
+    <TextView
+        android:id="@+id/phone_firststep_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="15.0dip"
+        android:gravity="center_vertical"
+        android:text="第一步：获取手机短信验证码。"
+        android:textColor="@color/black"
+        android:textSize="16.0sp" />
+       <TextView
+        android:id="@+id/getSmsCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="10.0dip"
+        android:layout_gravity="right|center_vertical"
+        android:text="单击此处获取"
+        android:textColor="@color/black"
+        android:textSize="16.0sp" />
+
+    <TextView
+        android:id="@+id/phone_secondstep_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="10.0dip"
+        android:gravity="center_vertical"
+        android:text="第二步：输入手机验证码:"
+        android:textColor="@color/black"
+        android:textSize="16.0sp" />
+       <EditText
+        android:id="@+id/inputSmsCode"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="4dp"
+        android:layout_gravity="right|center_vertical"
+        android:background="@drawable/input_bg"
+        android:textColor="@color/black"
+        android:inputType="none"
+        android:textSize="16.0sp" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:background="#616065" />
+
+    <TextView
+        android:id="@+id/phone_auth_submit"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:gravity="center"
+        android:text="验    证"
+        android:textColor="@color/black"
+        android:textSize="14.0sp" />
+
+</LinearLayout>
