@@ -1184,6 +1184,11 @@ public class K3_hz_fragment extends Fragment{
         return list;
     }
 
+    /**
+     * 从走势图返回后更新选号
+     * @param updateData
+     * @param gameType
+     */
     public void updateChoice(ArrayList<Boolean> updateData, String gameType)
     {
         if (!mGameType.equals(gameType))
@@ -1191,12 +1196,49 @@ public class K3_hz_fragment extends Fragment{
             return;
         }
 
+        //是否选了号码
+        boolean chosen = false;
         for (int i = 0; i < updateData.size(); i++) {
-            changedAfterWatchChart = changedAfterWatchChart && (bool[i] == updateData.get(i));
+            if (bool[i] != updateData.get(i))
+            {
+                changedAfterWatchChart = true;
+            }
 
             bool[i] = updateData.get(i);
+            chosen = chosen || bool[i];
         }
+        changedAfterWatchChart = changedAfterWatchChart && chosen;
 
         handler.sendEmptyMessage(UPDATE);
+    }
+
+    public ArrayList<Boolean> getSelectionList(String gameType)
+    {
+        ArrayList<Boolean> list = new ArrayList<Boolean>();
+
+        if (mGameType.equals(gameType))
+        {
+            if (mGameType.equals(K3Type.hezhi.toString()))
+            {
+                for (int i = 0; i < 16; i++) {
+                    list.add(i, bool[i]);
+                }
+            }
+            else if (mGameType.equals(K3Type.threesamesingle.toString()) ||
+                    mGameType.equals(K3Type.threedifsingle.toString()))
+            {
+                for (int i = 0; i < 7; i++) {
+                    list.add(i, bool[i]);
+                }
+            }
+            else if (mGameType.equals(K3Type.twodif.toString()))
+            {
+                for (int i = 0; i < 6; i++) {
+                    list.add(i, bool[i]);
+                }
+            }
+        }
+
+        return list;
     }
 }

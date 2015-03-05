@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.jincaizi.R;
 import com.jincaizi.common.StringUtil;
 import com.jincaizi.data.ElevenFiveData;
+import com.jincaizi.kuaiwin.utils.Constants;
 
 /**
  * Created by chenweida on 2015/2/14.
@@ -19,10 +20,13 @@ public class ElevenFiveCountAdapter extends BaseAdapter {
     private Context context;
     private ElevenFiveData responseData;
 
-    public ElevenFiveCountAdapter(Context context, ElevenFiveData responseData)
+    private int type;
+
+    public ElevenFiveCountAdapter(Context context, ElevenFiveData responseData, int type)
     {
         this.context = context;
         this.responseData = responseData;
+        this.type = type;
     }
 
     @Override
@@ -60,15 +64,15 @@ public class ElevenFiveCountAdapter extends BaseAdapter {
         holder.issue.setTextColor(Color.BLACK);
         holder.issue.setText(StringUtil.getIssue(i + 1));
         holder.sum.setTextColor(Color.BLACK);
-        holder.sum.setText(responseData.getTotalCount(i, 0));
+        holder.sum.setText(getCountDataByType(i, 0));
         holder.span.setTextColor(Color.BLACK);
-        holder.span.setText(responseData.getTotalCount(i, 1));
+        holder.span.setText(getCountDataByType(i, 1));
         holder.bigSmallRation.setTextColor(Color.BLACK);
-        holder.bigSmallRation.setText(responseData.getTotalCount(i, 2));
+        holder.bigSmallRation.setText(getCountDataByType(i, 2));
         holder.oddEvenRation.setTextColor(Color.BLACK);
-        holder.oddEvenRation.setText(responseData.getTotalCount(i, 3));
+        holder.oddEvenRation.setText(getCountDataByType(i, 3));
         holder.primeCompositeRation.setTextColor(Color.BLACK);
-        holder.primeCompositeRation.setText(responseData.getTotalCount(i, 4));
+        holder.primeCompositeRation.setText(getCountDataByType(i, 4));
 
 
         return convertView;
@@ -96,6 +100,22 @@ public class ElevenFiveCountAdapter extends BaseAdapter {
             bigSmallRation = (TextView) view.findViewById(R.id.big_small_ration);
             oddEvenRation = (TextView) view.findViewById(R.id.odd_even_ration);
             primeCompositeRation = (TextView) view.findViewById(R.id.prime_composite_ration);
+        }
+    }
+
+    private String getCountDataByType(int row, int column)
+    {
+        if (type == Constants.ShiyiyunType.FRONTTWOZU.ordinal())
+        {
+            return responseData.getFrontTwoCount(row, column);
+        }
+        else if (type == Constants.ShiyiyunType.FRONTTHREEZU.ordinal())
+        {
+            return responseData.getFrontThreeCount(row, column);
+        }
+        else
+        {
+            return responseData.getTotalCount(row, column);
         }
     }
 }

@@ -22,45 +22,16 @@
 				android:id="@+id/chose_title"
 				android:layout_width="0dp"
 				android:layout_height="match_parent"
-				android:layout_weight="9"
+				android:layout_weight="17"
 				android:textColor="@color/chart_black"
 				android:gravity="center"
-				android:text="选号(三不同号)"
+				android:text="选号(二不同号)"
 				android:textSize="12sp"
 				/>
 
 		<View android:layout_width="1dp"
 		      android:layout_height="match_parent"
 		      android:background="@android:color/transparent"/>
-
-		<RelativeLayout
-				android:id="@+id/special_layout"
-				android:layout_width="0dp"
-				android:layout_height="match_parent"
-				android:layout_weight="8"
-				>
-
-			<ImageView
-					android:id="@+id/special_bg"
-					android:layout_width="match_parent"
-					android:layout_height="20dp"
-					android:paddingLeft="2dp"
-					android:paddingRight="2dp"
-					android:layout_centerInParent="true"
-					android:scaleType="fitXY"
-					android:src="@drawable/bottom_item_bg"/>
-
-			<TextView
-					android:id="@+id/bottom_special"
-					android:layout_width="match_parent"
-					android:layout_height="19dp"
-					android:textColor="@drawable/bottom_number_color_selector"
-					android:textSize="12sp"
-					android:gravity="center"
-					android:text="三连号通选"
-					android:layout_centerInParent="true"/>
-
-		</RelativeLayout>
 
 		<View android:layout_width="1dp"
 		      android:layout_height="match_parent"

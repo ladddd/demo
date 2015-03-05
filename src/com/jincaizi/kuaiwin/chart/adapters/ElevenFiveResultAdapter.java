@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.jincaizi.R;
 import com.jincaizi.common.StringUtil;
 import com.jincaizi.data.ElevenFiveData;
+import com.jincaizi.kuaiwin.utils.Constants;
 
 /**
  * Created by chenweida on 2015/2/14.
@@ -22,6 +23,8 @@ public class ElevenFiveResultAdapter extends BaseAdapter {
     private boolean showCount = true;
     private boolean showMiss = true;
 
+    private int type;
+
     public void setShowCount(boolean showCount) {
         this.showCount = showCount;
     }
@@ -30,10 +33,12 @@ public class ElevenFiveResultAdapter extends BaseAdapter {
         this.showMiss = showMiss;
     }
 
-    public ElevenFiveResultAdapter(Context context, ElevenFiveData responseData)
+    public ElevenFiveResultAdapter(Context context, ElevenFiveData responseData, int type)
     {
         this.context = context;
         this.responseData = responseData;
+
+        this.type = type;
     }
 
     @Override
@@ -88,7 +93,7 @@ public class ElevenFiveResultAdapter extends BaseAdapter {
             for (int j = 0; j < 11; j++) {
                 holder.getTextViewAtIndex(j).setBackgroundColor(Color.TRANSPARENT);
                 holder.getTextViewAtIndex(j).setTextColor(context.getResources().getColor(R.color.counter_first));
-                holder.getTextViewAtIndex(j).setText(responseData.getTotalResultCount()[j] + "");
+                holder.getTextViewAtIndex(j).setText(getResultCountArrayByType()[j] + "");
             }
         }
         else if (i == responseData.getTotalIssueCount() + 1)
@@ -98,7 +103,7 @@ public class ElevenFiveResultAdapter extends BaseAdapter {
             for (int j = 0; j < 11; j++) {
                 holder.getTextViewAtIndex(j).setBackgroundColor(Color.TRANSPARENT);
                 holder.getTextViewAtIndex(j).setTextColor(context.getResources().getColor(R.color.counter_second));
-                holder.getTextViewAtIndex(j).setText(responseData.getTotalMissSum()[j]
+                holder.getTextViewAtIndex(j).setText(getMissSumArrayByType()[j]
                         /responseData.getTotalIssueCount() + "");
             }
         }
@@ -109,7 +114,7 @@ public class ElevenFiveResultAdapter extends BaseAdapter {
             for (int j = 0; j < 11; j++) {
                 holder.getTextViewAtIndex(j).setBackgroundColor(Color.TRANSPARENT);
                 holder.getTextViewAtIndex(j).setTextColor(context.getResources().getColor(R.color.counter_third));
-                holder.getTextViewAtIndex(j).setText(responseData.getTotalMaxMiss()[j] + "");
+                holder.getTextViewAtIndex(j).setText(getMaxMissArrayByType()[j] + "");
             }
         }
         else if (i == responseData.getTotalIssueCount() + 3)
@@ -119,7 +124,7 @@ public class ElevenFiveResultAdapter extends BaseAdapter {
             for (int j = 0; j < 11; j++) {
                 holder.getTextViewAtIndex(j).setBackgroundColor(Color.TRANSPARENT);
                 holder.getTextViewAtIndex(j).setTextColor(context.getResources().getColor(R.color.counter_forth));
-                holder.getTextViewAtIndex(j).setText(responseData.getTotalMissCount()[j] + "");
+                holder.getTextViewAtIndex(j).setText(getMissCountArrayByType()[j] + "");
             }
         }
 
@@ -128,7 +133,7 @@ public class ElevenFiveResultAdapter extends BaseAdapter {
 
     private void setResult(int row, int column, ItemViewHolder holder)
     {
-        int missCount = responseData.getTotalResult(row, column);
+        int missCount = getResultByType(row, column);
         if (missCount == 0)
         {
             holder.getTextViewAtIndex(column).setBackgroundResource(R.drawable.round_bg);
@@ -200,6 +205,86 @@ public class ElevenFiveResultAdapter extends BaseAdapter {
                 case 10:return eleven;
                 default:return null;
             }
+        }
+    }
+
+    private int[] getResultCountArrayByType()
+    {
+        if (type == Constants.ShiyiyunType.FRONTTWOZU.ordinal())
+        {
+            return responseData.getFrontTwoResultCount();
+        }
+        else if (type == Constants.ShiyiyunType.FRONTTHREEZU.ordinal())
+        {
+            return responseData.getFrontThreeResultCount();
+        }
+        else
+        {
+            return responseData.getTotalResultCount();
+        }
+    }
+
+    private int[] getMissSumArrayByType()
+    {
+        if (type == Constants.ShiyiyunType.FRONTTWOZU.ordinal())
+        {
+            return responseData.getFrontTwoMissSum();
+        }
+        else if (type == Constants.ShiyiyunType.FRONTTHREEZU.ordinal())
+        {
+            return responseData.getFrontThreeMissSum();
+        }
+        else
+        {
+            return responseData.getTotalMissSum();
+        }
+    }
+
+    private int[] getMaxMissArrayByType()
+    {
+        if (type == Constants.ShiyiyunType.FRONTTWOZU.ordinal())
+        {
+            return responseData.getFrontTwoMaxMiss();
+        }
+        else if (type == Constants.ShiyiyunType.FRONTTHREEZU.ordinal())
+        {
+            return responseData.getFrontThreeMaxMiss();
+        }
+        else
+        {
+            return responseData.getTotalMaxMiss();
+        }
+    }
+
+    private int[] getMissCountArrayByType()
+    {
+        if (type == Constants.ShiyiyunType.FRONTTWOZU.ordinal())
+        {
+            return responseData.getFrontTwoMissCount();
+        }
+        else if (type == Constants.ShiyiyunType.FRONTTHREEZU.ordinal())
+        {
+            return responseData.getFrontThreeMissCount();
+        }
+        else
+        {
+            return responseData.getTotalMissCount();
+        }
+    }
+
+    private int getResultByType(int row, int column)
+    {
+        if (type == Constants.ShiyiyunType.FRONTTWOZU.ordinal())
+        {
+            return responseData.getFrontTwoResult(row, column);
+        }
+        else if (type == Constants.ShiyiyunType.FRONTTHREEZU.ordinal())
+        {
+            return responseData.getFrontThreeResult(row, column);
+        }
+        else
+        {
+            return responseData.getTotalResult(row, column);
         }
     }
 }

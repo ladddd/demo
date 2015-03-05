@@ -26,22 +26,23 @@ public class FrontThreezhixuanFragment extends Fragment {
 	public static final String TAG = "FrontThreezhixuanFragment";
 	private String[] r_content = { "1", "2", "3", "4", "5", "6", "7", "8", "9",
 			"10", "11" };
-	private ArrayList<Boolean> boolFront = new ArrayList<Boolean>();
-	private ArrayList<Boolean> boolBehind = new ArrayList<Boolean>();
-	private ArrayList<Boolean> boolLast = new ArrayList<Boolean>();
-	private MyGridView front_ball_group;
-	private Activity mActivity;
-	private ShakeListener mShakeListener;
-	private ArrayList<String> mFrontBall = new ArrayList<String>();
-	private ArrayList<String> mbehindBall = new ArrayList<String>();
-	private ArrayList<String> mLastBall = new ArrayList<String>();
-	public int mZhushu = 0;
-	private MyGridView behind_ball_group, last_ball_group;
-	private BallGridViewAdapter mFrontAdapter;
-	private BallGridViewAdapter mBehindAdapter;
-	private BallGridViewAdapter mLastAdapter;
-	private String mLocalClassName;
 
+    private ArrayList<Boolean> boolFront = new ArrayList<Boolean>();
+
+    private ArrayList<Boolean> boolBehind = new ArrayList<Boolean>();
+    private ArrayList<Boolean> boolLast = new ArrayList<Boolean>();
+    private MyGridView front_ball_group;
+    private Activity mActivity;
+    private ShakeListener mShakeListener;
+    private ArrayList<String> mFrontBall = new ArrayList<String>();
+    private ArrayList<String> mbehindBall = new ArrayList<String>();
+    private ArrayList<String> mLastBall = new ArrayList<String>();
+    public int mZhushu = 0;
+    private MyGridView behind_ball_group, last_ball_group;
+    private BallGridViewAdapter mFrontAdapter;
+    private BallGridViewAdapter mBehindAdapter;
+    private BallGridViewAdapter mLastAdapter;
+    private String mLocalClassName;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -144,15 +145,15 @@ public class FrontThreezhixuanFragment extends Fragment {
 					boolFront.set(arg2, false);
 					mFrontBall.remove(ballStr);
 				} else {
-					if (mbehindBall.contains(ballStr)) {
-						mbehindBall.remove(ballStr);
-						boolBehind.set(arg2, false);
-						mBehindAdapter.notifyDataSetChanged();
-					} else if (mLastBall.contains(ballStr)) {
-						mLastBall.remove(ballStr);
-						boolLast.set(arg2, false);
-						mLastAdapter.notifyDataSetChanged();
-					}
+//					if (mbehindBall.contains(ballStr)) {
+//						mbehindBall.remove(ballStr);
+//						boolBehind.set(arg2, false);
+//						mBehindAdapter.notifyDataSetChanged();
+//					} else if (mLastBall.contains(ballStr)) {
+//						mLastBall.remove(ballStr);
+//						boolLast.set(arg2, false);
+//						mLastAdapter.notifyDataSetChanged();
+//					}
 
 					ballview.setTextColor(getActivity().getResources()
 							.getColor(android.R.color.white));
@@ -160,13 +161,7 @@ public class FrontThreezhixuanFragment extends Fragment {
 					boolFront.set(arg2, true);
 					mFrontBall.add(ballStr);
 				}
-				mZhushu = mFrontBall.size() * mbehindBall.size()* mLastBall.size();
-
-				if ( mLocalClassName.equals("buycenter.Syiyunjin")) {
-					((Syiyunjin) mActivity).setTouzhuResult(mZhushu);
-				} else {
-					((Syxw) mActivity).setTouzhuResult(mZhushu);
-				}
+                updateCount();
 			}
 		});
 
@@ -190,15 +185,15 @@ public class FrontThreezhixuanFragment extends Fragment {
 					boolBehind.set(arg2, false);
 					mbehindBall.remove(ballStr);
 				} else {
-					if (mFrontBall.contains(ballStr)) {
-						mFrontBall.remove(ballStr);
-						boolFront.set(arg2, false);
-						mFrontAdapter.notifyDataSetChanged();
-					} else if (mLastBall.contains(ballStr)) {
-						mLastBall.remove(ballStr);
-						boolLast.set(arg2, false);
-						mLastAdapter.notifyDataSetChanged();
-					}
+//					if (mFrontBall.contains(ballStr)) {
+//						mFrontBall.remove(ballStr);
+//						boolFront.set(arg2, false);
+//						mFrontAdapter.notifyDataSetChanged();
+//					} else if (mLastBall.contains(ballStr)) {
+//						mLastBall.remove(ballStr);
+//						boolLast.set(arg2, false);
+//						mLastAdapter.notifyDataSetChanged();
+//					}
 					ballview.setTextColor(getActivity().getResources()
 							.getColor(android.R.color.white));
 					ballview.setBackgroundResource(R.drawable.ball_blue);
@@ -234,15 +229,15 @@ public class FrontThreezhixuanFragment extends Fragment {
 					boolLast.set(arg2, false);
 					mLastBall.remove(ballStr);
 				} else {
-					if (mFrontBall.contains(ballStr)) {
-						mFrontBall.remove(ballStr);
-						boolFront.set(arg2, false);
-						mFrontAdapter.notifyDataSetChanged();
-					} else if (mbehindBall.contains(ballStr)) {
-						mbehindBall.remove(ballStr);
-						boolBehind.set(arg2, false);
-						mBehindAdapter.notifyDataSetChanged();
-					}
+//					if (mFrontBall.contains(ballStr)) {
+//						mFrontBall.remove(ballStr);
+//						boolFront.set(arg2, false);
+//						mFrontAdapter.notifyDataSetChanged();
+//					} else if (mbehindBall.contains(ballStr)) {
+//						mbehindBall.remove(ballStr);
+//						boolBehind.set(arg2, false);
+//						mBehindAdapter.notifyDataSetChanged();
+//					}
 					ballview.setTextColor(getActivity().getResources()
 							.getColor(android.R.color.white));
 					ballview.setBackgroundResource(R.drawable.ball_blue);
@@ -365,4 +360,120 @@ public class FrontThreezhixuanFragment extends Fragment {
 			((Syxw) mActivity).setTouzhuResult(mZhushu);
 		}
 	}
+
+    public ArrayList<Boolean> getBoolFront() {
+        return boolFront;
+    }
+
+    public ArrayList<Boolean> getBoolBehind() {
+        return boolBehind;
+    }
+
+    public ArrayList<Boolean> getBoolLast() {
+        return boolLast;
+    }
+
+    public void updateChoice(ArrayList<Boolean> firstUpdateData, ArrayList<Boolean> secondUpdateData,
+                             ArrayList<Boolean> thirdUpdateData)
+    {
+        boolean chosen = false;
+        boolean changed = false;
+
+        for (int i = 0; i < firstUpdateData.size(); i++) {
+            if (boolFront.get(i) != firstUpdateData.get(i))
+            {
+                changed = true;
+            }
+
+            boolFront.set(i, firstUpdateData.get(i));
+            chosen = chosen || boolFront.get(i);
+        }
+
+        for (int i = 0; i < secondUpdateData.size(); i++) {
+            if (boolBehind.get(i) != secondUpdateData.get(i))
+            {
+                changed = true;
+            }
+
+            boolBehind.set(i, secondUpdateData.get(i));
+            chosen = chosen || boolBehind.get(i);
+        }
+
+        for (int i = 0; i < thirdUpdateData.size(); i++) {
+            if (boolLast.get(i) != thirdUpdateData.get(i))
+            {
+                changed = true;
+            }
+
+            boolLast.set(i, thirdUpdateData.get(i));
+            chosen = chosen || boolLast.get(i);
+        }
+
+        changed = changed && chosen;
+
+        if (changed)
+        {
+            Vibrator vibrator = (Vibrator) getActivity().getApplication()
+                    .getSystemService(Service.VIBRATOR_SERVICE);
+            vibrator.vibrate(new long[] { 0, 200 }, -1);
+        }
+        mFrontAdapter.notifyDataSetChanged();
+        mBehindAdapter.notifyDataSetChanged();
+        mLastAdapter.notifyDataSetChanged();
+
+        updateBottom();
+    }
+
+    //更新父activity底部的投注数
+    private void updateBottom()
+    {
+        mFrontBall.clear();
+        mbehindBall.clear();
+        mLastBall.clear();
+        for (int i = 0; i < 11; i++) {
+            String ballStr;
+            if(i<9) {
+                ballStr= "0" + String.valueOf(i + 1);
+            } else {
+                ballStr= String.valueOf(i + 1);
+            }
+            if (boolFront.get(i))
+            {
+                mFrontBall.add(ballStr);
+            }
+            else
+            {
+                mFrontBall.remove(ballStr);
+            }
+            if (boolBehind.get(i))
+            {
+                mbehindBall.add(ballStr);
+            }
+            else
+            {
+                mbehindBall.remove(ballStr);
+            }
+            if (boolLast.get(i))
+            {
+                mLastBall.add(ballStr);
+            }
+            else
+            {
+                mLastBall.remove(ballStr);
+            }
+        }
+
+        updateCount();
+    }
+
+    private void updateCount()
+    {
+        mZhushu = mFrontBall.size() * mbehindBall.size()* mLastBall.size();
+
+        if ( mLocalClassName.equals("buycenter.Syiyunjin")) {
+            ((Syiyunjin) mActivity).setTouzhuResult(mZhushu);
+        } else {
+            ((Syxw) mActivity).setTouzhuResult(mZhushu);
+        }
+    }
 }

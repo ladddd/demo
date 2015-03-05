@@ -230,8 +230,9 @@
 				android:layout_height="40dp"
 				android:layout_marginTop="20dp"
 				android:layout_below="@+id/network_error_tips"
-				android:background="@drawable/ok_btn_bg"
+				android:background="@drawable/title_btn_bg"
 				android:text="刷新"
+				android:textSize="16sp"
 				android:textColor="@color/chart_white"
 				/>
 	</RelativeLayout>

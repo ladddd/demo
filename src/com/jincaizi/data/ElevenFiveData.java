@@ -36,18 +36,33 @@ public class ElevenFiveData {
 
     private List<Result> thirdResultList;
 
+    //全5
     private int[] totalMissCount;
-
     private int[] totalMissSum;
     private int[] totalMaxMiss;
     private int[] totalResultCount;
     private List<Result> totalResultList;
     private List<CountResult> totalCountList;
 
+    //前2
+    private int[] frontTwoMissCount;
+    private int[] frontTwoMissSum;
+    private int[] frontTwoMaxMiss;
+    private int[] frontTwoResultCount;
+    private List<Result> frontTwoResultList;
+    private List<CountResult> frontTwoCountList;
+
+    //前3
+    private int[] frontThreeMissCount;
+
+    private int[] frontThreeMissSum;
+    private int[] frontThreeMaxMiss;
+    private int[] frontThreeResultCount;
+    private List<Result> frontThreeResultList;
+    private List<CountResult> frontThreeCountList;
     private int[] formMissCount;
 
     private int[] formMissSum;
-
     private int[] formMaxMiss;
     private int[] formResultCount;
     private List<Result> formResultList;
@@ -84,6 +99,20 @@ public class ElevenFiveData {
         totalResultList = new ArrayList<Result>();
         totalCountList = new ArrayList<CountResult>();
 
+        frontTwoMissCount = new int[11];
+        frontTwoMissSum = new int[11];
+        frontTwoMaxMiss = new int[11];
+        frontTwoResultCount = new int[11];
+        frontTwoResultList = new ArrayList<Result>();
+        frontTwoCountList = new ArrayList<CountResult>();
+
+        frontThreeMissCount = new int[11];
+        frontThreeMissSum = new int[11];
+        frontThreeMaxMiss = new int[11];
+        frontThreeResultCount = new int[11];
+        frontThreeResultList = new ArrayList<Result>();
+        frontThreeCountList = new ArrayList<CountResult>();
+
         formMissCount = new int[7];
         formMissSum = new int[7];
         formMaxMiss = new int[7];
@@ -107,9 +136,146 @@ public class ElevenFiveData {
                 }
 
                 initTotalData();
+                initFrontTwoData();
+                initFrontThreeData();
                 initFirstData();
                 initFormData();
             }
+        }
+    }
+    private void initFrontTwoData()
+    {
+        for (int i = 0; i < totalIssueCount; i++) {
+            int sum = 0;
+            int max = totalResult[i][0];
+            int min = totalResult[i][0];
+            int bigCount = 0;
+            int smallCount = 0;
+            int oddCount = 0;
+            int evenCount = 0;
+            int primeCount = 0;
+            int compositeCount = 0;
+            for (int j = 0; j < 11; j++) {
+                boolean isContain = false;
+                for (int k = 0; k < 2; k++) {
+                    if (totalResult[i][k] == j+1)
+                    {
+                        sum += j+1;
+                        max = Math.max(max, j+1);
+                        min = Math.min(min, j+1);
+                        if (j+1 > 5)
+                        {
+                            bigCount++;
+                        }
+                        else
+                        {
+                            smallCount++;
+                        }
+                        if (isOdd(j+1))
+                        {
+                            oddCount++;
+                        }
+                        else
+                        {
+                            evenCount++;
+                        }
+                        if (isComposite(j+1))
+                        {
+                            compositeCount++;
+                        }
+                        else
+                        {
+                            primeCount++;
+                        }
+
+                        isContain = true;
+                        break;
+                    }
+                }
+                if (isContain)
+                {
+                    frontTwoMissCount[j] = 0;
+                    frontTwoResultCount[j]++;
+                }
+                else
+                {
+                    frontTwoMissCount[j]++;
+                    frontTwoMaxMiss[j] = Math.max(frontTwoMaxMiss[j], frontTwoMissCount[j]);
+                    frontTwoMissSum[j] += frontTwoMissCount[j];
+                }
+            }
+
+            frontTwoCountList.add(i, new CountResult(sum, max, min, bigCount, smallCount, oddCount,
+                    evenCount, primeCount, compositeCount));
+            frontTwoResultList.add(i, new Result(frontTwoMissCount));
+        }
+    }
+
+    private void initFrontThreeData()
+    {
+        for (int i = 0; i < totalIssueCount; i++) {
+            int sum = 0;
+            int max = totalResult[i][0];
+            int min = totalResult[i][0];
+            int bigCount = 0;
+            int smallCount = 0;
+            int oddCount = 0;
+            int evenCount = 0;
+            int primeCount = 0;
+            int compositeCount = 0;
+            for (int j = 0; j < 11; j++) {
+                boolean isContain = false;
+                for (int k = 0; k < 3; k++) {
+                    if (totalResult[i][k] == j+1)
+                    {
+                        sum += j+1;
+                        max = Math.max(max, j+1);
+                        min = Math.min(min, j+1);
+                        if (j+1 > 5)
+                        {
+                            bigCount++;
+                        }
+                        else
+                        {
+                            smallCount++;
+                        }
+                        if (isOdd(j+1))
+                        {
+                            oddCount++;
+                        }
+                        else
+                        {
+                            evenCount++;
+                        }
+                        if (isComposite(j+1))
+                        {
+                            compositeCount++;
+                        }
+                        else
+                        {
+                            primeCount++;
+                        }
+
+                        isContain = true;
+                        break;
+                    }
+                }
+                if (isContain)
+                {
+                    frontThreeMissCount[j] = 0;
+                    frontThreeResultCount[j]++;
+                }
+                else
+                {
+                    frontThreeMissCount[j]++;
+                    frontThreeMaxMiss[j] = Math.max(frontThreeMaxMiss[j], frontThreeMissCount[j]);
+                    frontThreeMissSum[j] += frontThreeMissCount[j];
+                }
+            }
+
+            frontThreeCountList.add(i, new CountResult(sum, max, min, bigCount, smallCount, oddCount,
+                    evenCount, primeCount, compositeCount));
+            frontThreeResultList.add(i, new Result(frontThreeMissCount));
         }
     }
 
@@ -358,6 +524,38 @@ public class ElevenFiveData {
         return formMissCount;
     }
 
+    public int[] getFrontThreeMissCount() {
+        return frontThreeMissCount;
+    }
+
+    public int[] getFrontThreeMissSum() {
+        return frontThreeMissSum;
+    }
+
+    public int[] getFrontThreeMaxMiss() {
+        return frontThreeMaxMiss;
+    }
+
+    public int[] getFrontThreeResultCount() {
+        return frontThreeResultCount;
+    }
+
+    public int[] getFrontTwoResultCount() {
+        return frontTwoResultCount;
+    }
+
+    public int[] getFrontTwoMaxMiss() {
+        return frontTwoMaxMiss;
+    }
+
+    public int[] getFrontTwoMissSum() {
+        return frontTwoMissSum;
+    }
+
+    public int[] getFrontTwoMissCount() {
+        return frontTwoMissCount;
+    }
+
     public int[] getThirdResultArray() {
         return thirdResult;
     }
@@ -414,6 +612,24 @@ public class ElevenFiveData {
     public String getTotalCount(int row, int column)
     {
         return totalCountList.get(row).resultAtIndex(column);
+    }
+
+    public int getFrontTwoResult(int row, int column)
+    {
+        return frontTwoResultList.get(row).resultAtIndex(column);
+    }
+
+    public String getFrontTwoCount(int row, int column) {
+        return frontTwoCountList.get(row).resultAtIndex(column);
+    }
+
+    public int getFrontThreeResult(int row, int column)
+    {
+        return frontThreeResultList.get(row).resultAtIndex(column);
+    }
+
+    public String getFrontThreeCount(int row, int column) {
+        return frontThreeCountList.get(row).resultAtIndex(column);
     }
 
     public int[][] getTotalResult() {

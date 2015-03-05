@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.jincaizi.R;
 import com.jincaizi.kuaiwin.chart.TableFixHeaders.adapters.BaseTableAdapter;
 
+import java.util.ArrayList;
+
 /**
  * Created by chenweida on 2015/2/9.
  */
@@ -105,12 +107,26 @@ public class BottomAdapter extends BaseTableAdapter {
         return false;
     }
 
-    public BottomAdapter(Context context)
+    public BottomAdapter(Context context, ArrayList<Boolean> selection)
     {
         this.context = context;
         density = context.getResources().getDisplayMetrics().density;
 
         chosenNumber = new boolean[16];
+
+        initSelection(selection);
+    }
+
+    private void initSelection(ArrayList<Boolean> selection)
+    {
+        if (selection == null || selection.size() < 16)
+        {
+            return;
+        }
+
+        for (int i = 0; i < 16; i++) {
+            chosenNumber[i] = selection.get(i);
+        }
     }
 
     public boolean[] getChosenNumber()

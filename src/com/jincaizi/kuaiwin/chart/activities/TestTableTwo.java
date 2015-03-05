@@ -19,6 +19,8 @@ import com.jincaizi.kuaiwin.chart.requesters.LotteryDataRequester;
 import com.jincaizi.kuaiwin.chart.requesters.LotteryTimeRequester;
 import com.jincaizi.data.ResponseData;
 
+import java.util.ArrayList;
+
 /**
  * Created by chenweida on 2015/2/9.
  */
@@ -32,6 +34,7 @@ public class TestTableTwo extends BaseTableActivity {
     private LotteryDataRequester requester;
     private LotteryTimeRequester timeRequester;
 
+    private RelativeLayout tableMainLayout;
     private LinearLayout bottomLayout;
     private RelativeLayout loadingLayout;
     private RelativeLayout refreshLayout;
@@ -80,6 +83,7 @@ public class TestTableTwo extends BaseTableActivity {
 
         selectedNumber = new boolean[6];
 
+        tableMainLayout = (RelativeLayout) findViewById(R.id.table_main);
         refreshBtn = (Button) findViewById(R.id.refresh);
         refreshLayout = (RelativeLayout) findViewById(R.id.refresh_layout);
         loadingLayout = (RelativeLayout) findViewById(R.id.loading);
@@ -171,16 +175,31 @@ public class TestTableTwo extends BaseTableActivity {
     private void initBottom()
     {
         boolean isDrag = getIntent().getBooleanExtra(IntentData.DRAG, true);
-        if (isDrag)
+        type = getIntent().getIntExtra(IntentData.THREE_NUMBER_TYPE, TYPE_THREE_EQUAL);
+        if (isDrag && type != TYPE_THREE_EQUAL)
         {
             bottomLayout.setVisibility(View.GONE);
             return;
         }
-        type = getIntent().getIntExtra(IntentData.THREE_NUMBER_TYPE, TYPE_THREE_EQUAL);
+        ArrayList<Boolean> selectionList = (ArrayList<Boolean>) getIntent().getSerializableExtra(IntentData.SELECT_NUMBERS);
+
         if (type == TYPE_THREE_EQUAL)
         {
             ((TextView) findViewById(R.id.chose_title)).setText("选号(三同号)");
             ((TextView) findViewById(R.id.bottom_special)).setText("三同号通选");
+
+            ((TextView)findViewById(R.id.bottom_one_text)).setTextSize(12);
+            ((TextView)findViewById(R.id.bottom_two_text)).setTextSize(12);
+            ((TextView)findViewById(R.id.bottom_three_text)).setTextSize(12);
+            ((TextView)findViewById(R.id.bottom_four_text)).setTextSize(12);
+            ((TextView)findViewById(R.id.bottom_five_text)).setTextSize(12);
+            ((TextView)findViewById(R.id.bottom_six_text)).setTextSize(12);
+            ((TextView)findViewById(R.id.bottom_one_text)).setText("111");
+            ((TextView)findViewById(R.id.bottom_two_text)).setText("222");
+            ((TextView)findViewById(R.id.bottom_three_text)).setText("333");
+            ((TextView)findViewById(R.id.bottom_four_text)).setText("444");
+            ((TextView)findViewById(R.id.bottom_five_text)).setText("555");
+            ((TextView)findViewById(R.id.bottom_six_text)).setText("666");
         }
         else
         {
@@ -188,6 +207,21 @@ public class TestTableTwo extends BaseTableActivity {
             ((TextView) findViewById(R.id.bottom_special)).setText("三连号通选");
         }
 
+        if (selectionList != null && selectionList.size() >= 7)
+        {
+            for (int i = 0; i < 6; i++) {
+                selectedNumber[i] = selectionList.get(i);
+            }
+            selectSpecial = selectionList.get(6);
+
+            findViewById(R.id.special_layout).setSelected(selectionList.get(6));
+            findViewById(R.id.bottom_one).setSelected(selectionList.get(0));
+            findViewById(R.id.bottom_two).setSelected(selectionList.get(1));
+            findViewById(R.id.bottom_three).setSelected(selectionList.get(2));
+            findViewById(R.id.bottom_four).setSelected(selectionList.get(3));
+            findViewById(R.id.bottom_five).setSelected(selectionList.get(4));
+            findViewById(R.id.bottom_six).setSelected(selectionList.get(5));
+        }
         findViewById(R.id.special_layout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -368,6 +402,7 @@ public class TestTableTwo extends BaseTableActivity {
             if (!intent.getBooleanExtra("success",false) && baseListLayout.getVisibility() == View.GONE &&
                     formListLayout.getVisibility() == View.GONE)
             {
+                tableMainLayout.setVisibility(View.GONE);
                 loadingLayout.setVisibility(View.GONE);
                 refreshLayout.setVisibility(View.VISIBLE);
                 return;
@@ -403,9 +438,24 @@ public class TestTableTwo extends BaseTableActivity {
                     loadingLayout.setVisibility(View.GONE);
                     formListLayout.setVisibility(subBtn.isEnabled() ? View.GONE : View.VISIBLE);
                     baseListLayout.setVisibility(baseBtn.isEnabled()?View.GONE:View.VISIBLE);
+                    tableMainLayout.setVisibility(View.VISIBLE);
                 }
             });
         }
+    }
+
+    @Override
+    public void onFinished() {
+        ArrayList<Boolean> resultList = new ArrayList<Boolean>(7);
+
+        for (int i = 0; i < 6; i++) {
+            resultList.add(i, selectedNumber[i]);
+        }
+        resultList.add(6, selectSpecial);
+
+        Intent intent = new Intent();
+        intent.putExtra(IntentData.SELECT_NUMBERS, resultList);
+        setResult(RESULT_OK, intent);
     }
 
     @Override

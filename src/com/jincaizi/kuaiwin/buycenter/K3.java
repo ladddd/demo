@@ -294,18 +294,33 @@ public class K3 extends FragmentActivity implements OnClickListener {
         if (syyType == K3Type.hezhi)
         {
             chartActivity.setClass(K3.this, TestTable.class);
+            if (mCurrentFragment instanceof K3_hz_fragment)
+            {
+                chartActivity.putExtra(IntentData.SELECT_NUMBERS,
+                        ((K3_hz_fragment) mCurrentFragment).getSelectionList(K3Type.hezhi.toString()));
+            }
         }
         //三同号 三不同号 三不胆拖 --> 形态走势
         else if (syyType == K3Type.threesamesingle)
         {
             chartActivity.setClass(K3.this, TestTableTwo.class);
             chartActivity.putExtra(IntentData.THREE_NUMBER_TYPE, TestTableTwo.TYPE_THREE_EQUAL);
+            if (mCurrentFragment instanceof K3_hz_fragment)
+            {
+                chartActivity.putExtra(IntentData.SELECT_NUMBERS,
+                        ((K3_hz_fragment) mCurrentFragment).getSelectionList(K3Type.threesamesingle.toString()));
+            }
         }
         else if (syyType == K3Type.threedifsingle || syyType == K3Type.dragthree)
         {
             chartActivity.setClass(K3.this, TestTableTwo.class);
             chartActivity.putExtra(IntentData.THREE_NUMBER_TYPE, TestTableTwo.TYPE_THREE_NOT_EQUAL);
             chartActivity.putExtra(IntentData.DRAG, syyType == K3Type.dragthree);
+            if (syyType == K3Type.threedifsingle && mCurrentFragment instanceof K3_hz_fragment)
+            {
+                chartActivity.putExtra(IntentData.SELECT_NUMBERS,
+                        ((K3_hz_fragment) mCurrentFragment).getSelectionList(K3Type.threedifsingle.toString()));
+            }
         }
         //二同号
         else if (syyType == K3Type.twosamesingle)
@@ -317,6 +332,11 @@ public class K3 extends FragmentActivity implements OnClickListener {
         {
             chartActivity.setClass(K3.this, TableFour.class);
             chartActivity.putExtra(IntentData.DRAG, syyType == K3Type.dragtwo);
+            if (syyType == K3Type.twodif && mCurrentFragment instanceof K3_hz_fragment)
+            {
+                chartActivity.putExtra(IntentData.SELECT_NUMBERS,
+                        ((K3_hz_fragment) mCurrentFragment).getSelectionList(K3Type.twodif.toString()));
+            }
         }
 
         chartActivity.putExtra(IntentData.CITY, lotterytype);
@@ -617,13 +637,10 @@ public class K3 extends FragmentActivity implements OnClickListener {
         {
             return;
         }
-        if (requestCode == K3Type.hezhi.ordinal())
+        ArrayList<Boolean> result = (ArrayList<Boolean>)data.getSerializableExtra(IntentData.SELECT_NUMBERS);
+        if (mCurrentFragment instanceof K3_hz_fragment)
         {
-            ArrayList<Boolean> result = (ArrayList<Boolean>)data.getSerializableExtra(IntentData.SELECT_NUMBERS);
-            if (mCurrentFragment instanceof K3_hz_fragment)
-            {
-                ((K3_hz_fragment) mCurrentFragment).updateChoice(result, syyType.toString());
-            }
+            ((K3_hz_fragment) mCurrentFragment).updateChoice(result, syyType.toString());
         }
     }
 

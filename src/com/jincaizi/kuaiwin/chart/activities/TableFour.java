@@ -21,18 +21,21 @@ import com.jincaizi.kuaiwin.chart.requesters.LotteryDataRequester;
 import com.jincaizi.kuaiwin.chart.requesters.LotteryTimeRequester;
 import com.jincaizi.data.ResponseData;
 
+import java.util.ArrayList;
+
 /**
  * Created by chenweida on 2015/1/26.
  */
 public class TableFour extends BaseTableActivity {
 
-    ResponseData responseData;
+    private ResponseData responseData;
 
+    private RelativeLayout tableMainLayout;
     private ListView baseListView;
     private BaseListAdapter baseListAdapter;
     private TableFixHeaders tableFixHeaders;
     private TwoNotEqualAdapter sumTableAdapter;
-    private TwoNotEqualBottomAdapter bottomAdapter;
+//    private TwoNotEqualBottomAdapter bottomAdapter;
     private RelativeLayout loadingLayout;
     private RelativeLayout refreshLayout;
     private Button refreshBtn;
@@ -44,12 +47,14 @@ public class TableFour extends BaseTableActivity {
     private ImageView subSelector;
     private TextView subBtnTxt;
     private PopupWindow popupWindow;
-    private TableFixHeaders bottomTable;
+//    private TableFixHeaders bottomTable;
 
     private boolean showMiss = true;
     private boolean showCount = true;
 
     private String lotteryType;
+
+    private boolean[] selectedNumber;
 
     private LotteryDataRequester requester;
     private LotteryTimeRequester timeRequester;
@@ -65,6 +70,7 @@ public class TableFour extends BaseTableActivity {
             if (!intent.getBooleanExtra("success",false) && baseListLayout.getVisibility() == View.GONE &&
                     sumTableLayout.getVisibility() == View.GONE)
             {
+                tableMainLayout.setVisibility(View.GONE);
                 loadingLayout.setVisibility(View.GONE);
                 refreshLayout.setVisibility(View.VISIBLE);
                 return;
@@ -100,6 +106,7 @@ public class TableFour extends BaseTableActivity {
                     loadingLayout.setVisibility(View.GONE);
                     sumTableLayout.setVisibility(subBtn.isEnabled()?View.GONE:View.VISIBLE);
                     baseListLayout.setVisibility(baseBtn.isEnabled()?View.GONE:View.VISIBLE);
+                    tableMainLayout.setVisibility(View.VISIBLE);
                 }
             });
         }
@@ -107,14 +114,16 @@ public class TableFour extends BaseTableActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.test_table_main);
+        setContentView(R.layout.test_table_four);
         super.onCreate(savedInstanceState);
 
         initLotteryType();
 
+        selectedNumber = new boolean[6];
         requester = new LotteryDataRequester(this, lotteryType);
         timeRequester = new LotteryTimeRequester(this, lotteryType);
 
+        tableMainLayout = (RelativeLayout) findViewById(R.id.table_main);
         refreshBtn = (Button) findViewById(R.id.refresh);
         refreshLayout = (RelativeLayout) findViewById(R.id.refresh_layout);
         loadingLayout = (RelativeLayout) findViewById(R.id.loading);
@@ -182,7 +191,7 @@ public class TableFour extends BaseTableActivity {
         baseListView = (ListView) findViewById(R.id.base_list);
         baseListLayout = (RelativeLayout) findViewById(R.id.base_list_layout);
         sumTableLayout = (RelativeLayout) findViewById(R.id.sum_table_layout);
-        bottomTable = (TableFixHeaders) findViewById(R.id.bottom_layout);
+//        bottomTable = (TableFixHeaders) findViewById(R.id.bottom_layout);
 
         initBottom();
         initListShadow();
@@ -195,17 +204,60 @@ public class TableFour extends BaseTableActivity {
 
     private void initBottom()
     {
+        LinearLayout bottomLayout = (LinearLayout) findViewById(R.id.bottom_layout);
+
         boolean drag = getIntent().getBooleanExtra(IntentData.DRAG, true);
         if (drag)
         {
-            bottomTable.setVisibility(View.GONE);
+//            bottomTable.setVisibility(View.GONE);
+            bottomLayout.setVisibility(View.GONE);
             return;
         }
 
-        bottomAdapter = new TwoNotEqualBottomAdapter(TableFour.this);
-        bottomTable.setAdapter(bottomAdapter);
-        tableFixHeaders.setDelegateTable(bottomTable);
-        bottomTable.setDelegateTable(tableFixHeaders);
+        ArrayList<Boolean> selectionList = (ArrayList<Boolean>) getIntent().getSerializableExtra(IntentData.SELECT_NUMBERS);
+
+        if (selectionList != null && selectionList.size() >= 6)
+        {
+            for (int i = 0; i < 6; i++) {
+                selectedNumber[i] = selectionList.get(i);
+            }
+
+            findViewById(R.id.bottom_one).setSelected(selectionList.get(0));
+            findViewById(R.id.bottom_two).setSelected(selectionList.get(1));
+            findViewById(R.id.bottom_three).setSelected(selectionList.get(2));
+            findViewById(R.id.bottom_four).setSelected(selectionList.get(3));
+            findViewById(R.id.bottom_five).setSelected(selectionList.get(4));
+            findViewById(R.id.bottom_six).setSelected(selectionList.get(5));
+        }
+
+        findViewById(R.id.bottom_one).setOnClickListener(new BottomItemClickListener(0));
+        findViewById(R.id.bottom_two).setOnClickListener(new BottomItemClickListener(1));
+        findViewById(R.id.bottom_three).setOnClickListener(new BottomItemClickListener(2));
+        findViewById(R.id.bottom_four).setOnClickListener(new BottomItemClickListener(3));
+        findViewById(R.id.bottom_five).setOnClickListener(new BottomItemClickListener(4));
+        findViewById(R.id.bottom_six).setOnClickListener(new BottomItemClickListener(5));
+
+//        bottomAdapter = new TwoNotEqualBottomAdapter(TableFour.this);
+//        bottomTable.setAdapter(bottomAdapter);
+//        tableFixHeaders.setDelegateTable(bottomTable);
+//        bottomTable.setDelegateTable(tableFixHeaders);
+    }
+
+    private class BottomItemClickListener implements View.OnClickListener
+    {
+        private int index;
+
+        public BottomItemClickListener(int index)
+        {
+            this.index = index;
+        }
+
+        @Override
+        public void onClick(View view) {
+            view.setSelected(!view.isSelected());
+
+            selectedNumber[index] = view.isSelected();
+        }
     }
 
     private void initLotteryType()
@@ -304,7 +356,7 @@ public class TableFour extends BaseTableActivity {
                     baseListAdapter.setShowCount(showCount);
                     sumTableAdapter.notifyDataSetChanged();
                     baseListAdapter.notifyDataSetChanged();
-                    bottomAdapter.notifyDataSetChanged();
+//                    bottomAdapter.notifyDataSetChanged();
                 }
             }
         });
@@ -329,6 +381,19 @@ public class TableFour extends BaseTableActivity {
         } else {
             imageView.setAlpha(Math.round(alpha * 255));
         }
+    }
+
+    @Override
+    public void onFinished() {
+        ArrayList<Boolean> resultList = new ArrayList<Boolean>(7);
+
+        for (int i = 0; i < 6; i++) {
+            resultList.add(i, selectedNumber[i]);
+        }
+
+        Intent intent = new Intent();
+        intent.putExtra(IntentData.SELECT_NUMBERS, resultList);
+        setResult(RESULT_OK, intent);
     }
 
     @Override

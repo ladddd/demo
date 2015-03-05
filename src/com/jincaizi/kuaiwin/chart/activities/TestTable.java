@@ -28,7 +28,7 @@ import java.util.ArrayList;
  */
 public class TestTable extends BaseTableActivity {
 
-    ResponseData responseData;
+    private ResponseData responseData;
 
     private ListView baseListView;
     private BaseListAdapter baseListAdapter;
@@ -55,6 +55,8 @@ public class TestTable extends BaseTableActivity {
 
     private LotteryDataRequester requester;
     private LotteryTimeRequester timeRequester;
+
+    ArrayList<Boolean> selection;
 
     private android.os.Handler handler = new android.os.Handler();
 
@@ -183,7 +185,7 @@ public class TestTable extends BaseTableActivity {
         sumTableLayout = (RelativeLayout) findViewById(R.id.sum_table_layout);
         bottomTable = (TableFixHeaders) findViewById(R.id.bottom_layout);
 
-        bottomAdapter = new BottomAdapter(TestTable.this);
+        bottomAdapter = new BottomAdapter(TestTable.this, selection);
         bottomTable.setAdapter(bottomAdapter);
         tableFixHeaders.setDelegateTable(bottomTable);
         bottomTable.setDelegateTable(tableFixHeaders);
@@ -203,6 +205,9 @@ public class TestTable extends BaseTableActivity {
         {
             finish();
         }
+
+        selection = (ArrayList<Boolean>)getIntent().
+                getSerializableExtra(IntentData.SELECT_NUMBERS);
     }
 
     private void initListShadow()

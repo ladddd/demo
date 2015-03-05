@@ -19,6 +19,8 @@ import com.jincaizi.kuaiwin.chart.requesters.LotteryTimeRequester;
 import com.jincaizi.kuaiwin.chart.views.ElevenFiveLineView;
 import com.jincaizi.data.ElevenFiveData;
 
+import java.util.ArrayList;
+
 /**
  * Created by chenweida on 2015/2/12.
  */
@@ -176,6 +178,8 @@ public class ElevenFiveTableOne extends BaseTableActivity {
 
     private void initBottom(LinearLayout bottomLayout, int index)
     {
+        ArrayList<Boolean> selectionList = null;
+
         if (bottomLayout == null)
         {
             return;
@@ -183,10 +187,39 @@ public class ElevenFiveTableOne extends BaseTableActivity {
 
         if (index == 0) {
             ((TextView) bottomLayout.findViewById(R.id.chose_title)).setText("选号(万位)");
+            selectionList = (ArrayList<Boolean>) getIntent().getSerializableExtra(IntentData.SELECT_NUMBERS);
         }
         else if (index == 1)
         {
             ((TextView) bottomLayout.findViewById(R.id.chose_title)).setText("选号(千位)");
+            selectionList = (ArrayList<Boolean>) getIntent().getSerializableExtra(IntentData.SECOND_SELECT_NUMBERS);
+        }
+
+        if (selectionList != null && selectionList.size() >= 11)
+        {
+            if (index == 0) {
+                for (int i = 0; i < 11; i++) {
+                    firstChosenNumber[i] = selectionList.get(i);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 11; i++) {
+                    secondChosenNumber[i] = selectionList.get(i);
+                }
+            }
+
+            bottomLayout.findViewById(R.id.bottom_one).setSelected(selectionList.get(0));
+            bottomLayout.findViewById(R.id.bottom_two).setSelected(selectionList.get(1));
+            bottomLayout.findViewById(R.id.bottom_three).setSelected(selectionList.get(2));
+            bottomLayout.findViewById(R.id.bottom_four).setSelected(selectionList.get(3));
+            bottomLayout.findViewById(R.id.bottom_five).setSelected(selectionList.get(4));
+            bottomLayout.findViewById(R.id.bottom_six).setSelected(selectionList.get(5));
+            bottomLayout.findViewById(R.id.bottom_seven).setSelected(selectionList.get(6));
+            bottomLayout.findViewById(R.id.bottom_eight).setSelected(selectionList.get(7));
+            bottomLayout.findViewById(R.id.bottom_nine).setSelected(selectionList.get(8));
+            bottomLayout.findViewById(R.id.bottom_ten).setSelected(selectionList.get(9));
+            bottomLayout.findViewById(R.id.bottom_eleven).setSelected(selectionList.get(10));
         }
 
         bottomLayout.findViewById(R.id.bottom_one).setOnClickListener(new BottomItemClickListener(index, 0));
@@ -439,6 +472,22 @@ public class ElevenFiveTableOne extends BaseTableActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void onFinished() {
+        ArrayList<Boolean> firstList = new ArrayList<Boolean>();
+        ArrayList<Boolean> secondList = new ArrayList<Boolean>();
+
+        for (int i = 0; i < 11; i++) {
+            firstList.add(i, firstChosenNumber[i]);
+            secondList.add(i, secondChosenNumber[i]);
+        }
+
+        Intent intent = new Intent();
+        intent.putExtra(IntentData.SELECT_NUMBERS, firstList);
+        intent.putExtra(IntentData.SECOND_SELECT_NUMBERS, secondList);
+        setResult(RESULT_OK, intent);
     }
 
     @Override

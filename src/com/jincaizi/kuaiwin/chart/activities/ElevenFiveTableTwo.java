@@ -19,6 +19,8 @@ import com.jincaizi.kuaiwin.chart.requesters.LotteryTimeRequester;
 import com.jincaizi.kuaiwin.chart.views.ElevenFiveLineView;
 import com.jincaizi.data.ElevenFiveData;
 
+import java.util.ArrayList;
+
 /**
  * Created by chenweida on 2015/2/12.
  */
@@ -228,16 +230,55 @@ public class ElevenFiveTableTwo extends BaseTableActivity {
             return;
         }
 
+        ArrayList<Boolean> selectionList = null;
+
         if (index == 0) {
             ((TextView) bottomLayout.findViewById(R.id.chose_title)).setText("选号(万位)");
+            selectionList = (ArrayList<Boolean>) getIntent().getSerializableExtra(IntentData.SELECT_NUMBERS);
         }
         else if (index == 1)
         {
             ((TextView) bottomLayout.findViewById(R.id.chose_title)).setText("选号(千位)");
+            selectionList = (ArrayList<Boolean>) getIntent().getSerializableExtra(IntentData.SECOND_SELECT_NUMBERS);
+
         }
         else if (index == 2)
         {
             ((TextView) bottomLayout.findViewById(R.id.chose_title)).setText("选号(百位)");
+            selectionList = (ArrayList<Boolean>) getIntent().getSerializableExtra(IntentData.THIRD_SELECT_NUMBERS);
+        }
+
+        if (selectionList != null && selectionList.size() >= 11)
+        {
+            if (index == 0) {
+                for (int i = 0; i < 11; i++) {
+                    firstChosenNumber[i] = selectionList.get(i);
+                }
+            }
+            else if (index == 1)
+            {
+                for (int i = 0; i < 11; i++) {
+                    secondChosenNumber[i] = selectionList.get(i);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 11; i++) {
+                    thirdChosenNumber[i] = selectionList.get(i);
+                }
+            }
+
+            bottomLayout.findViewById(R.id.bottom_one).setSelected(selectionList.get(0));
+            bottomLayout.findViewById(R.id.bottom_two).setSelected(selectionList.get(1));
+            bottomLayout.findViewById(R.id.bottom_three).setSelected(selectionList.get(2));
+            bottomLayout.findViewById(R.id.bottom_four).setSelected(selectionList.get(3));
+            bottomLayout.findViewById(R.id.bottom_five).setSelected(selectionList.get(4));
+            bottomLayout.findViewById(R.id.bottom_six).setSelected(selectionList.get(5));
+            bottomLayout.findViewById(R.id.bottom_seven).setSelected(selectionList.get(6));
+            bottomLayout.findViewById(R.id.bottom_eight).setSelected(selectionList.get(7));
+            bottomLayout.findViewById(R.id.bottom_nine).setSelected(selectionList.get(8));
+            bottomLayout.findViewById(R.id.bottom_ten).setSelected(selectionList.get(9));
+            bottomLayout.findViewById(R.id.bottom_eleven).setSelected(selectionList.get(10));
         }
 
         bottomLayout.findViewById(R.id.bottom_one).setOnClickListener(new BottomItemClickListener(index, 0));
@@ -389,7 +430,7 @@ public class ElevenFiveTableTwo extends BaseTableActivity {
                     float alpha = (child.getBottom() - absListView.getBottom()) * 1.0f / child.getMeasuredHeight();
                     setAlpha(bottomShadow, alpha);
                 }
-                else if (i != 0)
+                else
                 {
                     setAlpha(bottomShadow, 1);
                 }
@@ -552,6 +593,25 @@ public class ElevenFiveTableTwo extends BaseTableActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void onFinished() {
+        ArrayList<Boolean> firstList = new ArrayList<Boolean>();
+        ArrayList<Boolean> secondList = new ArrayList<Boolean>();
+        ArrayList<Boolean> thirdList = new ArrayList<Boolean>();
+
+        for (int i = 0; i < 11; i++) {
+            firstList.add(i, firstChosenNumber[i]);
+            secondList.add(i, secondChosenNumber[i]);
+            thirdList.add(i, thirdChosenNumber[i]);
+        }
+
+        Intent intent = new Intent();
+        intent.putExtra(IntentData.SELECT_NUMBERS, firstList);
+        intent.putExtra(IntentData.SECOND_SELECT_NUMBERS, secondList);
+        intent.putExtra(IntentData.THIRD_SELECT_NUMBERS, thirdList);
+        setResult(RESULT_OK, intent);
     }
 
     @Override

@@ -44,6 +44,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_toRightOf="@+id/text_first"
+				android:layout_marginLeft="2dp"
 				android:textSize="14sp"
 				android:textColor="@color/title_orange"
 				android:text="00:00"
