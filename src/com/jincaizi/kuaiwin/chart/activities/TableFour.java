@@ -48,6 +48,7 @@ public class TableFour extends BaseTableActivity {
     private TextView subBtnTxt;
     private PopupWindow popupWindow;
 //    private TableFixHeaders bottomTable;
+    private RelativeLayout menuBtn;
 
     private boolean showMiss = true;
     private boolean showCount = true;
@@ -70,6 +71,7 @@ public class TableFour extends BaseTableActivity {
             if (!intent.getBooleanExtra("success",false) && baseListLayout.getVisibility() == View.GONE &&
                     sumTableLayout.getVisibility() == View.GONE)
             {
+                menuBtn.setClickable(false);
                 tableMainLayout.setVisibility(View.GONE);
                 loadingLayout.setVisibility(View.GONE);
                 refreshLayout.setVisibility(View.VISIBLE);
@@ -103,6 +105,7 @@ public class TableFour extends BaseTableActivity {
                         sumTableAdapter.notifyDataSetChanged();
                     }
 
+                    menuBtn.setClickable(true);
                     loadingLayout.setVisibility(View.GONE);
                     sumTableLayout.setVisibility(subBtn.isEnabled()?View.GONE:View.VISIBLE);
                     baseListLayout.setVisibility(baseBtn.isEnabled()?View.GONE:View.VISIBLE);
@@ -133,7 +136,7 @@ public class TableFour extends BaseTableActivity {
         subSelector = (ImageView) findViewById(R.id.title_selector_sub);
 
         subBtnTxt = (TextView) findViewById(R.id.sub_btn_txt);
-        RelativeLayout menuBtn = (RelativeLayout) findViewById(R.id.menu);
+        menuBtn = (RelativeLayout) findViewById(R.id.menu);
 
         subBtnTxt.setText("二不同号分布");
 
@@ -361,8 +364,8 @@ public class TableFour extends BaseTableActivity {
             }
         });
 
-        popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.update();

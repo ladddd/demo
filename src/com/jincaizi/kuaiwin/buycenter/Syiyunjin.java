@@ -16,13 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jincaizi.adapters.PopViewAdapter;
 import com.jincaizi.R;
@@ -46,7 +41,7 @@ public class Syiyunjin extends FragmentActivity implements OnClickListener {
 	private int mCount = 0;
 	private TextView right_footer_btn;
 	private int startType = 0; // 0, normal; 1, continuePiack; 2, selectedAgain
-	private TextView clearPick;
+	private RelativeLayout clearPick;
 	private ImageView mBack;
 	private TextView mYilouView;
 
@@ -83,7 +78,7 @@ public class Syiyunjin extends FragmentActivity implements OnClickListener {
 		mShakeBtn = (TextView) findViewById(R.id.my_pls_shake_pick);
 		mZhuShuView = (TextView) findViewById(R.id.bet_zhushu);
 		right_footer_btn = (TextView) findViewById(R.id.right_footer_btn);
-		clearPick = (TextView) findViewById(R.id.left_footer_btn);
+		clearPick = (RelativeLayout) findViewById(R.id.left_footer_btn);
 		mBack = (ImageView) findViewById(R.id.touzhu_leftmenu);
 		mYilouView = (TextView)findViewById(R.id.sumbit_group_buy);
 		mYilouView.setText(this.getResources().getString(R.string.yilou));

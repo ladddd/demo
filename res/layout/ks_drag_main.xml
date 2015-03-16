@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+	<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp">
+
+		<TextView
+				android:id="@+id/text_first"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="选3个不同号码，与开奖相同即中"
+				android:textSize="14sp"
+				android:textColor="@color/setting_text"/>
+
+		<TextView
+				android:id="@+id/text_second"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="40"
+				android:textSize="14sp"
+				android:textColor="@color/buyer_red"
+				android:layout_toRightOf="@+id/text_first"/>
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="元"
+				android:textSize="14sp"
+				android:textColor="@color/setting_text"
+				android:layout_toRightOf="@+id/text_second"/>
+	</RelativeLayout>
+
+	<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp"
+			android:gravity="center"
+			android:text="胆码"
+			android:textSize="14sp"
+			android:textColor="@color/chart_black"/>
+	<com.jincaizi.kuaiwin.widget.ExpandableHeightGridView
+			android:id="@+id/selector_main"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:divider="#616065"
+			android:dividerHeight="1dp"
+			android:listSelector="@android:color/transparent"
+			android:numColumns="6"
+			android:stretchMode="columnWidth"
+			android:horizontalSpacing="4dp"
+			android:verticalSpacing="4dp"
+			android:layout_marginTop="5dp"
+			android:overScrollMode="never"/>
+
+	<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp"
+			android:gravity="center"
+			android:text="拖码"
+			android:textSize="14sp"
+			android:textColor="@color/chart_black"/>
+	<com.jincaizi.kuaiwin.widget.ExpandableHeightGridView
+			android:id="@+id/selector_sub"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:divider="#616065"
+			android:dividerHeight="1dp"
+			android:listSelector="@android:color/transparent"
+			android:numColumns="6"
+			android:stretchMode="columnWidth"
+			android:horizontalSpacing="4dp"
+			android:verticalSpacing="4dp"
+			android:layout_marginTop="5dp"
+			android:overScrollMode="never"/>
+
+</LinearLayout>

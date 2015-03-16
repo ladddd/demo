@@ -46,6 +46,7 @@ public class TestTable extends BaseTableActivity {
     private ImageView subSelector;
     private PopupWindow popupWindow;
     private TableFixHeaders bottomTable;
+    private RelativeLayout menuBtn;
 
     private boolean showLine = true;
     private boolean showMiss = true;
@@ -69,6 +70,7 @@ public class TestTable extends BaseTableActivity {
             if (!intent.getBooleanExtra("success",false) && baseListLayout.getVisibility() == View.GONE &&
                     sumTableLayout.getVisibility() == View.GONE)
             {
+                menuBtn.setClickable(false);
                 loadingLayout.setVisibility(View.GONE);
                 refreshLayout.setVisibility(View.VISIBLE);
                 return;
@@ -101,6 +103,7 @@ public class TestTable extends BaseTableActivity {
                         sumTableAdapter.notifyDataSetChanged();
                     }
 
+                    menuBtn.setClickable(true);
                     loadingLayout.setVisibility(View.GONE);
                     sumTableLayout.setVisibility(subBtn.isEnabled()?View.GONE:View.VISIBLE);
                     baseListLayout.setVisibility(baseBtn.isEnabled()?View.GONE:View.VISIBLE);
@@ -127,7 +130,7 @@ public class TestTable extends BaseTableActivity {
         subBtn = (RelativeLayout) findViewById(R.id.title_btn_sub);
         baseSelector = (ImageView) findViewById(R.id.title_selector_base);
         subSelector = (ImageView) findViewById(R.id.title_selector_sub);
-        RelativeLayout menuBtn = (RelativeLayout) findViewById(R.id.menu);
+        menuBtn = (RelativeLayout) findViewById(R.id.menu);
 
         refreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,6 +181,7 @@ public class TestTable extends BaseTableActivity {
                 popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
             }
         });
+        menuBtn.setClickable(false);
 
         tableFixHeaders = (TableFixHeaders) findViewById(R.id.table);
         baseListView = (ListView) findViewById(R.id.base_list);
@@ -306,8 +310,8 @@ public class TestTable extends BaseTableActivity {
             }
         });
 
-        popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.update();

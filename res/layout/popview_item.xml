@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/popwindow_item"
-    android:layout_width="100dp"
-    android:layout_height="wrap_content"
-    android:textColor="@android:color/black"
-    android:textSize="12sp"
-    android:layout_gravity="center"
-    android:gravity="center"
-    android:padding="10dp"
-    android:button="@null"
-    android:singleLine="true"
-    android:background="@drawable/popitem_bg"
-    >
-</TextView>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+		>
+
+	<ImageView
+			android:id="@+id/background"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:src="@drawable/popitem_bg"/>
+
+	<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true">
+
+		<TextView
+				android:id="@+id/type"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerHorizontal="true"
+				android:text="和值"
+				android:singleLine="true"
+				android:textSize="16sp"
+				android:textColor="@drawable/popitem_text_color"/>
+
+		<TextView
+				android:id="@+id/tips"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerHorizontal="true"
+				android:layout_below="@+id/type"
+				android:layout_marginTop="2dp"
+				android:singleLine="true"
+				android:text="奖金9-240元"
+				android:textSize="12sp"
+				android:textColor="@drawable/popitem_text_color"/>
+
+	</RelativeLayout>
+</RelativeLayout>

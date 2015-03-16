@@ -8,13 +8,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.jincaizi.R;
-import com.jincaizi.adapters.BallGridViewAdapter;
+import com.jincaizi.kuaiwin.buycenter.adapter.ElevenFiveCommonAdapter;
+import com.jincaizi.common.StringUtil;
 import com.jincaizi.kuaiwin.tool.ShiyiyunRandom;
 import com.jincaizi.kuaiwin.utils.Utils;
-import com.jincaizi.kuaiwin.widget.MyGridView;
+import com.jincaizi.kuaiwin.widget.ExpandableHeightGridView;
 import com.jincaizi.kuaiwin.widget.ShakeListener;
 
 import java.util.ArrayList;
@@ -23,18 +24,19 @@ import java.util.ArrayList;
  * Created by chenweida on 2015/3/4.
  */
 public class BaseElevenFiveFragment extends Fragment{
-
-    protected String[] r_content = { "1", "2", "3", "4", "5", "6", "7", "8", "9",
-            "10", "11" };
-    protected MyGridView front_ball_group;
+    protected ExpandableHeightGridView front_ball_group;
     protected Activity mActivity;
-    protected BallGridViewAdapter mRedAdapter;
+    protected ElevenFiveCommonAdapter mRedAdapter;
     protected ShakeListener mShakeListener;
     protected ArrayList<String> mLiuBall = new ArrayList<String>();
     public int mZhushu = 0;
     protected TextView baiHint;
+    protected TextView hintFirst;
+    protected TextView hintPrice;
     protected String mLocalClassName;
     protected ArrayList<Boolean> boolLiu = new ArrayList<Boolean>();
+    protected RelativeLayout randomSelect;
+    protected Vibrator vibrator;
 
     protected int selectNumber = 8;
 
@@ -62,6 +64,8 @@ public class BaseElevenFiveFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         _initLiuBool();
+        vibrator = (Vibrator) getActivity().getApplication()
+                .getSystemService(Service.VIBRATOR_SERVICE);
     }
 
     @Override
@@ -71,8 +75,7 @@ public class BaseElevenFiveFragment extends Fragment{
 
         mActivity = getActivity();
 
-        mRedAdapter = new BallGridViewAdapter(getActivity(), r_content,
-                boolLiu, true);
+        mRedAdapter = new ElevenFiveCommonAdapter(this, boolLiu);
 
         front_ball_group.setAdapter(mRedAdapter);
         mLocalClassName = mActivity.getLocalClassName();
@@ -113,61 +116,39 @@ public class BaseElevenFiveFragment extends Fragment{
             mShakeListener.stop();
         } else {
             mShakeListener.start();
+            updateCount();
         }
     }
 
     private void _findViews(View view) {
-        front_ball_group = (MyGridView) view
+        front_ball_group = (ExpandableHeightGridView) view
                 .findViewById(R.id.pls_bai_ball_group);
+        front_ball_group.setExpanded(true);
         TextView baiTitle = (TextView) view.findViewById(R.id.pls_bai_title);
         baiTitle.setText("选号");
         baiHint = (TextView) view.findViewById(R.id.pls_bai_hint);
+        hintFirst = (TextView) view.findViewById(R.id.text_first);
+        hintPrice = (TextView) view.findViewById(R.id.text_second);
+        randomSelect = (RelativeLayout) view.findViewById(R.id.shake_random_layout);
         view.findViewById(R.id.lv_pls_shi).setVisibility(View.GONE);
         view.findViewById(R.id.lv_pls_ge).setVisibility(View.GONE);
     }
 
     private void _setListeners() {
-        front_ball_group.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+        randomSelect.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-                TextView ballview = (TextView) arg1
-                        .findViewById(R.id.tv_ssq_ball);
-                String ballStr;
-                if(arg2<9) {
-                    ballStr= "0" + String.valueOf(arg2 + 1);
-                } else {
-                    ballStr= String.valueOf(arg2 + 1);
-                }
-                if (boolLiu.get(arg2)) {
-                    ballview.setTextColor(getActivity().getResources()
-                            .getColor(R.color.blue));
-                    ballview.setBackgroundResource(R.drawable.ball_gray);
-                    boolLiu.set(arg2, false);
-                    mLiuBall.remove(ballStr);
-                } else {
-                    ballview.setTextColor(getActivity().getResources()
-                            .getColor(android.R.color.white));
-                    ballview.setBackgroundResource(R.drawable.ball_blue);
-                    boolLiu.set(arg2, true);
-                    mLiuBall.add(ballStr);
-                }
-                updateCount();
+            public void onClick(View view) {
+                updateBallData();
             }
         });
-
     }
 
-    private void updateCount()
+    protected void updateCount()
     {
         mZhushu = Utils.getZuHeNum(mLiuBall.size(), selectNumber);
 
-        if ( mLocalClassName.equals("buycenter.Syiyunjin")) {
-            ((Syiyunjin) mActivity).setTouzhuResult(mZhushu);
-        } else {
-            ((Syxw) mActivity).setTouzhuResult(mZhushu);
-        }
+        ((Syxw) mActivity).setTouzhuResult(mZhushu);
     }
 
     //更新父activity底部的投注数
@@ -208,7 +189,7 @@ public class BaseElevenFiveFragment extends Fragment{
     public void updateBallData() {
         Vibrator vibrator = (Vibrator) getActivity().getApplication()
                 .getSystemService(Service.VIBRATOR_SERVICE);
-        vibrator.vibrate(new long[] { 0, 200 }, -1);
+        vibrator.vibrate(new long[] { 0, 30 }, -1);
         // _initData();
         ArrayList<String> shakeResult = new ArrayList<String>();
         shakeResult = ShiyiyunRandom.getSyyBallNoRePeat(selectNumber);
@@ -220,12 +201,8 @@ public class BaseElevenFiveFragment extends Fragment{
             mLiuBall.add(shakeResult.get(i));
         }
         mZhushu = 1;
-        if ( mLocalClassName.equals("buycenter.Syiyunjin")) {
-            ((Syiyunjin) mActivity).setTouzhuResult(mZhushu);
-        } else {
-            ((Syxw) mActivity).setTouzhuResult(mZhushu);
-        }
         mRedAdapter.notifyDataSetChanged();
+        updateCount();
     }
 
     public void updateBallData(String ball) {
@@ -244,11 +221,7 @@ public class BaseElevenFiveFragment extends Fragment{
         mLiuBall.clear();
         mRedAdapter.notifyDataSetChanged();
         mZhushu = 0;
-        if ( mLocalClassName.equals("buycenter.Syiyunjin")) {
-            ((Syiyunjin) mActivity).setTouzhuResult(mZhushu);
-        } else {
-            ((Syxw) mActivity).setTouzhuResult(mZhushu);
-        }
+        updateCount();
     }
 
     public void updateChoice(ArrayList<Boolean> updateData)
@@ -268,12 +241,26 @@ public class BaseElevenFiveFragment extends Fragment{
 
         if (changed)
         {
-            Vibrator vibrator = (Vibrator) getActivity().getApplication()
-                    .getSystemService(Service.VIBRATOR_SERVICE);
-            vibrator.vibrate(new long[] { 0, 200 }, -1);
+            vibrator.vibrate(new long[] { 0, 30 }, -1);
         }
         mRedAdapter.notifyDataSetChanged();
 
         updateBottom();
+    }
+
+    public void updateSelection(int position)
+    {
+        vibrator.vibrate(new long[] { 0, 30 }, -1);
+
+        String ballStr = StringUtil.getResultNumberString(position + 1);
+
+        if (boolLiu.get(position)) {
+            boolLiu.set(position, false);
+            mLiuBall.remove(ballStr);
+        } else {
+            boolLiu.set(position, true);
+            mLiuBall.add(ballStr);
+        }
+        updateCount();
     }
 }

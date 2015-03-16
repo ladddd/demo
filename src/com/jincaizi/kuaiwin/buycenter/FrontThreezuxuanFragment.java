@@ -5,8 +5,6 @@ import java.util.Collections;
 
 import android.os.Bundle;
 
-import com.jincaizi.kuaiwin.utils.Utils;
-
 public class FrontThreezuxuanFragment extends BaseElevenFiveFragment {
 	public static final String TAG = "FrontThreezuxuanFragment";
 
@@ -14,9 +12,17 @@ public class FrontThreezuxuanFragment extends BaseElevenFiveFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		selectNumber = 3;
-		baiHint.setText("至少选择3个球");
+        hintFirst.setText("至少选3个号，猜前3个开奖号即中");
+        hintPrice.setText("195");
 
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    protected void updateCount() {
+        super.updateCount();
+
+        ((Syxw) mActivity).setBuyTips(195, 195, mZhushu);
     }
 
 	public ArrayList<String> getPlsResultList() {

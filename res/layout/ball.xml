@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/tv_ssq_ball"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ball_gray"/>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
+	<RelativeLayout
+			android:id="@+id/select_cube"
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:layout_gravity="center_horizontal"
+			android:background="@drawable/ball_bg_selector">
+		<TextView
+				android:id="@+id/tv_ssq_ball"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				android:duplicateParentState="true"
+				android:text="3"
+				android:singleLine="true"
+				android:textSize="20sp"
+				android:textColor="@drawable/number_text_selector"/>
+
+	</RelativeLayout>
+
+
+	<TextView
+			android:id="@+id/leak"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:text="--"
+			android:textSize="14sp"
+			android:textColor="@color/setting_text"/>
+
+</LinearLayout>

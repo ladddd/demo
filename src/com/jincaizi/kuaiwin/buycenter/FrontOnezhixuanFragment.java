@@ -12,10 +12,18 @@ public class FrontOnezhixuanFragment extends BaseElevenFiveFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
         selectNumber = 1;
-        baiHint.setText("至少选择1个球");
+        hintFirst.setText("至少选1个号，猜对第1个开奖号即中");
+        hintPrice.setText("13");
 
         super.onActivityCreated(savedInstanceState);
 	}
+
+    @Override
+    protected void updateCount() {
+        super.updateCount();
+
+        ((Syxw) mActivity).setBuyTips(13, 13, mZhushu);
+    }
 
 	public ArrayList<String> getPlsResultList() {
 		ArrayList<String> result = new ArrayList<String>();

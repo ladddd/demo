@@ -1,243 +1,394 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+		android:scrollbars="none">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-         <WebView
-                    android:id="@+id/ssc_touzhu_rule"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_margin="3dp"
-                    android:visibility="gone"
-                    android:textSize="14sp" />
-        <LinearLayout
-            android:id="@+id/lv_pls_wan"
-            style="@style/simple_corner"
-            android:layout_margin="10dp"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:padding="4.0dip" >
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical" >
 
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+		<RelativeLayout
+				android:id="@+id/shake_random_layout"
+				android:layout_below="@+id/shadow"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:layout_gravity="end">
+			<ImageView
+					android:id="@+id/shake_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="25dp"
+					android:src="@drawable/shake_bg"/>
 
-                <TextView
-                    android:id="@+id/pls_wan_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="万位"
-                    android:textColor="@color/blue"
-                    android:textSize="14sp" />
+			<TextView
+					android:id="@+id/shake_text"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="摇一注"
+					android:textColor="@color/k3_orange"
+					android:layout_toRightOf="@+id/shake_icon"
+					android:layout_toEndOf="@+id/shake_icon"
+					android:layout_alignBottom="@+id/shake_icon"
+					android:textSize="14sp"
+					android:layout_marginLeft="4dp"
+					android:layout_marginStart="4dp"/>
 
-                <TextView
-                    android:id="@+id/pls_wan_hint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:text="至少选择1个球"
-                    android:textColor="@color/gray_333"
-                    android:textSize="12sp" />
-            </RelativeLayout>
+			<!--<ImageView-->
+			<!--android:id="@+id/leak_icon"-->
+			<!--android:layout_width="wrap_content"-->
+			<!--android:layout_height="22dp"-->
+			<!--android:src="@drawable/leak_icon"-->
+			<!--android:layout_toRightOf="@+id/shake_text"-->
+			<!--android:layout_toEndOf="@+id/shake_text"-->
+			<!--android:layout_marginLeft="8dp"-->
+			<!--android:layout_marginStart="8dp"-->
+			<!--android:layout_marginTop="2dp"/>-->
 
-            <com.jincaizi.kuaiwin.widget.MyGridView
-                android:id="@+id/pls_wan_ball_group"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:horizontalSpacing="0.0dip"
-                android:listSelector="@android:color/transparent"
-                android:numColumns="auto_fit"
-                android:columnWidth="67px"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="0.0dip" />
-        </LinearLayout>
+			<!--<TextView-->
+			<!--android:id="@+id/leak_text"-->
+			<!--android:layout_width="wrap_content"-->
+			<!--android:layout_height="wrap_content"-->
+			<!--android:text="遗漏"-->
+			<!--android:textColor="@color/k3_orange"-->
+			<!--android:layout_toRightOf="@+id/leak_icon"-->
+			<!--android:layout_toEndOf="@+id/leak_icon"-->
+			<!--android:layout_alignBottom="@+id/shake_text"-->
+			<!--android:textSize="14sp"-->
+			<!--android:layout_marginLeft="4dp"-->
+			<!--android:layout_marginStart="4dp"/>-->
+		</RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/lv_pls_qian"
-            style="@style/simple_corner"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:padding="4.0dip" >
+		<WebView
+				android:id="@+id/ssc_touzhu_rule"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="start"
+				android:layout_margin="3dp"
+				android:visibility="gone"
+				android:textSize="14sp"/>
 
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+		<LinearLayout
+				android:id="@+id/lv_pls_wan"
+				style="@style/simple_corner"
+				android:layout_margin="10dp"
+				android:orientation="vertical"
+				android:visibility="gone"
+				android:padding="4.0dip" >
 
-                <TextView
-                    android:id="@+id/pls_qian_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="千位"
-                    android:textColor="@color/blue"
-                    android:textSize="14sp" />
+			<RelativeLayout
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" >
 
-                <TextView
-                    android:id="@+id/pls_qian_hint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:text="至少选择1个球"
-                    android:textColor="@color/gray_333"
-                    android:textSize="12sp" />
-            </RelativeLayout>
+				<TextView
+						android:id="@+id/pls_wan_title"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_centerHorizontal="true"
+						android:text="万位"
+						android:textColor="@color/blue"
+						android:textSize="14sp" />
 
-            <com.jincaizi.kuaiwin.widget.MyGridView
-                android:id="@+id/pls_qian_ball_group"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:horizontalSpacing="0.0dip"
-                android:listSelector="@android:color/transparent"
-                android:numColumns="auto_fit"
-                android:columnWidth="67px"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="0.0dip" />
-        </LinearLayout>
+				<TextView
+						android:id="@+id/pls_wan_hint"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignParentRight="true"
+						android:layout_marginRight="10dp"
+						android:text="至少选择1个球"
+						android:textColor="@color/gray_333"
+						android:textSize="12sp" />
+			</RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/lv_pls_bai"
-            style="@style/simple_corner"
-            android:layout_margin="10dp"
-            android:orientation="vertical"
-            android:padding="4.0dip" >
+			<com.jincaizi.kuaiwin.widget.MyGridView
+					android:id="@+id/pls_wan_ball_group"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10dp"
+					android:horizontalSpacing="0.0dip"
+					android:listSelector="@android:color/transparent"
+					android:numColumns="auto_fit"
+					android:columnWidth="67px"
+					android:stretchMode="columnWidth"
+					android:verticalSpacing="0.0dip" />
+		</LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+		<LinearLayout
+				android:id="@+id/lv_pls_qian"
+				style="@style/simple_corner"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:orientation="vertical"
+				android:visibility="gone"
+				android:padding="4.0dip" >
 
-                <TextView
-                    android:id="@+id/pls_bai_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="百位"
-                    android:textColor="@color/blue"
-                    android:textSize="14sp" />
+			<RelativeLayout
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content" >
 
-                <TextView
-                    android:id="@+id/pls_bai_hint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:text="至少选择1个球"
-                    android:textColor="@color/gray_333"
-                    android:textSize="12sp" />
-            </RelativeLayout>
+				<TextView
+						android:id="@+id/pls_qian_title"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_centerHorizontal="true"
+						android:text="千位"
+						android:textColor="@color/blue"
+						android:textSize="14sp" />
 
-            <com.jincaizi.kuaiwin.widget.MyGridView
-                android:id="@+id/pls_bai_ball_group"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:horizontalSpacing="0.0dip"
-                android:listSelector="@android:color/transparent"
-                android:numColumns="auto_fit"
-                android:columnWidth="67px"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="0.0dip" />
-        </LinearLayout>
+				<TextView
+						android:id="@+id/pls_qian_hint"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignParentRight="true"
+						android:layout_marginRight="10dp"
+						android:text="至少选择1个球"
+						android:textColor="@color/gray_333"
+						android:textSize="12sp" />
+			</RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/lv_pls_shi"
-            style="@style/simple_corner"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical"
-            android:padding="4.0dip" >
+			<com.jincaizi.kuaiwin.widget.MyGridView
+					android:id="@+id/pls_qian_ball_group"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10dp"
+					android:horizontalSpacing="0.0dip"
+					android:listSelector="@android:color/transparent"
+					android:numColumns="auto_fit"
+					android:columnWidth="67px"
+					android:stretchMode="columnWidth"
+					android:verticalSpacing="0.0dip" />
+		</LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+		<LinearLayout
+				android:id="@+id/lv_pls_bai"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="十位"
-                    android:textColor="@color/blue"
-                    android:textSize="14sp" />
+			<RelativeLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:text="至少选择1个球"
-                    android:textColor="@color/gray_333"
-                    android:textSize="12sp" />
-            </RelativeLayout>
+				<TextView
+						android:id="@+id/pls_bai_hint"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:visibility="gone"/>
 
-            <com.jincaizi.kuaiwin.widget.MyGridView
-                android:id="@+id/pls_shi_ball_group"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:horizontalSpacing="0.0dip"
-                android:listSelector="@android:color/transparent"
-                android:numColumns="auto_fit"
-                android:columnWidth="67px"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="0.0dip" />
-        </LinearLayout>
+				<TextView
+						android:id="@+id/text_first"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="至少选两个号，猜对任意两个开奖号即中"
+						android:textSize="14sp"
+						android:textColor="@color/setting_text"/>
 
-        <LinearLayout
-            android:id="@+id/lv_pls_ge"
-            style="@style/simple_corner"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:padding="4.0dip" >
+				<TextView
+						android:id="@+id/text_second"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="6"
+						android:textSize="14sp"
+						android:textColor="@color/buyer_red"
+						android:layout_toRightOf="@+id/text_first"/>
 
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="元"
+						android:textSize="14sp"
+						android:textColor="@color/setting_text"
+						android:layout_toRightOf="@+id/text_second"/>
+			</RelativeLayout>
 
-                <TextView
-                    android:id="@+id/gewei_mark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="个位"
-                    android:textColor="@color/blue"
-                    android:textSize="14sp" />
+			<LinearLayout
+					android:id="@+id/first_gridview_title"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10dp"
+					android:background="@android:color/white"
+					android:orientation="horizontal"
+					android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/gewei_hintview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:text="至少选择1个球"
-                    android:textColor="@color/gray_333"
-                    android:textSize="12sp" />
-            </RelativeLayout>
+				<View
+						android:layout_width="0dp"
+						android:layout_height="1dp"
+						android:layout_gravity="center_vertical"
+						android:layout_weight="1"
+						android:layout_marginLeft="10dp"
+						android:layout_marginStart="10dp"
+						android:background="@drawable/divider_left" />
 
-            <com.jincaizi.kuaiwin.widget.MyGridView
-                android:id="@+id/pls_ge_ball_group"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:horizontalSpacing="0.0dip"
-                android:listSelector="@android:color/transparent"
-                android:numColumns="auto_fit"
-                android:columnWidth="67px"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="0.0dip" />
-        </LinearLayout>
-    </LinearLayout>
+				<TextView
+						android:id="@+id/pls_bai_title"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="10dp"
+						android:layout_marginRight="10dp"
+						android:text="万位"
+						android:textColor="@color/setting_text"
+						android:textSize="16sp"/>
+
+				<View
+						android:layout_width="0dp"
+						android:layout_height="1dp"
+						android:layout_gravity="center_vertical"
+						android:layout_weight="1"
+						android:layout_marginRight="10dp"
+						android:layout_marginEnd="10dp"
+						android:background="@drawable/divider_right" />
+			</LinearLayout>
+
+			<com.jincaizi.kuaiwin.widget.ExpandableHeightGridView
+					android:id="@+id/pls_bai_ball_group"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10dp"
+					android:listSelector="@android:color/transparent"
+					android:numColumns="auto_fit"
+					android:columnWidth="60dp"
+					android:stretchMode="columnWidth"
+					android:verticalSpacing="4dp"
+					android:overScrollMode="never"/>
+		</LinearLayout>
+
+		<LinearLayout
+				android:id="@+id/lv_pls_shi"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:orientation="vertical" >
+
+			<LinearLayout
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10dp"
+					android:background="@android:color/white"
+					android:orientation="horizontal">
+
+				<View
+						android:layout_width="0dp"
+						android:layout_height="1dp"
+						android:layout_gravity="center_vertical"
+						android:layout_weight="1"
+						android:layout_marginLeft="10dp"
+						android:layout_marginStart="10dp"
+						android:background="@drawable/divider_left" />
+
+				<TextView
+						android:id="@+id/second_gridview_text"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="10dp"
+						android:layout_marginRight="10dp"
+						android:text="千位"
+						android:textColor="@color/setting_text"
+						android:textSize="16sp"/>
+
+				<View
+						android:layout_width="0dp"
+						android:layout_height="1dp"
+						android:layout_gravity="center_vertical"
+						android:layout_weight="1"
+						android:layout_marginRight="10dp"
+						android:layout_marginEnd="10dp"
+						android:background="@drawable/divider_right" />
+			</LinearLayout>
+
+			<com.jincaizi.kuaiwin.widget.ExpandableHeightGridView
+					android:id="@+id/pls_shi_ball_group"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10dp"
+					android:listSelector="@android:color/transparent"
+					android:numColumns="auto_fit"
+					android:columnWidth="60dp"
+					android:stretchMode="columnWidth"
+					android:verticalSpacing="4dp"
+					android:overScrollMode="never" />
+		</LinearLayout>
+
+		<LinearLayout
+				android:id="@+id/lv_pls_ge"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:orientation="vertical" >
+
+			<RelativeLayout
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:visibility="gone">
+
+				<TextView
+						android:id="@+id/gewei_mark"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_centerHorizontal="true"
+						android:text="个位"
+						android:textColor="@color/blue"
+						android:textSize="14sp" />
+
+				<TextView
+						android:id="@+id/gewei_hintview"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignParentRight="true"
+						android:layout_marginRight="10dp"
+						android:text="至少选择1个球"
+						android:textColor="@color/gray_333"
+						android:textSize="12sp" />
+			</RelativeLayout>
+
+			<LinearLayout
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10dp"
+					android:background="@android:color/white"
+					android:orientation="horizontal">
+
+				<View
+						android:layout_width="0dp"
+						android:layout_height="1dp"
+						android:layout_gravity="center_vertical"
+						android:layout_weight="1"
+						android:layout_marginLeft="10dp"
+						android:layout_marginStart="10dp"
+						android:background="@drawable/divider_left" />
+
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="10dp"
+						android:layout_marginRight="10dp"
+						android:text="百位"
+						android:textColor="@color/setting_text"
+						android:textSize="16sp"/>
+
+				<View
+						android:layout_width="0dp"
+						android:layout_height="1dp"
+						android:layout_gravity="center_vertical"
+						android:layout_weight="1"
+						android:layout_marginRight="10dp"
+						android:layout_marginEnd="10dp"
+						android:background="@drawable/divider_right" />
+			</LinearLayout>
+
+			<com.jincaizi.kuaiwin.widget.ExpandableHeightGridView
+					android:id="@+id/pls_ge_ball_group"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10dp"
+					android:listSelector="@android:color/transparent"
+					android:numColumns="auto_fit"
+					android:columnWidth="60dp"
+					android:stretchMode="columnWidth"
+					android:verticalSpacing="4dp"
+					android:overScrollMode="never" />
+		</LinearLayout>
+	</LinearLayout>
 
 </ScrollView>

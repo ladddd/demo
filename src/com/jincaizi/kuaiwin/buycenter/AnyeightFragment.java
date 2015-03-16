@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import android.os.Bundle;
+import com.jincaizi.kuaiwin.utils.Utils;
 
 public class AnyeightFragment extends BaseElevenFiveFragment {
 	public static final String TAG = "AnyeightFragment";
@@ -12,10 +13,24 @@ public class AnyeightFragment extends BaseElevenFiveFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
         selectNumber = 8;
-        baiHint.setText("至少选择8个球");
+        hintFirst.setText("至少选8个号，选号包含5个开奖号即中");
+        hintPrice.setText("9");
 
 		super.onActivityCreated(savedInstanceState);
 	}
+
+    @Override
+    protected void updateCount() {
+        super.updateCount();
+
+        //选择号码的个数
+        int selectedCount = 0;
+        for (int i = 0; i < boolLiu.size(); i++) {
+            selectedCount += boolLiu.get(i)?1:0;
+        }
+        int profit = 9 * Utils.getZuHeNum(selectedCount - 5, 8-5);
+        ((Syxw) mActivity).setBuyTips(profit, profit, mZhushu);
+    }
 
 	public ArrayList<String> getPlsResultList() {
 		ArrayList<String> result = new ArrayList<String>();

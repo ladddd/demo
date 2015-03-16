@@ -179,5 +179,6 @@
     <string name="about_tel_content">4006&#8211;999&#8211;721</string>
 
 	<string name="chart">走势图</string>
+	<string name="number_tips">奖金%d元</string>
     
 </resources>

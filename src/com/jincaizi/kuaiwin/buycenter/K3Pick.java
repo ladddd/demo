@@ -71,7 +71,7 @@ public class K3Pick extends Activity implements OnClickListener, OnItemLongClick
 	private TextView mClearList;
 	private TextView mSubmitGroupBuy;
 	private TextView mSubmitDaigou;
-	private TextView mFootLeftBtn;
+	private RelativeLayout mFootLeftBtn;
 	private EditText mTraceTime;
 	private EditText mTraceIssue;
 	private ImageView mTimeSub;
@@ -174,11 +174,9 @@ public class K3Pick extends Activity implements OnClickListener, OnItemLongClick
 		mSubmitGroupBuy = (TextView) findViewById(R.id.sumbit_group_buy);
 		
 		mSubmitDaigou = (TextView)findViewById(R.id.right_footer_btn);
-		mFootLeftBtn = (TextView)findViewById(R.id.left_footer_btn);
-		mFootLeftBtn.setBackgroundResource(R.drawable.popitem_bg);
-		mFootLeftBtn.setTextColor(this.getResources().getColorStateList(R.color.footer_black));
-		mFootLeftBtn.setPadding(10, 10, 10, 10);
-		mFootLeftBtn.setText(this.getResources().getString(R.string.smartzhuihao));
+		mFootLeftBtn = (RelativeLayout)findViewById(R.id.left_footer_btn);
+        TextView leftBtnText = (TextView) findViewById(R.id.clear_text);
+		leftBtnText.setText(this.getResources().getString(R.string.smartzhuihao));
 		
 		mZhuiCheckbox = (CheckBox)findViewById(R.id.zhui_checkbox);
 		

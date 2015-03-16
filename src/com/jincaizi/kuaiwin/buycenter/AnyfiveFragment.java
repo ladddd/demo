@@ -12,10 +12,18 @@ public class AnyfiveFragment extends BaseElevenFiveFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
         selectNumber = 5;
-        baiHint.setText("至少选择5个球");
+        hintFirst.setText("至少选5个号，猜对全部5个开奖号即中");
+        hintPrice.setText("540");
         
 		super.onActivityCreated(savedInstanceState);
 	}
+
+    @Override
+    protected void updateCount() {
+        super.updateCount();
+
+        ((Syxw) mActivity).setBuyTips(540, 540, mZhushu);
+    }
 
 	public ArrayList<String> getPlsResultList() {
 		ArrayList<String> result = new ArrayList<String>();

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+	<RelativeLayout
+			android:id="@+id/shake_random_layout"
+			android:layout_below="@+id/shadow"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp"
+			android:layout_gravity="end">
+		<ImageView
+				android:id="@+id/shake_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="25dp"
+				android:src="@drawable/shake_bg"/>
+
+		<TextView
+				android:id="@+id/shake_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="摇一注"
+				android:textColor="@color/k3_orange"
+				android:layout_toRightOf="@+id/shake_icon"
+				android:layout_toEndOf="@+id/shake_icon"
+				android:layout_alignBottom="@+id/shake_icon"
+				android:textSize="14sp"
+				android:layout_marginLeft="4dp"
+				android:layout_marginStart="4dp"/>
+
+		<!--<ImageView-->
+		<!--android:id="@+id/leak_icon"-->
+		<!--android:layout_width="wrap_content"-->
+		<!--android:layout_height="22dp"-->
+		<!--android:src="@drawable/leak_icon"-->
+		<!--android:layout_toRightOf="@+id/shake_text"-->
+		<!--android:layout_toEndOf="@+id/shake_text"-->
+		<!--android:layout_marginLeft="8dp"-->
+		<!--android:layout_marginStart="8dp"-->
+		<!--android:layout_marginTop="2dp"/>-->
+
+		<!--<TextView-->
+		<!--android:id="@+id/leak_text"-->
+		<!--android:layout_width="wrap_content"-->
+		<!--android:layout_height="wrap_content"-->
+		<!--android:text="遗漏"-->
+		<!--android:textColor="@color/k3_orange"-->
+		<!--android:layout_toRightOf="@+id/leak_icon"-->
+		<!--android:layout_toEndOf="@+id/leak_icon"-->
+		<!--android:layout_alignBottom="@+id/shake_text"-->
+		<!--android:textSize="14sp"-->
+		<!--android:layout_marginLeft="4dp"-->
+		<!--android:layout_marginStart="4dp"/>-->
+	</RelativeLayout>
+
+	<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp">
+
+		<TextView
+				android:id="@+id/text_first"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="三不同号：选3个不同的号码，与开奖结果相同即中"
+				android:textSize="14sp"
+				android:textColor="@color/setting_text"/>
+
+		<TextView
+				android:id="@+id/text_second"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="40"
+				android:textSize="14sp"
+				android:textColor="@color/buyer_red"
+				android:layout_toRightOf="@+id/text_first"/>
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="元"
+				android:textSize="14sp"
+				android:textColor="@color/setting_text"
+				android:layout_toRightOf="@+id/text_second"/>
+	</RelativeLayout>
+
+	<com.jincaizi.kuaiwin.widget.ExpandableHeightGridView
+			android:id="@+id/selector_main"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:divider="#616065"
+			android:dividerHeight="1dp"
+			android:listSelector="@android:color/transparent"
+			android:numColumns="6"
+			android:stretchMode="columnWidth"
+			android:horizontalSpacing="4dp"
+			android:verticalSpacing="4dp"
+			android:layout_marginTop="5dp"
+			android:overScrollMode="never"/>
+
+	<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp">
+
+		<TextView
+				android:id="@+id/text_first_sub"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="三连号：123,234,345,456任意开出即中"
+				android:textSize="14sp"
+				android:textColor="@color/setting_text"/>
+
+		<TextView
+				android:id="@+id/text_second_sub"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="10"
+				android:textSize="14sp"
+				android:textColor="@color/buyer_red"
+				android:layout_toRightOf="@+id/text_first_sub"/>
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="元"
+				android:textSize="14sp"
+				android:textColor="@color/setting_text"
+				android:layout_toRightOf="@+id/text_second_sub"/>
+	</RelativeLayout>
+
+	<LinearLayout
+			android:id="@+id/special_choose"
+			android:orientation="vertical"
+			android:layout_width="280dp"
+			android:layout_height="65dp"
+			android:layout_marginTop="10dp"
+			android:layout_gravity="center">
+
+		<RelativeLayout
+				android:id="@+id/select_cube"
+				android:layout_width="match_parent"
+				android:layout_height="45dp"
+				android:background="@drawable/number_selector">
+
+			<TextView
+					android:id="@+id/type"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_centerInParent="true"
+					android:duplicateParentState="true"
+					android:text="三连号通选"
+					android:singleLine="true"
+					android:textSize="16sp"
+					android:textColor="@drawable/number_text_selector"/>
+
+		</RelativeLayout>
+
+
+		<TextView
+				android:id="@+id/leak"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:text="--"
+				android:textSize="14sp"
+				android:textColor="@color/setting_text"/>
+
+	</LinearLayout>
+
+</LinearLayout>

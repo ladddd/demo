@@ -1,46 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-     >
-     <View 
-           android:layout_width="match_parent"
-    android:layout_height="1dp"
-         android:background="@android:color/darker_gray"
-         />
-<RelativeLayout 
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/main_head_bar_height"
-    android:background="@color/white"
-     >
-     <TextView 
-         android:id="@+id/left_footer_btn"
-         android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-       android:layout_alignParentLeft="true"
-      android:layout_centerVertical="true"
-      android:background="@drawable/btn_delete"
-      android:layout_marginLeft="10dp"
-         />
-  <TextView 
-      android:id="@+id/bet_zhushu"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_centerInParent="true"
-      />
- 
-  <TextView 
-      android:id="@+id/right_footer_btn"
-      android:layout_width="@dimen/main_footer_btn_weight"
-      android:layout_height="fill_parent"
-      android:layout_alignParentRight="true"
-      android:layout_centerVertical="true"
-      android:gravity="center"
-      android:background="@drawable/common_footer_btn_bg"
-      android:textColor="@color/right_footer_text_color"
-      android:text="@string/submit"
-      />
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+		>
 
-</RelativeLayout>
+	<LinearLayout
+			android:id="@+id/buy_tips_layout"
+			android:layout_width="match_parent"
+			android:layout_height="30dp"
+			android:background="@color/timer_bg"
+			android:gravity="center_vertical"
+			android:visibility="gone">
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:layout_marginStart="10dp"
+				android:text="若中奖，奖金"
+				android:textColor="@color/chart_black"
+				android:textSize="14sp"/>
+		<TextView
+				android:id="@+id/lottery_money"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textSize="14sp"
+				android:textColor="@color/buyer_red"
+				android:text="10-16"/>
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="元，盈利"
+				android:textColor="@color/chart_black"
+				android:textSize="14sp"/>
+		<TextView
+				android:id="@+id/profit"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textSize="14sp"
+				android:textColor="@color/buyer_red"
+				android:text="10-16"/>
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="元"
+				android:textColor="@color/chart_black"
+				android:textSize="14sp"/>
+	</LinearLayout>
+
+	<View
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="@color/divider_dark"
+			/>
+
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/main_head_bar_height"
+			android:background="@color/timer_bg"
+			>
+
+		<RelativeLayout
+				android:id="@+id/left_footer_btn"
+				android:layout_width="60dp"
+				android:layout_height="match_parent"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentStart="true"
+				>
+
+			<RelativeLayout
+					android:layout_width="wrap_content"
+					android:layout_height="35dp"
+					android:layout_centerInParent="true">
+				<ImageView
+						android:id="@+id/clear_image"
+						android:layout_width="20dp"
+						android:layout_height="20dp"
+						android:layout_centerHorizontal="true"
+						android:src="@drawable/btn_delete"/>
+
+				<TextView
+						android:id="@+id/clear_text"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_centerHorizontal="true"
+						android:layout_below="@+id/clear_image"
+						android:text="清空"
+						android:textSize="12dp"
+						android:textColor="@color/k3_orange"
+						/>
+			</RelativeLayout>
+
+		</RelativeLayout>
+
+
+		<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:layout_centerInParent="true"
+				android:gravity="center">
+
+			<TextView
+					android:id="@+id/bet_txt_1"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textSize="16sp"
+					android:textColor="@color/chart_black"
+					android:text="共"/>
+			<TextView
+					android:id="@+id/bet_txt_2"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@color/buyer_red"
+					android:textSize="16sp"
+					android:text="1"/>
+			<TextView
+					android:id="@+id/bet_txt_3"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textSize="16sp"
+					android:textColor="@color/chart_black"
+					android:text="注"/>
+			<TextView
+					android:id="@+id/bet_txt_4"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@color/buyer_red"
+					android:textSize="16sp"
+					android:text="2"/>
+			<TextView
+					android:id="@+id/bet_txt_5"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textSize="16sp"
+					android:textColor="@color/chart_black"
+					android:text="元"/>
+
+		</LinearLayout>
+
+		<TextView
+				android:id="@+id/bet_zhushu"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				/>
+
+		<TextView
+				android:id="@+id/right_footer_btn"
+				android:layout_width="@dimen/main_footer_btn_weight"
+				android:layout_height="35dp"
+				android:layout_marginRight="10dp"
+				android:layout_marginEnd="10dp"
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true"
+				android:gravity="center"
+				android:background="@drawable/bottom_bg_selected"
+				android:textColor="@color/k3_orange"
+				android:text="下一步"
+				/>
+
+	</RelativeLayout>
+
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.jincaizi.kuaiwin.buycenter;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import android.app.Activity;
@@ -14,31 +15,24 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.AbsoluteSizeSpan;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
+import android.widget.*;
 
 import com.jincaizi.R;
+import com.jincaizi.common.NumberUtil;
+import com.jincaizi.kuaiwin.buycenter.adapter.*;
 import com.jincaizi.kuaiwin.tool.K3Random;
 import com.jincaizi.kuaiwin.utils.Constants.K3Type;
 import com.jincaizi.kuaiwin.utils.Utils;
 import com.jincaizi.kuaiwin.widget.AnimationController;
+import com.jincaizi.kuaiwin.widget.ExpandableHeightGridView;
 
 public class K3_hz_fragment extends Fragment{
     public static final String TAG_HZ ="K3_hz_fragment";
@@ -49,6 +43,16 @@ public class K3_hz_fragment extends Fragment{
     public static final String TAG_THREE_DIF_DRAG ="K3_threedif_drag_fragment";
     public static final String TAG_TWO_DIF_DRAG ="K3_twodif_drag_fragment";
     public static final String BETTYPE ="bettype";
+
+    private static final int TYPE_BIG = 0;
+    private static final int TYPE_SMALL = 1;
+    private static final int TYPE_ODD = 2;
+    private static final int TYPE_EVEN = 3;
+    private static final int TYPE_BIG_ODD = 4;
+    private static final int TYPE_BIG_EVEN = 5;
+    private static final int TYPE_SMALL_ODD = 6;
+    private static final int TYPE_SMALL_EVEN = 7;
+
     private String[] r_content = { "3 \n奖金240元", "4 \n奖金80元", "5 \n奖金40元", "6 \n奖金25元", "7 \n奖金16元", "8 \n奖金12元", "9 \n奖金10元",
             "10 \n奖金9元", "11 \n奖金9元","12 \n奖金10元","13 \n奖金12元","14 \n奖金16元","15 \n奖金25元","16 \n奖金40元","17 \n奖金80元","18 \n奖金240元" };
     private String[] three_same_content = { "111 \n奖金240元", "222 \n奖金240元", "333 \n奖金240元",
@@ -71,7 +75,20 @@ public class K3_hz_fragment extends Fragment{
     private RelativeLayout rv_anim;
     public int mZhushu = 0;
 
-    private boolean changedAfterWatchChart;
+    private Vibrator vibrator;
+
+    private KSSumAdapter sumAdapter;
+    private ThreeSameAdapter threeSameAdapter;
+    private ChooseCommonAdapter threeDiffAdapter;
+    private TwoSameAdapter twoSameFirstAdapter;
+    private TwoSameAdapter twoSameSecondAdapter;
+    private TwoSameAdapter twoSameMultiAdapter;
+    private ChooseCommonAdapter twoDiffAdapter;
+
+    private KSDragAdapter dragFirstAdapter;
+    private KSDragAdapter dragSecondAdapter;
+
+    private boolean changed; //选号是否改变
 
     @Override
     public void onAttach(Activity activity) {
@@ -83,6 +100,8 @@ public class K3_hz_fragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = (K3)getActivity();
+        vibrator = (Vibrator) getActivity().getApplication()
+                .getSystemService(Service.VIBRATOR_SERVICE);
     }
     private void _initBool(int size) {
         for(int i=0; i<size; i++) {
@@ -108,36 +127,9 @@ public class K3_hz_fragment extends Fragment{
 
     }
 
+    public void _showDiceFrame(int caseIndex) {
+        vibrator.vibrate(new long[] { 0, 30 }, -1);
 
-    public void updateBallData() {
-        Vibrator vibrator = (Vibrator) getActivity().getApplication()
-                .getSystemService(Service.VIBRATOR_SERVICE);
-        vibrator.vibrate(new long[] { 0, 200 }, -1);
-
-
-        int factor = 0;
-        int length = 16;
-        if(mActivity.mCaseIndex == 1) {
-            factor = 16;
-            length = 7;
-        } else if(mActivity.mCaseIndex == 2) {
-            factor = 23;
-            length = 18;
-        } else if(mActivity.mCaseIndex == 3) {
-            factor = 41;
-            length = 7;
-        } else if(mActivity.mCaseIndex == 4) {
-            factor = 48;
-            length = 6;
-        }
-        for(int i=0; i<length; i++) {
-            Log.d("test1", i+"+"+factor+"=" +(i+factor));
-            mActivity.tbArrays[i+factor].setChecked(false);
-            //((ToggleButton)mLvMatch.findViewById((i+factor))).setChecked(false);
-        }
-        _showDiceFrame(mActivity.mCaseIndex);
-    }
-    private void _showDiceFrame(int caseIndex) {
         myDialog = new Dialog(getActivity(), R.style.Theme_dialog);
         View view = LayoutInflater.from(getActivity().getApplicationContext()).inflate(
                 R.layout.k3_dice_frame, null);
@@ -204,12 +196,12 @@ public class K3_hz_fragment extends Fragment{
                     doAnimationOfTwoDif();
                     break;
                 case DISMISS:
-                    updateSelection(false);
+                    updateSelection();
                     myDialog.dismiss();
                     myDialog = null;
                     break;
                 case UPDATE:
-                    updateSelection(true);
+                    updateSelection();
                     break;
                 default:
                     break;
@@ -219,35 +211,39 @@ public class K3_hz_fragment extends Fragment{
         }
     };
 
-    private void updateSelection(boolean vibrate)
+    private void updateSelection()
     {
-        if (vibrate && changedAfterWatchChart)
+        if (changed)
         {
-            Vibrator vibrator = (Vibrator) getActivity().getApplication()
-                    .getSystemService(Service.VIBRATOR_SERVICE);
-            vibrator.vibrate(new long[] { 0, 200 }, -1);
-            changedAfterWatchChart = false;
+            vibrator.vibrate(new long[] { 0, 30 }, -1);
+            changed = false;
         }
 
-        int factor = 0;
-        int length = 16;
-        if(mActivity.mCaseIndex == 1) {
-            factor = 16;
-            length = 7;
-        } else if(mActivity.mCaseIndex == 2) {
-            factor = 23;
-            length = 18;
-        } else if(mActivity.mCaseIndex == 3) {
-            factor = 41;
-            length = 7;
-        } else if(mActivity.mCaseIndex == 4) {
-            factor = 48;
-            length = 6;
+        if(mActivity.mCaseIndex == 1)
+        {
+            threeSameAdapter.notifyDataSetChanged();
+            mLvMatch.findViewById(R.id.special_choose).setSelected(bool[6]);
         }
-        for(int i=0; i<length; i++) {
-            mActivity.tbArrays[i+factor].setChecked(bool[i]);
-            //((ToggleButton)mLvMatch.findViewById((i+factor))).setChecked(bool[i]);
+        else if(mActivity.mCaseIndex == 2)
+        {
+            twoSameFirstAdapter.notifyDataSetChanged();
+            twoSameSecondAdapter.notifyDataSetChanged();
+            twoSameMultiAdapter.notifyDataSetChanged();
         }
+        else if(mActivity.mCaseIndex == 3)
+        {
+            threeDiffAdapter.notifyDataSetChanged();
+            mLvMatch.findViewById(R.id.special_choose).setSelected(bool[6]);
+        }
+        else if(mActivity.mCaseIndex == 4)
+        {
+            twoDiffAdapter.notifyDataSetChanged();
+        }
+        else if (mActivity.mCaseIndex != 5 && mActivity.mCaseIndex != 6)
+        {
+            sumAdapter.notifyDataSetChanged();
+        }
+
         computeZhushu();
     }
 
@@ -274,6 +270,7 @@ public class K3_hz_fragment extends Fragment{
         dismissMsg.what = DISMISS;
         handler.sendMessageDelayed(dismissMsg, 2500);
     }
+
     private void doAnimationOfThreeSame() {
         Random ramdom = new Random();
         int nu1 = ramdom.nextInt(6);
@@ -294,6 +291,7 @@ public class K3_hz_fragment extends Fragment{
         dismissMsg.what = DISMISS;
         handler.sendMessageDelayed(dismissMsg, 2500);
     }
+
     private void doAnimationOfTwoSame() {
         Random ramdom = new Random();
         int nu1 = ramdom.nextInt(6);
@@ -316,6 +314,7 @@ public class K3_hz_fragment extends Fragment{
         dismissMsg.what = DISMISS;
         handler.sendMessageDelayed(dismissMsg, 2500);
     }
+
     private void doAnimationOfThreeDif() {
         int[]result = K3Random.getThreeDiff();
         anim1.stop();
@@ -337,6 +336,7 @@ public class K3_hz_fragment extends Fragment{
         dismissMsg.what = DISMISS;
         handler.sendMessageDelayed(dismissMsg, 2500);
     }
+
     private void doAnimationOfTwoDif() {
         int[]result = K3Random.getTwoDiff();
         anim1.stop();
@@ -386,688 +386,561 @@ public class K3_hz_fragment extends Fragment{
         } else if(mGameType.equals(K3Type.dragthree.toString())) {
             //bool = new boolean[three_diff_content.length];
             _initBool(12);
-            _drawViewDrag(getResources().getString(R.string.k3_drag3_num));
+            _drawViewDrag(true);
         } else {
             //bool = new boolean[three_diff_content.length];
             _initBool(12);
-            _drawViewDrag(getResources().getString(R.string.k3_drag2_num));
+            _drawViewDrag(false);
         }
     }
 
-    private void _drawViewHZ() {
-        int tb_id = 0;
-        for (int i = 0; i < 4; i++) {
-            LinearLayout lv = new LinearLayout(getActivity());
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-            lp.topMargin = 10;
-            lp.leftMargin = 6;
-            lp.rightMargin = 10;
-            lv.setLayoutParams(lp);
-            lv.setOrientation(LinearLayout.HORIZONTAL);
-            for (int j = 0; j < 4; j++) {
-                int tb_index = i * 4 + j;
-                ToggleButton tv1 = new ToggleButton(getActivity());
-                SpannableString ss = new SpannableString(r_content[tb_index]);
-                int index = r_content[tb_index].indexOf(" ");
-                ss.setSpan(new AbsoluteSizeSpan(12), index,
-                        r_content[tb_index].length(),
-                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                Log.d("test", tb_id+"");
-                tv1.setId(tb_id++);
-                tv1.setText(ss);
-                tv1.setTextOff(ss);
-                tv1.setTextOn(ss);
-                tv1.setPadding(10, 5, 10, 5);
-                tv1.setGravity(Gravity.CENTER);
-                tv1.setTextColor(this.getResources().getColor(R.color.footer_black));
-                tv1.setBackgroundResource(R.drawable.k3_btn_toggle_bg);
-                tv1.setChecked(bool[tb_index]);
-                LinearLayout.LayoutParams tp = new LayoutParams(0, LayoutParams.MATCH_PARENT,
-                        1);
-                tp.leftMargin = 4;
-                lv.addView(tv1, tp);
+    private void _drawViewHZ()
+    {
+        final LinearLayout body = (LinearLayout) LayoutInflater.from(getActivity().getApplicationContext()).
+                inflate(R.layout.ks_sum_main, null);
+        ExpandableHeightGridView gridView = (ExpandableHeightGridView)body.findViewById(R.id.selector_main);
+        sumAdapter = new KSSumAdapter(this, bool);
+        gridView.setAdapter(sumAdapter);
+        gridView.setExpanded(true);
 
-                tv1.setOnClickListener(new MyClick(tb_index));
-                mActivity.tbArrays[tb_id-1] = tv1;
-                //tb_id++;
+        RelativeLayout randomLayout = (RelativeLayout) body.findViewById(R.id.shake_random_layout);
+        randomLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _showDiceFrame(mActivity.mCaseIndex);
             }
+        });
 
-            mLvMatch.addView(lv);
+        final TextView big = (TextView) body.findViewById(R.id.big);
+        final TextView small = (TextView) body.findViewById(R.id.small);
+        final TextView odd = (TextView) body.findViewById(R.id.odd);
+        final TextView even = (TextView) body.findViewById(R.id.even);
 
-        }
-        LinearLayout ruleLV = new LinearLayout(getActivity());
-        LinearLayout.LayoutParams rulelp = new LinearLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        rulelp.topMargin = 20;
-        rulelp.leftMargin = 10;
-        rulelp.rightMargin = 10;
-        ruleLV.setLayoutParams(rulelp);
-        ruleLV.setOrientation(LinearLayout.HORIZONTAL);
-        TextView ruleHint = new TextView(getActivity());
-        ruleHint.setTextColor(this.getResources().getColor((R.color.red)));
-        ruleHint.setText(this.getResources().getString(R.string.k3_hz_rulehint));
-        ruleLV.addView(ruleHint);
-        mLvMatch.addView(ruleLV);
+        big.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.setSelected(!view.isSelected());
+                boolean isOdd = odd.isSelected();
+                boolean isEven = even.isSelected();
+                if (isOdd)
+                {
+                    for (int i = 0; i < 16; i++) {
+                        bool[i] = ((i % 2) == 0) && (i > 7 || !view.isSelected());
+                    }
+                }
+                else if (isEven)
+                {
+                    for (int i = 0; i < 16; i++) {
+                        bool[i] = ((i % 2) == 1) && (i > 7 || !view.isSelected());
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < 16; i++) {
+                        bool[i] = (i > 7) && view.isSelected();
+                    }
+                }
+
+                changed = view.isSelected() || isOdd || isEven;
+
+                if (view.isSelected()) {
+                    small.setSelected(false);
+                }
+
+                handler.sendEmptyMessage(UPDATE);
+            }
+        });
+
+        small.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.setSelected(!view.isSelected());
+                boolean isOdd = odd.isSelected();
+                boolean isEven = even.isSelected();
+
+                if (isOdd)
+                {
+                    for (int i = 0; i < 16; i++) {
+                        bool[i] = ((i % 2) == 0) && (i <= 7 || !view.isSelected());
+                    }
+                }
+                else if (isEven)
+                {
+                    for (int i = 0; i < 16; i++) {
+                        bool[i] = ((i % 2) == 1) && (i <= 7 || !view.isSelected());
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < 16; i++) {
+                        bool[i] = (i <= 7) && view.isSelected();
+                    }
+                }
+
+                changed = view.isSelected() || isOdd || isEven;
+
+                if (view.isSelected()) {
+                    big.setSelected(false);
+                }
+
+                handler.sendEmptyMessage(UPDATE);
+            }
+        });
+
+        odd.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.setSelected(!view.isSelected());
+                boolean isBig = big.isSelected();
+                boolean isSmall = small.isSelected();
+
+                if (isBig)
+                {
+                    for (int i = 0; i < 16; i++) {
+                        bool[i] =  (i > 7) && (((i % 2) == 0) || !view.isSelected());
+                    }
+                }
+                else if (isSmall)
+                {
+                    for (int i = 0; i < 16; i++) {
+                        bool[i] =  (i <= 7) && (((i % 2) == 0) || !view.isSelected());
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < 16; i++) {
+                        bool[i] = ((i % 2) == 0) && view.isSelected();
+                    }
+                }
+
+                changed = view.isSelected() || isBig || isSmall;
+                if (view.isSelected())
+                {
+                    even.setSelected(false);
+                }
+                handler.sendEmptyMessage(UPDATE);
+            }
+        });
+
+        even.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.setSelected(!view.isSelected());
+                boolean isBig = big.isSelected();
+                boolean isSmall = small.isSelected();
+
+                if (isBig)
+                {
+                    for (int i = 0; i < 16; i++) {
+                        bool[i] =  (i > 7) && (((i % 2) == 1) || !view.isSelected());
+                    }
+                }
+                else if (isSmall)
+                {
+                    for (int i = 0; i < 16; i++) {
+                        bool[i] =  (i <= 7) && (((i % 2) == 1) || !view.isSelected());
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < 16; i++) {
+                        bool[i] = ((i % 2) == 1) && view.isSelected();
+                    }
+                }
+
+                changed = view.isSelected() || isBig || isSmall;
+
+                if (view.isSelected())
+                {
+                    odd.setSelected(false);
+                }
+
+                handler.sendEmptyMessage(UPDATE);
+            }
+        });
+
+        mLvMatch.addView(body);
     }
+
     private void _drawViewThreeSame() {
-        int tb_id = 16;
-        for (int i = 0; i < 3; i++) {
-            LinearLayout lv = new LinearLayout(getActivity());
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-            lp.topMargin = 10;
-            lp.leftMargin = 6;
-            lp.rightMargin = 10;
-            lv.setLayoutParams(lp);
-            lv.setOrientation(LinearLayout.HORIZONTAL);
-            int size = i==2?1:3;;
 
-            for (int j = 0; j < size; j++) {
-                int tb_index = i * 3 + j;
-                ToggleButton tv1 = new ToggleButton(getActivity());
-                SpannableString ss = new SpannableString(three_same_content[tb_index]);
-                int index = three_same_content[tb_index].indexOf(" ");
-                ss.setSpan(new AbsoluteSizeSpan(12), index,
-                        three_same_content[tb_index].length(),
-                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                Log.d("test", tb_id+"");
-                tv1.setId((tb_id++));
-                tv1.setText(ss);
-                tv1.setTextOff(ss);
-                tv1.setTextOn(ss);
-                tv1.setPadding(10, 5, 10, 5);
-                tv1.setGravity(Gravity.CENTER);
-                tv1.setTextColor(this.getResources().getColor(R.color.footer_black));
-                tv1.setBackgroundResource(R.drawable.k3_btn_toggle_bg);
-                tv1.setChecked(bool[tb_index]);
-                LinearLayout.LayoutParams tp = new LayoutParams(0, LayoutParams.MATCH_PARENT,
-                        1);
-                tp.leftMargin = 4;
-                lv.addView(tv1, tp);
+        final LinearLayout body = (LinearLayout) LayoutInflater.from(getActivity().getApplicationContext()).
+                inflate(R.layout.ks_three_equal_main, null);
 
-                tv1.setOnClickListener(new MyClick(tb_index));
-                mActivity.tbArrays[tb_id-1] = tv1;
-                //tb_id++;
+        ExpandableHeightGridView gridView = (ExpandableHeightGridView)body.findViewById(R.id.selector_main);
+        threeSameAdapter = new ThreeSameAdapter(this, bool);
+        gridView.setAdapter(threeSameAdapter);
+        gridView.setExpanded(true);
+
+        RelativeLayout randomLayout = (RelativeLayout) body.findViewById(R.id.shake_random_layout);
+        randomLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _showDiceFrame(mActivity.mCaseIndex);
             }
+        });
 
-            mLvMatch.addView(lv);
+        LinearLayout specialChoose = (LinearLayout) body.findViewById(R.id.special_choose);
+        specialChoose.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.setSelected(!view.isSelected());
+                bool[6] = view.isSelected();
+                changed = true;
+                handler.sendEmptyMessage(UPDATE);
+            }
+        });
 
-        }
-        LinearLayout ruleLV = new LinearLayout(getActivity());
-        LinearLayout.LayoutParams rulelp = new LinearLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        rulelp.topMargin = 20;
-        rulelp.leftMargin = 10;
-        rulelp.rightMargin = 10;
-        ruleLV.setLayoutParams(rulelp);
-        ruleLV.setOrientation(LinearLayout.HORIZONTAL);
-        TextView ruleHint = new TextView(getActivity());
-        ruleHint.setTextColor(this.getResources().getColor((R.color.red)));
-        ruleHint.setText(this.getResources().getString(R.string.k3_threesame_rulehint));
-        ruleLV.addView(ruleHint);
-        mLvMatch.addView(ruleLV);
+        mLvMatch.addView(body);
     }
+
     private void _drawViewTwoSame() {
-        int tb_id = 23;
-        for (int i = 0; i < 3; i++) {
-            switch(i) {
-                case 0:
-                    LinearLayout lv = new LinearLayout(getActivity());
-                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                            LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-                    lp.topMargin = 10;
-                    lp.leftMargin = 10;
-                    lp.rightMargin = 10;
-                    lv.setLayoutParams(lp);
-                    lv.setOrientation(LinearLayout.VERTICAL);
-                    TextView tv = new TextView(getActivity());
-                    tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.yellow_star, 0, 0, 0);
-                    tv.setText(getResources().getString(R.string.k3_two_single));
-                    tv.setTextColor(getResources().getColor(R.color.tc_default));
-                    tv.setGravity(Gravity.LEFT);
-                    lv.addView(tv);
-                    TextView tv_num = new TextView(getActivity());
-                    tv_num.setText(getResources().getString(R.string.k3_samenum));
-                    tv_num.setTextColor(getResources().getColor(R.color.footer_black));
-                    tv_num.setGravity(Gravity.CENTER);
-                    lv.addView(tv_num);
-                    mLvMatch.addView(lv);
-                    break;
-                case 1:
-                    LinearLayout lv1 = new LinearLayout(getActivity());
-                    LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(
-                            LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-                    lp1.topMargin = 10;
-                    lp1.leftMargin = 10;
-                    lp1.rightMargin = 10;
-                    lv1.setLayoutParams(lp1);
-                    lv1.setGravity(Gravity.CENTER);
-                    lv1.setOrientation(LinearLayout.HORIZONTAL);
-                    TextView tv_num_dif = new TextView(getActivity());
-                    tv_num_dif.setText(getResources().getString(R.string.k3_difnum));
-                    tv_num_dif.setTextColor(getResources().getColor(R.color.footer_black));
-                    lv1.addView(tv_num_dif);
-                    mLvMatch.addView(lv1);
-                    break;
-                case 2:
-                    LinearLayout lv2 = new LinearLayout(getActivity());
-                    LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
-                            LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-                    lp2.topMargin = 10;
-                    lp2.leftMargin = 10;
-                    lp2.rightMargin = 10;
-                    lv2.setLayoutParams(lp2);
-                    lv2.setOrientation(LinearLayout.HORIZONTAL);
-                    lv2.setGravity(Gravity.LEFT);
-                    TextView tv2 = new TextView(getActivity());
-                    tv2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.yellow_star, 0, 0, 0);
-                    tv2.setText(getResources().getString(R.string.k3_two_mutiple));
-                    tv2.setTextColor(getResources().getColor(R.color.tc_default));
-                    lv2.addView(tv2);
-                    mLvMatch.addView(lv2);
-                    break;
-                default:
-                    break;
+        final LinearLayout body = (LinearLayout) LayoutInflater.from(getActivity().getApplicationContext()).
+                inflate(R.layout.ks_two_same_main, null);
+
+        ExpandableHeightGridView firstGridView = (ExpandableHeightGridView)body.findViewById(R.id.selector_main);
+        ExpandableHeightGridView secondGridView = (ExpandableHeightGridView)body.findViewById(R.id.selector_sub);
+        ExpandableHeightGridView multiGridView = (ExpandableHeightGridView)body.findViewById(R.id.selector_multi);
+
+        twoSameFirstAdapter = new TwoSameAdapter(this, bool, TwoSameAdapter.SINGLE_SELECT_SAME);
+        twoSameSecondAdapter = new TwoSameAdapter(this, bool, TwoSameAdapter.SINGLE_SELECT_DIFF);
+        twoSameMultiAdapter = new TwoSameAdapter(this, bool, TwoSameAdapter.MULTI_SELECT);
+
+        firstGridView.setAdapter(twoSameFirstAdapter);
+        firstGridView.setExpanded(true);
+        secondGridView.setAdapter(twoSameSecondAdapter);
+        secondGridView.setEnabled(true);
+        multiGridView.setAdapter(twoSameMultiAdapter);
+        multiGridView.setExpanded(true);
+
+        RelativeLayout randomLayout = (RelativeLayout) body.findViewById(R.id.shake_random_layout);
+        randomLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _showDiceFrame(mActivity.mCaseIndex);
             }
-            LinearLayout lv = new LinearLayout(getActivity());
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-            lp.topMargin = 10;
-            lp.leftMargin = 6;
-            lp.rightMargin = 10;
-            lv.setLayoutParams(lp);
-            lv.setOrientation(LinearLayout.HORIZONTAL);
+        });
 
-            for (int j = 0; j < 6; j++) {
-                int tb_index = i * 6 + j;
-                ToggleButton tv1 = new ToggleButton(getActivity());
-                Log.d("test", tb_id+"");
-                tv1.setId(tb_id++);
-                tv1.setText(two_same_content[tb_index]);
-                tv1.setTextOff(two_same_content[tb_index]);
-                tv1.setTextOn(two_same_content[tb_index]);
-                tv1.setPadding(10, 5, 10, 5);
-                tv1.setGravity(Gravity.CENTER);
-                tv1.setTextColor(this.getResources().getColor(R.color.footer_black));
-                tv1.setBackgroundResource(R.drawable.k3_btn_toggle_bg);
-                tv1.setChecked(bool[tb_index]);
-                LinearLayout.LayoutParams tp = new LayoutParams(0, LayoutParams.MATCH_PARENT,
-                        1);
-                tp.leftMargin = 4;
-                lv.addView(tv1, tp);
-
-                tv1.setOnClickListener(new MyClick(tb_index));
-                mActivity.tbArrays[tb_id-1] = tv1;
-            }
-
-            mLvMatch.addView(lv);
-
-        }
-        LinearLayout ruleLV = new LinearLayout(getActivity());
-        LinearLayout.LayoutParams rulelp = new LinearLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        rulelp.topMargin = 20;
-        rulelp.leftMargin = 10;
-        rulelp.rightMargin = 10;
-        ruleLV.setLayoutParams(rulelp);
-        ruleLV.setOrientation(LinearLayout.HORIZONTAL);
-        TextView ruleHint = new TextView(getActivity());
-        ruleHint.setTextColor(this.getResources().getColor((R.color.red)));
-        ruleHint.setText(this.getResources().getString(R.string.k3_twosame_rulehint));
-        ruleLV.addView(ruleHint);
-        mLvMatch.addView(ruleLV);
+        mLvMatch.addView(body);
     }
+
+
     private void _drawViewThreeDif() {
-        int tb_id = 41;
-        for (int i = 0; i < 2; i++) {
-            switch(i) {
-                case 0:
-                    LinearLayout lv = new LinearLayout(getActivity());
-                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                            LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-                    lp.topMargin = 10;
-                    lp.leftMargin = 10;
-                    lp.rightMargin = 10;
-                    lv.setLayoutParams(lp);
-                    lv.setOrientation(LinearLayout.VERTICAL);
-                    TextView tv = new TextView(getActivity());
-                    tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.yellow_star, 0, 0, 0);
-                    tv.setText(getResources().getString(R.string.k3_three_diff_num));
-                    tv.setTextColor(getResources().getColor(R.color.tc_default));
-                    tv.setGravity(Gravity.LEFT);
-                    lv.addView(tv);
-                    mLvMatch.addView(lv);
-                    break;
-                case 1:
-                    LinearLayout lv2 = new LinearLayout(getActivity());
-                    LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
-                            LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-                    lp2.topMargin = 10;
-                    lp2.leftMargin = 10;
-                    lp2.rightMargin = 10;
-                    lv2.setLayoutParams(lp2);
-                    lv2.setOrientation(LinearLayout.HORIZONTAL);
-                    lv2.setGravity(Gravity.LEFT);
-                    TextView tv2 = new TextView(getActivity());
-                    tv2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.yellow_star, 0, 0, 0);
-                    tv2.setText(getResources().getString(R.string.k3_three_same_num));
-                    tv2.setTextColor(getResources().getColor(R.color.tc_default));
-                    lv2.addView(tv2);
-                    mLvMatch.addView(lv2);
-                    break;
-                default:
-                    break;
+        final LinearLayout body = (LinearLayout) LayoutInflater.from(getActivity().getApplicationContext()).
+                inflate(R.layout.ks_three_diff_main, null);
+
+        ExpandableHeightGridView gridView = (ExpandableHeightGridView)body.findViewById(R.id.selector_main);
+        threeDiffAdapter = new ChooseCommonAdapter(this, bool);
+        gridView.setAdapter(threeDiffAdapter);
+        gridView.setExpanded(true);
+
+        RelativeLayout randomLayout = (RelativeLayout) body.findViewById(R.id.shake_random_layout);
+        randomLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _showDiceFrame(mActivity.mCaseIndex);
             }
-            LinearLayout lv = new LinearLayout(getActivity());
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-            lp.topMargin = 10;
-            lp.leftMargin = 6;
-            lp.rightMargin = 10;
-            lv.setLayoutParams(lp);
-            lv.setOrientation(LinearLayout.HORIZONTAL);
-            int size = i==0?6:1;
-            for (int j = 0; j < size; j++) {
-                int tb_index = i * 6 + j;
-                ToggleButton tv1 = new ToggleButton(getActivity());
-                Log.d("test", tb_id+"");
-                tv1.setId(tb_id++);
-                tv1.setText(three_diff_content[tb_index]);
-                tv1.setTextOff(three_diff_content[tb_index]);
-                tv1.setTextOn(three_diff_content[tb_index]);
-                tv1.setPadding(10, 5, 10, 5);
-                tv1.setGravity(Gravity.CENTER);
-                tv1.setTextColor(this.getResources().getColor(R.color.footer_black));
-                tv1.setBackgroundResource(R.drawable.k3_btn_toggle_bg);
-                tv1.setChecked(bool[tb_index]);
-                LinearLayout.LayoutParams tp = new LayoutParams(0, LayoutParams.MATCH_PARENT,
-                        1);
-                tp.leftMargin = 4;
-                lv.addView(tv1, tp);
+        });
 
-                tv1.setOnClickListener(new MyClick(tb_index));
-                mActivity.tbArrays[tb_id-1] = tv1;
+        LinearLayout specialChoose = (LinearLayout) body.findViewById(R.id.special_choose);
+        specialChoose.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.setSelected(!view.isSelected());
+                bool[6] = view.isSelected();
+                changed = true;
+                handler.sendEmptyMessage(UPDATE);
             }
+        });
 
-            mLvMatch.addView(lv);
-
-        }
-
+        mLvMatch.addView(body);
     }
     private void _drawViewTwoDif() {
-        int tb_id = 48;
-        LinearLayout lv0 = new LinearLayout(getActivity());
-        LinearLayout.LayoutParams lp0 = new LinearLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        lp0.topMargin = 10;
-        lp0.leftMargin = 10;
-        lp0.rightMargin = 10;
-        lv0.setLayoutParams(lp0);
-        lv0.setOrientation(LinearLayout.VERTICAL);
-        TextView tv = new TextView(getActivity());
-        tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.yellow_star, 0, 0, 0);
-        tv.setText(getResources().getString(R.string.k3_two_diff_num));
-        tv.setTextColor(getResources().getColor(R.color.tc_default));
-        tv.setGravity(Gravity.LEFT);
-        lv0.addView(tv);
-        mLvMatch.addView(lv0);
+        final LinearLayout body = (LinearLayout) LayoutInflater.from(getActivity().getApplicationContext()).
+                inflate(R.layout.ks_two_diff_main, null);
 
-        LinearLayout lv = new LinearLayout(getActivity());
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        lp.topMargin = 10;
-        lp.leftMargin = 6;
-        lp.rightMargin = 10;
-        lv.setLayoutParams(lp);
-        lv.setOrientation(LinearLayout.HORIZONTAL);
-        for (int j = 0; j < 6; j++) {
-            int tb_index = j;
-            ToggleButton tv1 = new ToggleButton(getActivity());
-            Log.d("test", tb_id+"");
-            tv1.setId(tb_id++);
-            tv1.setText(three_diff_content[tb_index]);
-            tv1.setTextOff(three_diff_content[tb_index]);
-            tv1.setTextOn(three_diff_content[tb_index]);
-            tv1.setPadding(10, 5, 10, 5);
-            tv1.setGravity(Gravity.CENTER);
-            tv1.setTextColor(this.getResources().getColor(R.color.footer_black));
-            tv1.setBackgroundResource(R.drawable.k3_btn_toggle_bg);
-            tv1.setChecked(bool[tb_index]);
-            LinearLayout.LayoutParams tp = new LayoutParams(0, LayoutParams.MATCH_PARENT,
-                    1);
-            tp.leftMargin = 4;
-            lv.addView(tv1, tp);
+        ExpandableHeightGridView gridView = (ExpandableHeightGridView)body.findViewById(R.id.selector_main);
+        twoDiffAdapter = new ChooseCommonAdapter(this, bool);
+        gridView.setAdapter(twoDiffAdapter);
+        gridView.setExpanded(true);
 
-            tv1.setOnClickListener(new MyClick(tb_index));
-            mActivity.tbArrays[tb_id-1] = tv1;
-        }
+        RelativeLayout randomLayout = (RelativeLayout) body.findViewById(R.id.shake_random_layout);
+        randomLayout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _showDiceFrame(mActivity.mCaseIndex);
+            }
+        });
 
-        mLvMatch.addView(lv);
+        mLvMatch.addView(body);
 
     }
-    private void _drawViewDrag(String hintStr) {
-        int drag_index = 0;
-        for (int i = 0; i < 2; i++) {
-            switch(i) {
-                case 0:
-                    LinearLayout lv = new LinearLayout(getActivity());
-                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                            LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-                    lp.topMargin = 10;
-                    lp.leftMargin = 10;
-                    lp.rightMargin = 10;
-                    lv.setLayoutParams(lp);
-                    lv.setOrientation(LinearLayout.VERTICAL);
-                    TextView tv = new TextView(getActivity());
-                    tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.yellow_star, 0, 0, 0);
-                    tv.setText(getResources().getString(R.string.k3_danma));
-                    tv.setTextColor(getResources().getColor(R.color.tc_default));
-                    tv.setGravity(Gravity.LEFT);
-                    lv.addView(tv);
-                    mLvMatch.addView(lv);
-                    break;
-                case 1:
-                    LinearLayout lv2 = new LinearLayout(getActivity());
-                    LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
-                            LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-                    lp2.topMargin = 10;
-                    lp2.leftMargin = 10;
-                    lp2.rightMargin = 10;
-                    lv2.setLayoutParams(lp2);
-                    lv2.setOrientation(LinearLayout.HORIZONTAL);
-                    lv2.setGravity(Gravity.LEFT);
-                    TextView tv2 = new TextView(getActivity());
-                    tv2.setCompoundDrawablesWithIntrinsicBounds(R.drawable.yellow_star, 0, 0, 0);
-                    tv2.setText(getResources().getString(R.string.k3_tuoma));
-                    tv2.setTextColor(getResources().getColor(R.color.tc_default));
-                    lv2.addView(tv2);
-                    mLvMatch.addView(lv2);
-                    break;
-                default:
-                    break;
-            }
-            LinearLayout lv = new LinearLayout(getActivity());
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-            lp.topMargin = 10;
-            lp.leftMargin = 6;
-            lp.rightMargin = 10;
-            lv.setLayoutParams(lp);
-            lv.setOrientation(LinearLayout.HORIZONTAL);
-            for (int j = 0; j < 6; j++) {
-                int j_index = drag_index++;
-                int tb_index = j;
-                ToggleButton tv1 = new ToggleButton(getActivity());
-                tv1.setText(three_diff_content[tb_index]);
-                tv1.setTextOff(three_diff_content[tb_index]);
-                tv1.setTextOn(three_diff_content[tb_index]);
-                tv1.setPadding(10, 5, 10, 5);
-                tv1.setGravity(Gravity.CENTER);
-                tv1.setTextColor(this.getResources().getColor(R.color.footer_black));
-                tv1.setBackgroundResource(R.drawable.k3_btn_toggle_bg);
-                tv1.setChecked(bool[j_index]);
-                LinearLayout.LayoutParams tp = new LayoutParams(0, LayoutParams.MATCH_PARENT,
-                        1);
-                tp.leftMargin = 4;
-                lv.addView(tv1, tp);
+    private void _drawViewDrag(boolean isThreeDrag) {
+        final LinearLayout body = (LinearLayout) LayoutInflater.from(getActivity().getApplicationContext()).
+                inflate(R.layout.ks_drag_main, null);
 
-                tv1.setOnClickListener(new MyClick(j_index));
-                if(mActivity.mCaseIndex == 5) {//三不同号胆拖
-                    mActivity.tbDragArrays_three[j_index] = tv1;
-                } else if(mActivity.mCaseIndex == 6) {//两不同号胆拖
-                    mActivity.tbDragArrays_two[j_index] = tv1;
-                }
-            }
-
-            mLvMatch.addView(lv);
-
+        if (mActivity.mCaseIndex == 6)
+        {
+            ((TextView) body.findViewById(R.id.text_first)).setText("选两个不同号码，猜中开奖的任意两位即中");
+            ((TextView) body.findViewById(R.id.text_second)).setText("8");
         }
-        LinearLayout ruleLV = new LinearLayout(getActivity());
-        LinearLayout.LayoutParams rulelp = new LinearLayout.LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        rulelp.topMargin = 20;
-        rulelp.leftMargin = 10;
-        rulelp.rightMargin = 10;
-        ruleLV.setLayoutParams(rulelp);
-        ruleLV.setOrientation(LinearLayout.HORIZONTAL);
-        TextView ruleHint = new TextView(getActivity());
-        ruleHint.setTextColor(this.getResources().getColor((R.color.red)));
-        ruleHint.setText(hintStr);
-        ruleLV.addView(ruleHint);
-        mLvMatch.addView(ruleLV);
+
+        ExpandableHeightGridView firstGridView = (ExpandableHeightGridView)body.findViewById(R.id.selector_main);
+        ExpandableHeightGridView secondGridView = (ExpandableHeightGridView)body.findViewById(R.id.selector_sub);
+
+        dragFirstAdapter = new KSDragAdapter(this, bool, KSDragAdapter.FIRST,
+                isThreeDrag? KSDragAdapter.THREE_DRAG: KSDragAdapter.TWO_DRAG);
+        dragSecondAdapter = new KSDragAdapter(this, bool, KSDragAdapter.SECOND);
+
+        firstGridView.setAdapter(dragFirstAdapter);
+        firstGridView.setExpanded(true);
+        secondGridView.setAdapter(dragSecondAdapter);
+        secondGridView.setEnabled(true);
+
+        mLvMatch.addView(body);
     }
 
-    class MyClick implements OnClickListener {
-        int position;
-
-        public MyClick(int position) {
-            super();
-            this.position = position;
-        }
-
-        @Override
-        public void onClick(View v) {
-            ToggleButton tb = (ToggleButton) v;
-            if (mActivity.mCaseIndex == 5) {// 三不同号胆拖
-                if (position < 6) {
-                    int count = 0;
-                    for (int i = 0; i < 6; i++) {
-                        if (i != position
-                                && mActivity.tbDragArrays_three[i].isChecked()) {
-                            count++;
-                            if (count >= 2) {
-                                mActivity.tbDragArrays_three[position]
-                                        .setChecked(false);
-                                bool[position] = false;
-                                Toast.makeText(mActivity, "此玩法最多只能存在2个胆码",
-                                        Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        }
-                    }
-                    bool[position] = tb.isChecked();
-                    bool[position+6] = false;
-                    mActivity.tbDragArrays_three[position+6].setChecked(false);
-                } else {
-                    if (mActivity.tbDragArrays_three[position % 6].isChecked()) {
-                        mActivity.tbDragArrays_three[position].setChecked(true);
-                        mActivity.tbDragArrays_three[position % 6]
-                                .setChecked(false);
-                        bool[position % 6] = false;
-                        bool[position] = true;
-                    } else {
-                        bool[position] = tb.isChecked();
-                    }
-                }
-            } else if (mActivity.mCaseIndex == 6) {// 两不同号胆拖
-                if (position < 6) {
-                    for (int i = 0; i < 6; i++) {
-                        if (i != position
-                                && mActivity.tbDragArrays_two[i].isChecked()) {
-                            mActivity.tbDragArrays_two[position]
-                                    .setChecked(false);
-                            bool[position] = false;
-                            Toast.makeText(mActivity, "此玩法最多只能存在1个胆码",
-                                    Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                    }
-                    bool[position] = tb.isChecked();
-                    bool[position+6] = false;
-                    mActivity.tbDragArrays_two[position+6].setChecked(false);
-                } else {
-                    if (mActivity.tbDragArrays_two[position % 6].isChecked()) {
-                        mActivity.tbDragArrays_two[position].setChecked(true);
-                        mActivity.tbDragArrays_two[position % 6]
-                                .setChecked(false);
-                        bool[position % 6] = false;
-                        bool[position] = true;
-                    } else {
-                        bool[position] = tb.isChecked();
-                    }
-                }
-            } else if(mActivity.mCaseIndex == 2) {//两同号
-                if(position <6 && mActivity.tbArrays[position+29].isChecked() ) {
-                    mActivity.tbArrays[position+23].setChecked(false);
-                    bool[position] = false;
-                } else if(position <12 && position > 5 &&  mActivity.tbArrays[position+17].isChecked())  {
-                    mActivity.tbArrays[position+23].setChecked(false);
-                    bool[position] = false;
-                } else {
-                    bool[position] = tb.isChecked();
-                }
-            } else {
-                bool[position] = tb.isChecked();
-            }
-            computeZhushu();
-        }
-
-    }
     public void computeZhushu() {
-        if(mGameType.equals(K3Type.hezhi.toString())) {
-            int count = 0;
-            for(int i=0; i<r_content.length; i++) {
-                if(bool[i]) {
-                    count++;
+        mZhushu = 0;
+
+        int max = 0;
+        int min = 0;
+
+        if (mGameType.equals(K3Type.hezhi.toString()))
+        {
+            for (int i = 0; i < 16; i++) {
+                if (bool[i]) {
+                    mZhushu++;
+                    if (max == 0) {
+                        min = NumberUtil.getSumLotteryMoney(i);
+                        max = NumberUtil.getSumLotteryMoney(i);
+                    } else {
+                        max = Math.max(max, NumberUtil.getSumLotteryMoney(i));
+                        min = Math.min(min, NumberUtil.getSumLotteryMoney(i));
+                    }
                 }
             }
-            mZhushu = count;
-            //mActivity.setTouzhuResult(count);
-        } else if(mGameType.equals(K3Type.threesamesingle.toString())) {;
-            int count = 0;
-            for(int i=0; i<three_same_content.length; i++) {
-                if(bool[i]) {
-                    count++;
+            setSpecial();
+        }
+        else if (mGameType.equals(K3Type.threesamesingle.toString()))
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (bool[i])
+                {
+                    min = 240;
+                    max = 240;
+                    mZhushu++;
                 }
             }
-            mZhushu = count;
-            //mActivity.setTouzhuResult(mZhushu);
-        } else if(mGameType.equals(K3Type.twosamesingle.toString())) {
-            int count = 0;
-            int same = 0;
-            int diff = 0;
-            for(int i=12; i<two_same_content.length; i++) {
-                if(bool[i]) {
-                    count++;
+
+            if (bool[6])
+            {
+                min = 40;
+                mZhushu++;
+            }
+
+            //全选
+            if (mZhushu == 7)
+            {
+                min = 280;
+                max = 280;
+            }
+        }
+        else if (mGameType.equals(K3Type.twosamesingle.toString()))
+        {
+            int sameCount = 0;
+            int diffCount = 0;
+            boolean bonus = false;
+
+            for (int i = 0; i < 6; i++) {
+                if (bool[i])
+                {
+                    sameCount++;
+                    if (bool[i + 12])
+                    {
+                        bonus = true;
+                    }
+                }
+                else if (bool[i + 6])
+                {
+                    diffCount++;
+                }
+                if (bool[i + 12])
+                {
+                    mZhushu++;
                 }
             }
+            if (mZhushu > 0)
+            {
+                min = 15;
+                max = 15;
+
+                if (sameCount * diffCount != 0)
+                {
+                    max = bonus?95:80;
+                }
+            }
+            else
+            {
+                min = (sameCount * diffCount == 0)?0:80;
+                max = min;
+            }
+
+            mZhushu += sameCount * diffCount;
+        }
+        else if (mGameType.equals(K3Type.threedifsingle.toString()))
+        {
+            int selection = 0;
+
+            for (int i = 0; i < 6; i++)
+            {
+                if (bool[i])
+                {
+                    min = 40;
+                    max = 40;
+                    selection++;
+                }
+            }
+
+            mZhushu = Utils.getZuHeNum(selection, 3) + (bool[6]?1:0);
+
+            if (bool[6])
+            {
+                min = 10;
+                selection++;
+            }
+
+            //全选
+            if (selection == 7)
+            {
+                min = 40;
+                max = 50;
+            }
+        }
+        else if (mGameType.equals(K3Type.twodif.toString()))
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (bool[i])
+                {
+                    min = 8;
+                    max = 8;
+                    mZhushu++;
+                }
+            }
+
+            mZhushu = Utils.getZuHeNum(mZhushu, 2);
+        }
+        else if (mGameType.equals(K3Type.dragthree.toString()))
+        {
+            int dragFirst = 0;
+            int dragSecond = 0;
             for(int i=0; i<6; i++) {
                 if(bool[i]) {
-                    same++;
+                    dragFirst++;
+                }
+                else if (bool[i + 6])
+                {
+                    dragSecond++;
                 }
             }
-            for(int i=6; i<12; i++) {
-                if(bool[i]) {
-                    diff++;
-                }
-            }
-            mZhushu = count + same*diff;
-            //mActivity.setTouzhuResult(mZhushu);
-        } else if(mGameType.equals(K3Type.threedifsingle.toString())) {
-            int count = 0;
-            for(int i=0; i<three_diff_content.length - 1; i++) {
-                if(bool[i]) {
-                    count++;
-                }
-            }
-            int tongCount = bool[three_diff_content.length - 1]?1:0;
-            mZhushu = Utils.getZuHeNum(count, 3) + tongCount;
-            //mActivity.setTouzhuResult(mZhushu);
-        } else if(mGameType.equals(K3Type.twodif.toString())) {
-            int count = 0;
-            for(int i=0; i<three_diff_content.length - 1; i++) {
-                if(bool[i]) {
-                    count++;
-                }
-            }
-            mZhushu = Utils.getZuHeNum(count, 2);
-            //mActivity.setTouzhuResult(mZhushu);
-        } else if(mGameType.equals(K3Type.dragthree.toString())) {
-            int danCount = 0;
-            int tuoCount = 0;
-            for(int i=0; i<6; i++) {
-                if(bool[i]) {
-                    danCount++;
-                }
-            }
-            for(int i=6;i<12; i++) {
-                if(bool[i]) {
-                    tuoCount++;
-                }
-            }
-            if(danCount == 0) {
+
+            if(dragFirst == 0) {
                 mZhushu = 0;
             } else {
-                mZhushu = Utils.getZuHeNum(tuoCount, 3-danCount);
+                mZhushu = Utils.getZuHeNum(dragSecond, 3-dragFirst);
+                min = 40;
+                max = min;
             }
-        } else {
-            int danCount = 0;
-            int tuoCount = 0;
-            for(int i=0; i<6; i++) {
-                if(bool[i]) {
-                    danCount++;
-                }
-            }
-            for(int i=6;i<12; i++) {
-                if(bool[i]) {
-                    tuoCount++;
-                }
-            }
-            mZhushu = danCount *tuoCount;
         }
+        else if (mGameType.equals(K3Type.dragtwo.toString()))
+        {
+            int dragFirst = 0;
+            int dragSecond = 0;
+
+            for (int i = 0; i < 6; i++) {
+                if (bool[i])
+                {
+                    dragFirst++;
+                }
+                else if (bool[i + 6])
+                {
+                    dragSecond++;
+                }
+            }
+
+            mZhushu = dragFirst * dragSecond;
+
+            min = 8;
+            max = min;
+        }
+
+        mActivity.setBuyTips(max, min, mZhushu);
         mActivity.setTouzhuResult(mZhushu);
     }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         if(!hidden) {
             computeZhushu();
         }
     }
+
     public void clearTouzhu() {
         if(mGameType.equals(K3Type.hezhi.toString())) {
             //bool = new boolean[r_content.length];
             for(int i=0; i<r_content.length; i++) {
                 bool[i] = false;
-                mActivity.tbArrays[i].setChecked(false);
             }
+            setSpecial();
+            sumAdapter.notifyDataSetChanged();
         } else if(mGameType.equals(K3Type.threesamesingle.toString())) {
             //bool = new boolean[three_same_content.length];
             for(int i=0; i<three_same_content.length; i++) {
                 bool[i] = false;
-                mActivity.tbArrays[i+16].setChecked(false);
             }
+
+            mLvMatch.findViewById(R.id.special_choose).setSelected(false);
+            threeSameAdapter.notifyDataSetChanged();
         } else if(mGameType.equals(K3Type.twosamesingle.toString())) {
             //bool = new boolean[two_same_content.length];
             for(int i=0; i<two_same_content.length; i++) {
                 bool[i] = false;
-                mActivity.tbArrays[i+23].setChecked(false);
             }
+
+            twoSameFirstAdapter.notifyDataSetChanged();
+            twoSameSecondAdapter.notifyDataSetChanged();
+            twoSameMultiAdapter.notifyDataSetChanged();
         } else if(mGameType.equals(K3Type.threedifsingle.toString())) {
             //bool = new boolean[three_diff_content.length];
             for(int i=0; i<three_diff_content.length; i++) {
                 bool[i] = false;
-                mActivity.tbArrays[i+41].setChecked(false);
             }
+
+            mLvMatch.findViewById(R.id.special_choose).setSelected(false);
+            threeDiffAdapter.notifyDataSetChanged();
         } else if(mGameType.equals(K3Type.twodif.toString())) {
             //bool = new boolean[three_diff_content.length];
             for(int i=0; i<three_diff_content.length - 1; i++) {
                 bool[i] = false;
-                mActivity.tbArrays[i+48].setChecked(false);
             }
-        } else if(mGameType.equals(K3Type.dragthree.toString())) {
-            for(int i=0; i<mActivity.tbDragArrays_three.length; i++) {
+
+            twoDiffAdapter.notifyDataSetChanged();
+        } else if(mGameType.equals(K3Type.dragthree.toString()) ||
+                mGameType.equals(K3Type.dragtwo.toString()))
+        {
+            for (int i = 0; i < mActivity.tbDragArrays_three.length; i++) {
                 bool[i] = false;
-                mActivity.tbDragArrays_three[i].setChecked(false);
             }
-        } else {
-            for(int i=0; i<mActivity.tbDragArrays_three.length; i++) {
-                bool[i] = false;
-                mActivity.tbDragArrays_two[i].setChecked(false);
-            }
+
+            dragFirstAdapter.notifyDataSetChanged();
+            dragSecondAdapter.notifyDataSetChanged();
         }
+
         computeZhushu();
     }
+
     public String betTypes = "";
     public String betResult = "";
     public void  getBetResult() {
@@ -1201,13 +1074,13 @@ public class K3_hz_fragment extends Fragment{
         for (int i = 0; i < updateData.size(); i++) {
             if (bool[i] != updateData.get(i))
             {
-                changedAfterWatchChart = true;
+                changed = true;
             }
 
             bool[i] = updateData.get(i);
             chosen = chosen || bool[i];
         }
-        changedAfterWatchChart = changedAfterWatchChart && chosen;
+        changed = changed && chosen;
 
         handler.sendEmptyMessage(UPDATE);
     }
@@ -1240,5 +1113,230 @@ public class K3_hz_fragment extends Fragment{
         }
 
         return list;
+    }
+
+    public void updateSumChoice(int position, boolean selected)
+    {
+        vibrator.vibrate(new long[] { 0, 30 }, -1);
+
+        if (position < 0 || position >= 16)
+        {
+            return;
+        }
+
+        bool[position] = selected;
+
+        computeZhushu();
+    }
+
+    public void updateCommonChoice(int position, boolean selected)
+    {
+        vibrator.vibrate(new long[] { 0, 30 }, -1);
+
+        if (position < 0 || position >= 6)
+        {
+            return;
+        }
+
+        bool[position] = selected;
+
+        computeZhushu();
+    }
+
+    public void updateTwoEqualChoice(int position, boolean selected)
+    {
+        vibrator.vibrate(new long[] { 0, 30 }, -1);
+
+        if (position < 0 || position >= 18)
+        {
+            return;
+        }
+
+        //同号与不同号数字不同
+        if (position >= 0 && position < 6 && selected)
+        {
+            bool[position + 6] = false;
+            twoSameSecondAdapter.notifyDataSetChanged();
+        }
+        else if (position >= 6 && position < 12 && selected)
+        {
+            bool[position - 6] = false;
+            twoSameFirstAdapter.notifyDataSetChanged();
+        }
+
+        bool[position] = selected;
+
+        computeZhushu();
+    }
+
+    public void updateDragChoice(int position, boolean selected)
+    {
+        vibrator.vibrate(new long[] { 0, 30 }, -1);
+
+        if (position < 0 || position >= 12)
+        {
+            return;
+        }
+
+        //同号与不同号数字不同
+        if (position >= 0 && position < 6 && selected)
+        {
+            bool[position + 6] = false;
+            dragSecondAdapter.notifyDataSetChanged();
+        }
+        else if (position >= 6 && position < 12 && selected)
+        {
+            bool[position - 6] = false;
+            dragFirstAdapter.notifyDataSetChanged();
+        }
+
+        bool[position] = selected;
+
+        computeZhushu();
+    }
+
+    private void setSpecial()
+    {
+        int type = -1;
+
+        List<Integer> selectList = new ArrayList<Integer>();
+        for (int i = 0; i < 16; i++) {
+            if (bool[i])
+            {
+                selectList.add(i);
+            }
+        }
+
+        if (selectList.size() == 4)
+        {
+            int first = selectList.get(0);
+            int second = selectList.get(1);
+            int third = selectList.get(2);
+            int forth = selectList.get(3);
+
+            if (first == 0 && second == 2 && third == 4 && forth == 6)
+            {
+                type = TYPE_SMALL_ODD;
+            }
+            else if (first == 1 && second == 3 && third == 5 && forth == 7)
+            {
+                type = TYPE_SMALL_EVEN;
+            }
+            else if (first == 8 && second == 10 && third == 12 && forth == 14)
+            {
+                type = TYPE_BIG_ODD;
+            }
+            else if (first == 9 && second == 11 && third == 13 && forth == 15)
+            {
+                type = TYPE_BIG_EVEN;
+            }
+        }
+        else if (selectList.size() == 8)
+        {
+            boolean big = true;
+            boolean small = true;
+            boolean odd = true;
+            boolean even = true;
+
+            for (int i = 0; i < 8; i++) {
+                if (selectList.get(i) <= 7)
+                {
+                    big = false;
+                }
+                else
+                {
+                    small = false;
+                }
+                if ((selectList.get(i) % 2) == 1)
+                {
+                    odd = false;
+                }
+                else
+                {
+                    even = false;
+                }
+            }
+
+            if (big)
+            {
+                type = TYPE_BIG;
+            }
+            else if (small)
+            {
+                type = TYPE_SMALL;
+            }
+            else if (odd)
+            {
+                type = TYPE_ODD;
+            }
+            else if (even)
+            {
+                type = TYPE_EVEN;
+            }
+        }
+
+        View bigBtn = mLvMatch.findViewById(R.id.big);
+        View smallBtn = mLvMatch.findViewById(R.id.small);
+        View oddBtn = mLvMatch.findViewById(R.id.odd);
+        View evenBtn = mLvMatch.findViewById(R.id.even);
+        switch (type)
+        {
+            case -1:
+                bigBtn.setSelected(false);
+                smallBtn.setSelected(false);
+                oddBtn.setSelected(false);
+                evenBtn.setSelected(false);
+                break;
+            case TYPE_BIG:
+                bigBtn.setSelected(true);
+                smallBtn.setSelected(false);
+                oddBtn.setSelected(false);
+                evenBtn.setSelected(false);
+                break;
+            case TYPE_SMALL:
+                bigBtn.setSelected(false);
+                smallBtn.setSelected(true);
+                oddBtn.setSelected(false);
+                evenBtn.setSelected(false);
+                break;
+            case TYPE_ODD:
+                bigBtn.setSelected(false);
+                smallBtn.setSelected(false);
+                oddBtn.setSelected(true);
+                evenBtn.setSelected(false);
+                break;
+            case TYPE_EVEN:
+                bigBtn.setSelected(false);
+                smallBtn.setSelected(false);
+                oddBtn.setSelected(false);
+                evenBtn.setSelected(true);
+                break;
+            case TYPE_BIG_ODD:
+                bigBtn.setSelected(true);
+                smallBtn.setSelected(false);
+                oddBtn.setSelected(true);
+                evenBtn.setSelected(false);
+                break;
+            case TYPE_BIG_EVEN:
+                bigBtn.setSelected(true);
+                smallBtn.setSelected(false);
+                oddBtn.setSelected(false);
+                evenBtn.setSelected(true);
+                break;
+            case TYPE_SMALL_ODD:
+                bigBtn.setSelected(false);
+                smallBtn.setSelected(true);
+                oddBtn.setSelected(true);
+                evenBtn.setSelected(false);
+                break;
+            case TYPE_SMALL_EVEN:
+                bigBtn.setSelected(false);
+                smallBtn.setSelected(true);
+                oddBtn.setSelected(false);
+                evenBtn.setSelected(true);
+                break;
+            default:
+                break;
+        }
     }
 }

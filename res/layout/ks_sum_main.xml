@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+	<RelativeLayout
+			android:id="@+id/shake_random_layout"
+			android:layout_below="@+id/shadow"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="end"
+			android:layout_marginTop="10dp">
+		<ImageView
+				android:id="@+id/shake_icon"
+				android:layout_width="wrap_content"
+				android:layout_height="25dp"
+				android:src="@drawable/shake_bg"/>
+
+		<TextView
+				android:id="@+id/shake_text"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="摇一注"
+				android:textColor="@color/k3_orange"
+				android:layout_toRightOf="@+id/shake_icon"
+				android:layout_toEndOf="@+id/shake_icon"
+				android:layout_alignBottom="@+id/shake_icon"
+				android:textSize="14sp"
+				android:layout_marginLeft="4dp"
+				android:layout_marginStart="4dp"/>
+
+		<!--<ImageView-->
+		<!--android:id="@+id/leak_icon"-->
+		<!--android:layout_width="wrap_content"-->
+		<!--android:layout_height="22dp"-->
+		<!--android:src="@drawable/leak_icon"-->
+		<!--android:layout_toRightOf="@+id/shake_text"-->
+		<!--android:layout_toEndOf="@+id/shake_text"-->
+		<!--android:layout_marginLeft="8dp"-->
+		<!--android:layout_marginStart="8dp"-->
+		<!--android:layout_marginTop="2dp"/>-->
+
+		<!--<TextView-->
+		<!--android:id="@+id/leak_text"-->
+		<!--android:layout_width="wrap_content"-->
+		<!--android:layout_height="wrap_content"-->
+		<!--android:text="遗漏"-->
+		<!--android:textColor="@color/k3_orange"-->
+		<!--android:layout_toRightOf="@+id/leak_icon"-->
+		<!--android:layout_toEndOf="@+id/leak_icon"-->
+		<!--android:layout_alignBottom="@+id/shake_text"-->
+		<!--android:textSize="14sp"-->
+		<!--android:layout_marginLeft="4dp"-->
+		<!--android:layout_marginStart="4dp"/>-->
+	</RelativeLayout>
+
+	<com.jincaizi.kuaiwin.widget.ExpandableHeightGridView
+			android:id="@+id/selector_main"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:divider="#616065"
+			android:dividerHeight="1dp"
+			android:listSelector="@android:color/transparent"
+			android:columnWidth="70dp"
+			android:numColumns="auto_fit"
+			android:stretchMode="columnWidth"
+			android:horizontalSpacing="4dp"
+			android:verticalSpacing="4dp"
+			android:layout_marginTop="10dp"
+			android:overScrollMode="never"/>
+
+	<TextView android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:text="快速选号"
+	          android:layout_marginTop="10dp"
+	          android:textSize="14sp"
+	          android:textColor="@color/setting_text"/>
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:layout_marginTop="10dp"
+			android:weightSum="4">
+		<TextView
+				android:id="@+id/big"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="大"
+				android:textSize="16sp"
+				android:textColor="@drawable/number_text_selector"
+				android:gravity="center"
+				android:background="@drawable/number_selector"
+				android:layout_weight="1"
+				android:layout_margin="2dp"/>
+		<TextView
+				android:id="@+id/small"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="小"
+				android:textColor="@drawable/number_text_selector"
+				android:gravity="center"
+				android:background="@drawable/number_selector"
+				android:layout_weight="1"
+				android:layout_margin="2dp"/>
+		<TextView
+				android:id="@+id/odd"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="单"
+				android:textColor="@drawable/number_text_selector"
+				android:gravity="center"
+				android:background="@drawable/number_selector"
+				android:layout_weight="1"
+				android:layout_margin="2dp"/>
+		<TextView
+				android:id="@+id/even"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="双"
+				android:textColor="@drawable/number_text_selector"
+				android:gravity="center"
+				android:background="@drawable/number_selector"
+				android:layout_weight="1"
+				android:layout_margin="2dp"/>
+
+	</LinearLayout>
+
+	<RelativeLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp">
+
+		<TextView
+				android:id="@+id/text_first"
+				android:layout_width="wrap_content"
+		          android:layout_height="wrap_content"
+		          android:text="与3个开奖号码相加之和相同即中奖"
+		          android:textSize="14sp"
+		          android:textColor="@color/setting_text"/>
+
+		<TextView
+				android:id="@+id/text_second"
+				android:layout_width="wrap_content"
+		          android:layout_height="wrap_content"
+				android:text="9-240"
+				android:textSize="14sp"
+				android:textColor="@color/buyer_red"
+				android:layout_toRightOf="@+id/text_first"/>
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="元"
+				android:textSize="14sp"
+				android:textColor="@color/setting_text"
+				android:layout_toRightOf="@+id/text_second"/>
+	</RelativeLayout>
+
+</LinearLayout>

@@ -10,6 +10,58 @@
 			android:id="@+id/title"
 			layout="@layout/title"/>
 
+	<RelativeLayout
+			android:id="@+id/loading"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			>
+		<com.jincaizi.kuaiwin.chart.views.CircularProgress
+				android:id="@+id/progress"
+				android:layout_width="60dp"
+				android:layout_height="60dp"
+				progress:borderWidth="6dp"
+				android:layout_centerHorizontal="true"/>
+
+		<TextView android:layout_width="wrap_content"
+		          android:layout_height="wrap_content"
+		          android:layout_below="@+id/progress"
+		          android:layout_marginTop="20dp"
+		          android:text="正在加载开奖结果"
+		          android:textColor="@color/setting_text"/>
+
+	</RelativeLayout>
+
+
+	<RelativeLayout
+			android:id="@+id/refresh_layout"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:visibility="gone">
+
+		<TextView
+				android:id="@+id/network_error_tips"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="加载数据失败"
+				android:textColor="@color/setting_text"
+				android:layout_centerHorizontal="true"
+				/>
+
+		<Button
+				android:id="@+id/refresh"
+				android:layout_width="100dp"
+				android:layout_height="40dp"
+				android:layout_marginTop="20dp"
+				android:layout_below="@+id/network_error_tips"
+				android:background="@drawable/title_btn_bg"
+				android:text="刷新"
+				android:textSize="16sp"
+				android:textColor="@color/chart_white"
+				/>
+	</RelativeLayout>
+
 	<LinearLayout
 			android:id="@+id/title_bar"
 			android:layout_width="match_parent"
@@ -365,59 +417,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="40dp"/>
 
-	</RelativeLayout>
-
-
-	<RelativeLayout
-			android:id="@+id/loading"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_centerInParent="true"
-			>
-		<com.jincaizi.kuaiwin.chart.views.CircularProgress
-				android:id="@+id/progress"
-				android:layout_width="60dp"
-				android:layout_height="60dp"
-				progress:borderWidth="6dp"
-				android:layout_centerHorizontal="true"/>
-
-		<TextView android:layout_width="wrap_content"
-		          android:layout_height="wrap_content"
-		          android:layout_below="@+id/progress"
-		          android:layout_marginTop="20dp"
-		          android:text="正在加载开奖结果"
-		          android:textColor="@color/setting_text"/>
-
-	</RelativeLayout>
-
-
-	<RelativeLayout
-			android:id="@+id/refresh_layout"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_centerInParent="true"
-			android:visibility="gone">
-
-		<TextView
-				android:id="@+id/network_error_tips"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="加载数据失败"
-				android:textColor="@color/setting_text"
-				android:layout_centerHorizontal="true"
-				/>
-
-		<Button
-				android:id="@+id/refresh"
-				android:layout_width="100dp"
-				android:layout_height="40dp"
-				android:layout_marginTop="20dp"
-				android:layout_below="@+id/network_error_tips"
-				android:background="@drawable/title_btn_bg"
-				android:text="刷新"
-				android:textSize="16sp"
-				android:textColor="@color/chart_white"
-				/>
 	</RelativeLayout>
 
 </RelativeLayout>

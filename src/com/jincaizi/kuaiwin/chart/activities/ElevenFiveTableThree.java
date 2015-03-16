@@ -45,6 +45,7 @@ public class ElevenFiveTableThree extends BaseTableActivity {
     private PopupWindow popupWindow;
     private ListView baseListView;
     private ListView formListView;
+    private RelativeLayout menuBtn;
 
     private ElevenFiveLineView firstLineView;
 
@@ -86,7 +87,7 @@ public class ElevenFiveTableThree extends BaseTableActivity {
         refreshLayout = (RelativeLayout) findViewById(R.id.refresh_layout);
         baseBtn = (RelativeLayout) findViewById(R.id.first_btn);
         subBtn = (RelativeLayout) findViewById(R.id.second_btn);
-        RelativeLayout menuBtn = (RelativeLayout) findViewById(R.id.menu);
+        menuBtn = (RelativeLayout) findViewById(R.id.menu);
 
         baseSelector = (ImageView) findViewById(R.id.title_selector_base);
         subSelector = (ImageView) findViewById(R.id.title_selector_sub);
@@ -147,6 +148,7 @@ public class ElevenFiveTableThree extends BaseTableActivity {
                 popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
             }
         });
+        menuBtn.setClickable(false);
 
         initBottom();
 
@@ -276,8 +278,8 @@ public class ElevenFiveTableThree extends BaseTableActivity {
             }
         });
 
-        popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.update();
@@ -388,6 +390,7 @@ public class ElevenFiveTableThree extends BaseTableActivity {
             if (!intent.getBooleanExtra("success",false) && baseListLayout.getVisibility() == View.GONE &&
                     formListLayout.getVisibility() == View.GONE)
             {
+                menuBtn.setClickable(false);
                 tableMainLayout.setVisibility(View.GONE);
                 loadingLayout.setVisibility(View.GONE);
                 refreshLayout.setVisibility(View.VISIBLE);
@@ -421,6 +424,7 @@ public class ElevenFiveTableThree extends BaseTableActivity {
                         formListAdapter.notifyDataSetChanged();
                     }
 
+                    menuBtn.setClickable(true);
                     LinearLayout itemView = (LinearLayout) findViewById(R.id.base_list_title);
                     itemView.measure(0, 0);
                     firstLineView.setParam(itemView.getMeasuredHeight(), responseData.getFirstResultArray(), responseData.getTotalIssueCount(), showLine);

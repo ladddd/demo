@@ -22,13 +22,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
 import com.jincaizi.common.IntentData;
 import com.jincaizi.kuaiwin.chart.activities.ElevenFiveTableFour;
 import com.jincaizi.kuaiwin.chart.activities.ElevenFiveTableOne;
@@ -41,10 +36,8 @@ import com.jincaizi.adapters.PopViewAdapter;
 import com.jincaizi.http.JinCaiZiHttpClient;
 import com.jincaizi.R;
 import com.jincaizi.kuaiwin.utils.Constants;
-import com.jincaizi.kuaiwin.utils.Constants.City;
 import com.jincaizi.kuaiwin.utils.Constants.ShiyiyunType;
 import com.jincaizi.kuaiwin.utils.IntentAction;
-import com.jincaizi.kuaiwin.utils.UiHelper;
 import com.jincaizi.kuaiwin.utils.Utils;
 import com.jincaizi.vendor.http.AsyncHttpClient;
 import com.jincaizi.vendor.http.AsyncHttpResponseHandler;
@@ -55,18 +48,19 @@ public class Syxw extends FragmentActivity implements OnClickListener {
     public static final String CITY = "city";
     protected static final String TAG = "Syxw";
     private TextView mTitleView;
+    private RelativeLayout titleSelectorLayout;
     private PopupWindow mPopWindow;
     private boolean isPopWindowShow = false;
     private Fragment mCurrentFragment;
-    private TextView mShakeBtn;
+//    private TextView mShakeBtn;
     public ShiyiyunType syyType = Constants.ShiyiyunType.ANYTWO;
     int lastIndex = 0;
     private TextView mZhuShuView;
     private int mCount = 0;
     private TextView right_footer_btn;
     private int startType = 0; // 0, normal; 1, continuePiack; 2, selectedAgain
-    private TextView clearPick;
-    private ImageView mBack;
+    private RelativeLayout clearPick;
+    private RelativeLayout mBack;
     private GridView mGridNormalView;
     private GridView mGridDragView;
     private PopViewAdapter mMyNormalAdapter, mMyDragAdapter;
@@ -80,6 +74,13 @@ public class Syxw extends FragmentActivity implements OnClickListener {
     private TextView mQihaoView;
     private TextView mTimeDiffView;
     private String lotterytype;
+
+    private TextView lotteryCount;
+    private TextView price;
+
+    private LinearLayout buyTipsLayout;
+    private TextView lotteryMoney;
+    private TextView profit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,8 +138,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
     }
     private void _setListner() {
         // TODO Auto-generated method stub
-        mTitleView.setOnClickListener(this);
-        mShakeBtn.setOnClickListener(this);
+        titleSelectorLayout.setOnClickListener(this);
         right_footer_btn.setOnClickListener(this);
         clearPick.setOnClickListener(this);
         mBack.setOnClickListener(this);
@@ -152,25 +152,24 @@ public class Syxw extends FragmentActivity implements OnClickListener {
         mTitleView = (TextView) findViewById(R.id.current_lottery);
         mTitleView.setText(prefix+"-任选二(普通)");
         mTitleView.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
-        mTitleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.triangle_white, 0);
-        mTitleView.setCompoundDrawablePadding(4);
-        mShakeBtn = (TextView) findViewById(R.id.my_pls_shake_pick);
+        titleSelectorLayout = (RelativeLayout) findViewById(R.id.title_selector);
         mZhuShuView = (TextView) findViewById(R.id.bet_zhushu);
         right_footer_btn = (TextView) findViewById(R.id.right_footer_btn);
-        clearPick = (TextView) findViewById(R.id.left_footer_btn);
-        mBack = (ImageView) findViewById(R.id.touzhu_leftmenu);
+        clearPick = (RelativeLayout) findViewById(R.id.left_footer_btn);
+        mBack = (RelativeLayout) findViewById(R.id.left_layout);
 
-        mPsInfoView = (TextView)findViewById(R.id.ps_info);
-        mPsInfoView.setVisibility(View.VISIBLE);
-        mPsInfoView.setText("("+City.getCityName(mCity)+")");
-
-//		mYilouView = (TextView)findViewById(R.id.sumbit_group_buy);
-//		mYilouView.setText(this.getResources().getString(R.string.yilou));
         chart = (TextView)findViewById(R.id.sumbit_group_buy);
         chart.setText(getResources().getString(R.string.chart));
 
+        buyTipsLayout = (LinearLayout) findViewById(R.id.buy_tips_layout);
+        lotteryMoney = (TextView) findViewById(R.id.lottery_money);
+        profit = (TextView) findViewById(R.id.profit);
+
         mQihaoView = (TextView)findViewById(R.id.pre_num_str);
         mTimeDiffView = (TextView)findViewById(R.id.pre_win_num);
+
+        lotteryCount = (TextView) findViewById(R.id.bet_txt_2);
+        price = (TextView) findViewById(R.id.bet_txt_4);
     }
 
     @Override
@@ -466,7 +465,29 @@ public class Syxw extends FragmentActivity implements OnClickListener {
     }
 
     public void setTouzhuResult(int count) {
-        mZhuShuView.setText(String.valueOf(count) + "注" + 2*count + "元");
+        lotteryCount.setText(String.valueOf(count));
+        price.setText(String.valueOf(2*count));
+//        mZhuShuView.setText(String.valueOf(count) + "注" + 2*count + "元");
+    }
+
+    public void setBuyTips(int max, int min, int count)
+    {
+        if (count <= 0)
+        {
+            buyTipsLayout.setVisibility(View.GONE);
+            return;
+        }
+
+        buyTipsLayout.setVisibility(View.VISIBLE);
+        if (count == 1 || min == max) {
+            lotteryMoney.setText(String.valueOf(min));
+            profit.setText(String.valueOf(min - 2 * count));
+        }
+        else
+        {
+            lotteryMoney.setText(String.valueOf(min) + "~" + String.valueOf(max));
+            profit.setText(String.valueOf(min - 2 * count) + "~" + String.valueOf(max - 2 * count));
+        }
     }
 
     private void _initBallStr() {
@@ -661,7 +682,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
                 //进入走势图
                 goToChart();
                 break;
-            case R.id.touzhu_leftmenu:
+            case R.id.left_layout:
                 if(mc != null) {
                     mc.cancel();
                 }
@@ -670,10 +691,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             case R.id.left_footer_btn:
                 _clearChoose();
                 break;
-            case R.id.my_pls_shake_pick:
-                _updateShakePick();
-                break;
-            case R.id.current_lottery:
+            case R.id.title_selector:
                 if (!isPopWindowShow) {
                     _setPopWindow((int) (v.getWidth() * 1.5 + 0.5f));
                     isPopWindowShow = true;
@@ -876,24 +894,20 @@ public class Syxw extends FragmentActivity implements OnClickListener {
     private void _setPopWindow(int width) {
         View view = LayoutInflater.from(this).inflate(R.layout.syxw_popview_layout, null);
         mPopWindow = new PopupWindow(view, LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT);
+                LayoutParams.MATCH_PARENT);
         mGridNormalView = (GridView) view.findViewById(R.id.pop_normal_gridview);
-//		mGridNormalView.setBackgroundColor(this.getResources().getColor(
-//				android.R.color.transparent));
         mGridNormalView.setNumColumns(3);
         mGridDragView = (GridView) view.findViewById(R.id.pop_drag_gridview);
-//		mGridDragView.setBackgroundColor(this.getResources().getColor(
-//				android.R.color.transparent));
         mGridDragView.setNumColumns(3);
         ArrayList<String> listNormal = new ArrayList<String>();
-        listNormal.add("任二");
-        listNormal.add("任三");
-        listNormal.add("任四");
-        listNormal.add("任五");
-        listNormal.add("任六");
-        listNormal.add("任七");
-        listNormal.add("任八");
-        listNormal.add("前一直选");
+        listNormal.add("任选二");
+        listNormal.add("任选三");
+        listNormal.add("任选四");
+        listNormal.add("任选五");
+        listNormal.add("任选六");
+        listNormal.add("任选七");
+        listNormal.add("任选八");
+        listNormal.add("前一");
         listNormal.add("前二直选");
         listNormal.add("前二组选");
         listNormal.add("前三直选");
@@ -905,68 +919,68 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
-                mShakeBtn.setVisibility(View.VISIBLE);
+//                mShakeBtn.setVisibility(View.VISIBLE);
                 if (arg2 == 0) {
 
-                    mTitleView.setText(prefix+"-任二(普通)");
+                    mTitleView.setText(prefix+"-任选二");
                     syyType = Constants.ShiyiyunType.ANYTWO;
                     _showFragments(AnytwoFragment.TAG);
 
                 } else if (arg2 == 1) {
 
-                    mTitleView.setText(prefix+"-任三(普通)");
+                    mTitleView.setText(prefix+"-任选三");
                     syyType = Constants.ShiyiyunType.ANYTHREE;
                     _showFragments(AnythreeFragment.TAG);
                 } else if (arg2 == 2) {
 
-                    mTitleView.setText(prefix+"-任四(普通)");
+                    mTitleView.setText(prefix+"-任选四");
                     syyType = Constants.ShiyiyunType.ANYFOUR;
                     _showFragments(AnyfourFragment.TAG);
                 } else if (arg2 == 3) {
 
-                    mTitleView.setText(prefix+"-任五(普通)");
+                    mTitleView.setText(prefix+"-任选五");
                     syyType = Constants.ShiyiyunType.ANYFIVE;
                     _showFragments(AnyfiveFragment.TAG);
                 } else if (arg2 == 4) {
 
-                    mTitleView.setText(prefix+"-任六(普通)");
+                    mTitleView.setText(prefix+"-任选六");
                     syyType = Constants.ShiyiyunType.ANYSIX;
                     _showFragments(AnysixFragment.TAG);
                 } else if(arg2 == 5){
 
-                    mTitleView.setText(prefix+"-任七(普通)");
+                    mTitleView.setText(prefix+"-任选七");
                     syyType = Constants.ShiyiyunType.ANYSEVEN;
                     _showFragments(AnysevenFragment.TAG);
                 }
                 else if(arg2 == 6){
 
-                    mTitleView.setText(prefix+"-任八(普通)");
+                    mTitleView.setText(prefix+"-任选八");
                     syyType = Constants.ShiyiyunType.ANYEIGHT;
                     _showFragments(AnyeightFragment.TAG);
                 }
                 else if(arg2 == 7){
 
-                    mTitleView.setText(prefix+"-前一直选(普通)");
+                    mTitleView.setText(prefix+"-前一");
                     syyType = Constants.ShiyiyunType.FRONTONEZHI;
                     _showFragments(FrontOnezhixuanFragment.TAG);
                 }else if(arg2 == 8){
 
-                    mTitleView.setText(prefix+"-前二直选(普通)");
+                    mTitleView.setText(prefix+"-前二直选");
                     syyType = Constants.ShiyiyunType.FRONTTWOZHI;
                     _showFragments(FrontTwozhixuanFragment.TAG);
                 }else if(arg2 == 9){
 
-                    mTitleView.setText(prefix+"-前二组选(普通)");
+                    mTitleView.setText(prefix+"-前二组选");
                     syyType = Constants.ShiyiyunType.FRONTTWOZU;
                     _showFragments(FrontTwozuxuanFragment.TAG);
                 }else if(arg2 == 10){
 
-                    mTitleView.setText(prefix+"-前三直选(普通)");
+                    mTitleView.setText(prefix+"-前三直选");
                     syyType = Constants.ShiyiyunType.FRONTTHREEZHI;
                     _showFragments(FrontThreezhixuanFragment.TAG);
                 }else if(arg2 == 11){
 
-                    mTitleView.setText(prefix+"-前三组选(普通)");
+                    mTitleView.setText(prefix+"-前三组选");
                     syyType = Constants.ShiyiyunType.FRONTTHREEZU;
                     _showFragments(FrontThreezuxuanFragment.TAG);
                 }
@@ -982,13 +996,13 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             }
         });
         ArrayList<String>mDragList = new ArrayList<String>();
-        mDragList.add("任二");
-        mDragList.add("任三");
-        mDragList.add("任四");
-        mDragList.add("任五");
-        mDragList.add("任六");
-        mDragList.add("任七");
-        mDragList.add("任八");
+        mDragList.add("任选二");
+        mDragList.add("任选三");
+        mDragList.add("任选四");
+        mDragList.add("任选五");
+        mDragList.add("任选六");
+        mDragList.add("任选七");
+        mDragList.add("任选八");
         mDragList.add("前二组选");
         mDragList.add("前三组选");
         mMyDragAdapter = new PopViewAdapter(this, mDragList, mDragChecked);
@@ -999,42 +1013,42 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
                 // TODO Auto-generated method stub
-                mShakeBtn.setVisibility(View.GONE);
+//                mShakeBtn.setVisibility(View.GONE);
                 if (arg2 == 0) {
 
-                    mTitleView.setText(prefix+"-任二(胆拖)");
+                    mTitleView.setText(prefix+"-任选二(胆拖)");
                     syyType = Constants.ShiyiyunType.ANYTWODRAG;
                     _showFragments(AnyTwoDragFragment.TAG);
 
                 } else if (arg2 == 1) {
 
-                    mTitleView.setText(prefix+"-任三(胆拖)");
+                    mTitleView.setText(prefix+"-任选三(胆拖)");
                     syyType = Constants.ShiyiyunType.ANYTHREEDRAG;
                     _showFragments(AnyThreeDragFragment.TAG);
                 } else if (arg2 == 2) {
 
-                    mTitleView.setText(prefix+"-任四(胆拖)");
+                    mTitleView.setText(prefix+"-任选四(胆拖)");
                     syyType = Constants.ShiyiyunType.ANYFOURDRAG;
                     _showFragments(AnyFourDragFragment.TAG);
                 } else if (arg2 == 3) {
 
-                    mTitleView.setText(prefix+"-任五(胆拖)");
+                    mTitleView.setText(prefix+"-任选五(胆拖)");
                     syyType = Constants.ShiyiyunType.ANYFIVEDRAG;
                     _showFragments(AnyFiveDragFragment.TAG);
                 } else if (arg2 == 4) {
 
-                    mTitleView.setText(prefix+"-任六(胆拖)");
+                    mTitleView.setText(prefix+"-任选六(胆拖)");
                     syyType = Constants.ShiyiyunType.ANYSIXDRAG;
                     _showFragments(AnySixDragFragment.TAG);
                 } else if(arg2 == 5){
 
-                    mTitleView.setText(prefix+"-任七(胆拖)");
+                    mTitleView.setText(prefix+"-任选七(胆拖)");
                     syyType = Constants.ShiyiyunType.ANYSEVENDRAG;
                     _showFragments(AnySevenDragFragment.TAG);
                 }
                 else if(arg2 == 6){
 
-                    mTitleView.setText(prefix+"-任八(胆拖)");
+                    mTitleView.setText(prefix+"-任选八(胆拖)");
                     syyType = Constants.ShiyiyunType.ANYEIGHTDRAG;
                     _showFragments(AnyEightDragFragment.TAG);
                 }
@@ -1060,6 +1074,16 @@ public class Syxw extends FragmentActivity implements OnClickListener {
                 mPopWindow.dismiss();
             }
         });
+
+        RelativeLayout bottomShadow = (RelativeLayout)view.findViewById(R.id.popup_bottom);
+        bottomShadow.setSoundEffectsEnabled(false);
+        bottomShadow.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPopWindow.dismiss();
+            }
+        });
+
         mPopWindow.setFocusable(true);
         mPopWindow.setOutsideTouchable(true);
         mPopWindow.update();
@@ -1181,9 +1205,11 @@ public class Syxw extends FragmentActivity implements OnClickListener {
                     }
                 });
     }
+
     private String mQihao = "";
     private boolean isCanSale = true;
     private MyCount mc = null;
+
     private void _readQihaoFromJson(String jsonData) throws IOException {
         JsonReader reader = new JsonReader(new StringReader(jsonData));
         reader.beginObject();

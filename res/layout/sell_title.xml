@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="46dp"
+                android:background="@color/k3_orange">
+
+	<RelativeLayout
+			android:id="@+id/left_layout"
+			android:layout_width="54dp"
+			android:layout_height="match_parent">
+		<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				android:contentDescription="@null"
+				android:gravity="center"
+				android:src="@drawable/return_back"/>
+	</RelativeLayout>
+
+	<RelativeLayout
+			android:id="@+id/title_selector"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:layout_centerInParent="true">
+		<TextView
+				android:id="@+id/current_lottery"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:gravity="center"
+				android:textColor="@color/white"
+				android:textSize="17sp"
+				android:text="快三"/>
+
+		<ImageView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_toRightOf="@+id/current_lottery"
+				android:layout_toEndOf="@+id/current_lottery"
+				android:layout_alignBottom="@+id/current_lottery"
+				android:layout_marginLeft="2dp"
+				android:layout_marginStart="2dp"
+				android:layout_marginBottom="3dp"
+				android:src="@drawable/triangle_white"/>
+	</RelativeLayout>
+
+
+	<TextView
+			android:id="@+id/sumbit_group_buy"
+			android:layout_width="wrap_content"
+			android:layout_height="fill_parent"
+			android:layout_alignParentRight="true"
+			android:gravity="center_vertical"
+			android:paddingLeft="10dp"
+			android:paddingRight="10dp"
+			android:minWidth="55dp"
+			android:textColor="@color/white" />
+</RelativeLayout>
+
+
+

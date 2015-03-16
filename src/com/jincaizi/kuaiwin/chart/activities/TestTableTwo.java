@@ -48,6 +48,7 @@ public class TestTableTwo extends BaseTableActivity {
     private PopupWindow popupWindow;
     private ListView baseListView;
     private ListView formListView;
+    private RelativeLayout menuBtn;
 
     private BaseListAdapter baseListAdapter;
     private FormListAdapter formListAdapter;
@@ -91,7 +92,7 @@ public class TestTableTwo extends BaseTableActivity {
         subBtn = (RelativeLayout) findViewById(R.id.title_btn_sub);
         baseSelector = (ImageView) findViewById(R.id.title_selector_base);
         subSelector = (ImageView) findViewById(R.id.title_selector_sub);
-        RelativeLayout menuBtn = (RelativeLayout) findViewById(R.id.menu);
+        menuBtn = (RelativeLayout) findViewById(R.id.menu);
         bottomLayout = (LinearLayout) findViewById(R.id.base_list_bottom);
 
         topShadow = (ImageView)findViewById(R.id.top_shadow);
@@ -148,6 +149,7 @@ public class TestTableTwo extends BaseTableActivity {
                 popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
             }
         });
+        menuBtn.setClickable(false);
 
         formListView = (ListView) findViewById(R.id.form_list);
         baseListView = (ListView) findViewById(R.id.base_list);
@@ -306,8 +308,8 @@ public class TestTableTwo extends BaseTableActivity {
             }
         });
 
-        popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.update();
@@ -402,6 +404,7 @@ public class TestTableTwo extends BaseTableActivity {
             if (!intent.getBooleanExtra("success",false) && baseListLayout.getVisibility() == View.GONE &&
                     formListLayout.getVisibility() == View.GONE)
             {
+                menuBtn.setClickable(false);
                 tableMainLayout.setVisibility(View.GONE);
                 loadingLayout.setVisibility(View.GONE);
                 refreshLayout.setVisibility(View.VISIBLE);
@@ -435,6 +438,7 @@ public class TestTableTwo extends BaseTableActivity {
                         formListAdapter.notifyDataSetChanged();
                     }
 
+                    menuBtn.setClickable(true);
                     loadingLayout.setVisibility(View.GONE);
                     formListLayout.setVisibility(subBtn.isEnabled() ? View.GONE : View.VISIBLE);
                     baseListLayout.setVisibility(baseBtn.isEnabled()?View.GONE:View.VISIBLE);

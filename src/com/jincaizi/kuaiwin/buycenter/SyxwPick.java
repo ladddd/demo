@@ -21,16 +21,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 import org.apache.http.Header;
 
 import com.google.gson.stream.JsonReader;
@@ -84,7 +77,7 @@ public class SyxwPick extends Activity implements OnClickListener,
 	private ArrayList<String> mBall = new ArrayList<String>();
 	private String mCity;
 	private TextView mSubmitDaigou;
-	private TextView mFootLeftBtn;
+	private RelativeLayout mFootLeftBtn;
 	private EditText mTraceTime;
 	private EditText mTraceIssue;
 	private int mZhuiHaoNums = 0;
@@ -188,11 +181,11 @@ public class SyxwPick extends Activity implements OnClickListener,
 		mSubmitGroupBuy = (TextView) findViewById(R.id.sumbit_group_buy);
 		
 		mSubmitDaigou = (TextView)findViewById(R.id.right_footer_btn);
-		mFootLeftBtn = (TextView)findViewById(R.id.left_footer_btn);
-		mFootLeftBtn.setBackgroundResource(R.drawable.popitem_bg);
-		mFootLeftBtn.setTextColor(this.getResources().getColorStateList(R.color.footer_black));
-		mFootLeftBtn.setPadding(10, 10, 10, 10);
-		mFootLeftBtn.setText(this.getResources().getString(R.string.smartzhuihao));
+		mFootLeftBtn = (RelativeLayout)findViewById(R.id.left_footer_btn);
+//		mFootLeftBtn.setBackgroundResource(R.drawable.popitem_bg);
+//		mFootLeftBtn.setTextColor(this.getResources().getColorStateList(R.color.footer_black));
+//		mFootLeftBtn.setPadding(10, 10, 10, 10);
+//		mFootLeftBtn.setText(this.getResources().getString(R.string.smartzhuihao));
 		
 		mTraceTime = (EditText)findViewById(R.id.trace_times);
 		mTraceIssue = (EditText)findViewById(R.id.trace_issue);
