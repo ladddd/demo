@@ -27,11 +27,17 @@ public class ElevenFiveDragAdapter extends BaseAdapter {
     private final int type;
     private final int maxFirst;
 
-    public ElevenFiveDragAdapter(Fragment fragment, ArrayList<Boolean>checked, int type, int maxFirst) {
+    private ArrayList<String> currentMiss;
+    private int maxIndex;
+
+    private boolean showLeak;
+    public ElevenFiveDragAdapter(Fragment fragment, ArrayList<Boolean>checked,
+                                 int type, int maxFirst, boolean showLeak) {
         this.fragment = fragment;
         this.mChecked = checked;
         this.type = type;
         this.maxFirst = maxFirst;
+        this.showLeak = showLeak;
     }
 
     @Override
@@ -67,6 +73,19 @@ public class ElevenFiveDragAdapter extends BaseAdapter {
 
         holder.selectCube.setSelected(mChecked.get(position));
         holder.type.setText(StringUtil.getResultNumberString(position + 1));
+
+        holder.leak.setVisibility(showLeak?View.VISIBLE:View.GONE);
+
+        if (currentMiss != null && currentMiss.size() == 11)
+        {
+            holder.leak.setTextColor(fragment.getResources().getColor(R.color.setting_text));
+            if (position == maxIndex)
+            {
+                holder.leak.setTextColor(fragment.getResources().getColor(R.color.buyer_red));
+            }
+
+            holder.leak.setText(currentMiss.get(position));
+        }
 
         holder.selectCube.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +148,24 @@ public class ElevenFiveDragAdapter extends BaseAdapter {
             leak = (TextView) view.findViewById(R.id.leak);
             selectCube = (RelativeLayout) view.findViewById(R.id.select_cube);
         }
+    }
+
+    public void setCurrentMiss(ArrayList<String> currentMiss) {
+        this.currentMiss = currentMiss;
+        findMaxIndex();
+    }
+
+    private void findMaxIndex()
+    {
+        int max = 0;
+        for (int i = 1; i < currentMiss.size(); i++) {
+            if (Integer.valueOf(currentMiss.get(i)) >
+                    Integer.valueOf(currentMiss.get(i-1)))
+            {
+                max = i;
+            }
+        }
+        maxIndex = max;
     }
 
 }

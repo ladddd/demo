@@ -1,15 +1,10 @@
 package com.jincaizi.kuaiwin.buycenter;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.jincaizi.R;
-import com.jincaizi.kuaiwin.buycenter.adapter.ElevenFiveDragAdapter;
-import com.jincaizi.kuaiwin.tool.DoubleColorFromMachine;
 
 public class AnyTwoDragFragment extends ElevenFiveBaseDragFragment {
 
@@ -25,44 +20,20 @@ public class AnyTwoDragFragment extends ElevenFiveBaseDragFragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
+        maxFirst = 1;
         super.onActivityCreated(savedInstanceState);
-        mRedDanAdapter = new ElevenFiveDragAdapter(this, boolReddan,
-                ElevenFiveDragAdapter.DRAG_FIRST, 1);
-        mRedTuoAdapter = new ElevenFiveDragAdapter(this, boolRedtuo,
-                ElevenFiveDragAdapter.DRAG_SECOND, 1);
-        red_dan_group.setAdapter(mRedDanAdapter);
-        red_tuo_group.setAdapter(mRedTuoAdapter);
-        updateCount();
     }
 
     @Override
-    protected void updateCount() {
+    protected void updateCount(boolean vibrate) {
         int redDanFactor = mRedDanBall.size() > 0 ? 1 : 0;
         mZhushu = redDanFactor
                 * mRedTuoBall.size();
 
-         super.updateCount();
-    }
 
-    public ArrayList<String> getPlsResultList() {
-		ArrayList<String> result = new ArrayList<String>();
-		Collections.sort(mRedDanBall);
-		Collections.sort(mRedTuoBall);
-		StringBuilder builder = new StringBuilder("(");
-		for(int i=0; i< mRedDanBall.size(); i++) {
-			builder.append(" " + mRedDanBall.get(i));
-		}
-		builder.append(" )");
-		ArrayList<String[]> resultBehind = DoubleColorFromMachine.combine(mRedTuoBall, 2-mRedDanBall.size());
-		for(int i=0; i<resultBehind.size(); i++) {
-			StringBuilder builderIn = new StringBuilder();
-			String[] resultIn = resultBehind.get(i);
-			for(int j=0; j <resultIn.length; j++) {
-				builderIn.append(" " + resultIn[j] );
-			}
-			result.add(builder.toString() + builderIn.toString());
-		}
-		return result;
-	}
+//        min = (mRedTuoBall.size()>7?mRedTuoBall.size()-7:1) * 6;
+        min = Math.max(1, mRedTuoBall.size() - 6) * 6;
+        max = Math.min(4, mRedTuoBall.size())*6;
+        super.updateCount(vibrate);
+    }
 }

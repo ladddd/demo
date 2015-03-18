@@ -15,8 +15,8 @@ import com.jincaizi.R;
 import com.jincaizi.common.IntentData;
 import com.jincaizi.kuaiwin.chart.adapters.BaseListAdapter;
 import com.jincaizi.kuaiwin.chart.adapters.FormListAdapter;
-import com.jincaizi.kuaiwin.chart.requesters.LotteryDataRequester;
-import com.jincaizi.kuaiwin.chart.requesters.LotteryTimeRequester;
+import com.jincaizi.requesters.LotteryDataRequester;
+import com.jincaizi.requesters.LotteryTimeRequester;
 import com.jincaizi.data.ResponseData;
 
 import java.util.ArrayList;

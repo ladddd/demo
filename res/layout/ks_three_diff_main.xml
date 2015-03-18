@@ -166,7 +166,8 @@
 				android:gravity="center"
 				android:text="--"
 				android:textSize="14sp"
-				android:textColor="@color/setting_text"/>
+				android:textColor="@color/setting_text"
+				android:visibility="gone"/>
 
 	</LinearLayout>
 

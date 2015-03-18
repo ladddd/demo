@@ -5,7 +5,10 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.drawable.BitmapDrawable;
@@ -29,6 +32,8 @@ import com.jincaizi.kuaiwin.chart.activities.ElevenFiveTableFour;
 import com.jincaizi.kuaiwin.chart.activities.ElevenFiveTableOne;
 import com.jincaizi.kuaiwin.chart.activities.ElevenFiveTableThree;
 import com.jincaizi.kuaiwin.chart.activities.ElevenFiveTableTwo;
+import com.jincaizi.kuaiwin.utils.SafeAsyncTask;
+import com.jincaizi.requesters.LotteryLeakRequester;
 import org.apache.http.Header;
 
 import com.google.gson.stream.JsonReader;
@@ -82,6 +87,11 @@ public class Syxw extends FragmentActivity implements OnClickListener {
     private TextView lotteryMoney;
     private TextView profit;
 
+    private ArrayList<String> currentMiss;
+
+    private LotteryLeakRequester requester;
+    private MyBroadcastReceiver broadcastReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -99,6 +109,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
         for(int i=0; i<9; i++) {
             mDragChecked.add(false);
         }
+        currentMiss = new ArrayList<String>();
         _findViews();
         _setListner();
         _loadFragment();
@@ -1204,6 +1215,11 @@ public class Syxw extends FragmentActivity implements OnClickListener {
                         _requestData();
                     }
                 });
+
+        broadcastReceiver = new MyBroadcastReceiver();
+        registerReceiver(broadcastReceiver, new IntentFilter("leak"));
+        requester = new LotteryLeakRequester(this, lotterytype);
+        requester.query();
     }
 
     private String mQihao = "";
@@ -1312,4 +1328,83 @@ public class Syxw extends FragmentActivity implements OnClickListener {
         finish();
     }
 
+    private class MyBroadcastReceiver extends BroadcastReceiver
+    {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getBooleanExtra("success",false))
+            {
+                _readyilouFromJson(intent.getStringExtra("JSON"));
+            }
+        }
+    }
+
+    private void _readyilouFromJson(String jsonData) {
+        final JsonReader reader = new JsonReader(new StringReader(jsonData));
+        SafeAsyncTask<Boolean> getAllDaigouTask = new SafeAsyncTask<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                currentMiss.clear();
+                reader.beginArray();
+                while (reader.hasNext()) {
+                    reader.beginObject();
+                    while (reader.hasNext()) {
+                        String tagName = reader.nextName();
+                        if (tagName.equals("nowyilou")) {
+                            currentMiss.add(reader.nextString());
+                        }
+                        else
+                        {
+                            reader.nextString();
+                        }
+                    }
+                    reader.endObject();
+                }
+                reader.endArray();
+                return true;
+            }
+
+            @Override
+            protected void onSuccess(Boolean t) throws Exception {
+                // TODO Auto-generated method stub
+                super.onSuccess(t);
+                if (mCurrentFragment != null) {
+                    if (mCurrentFragment instanceof BaseElevenFiveFragment)
+                    {
+                        ((BaseElevenFiveFragment) mCurrentFragment).notifyLeakUpdate();
+                    }
+                    else if (mCurrentFragment instanceof ElevenFiveBaseDragFragment)
+                    {
+                        ((ElevenFiveBaseDragFragment) mCurrentFragment).notifyLeakUpdate();
+                    }
+                }
+            }
+
+            @Override
+            protected void onThrowable(Throwable t) {
+                // TODO Auto-generated method stub
+                super.onThrowable(t);
+            }
+
+            @Override
+            protected void onFinally() {
+                // TODO Auto-generated method stub
+                super.onFinally();
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+            }
+
+        };
+        getAllDaigouTask.execute();
+    }
+
+    public ArrayList<String> getCurrentMiss() {
+        return currentMiss;
+    }
 }

@@ -37,6 +37,7 @@ public class BaseElevenFiveFragment extends Fragment{
     protected ArrayList<Boolean> boolLiu = new ArrayList<Boolean>();
     protected RelativeLayout randomSelect;
     protected Vibrator vibrator;
+    protected boolean showLeak = true;
 
     protected int selectNumber = 8;
 
@@ -75,12 +76,13 @@ public class BaseElevenFiveFragment extends Fragment{
 
         mActivity = getActivity();
 
-        mRedAdapter = new ElevenFiveCommonAdapter(this, boolLiu);
+        mRedAdapter = new ElevenFiveCommonAdapter(this, boolLiu, showLeak);
+        mRedAdapter.setCurrentMiss(((Syxw)mActivity).getCurrentMiss());
 
         front_ball_group.setAdapter(mRedAdapter);
         mLocalClassName = mActivity.getLocalClassName();
 
-        updateCount();
+        updateCount(false);
 
         mShakeListener = new ShakeListener(getActivity());
         mShakeListener.setOnShakeListener(new shakeLitener());
@@ -116,7 +118,7 @@ public class BaseElevenFiveFragment extends Fragment{
             mShakeListener.stop();
         } else {
             mShakeListener.start();
-            updateCount();
+            updateCount(false);
         }
     }
 
@@ -144,8 +146,12 @@ public class BaseElevenFiveFragment extends Fragment{
         });
     }
 
-    protected void updateCount()
+    protected void updateCount(boolean vibrate)
     {
+        if (vibrate) {
+            vibrator.vibrate(new long[]{0, 30}, -1);
+        }
+
         mZhushu = Utils.getZuHeNum(mLiuBall.size(), selectNumber);
 
         ((Syxw) mActivity).setTouzhuResult(mZhushu);
@@ -172,7 +178,7 @@ public class BaseElevenFiveFragment extends Fragment{
             }
         }
 
-        updateCount();
+        updateCount(true);
     }
 
     class shakeLitener implements ShakeListener.OnShakeListener {
@@ -187,8 +193,6 @@ public class BaseElevenFiveFragment extends Fragment{
     }
 
     public void updateBallData() {
-        Vibrator vibrator = (Vibrator) getActivity().getApplication()
-                .getSystemService(Service.VIBRATOR_SERVICE);
         vibrator.vibrate(new long[] { 0, 30 }, -1);
         // _initData();
         ArrayList<String> shakeResult = new ArrayList<String>();
@@ -202,7 +206,7 @@ public class BaseElevenFiveFragment extends Fragment{
         }
         mZhushu = 1;
         mRedAdapter.notifyDataSetChanged();
-        updateCount();
+        updateCount(true);
     }
 
     public void updateBallData(String ball) {
@@ -221,7 +225,7 @@ public class BaseElevenFiveFragment extends Fragment{
         mLiuBall.clear();
         mRedAdapter.notifyDataSetChanged();
         mZhushu = 0;
-        updateCount();
+        updateCount(true);
     }
 
     public void updateChoice(ArrayList<Boolean> updateData)
@@ -261,6 +265,14 @@ public class BaseElevenFiveFragment extends Fragment{
             boolLiu.set(position, true);
             mLiuBall.add(ballStr);
         }
-        updateCount();
+        updateCount(true);
+    }
+
+    public void notifyLeakUpdate()
+    {
+        ArrayList<String> currentMiss = ((Syxw)getActivity()).getCurrentMiss();
+
+        mRedAdapter.setCurrentMiss(currentMiss);
+        mRedAdapter.notifyDataSetChanged();
     }
 }

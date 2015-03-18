@@ -7,11 +7,16 @@ import java.util.ArrayList;
 import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.IntentFilter;
 import com.jincaizi.common.IntentData;
 import com.jincaizi.kuaiwin.chart.activities.TableFour;
 import com.jincaizi.kuaiwin.chart.activities.TableThree;
 import com.jincaizi.kuaiwin.chart.activities.TestTable;
 import com.jincaizi.kuaiwin.chart.activities.TestTableTwo;
+import com.jincaizi.kuaiwin.utils.*;
+import com.jincaizi.requesters.LotteryLeakRequester;
 import org.apache.http.Header;
 
 import android.content.Intent;
@@ -47,12 +52,7 @@ import com.google.gson.stream.JsonReader;
 import com.jincaizi.R;
 import com.jincaizi.adapters.PopViewAdapter;
 import com.jincaizi.http.JinCaiZiHttpClient;
-import com.jincaizi.kuaiwin.utils.Constants;
-import com.jincaizi.kuaiwin.utils.Constants.City;
 import com.jincaizi.kuaiwin.utils.Constants.K3Type;
-import com.jincaizi.kuaiwin.utils.IntentAction;
-import com.jincaizi.kuaiwin.utils.UiHelper;
-import com.jincaizi.kuaiwin.utils.Utils;
 import com.jincaizi.kuaiwin.widget.ShakeListener;
 import com.jincaizi.kuaiwin.widget.ShakeListener.OnShakeListener;
 import com.jincaizi.vendor.http.AsyncHttpClient;
@@ -100,6 +100,10 @@ public class K3 extends FragmentActivity implements OnClickListener {
     private TextView lotteryMoney;
     private TextView profit;
 
+    private ArrayList<String> currentMiss;
+
+    private LotteryLeakRequester requester;
+    private MyBroadcastReceiver broadcastReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -113,6 +117,7 @@ public class K3 extends FragmentActivity implements OnClickListener {
         for(int i=0; i<2; i++) {
             mDragChecked.add(false);
         }
+        currentMiss = new ArrayList<String>();
         _getLotteryType();
         _isForStartForResult();
         _findViews();
@@ -121,6 +126,7 @@ public class K3 extends FragmentActivity implements OnClickListener {
         _registerSensorListener();
         _requestData();
     }
+
     private void _getLotteryType() {
         if(mCity.equals(Constants.City.jiangsu.toString())) {
             lotterytype = "JSK3";
@@ -146,7 +152,6 @@ public class K3 extends FragmentActivity implements OnClickListener {
         mShakeListener.setUPTATE_INTERVAL_TIME(160);
     }
     class shakeLitener implements OnShakeListener {
-
         @Override
         public void onShake() {
             // TODO Auto-generated method stub
@@ -180,6 +185,7 @@ public class K3 extends FragmentActivity implements OnClickListener {
             mNormalChecked.add(false);
         }
     }
+
     private void _initDragChecked() {
         mDragChecked.clear();
         for(int i=0; i<2; i++) {
@@ -197,7 +203,6 @@ public class K3 extends FragmentActivity implements OnClickListener {
         chart.setOnClickListener(this);
         mQihaoView.setOnClickListener(this);
     }
-
     private void _findViews() {
         // TODO Auto-generated method stub
         RelativeLayout mHeaderBar = (RelativeLayout)findViewById(R.id.pl3_head_bar);
@@ -232,11 +237,11 @@ public class K3 extends FragmentActivity implements OnClickListener {
         mShakeListener.start();
     }
 
-
     public void setTouzhuResult(int count) {
         mZhuShuView.setText(String.valueOf(count));
         priceTextView.setText(String.valueOf(count * 2));
     }
+
 
     public void setBuyTips(int max, int min, int count)
     {
@@ -370,6 +375,7 @@ public class K3 extends FragmentActivity implements OnClickListener {
         }
         return true;
     }
+
     private void _startK3Pick(K3_hz_fragment fragment) {
         fragment.getBetResult();
         Intent intent = new Intent();
@@ -389,8 +395,6 @@ public class K3 extends FragmentActivity implements OnClickListener {
         }
         finish();
     }
-
-
     private void _setPopWindow(int width) {
         View view = LayoutInflater.from(this).inflate(R.layout.syxw_popview_layout, null);
         LinearLayout popLayout = (LinearLayout)view.findViewById(R.id.syxw_popview_lv);
@@ -519,6 +523,8 @@ public class K3 extends FragmentActivity implements OnClickListener {
         mPopWindow.setBackgroundDrawable(new BitmapDrawable(getResources(),
                 Bitmap.createBitmap(1, 1, Config.ARGB_8888)));
     }
+
+
     private void _showFragments(String fragmentTag) {
         FragmentManager mFragManager = getSupportFragmentManager();
         FragmentTransaction mFragTransaction = mFragManager.beginTransaction();
@@ -579,7 +585,6 @@ public class K3 extends FragmentActivity implements OnClickListener {
         }
         finish();
     }
-
     private void _requestData() {
         JinCaiZiHttpClient.closeExpireConnection();
         mQihaoView.setText("正在获取当前期号");
@@ -603,7 +608,7 @@ public class K3 extends FragmentActivity implements OnClickListener {
                                           byte[] responseBody) {
                         try {
                             String charset;
-                            if(Utils.isCmwapNet(K3.this)) {
+                            if (Utils.isCmwapNet(K3.this)) {
                                 charset = "utf-8";
                             } else {
                                 charset = "gb2312";
@@ -634,7 +639,14 @@ public class K3 extends FragmentActivity implements OnClickListener {
                         _requestData();
                     }
                 });
+
+
+        broadcastReceiver = new MyBroadcastReceiver();
+        registerReceiver(broadcastReceiver, new IntentFilter("leak"));
+        requester = new LotteryLeakRequester(this, lotterytype);
+        requester.query();
     }
+
     private String mQihao = "";
     private boolean isCanSale = true;
     private MyCount mc = null;
@@ -669,7 +681,6 @@ public class K3 extends FragmentActivity implements OnClickListener {
             }
         }
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -687,6 +698,7 @@ public class K3 extends FragmentActivity implements OnClickListener {
 
     /*定义一个倒计时的内部类*/
     class MyCount extends CountDownTimer {
+
         public MyCount(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
@@ -702,6 +714,75 @@ public class K3 extends FragmentActivity implements OnClickListener {
 
         }
     }
+    private class MyBroadcastReceiver extends BroadcastReceiver
+    {
 
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getBooleanExtra("success",false))
+            {
+                _readyilouFromJson(intent.getStringExtra("JSON"));
+            }
+        }
+    }
+    private void _readyilouFromJson(String jsonData) {
+        final JsonReader reader = new JsonReader(new StringReader(jsonData));
+        SafeAsyncTask<Boolean> getAllDaigouTask = new SafeAsyncTask<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                currentMiss.clear();
+                reader.beginArray();
+                while (reader.hasNext()) {
+                    reader.beginObject();
+                    while (reader.hasNext()) {
+                        String tagName = reader.nextName();
+                        if (tagName.equals("nowyilou")) {
+                            currentMiss.add(reader.nextString());
+                        }
+                        else
+                        {
+                            reader.nextString();
+                        }
+                    }
+                    reader.endObject();
+                }
+                reader.endArray();
+                return true;
+            }
 
+            @Override
+            protected void onSuccess(Boolean t) throws Exception {
+                // TODO Auto-generated method stub
+                super.onSuccess(t);
+                if (mCurrentFragment != null) {
+                    ((K3_hz_fragment) mCurrentFragment).notifyLeakUpdate();
+                }
+            }
+
+            @Override
+            protected void onThrowable(Throwable t) {
+                // TODO Auto-generated method stub
+                super.onThrowable(t);
+            }
+
+            @Override
+            protected void onFinally() {
+                // TODO Auto-generated method stub
+                super.onFinally();
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+            }
+
+        };
+        getAllDaigouTask.execute();
+    }
+
+    public ArrayList<String> getCurrentMiss() {
+        return currentMiss;
+    }
 }

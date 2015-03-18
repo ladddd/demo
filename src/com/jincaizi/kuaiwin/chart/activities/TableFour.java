@@ -16,9 +16,8 @@ import com.jincaizi.common.IntentData;
 import com.jincaizi.kuaiwin.chart.TableFixHeaders.TableFixHeaders;
 import com.jincaizi.kuaiwin.chart.adapters.BaseListAdapter;
 import com.jincaizi.kuaiwin.chart.adapters.TwoNotEqualAdapter;
-import com.jincaizi.kuaiwin.chart.adapters.TwoNotEqualBottomAdapter;
-import com.jincaizi.kuaiwin.chart.requesters.LotteryDataRequester;
-import com.jincaizi.kuaiwin.chart.requesters.LotteryTimeRequester;
+import com.jincaizi.requesters.LotteryDataRequester;
+import com.jincaizi.requesters.LotteryTimeRequester;
 import com.jincaizi.data.ResponseData;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.jincaizi.kuaiwin.chart.requesters;
+package com.jincaizi.requesters;
 
 import android.content.Context;
 import android.content.Intent;

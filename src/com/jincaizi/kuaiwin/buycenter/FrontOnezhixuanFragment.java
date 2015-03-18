@@ -15,12 +15,13 @@ public class FrontOnezhixuanFragment extends BaseElevenFiveFragment {
         hintFirst.setText("至少选1个号，猜对第1个开奖号即中");
         hintPrice.setText("13");
 
+        showLeak = false;
         super.onActivityCreated(savedInstanceState);
 	}
 
     @Override
-    protected void updateCount() {
-        super.updateCount();
+    protected void updateCount(boolean vibrate) {
+        super.updateCount(vibrate);
 
         ((Syxw) mActivity).setBuyTips(13, 13, mZhushu);
     }

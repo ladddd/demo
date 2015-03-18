@@ -30,6 +30,14 @@ public class ElevenFiveBaseDragFragment extends Fragment {
     protected ArrayList<String> mRedDanBall = new ArrayList<String>();
     public int mZhushu;
 
+    protected int min = 0;
+    protected int max = 0;
+
+    protected int maxFirst;
+    protected int minSelectedCount;
+
+    protected boolean showLeak = true;
+
     public ArrayList<String> getmRedTuoBall() {
         return mRedTuoBall;
     }
@@ -54,6 +62,23 @@ public class ElevenFiveBaseDragFragment extends Fragment {
         _initBool();
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        minSelectedCount = maxFirst + 1;
+        mRedDanAdapter = new ElevenFiveDragAdapter(this,
+                boolReddan, ElevenFiveDragAdapter.DRAG_FIRST, maxFirst, showLeak);
+        mRedTuoAdapter = new ElevenFiveDragAdapter(this,
+                boolRedtuo, ElevenFiveDragAdapter.DRAG_SECOND, maxFirst, showLeak);
+        ArrayList<String> currentMiss = ((Syxw) getActivity()).getCurrentMiss();
+        mRedDanAdapter.setCurrentMiss(currentMiss);
+        mRedTuoAdapter.setCurrentMiss(currentMiss);
+        red_dan_group.setAdapter(mRedDanAdapter);
+        red_tuo_group.setAdapter(mRedTuoAdapter);
+        updateCount(false);
+    }
+
     private void _initData() {
         _clearData();
         _initBool();
@@ -71,9 +96,16 @@ public class ElevenFiveBaseDragFragment extends Fragment {
         }
     }
 
-    protected void updateCount()
+    protected void updateCount(boolean vibrate)
     {
+        if (vibrate) {
+            Vibrator vibrator = (Vibrator) getActivity().getApplication()
+                    .getSystemService(Service.VIBRATOR_SERVICE);
+            vibrator.vibrate(new long[]{0, 30}, -1);
+        }
+
         ((Syxw) getActivity()).setTouzhuResult(mZhushu);
+        ((Syxw) getActivity()).setBuyTips(max, min, mZhushu);
     }
 
     @Override
@@ -113,6 +145,9 @@ public class ElevenFiveBaseDragFragment extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         // TODO Auto-generated method stub
         super.onHiddenChanged(hidden);
+        if (!hidden) {
+            updateCount(false);
+        }
     }
 
     public void updateSelection(int position, int type)
@@ -157,7 +192,7 @@ public class ElevenFiveBaseDragFragment extends Fragment {
             }
         }
 
-        updateCount();
+        updateCount(true);
     }
 
     @Override
@@ -173,7 +208,7 @@ public class ElevenFiveBaseDragFragment extends Fragment {
         mRedDanBall.clear();
         mRedDanAdapter.notifyDataSetChanged();
         mRedTuoAdapter.notifyDataSetChanged();
-        updateCount();
+        updateCount(true);
     }
 
     public void updateBallData(String ball) {
@@ -197,5 +232,37 @@ public class ElevenFiveBaseDragFragment extends Fragment {
             mRedTuoBall.add(result[i]);
             boolRedtuo.set(Integer.valueOf(result[i]) - 1, true);
         }
+    }
+
+    public void notifyLeakUpdate()
+    {
+        ArrayList<String> currentMiss = ((Syxw)getActivity()).getCurrentMiss();
+
+        mRedDanAdapter.setCurrentMiss(currentMiss);
+        mRedDanAdapter.notifyDataSetChanged();
+
+        mRedTuoAdapter.setCurrentMiss(currentMiss);
+        mRedTuoAdapter.notifyDataSetChanged();
+    }
+
+    public ArrayList<String> getPlsResultList() {
+        ArrayList<String> result = new ArrayList<String>();
+        Collections.sort(mRedDanBall);
+        Collections.sort(mRedTuoBall);
+        StringBuilder builder = new StringBuilder("(");
+        for(int i=0; i< mRedDanBall.size(); i++) {
+            builder.append(" " + mRedDanBall.get(i));
+        }
+        builder.append(" )");
+        ArrayList<String[]> resultBehind = DoubleColorFromMachine.combine(mRedTuoBall, minSelectedCount-mRedDanBall.size());
+        for(int i=0; i<resultBehind.size(); i++) {
+            StringBuilder builderIn = new StringBuilder();
+            String[] resultIn = resultBehind.get(i);
+            for(int j=0; j <resultIn.length; j++) {
+                builderIn.append(" " + resultIn[j] );
+            }
+            result.add(builder.toString() + builderIn.toString());
+        }
+        return result;
     }
 }

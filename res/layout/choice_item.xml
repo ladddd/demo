@@ -43,14 +43,18 @@
 		</RelativeLayout>
 	</RelativeLayout>
 
-
-	<TextView
-			android:id="@+id/leak"
+	<RelativeLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:gravity="center"
-			android:text="--"
-			android:textSize="14sp"
-			android:textColor="@color/setting_text"/>
+			android:layout_height="20dp">
+		<TextView
+				android:id="@+id/leak"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:text="--"
+				android:textSize="14sp"
+				android:textColor="@color/setting_text"
+				android:visibility="gone"/>
+	</RelativeLayout>
 
 </LinearLayout>

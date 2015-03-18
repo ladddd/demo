@@ -14,13 +14,14 @@ public class FrontThreezuxuanFragment extends BaseElevenFiveFragment {
 		selectNumber = 3;
         hintFirst.setText("至少选3个号，猜前3个开奖号即中");
         hintPrice.setText("195");
+        showLeak = false;
 
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
-    protected void updateCount() {
-        super.updateCount();
+    protected void updateCount(boolean vibrate) {
+        super.updateCount(vibrate);
 
         ((Syxw) mActivity).setBuyTips(195, 195, mZhushu);
     }

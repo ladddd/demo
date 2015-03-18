@@ -19,8 +19,8 @@ public class AnyfiveFragment extends BaseElevenFiveFragment {
 	}
 
     @Override
-    protected void updateCount() {
-        super.updateCount();
+    protected void updateCount(boolean vibrate) {
+        super.updateCount(vibrate);
 
         ((Syxw) mActivity).setBuyTips(540, 540, mZhushu);
     }

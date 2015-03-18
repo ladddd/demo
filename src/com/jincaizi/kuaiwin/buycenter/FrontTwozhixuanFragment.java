@@ -84,16 +84,16 @@ public class FrontTwozhixuanFragment extends Fragment {
 		mActivity = getActivity();
 
 		mFrontAdapter = new ElevenFiveCommonAdapter(this,
-				boolFront, ElevenFiveCommonAdapter.FIRST);
+				boolFront, ElevenFiveCommonAdapter.FIRST, false);
 		mBehindAdapter = new ElevenFiveCommonAdapter(this,
-				boolBehind, ElevenFiveCommonAdapter.SECOND);
+				boolBehind, ElevenFiveCommonAdapter.SECOND, false);
 
 		mZhushu = mFrontBall.size()*  mbehindBall.size();
 
 		front_ball_group.setAdapter(mFrontAdapter);
 		behind_ball_group.setAdapter(mBehindAdapter);
 		mLocalClassName = mActivity.getLocalClassName();
-        updateCount();
+        updateCount(false);
 		mShakeListener = new ShakeListener(getActivity());
 		mShakeListener.setOnShakeListener(new shakeLitener());
 	}
@@ -177,7 +177,7 @@ public class FrontTwozhixuanFragment extends Fragment {
 		mFrontBall.add(shakeResult.get(0));
 		boolBehind.set(Integer.valueOf(shakeResult.get(1)) - 1, true);
 		mbehindBall.add(shakeResult.get(1));
-        updateCount();
+        updateCount(true);
 		mFrontAdapter.notifyDataSetChanged();
 		mBehindAdapter.notifyDataSetChanged();
 	}
@@ -202,10 +202,7 @@ public class FrontTwozhixuanFragment extends Fragment {
 			mShakeListener.stop();
 		} else {
 			mShakeListener.start();
-			// mRedAdapter = new BallGridViewAdapter(getActivity(), r_content,
-			// boolLiu, true);
-			// front_ball_group.setAdapter(mRedAdapter);
-			// mRedAdapter.notifyDataSetChanged();
+            updateCount(false);
 		}
 	}
 
@@ -226,7 +223,7 @@ public class FrontTwozhixuanFragment extends Fragment {
 		mbehindBall.clear();
 		mFrontAdapter.notifyDataSetChanged();
 		mBehindAdapter.notifyDataSetChanged();
-        updateCount();
+        updateCount(true);
 	}
 
     public ArrayList<Boolean> getBoolFront()
@@ -241,35 +238,7 @@ public class FrontTwozhixuanFragment extends Fragment {
 
     public void updateChoice(ArrayList<Boolean> firstUpdateData, ArrayList<Boolean> secondUpdateData)
     {
-        boolean chosen = false;
-        boolean changed = false;
-
-        for (int i = 0; i < firstUpdateData.size(); i++) {
-            if (boolFront.get(i) != firstUpdateData.get(i))
-            {
-                changed = true;
-            }
-
-            boolFront.set(i, firstUpdateData.get(i));
-            chosen = chosen || boolFront.get(i);
-        }
-
-        for (int i = 0; i < secondUpdateData.size(); i++) {
-            if (boolBehind.get(i) != secondUpdateData.get(i))
-            {
-                changed = true;
-            }
-
-            boolBehind.set(i, secondUpdateData.get(i));
-            chosen = chosen || boolBehind.get(i);
-        }
-
-        changed = changed && chosen;
-
-        if (changed)
-        {
-            vibrator.vibrate(new long[] { 0, 30 }, -1);
-        }
+        vibrator.vibrate(new long[] { 0, 30 }, -1);
         mFrontAdapter.notifyDataSetChanged();
         mBehindAdapter.notifyDataSetChanged();
 
@@ -306,12 +275,16 @@ public class FrontTwozhixuanFragment extends Fragment {
             }
         }
 
-        updateCount();
+        updateCount(true);
     }
 
-    private void updateCount()
+    private void updateCount(boolean vibrate)
     {
-        mZhushu = mFrontBall.size()*  mbehindBall.size();
+        if (vibrate) {
+            vibrator.vibrate(new long[]{0, 30}, -1);
+        }
+
+        mZhushu = mFrontBall.size() * mbehindBall.size();
 
         ((Syxw) mActivity).setTouzhuResult(mZhushu);
         ((Syxw) mActivity).setBuyTips(130, 130, mZhushu);
@@ -342,6 +315,6 @@ public class FrontTwozhixuanFragment extends Fragment {
                 mbehindBall.add(ballStr);
             }
         }
-        updateCount();
+        updateCount(true);
     }
 }

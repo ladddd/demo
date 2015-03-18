@@ -15,8 +15,8 @@ import com.jincaizi.R;
 import com.jincaizi.common.IntentData;
 import com.jincaizi.kuaiwin.chart.adapters.ElevenFiveCountAdapter;
 import com.jincaizi.kuaiwin.chart.adapters.ElevenFiveResultAdapter;
-import com.jincaizi.kuaiwin.chart.requesters.LotteryDataRequester;
-import com.jincaizi.kuaiwin.chart.requesters.LotteryTimeRequester;
+import com.jincaizi.requesters.LotteryDataRequester;
+import com.jincaizi.requesters.LotteryTimeRequester;
 import com.jincaizi.data.ElevenFiveData;
 import com.jincaizi.kuaiwin.utils.Constants;
 

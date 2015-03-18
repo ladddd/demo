@@ -10,17 +10,17 @@ public class FrontTwozuxuanFragment extends BaseElevenFiveFragment {
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
         selectNumber = 2;
         hintFirst.setText("至少选2个号，猜前2个开奖号即中");
         hintPrice.setText("65");
+        showLeak = false;
 
 		super.onActivityCreated(savedInstanceState);
 	}
 
     @Override
-    protected void updateCount() {
-        super.updateCount();
+    protected void updateCount(boolean vibrate) {
+        super.updateCount(vibrate);
 
         ((Syxw) mActivity).setBuyTips(65, 65, mZhushu);
     }

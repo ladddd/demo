@@ -17,8 +17,8 @@ import com.jincaizi.kuaiwin.chart.TableFixHeaders.TableFixHeaders;
 import com.jincaizi.kuaiwin.chart.adapters.BaseListAdapter;
 import com.jincaizi.kuaiwin.chart.adapters.BottomAdapter;
 import com.jincaizi.kuaiwin.chart.adapters.QuickThreeSumTableAdapter;
-import com.jincaizi.kuaiwin.chart.requesters.LotteryDataRequester;
-import com.jincaizi.kuaiwin.chart.requesters.LotteryTimeRequester;
+import com.jincaizi.requesters.LotteryDataRequester;
+import com.jincaizi.requesters.LotteryTimeRequester;
 import com.jincaizi.data.ResponseData;
 
 import java.util.ArrayList;

@@ -88,8 +88,6 @@ public class K3_hz_fragment extends Fragment{
     private KSDragAdapter dragFirstAdapter;
     private KSDragAdapter dragSecondAdapter;
 
-    private boolean changed; //选号是否改变
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -213,11 +211,7 @@ public class K3_hz_fragment extends Fragment{
 
     private void updateSelection()
     {
-        if (changed)
-        {
-            vibrator.vibrate(new long[] { 0, 30 }, -1);
-            changed = false;
-        }
+        vibrator.vibrate(new long[] { 0, 30 }, -1);
 
         if(mActivity.mCaseIndex == 1)
         {
@@ -441,8 +435,6 @@ public class K3_hz_fragment extends Fragment{
                     }
                 }
 
-                changed = view.isSelected() || isOdd || isEven;
-
                 if (view.isSelected()) {
                     small.setSelected(false);
                 }
@@ -476,8 +468,6 @@ public class K3_hz_fragment extends Fragment{
                         bool[i] = (i <= 7) && view.isSelected();
                     }
                 }
-
-                changed = view.isSelected() || isOdd || isEven;
 
                 if (view.isSelected()) {
                     big.setSelected(false);
@@ -513,7 +503,6 @@ public class K3_hz_fragment extends Fragment{
                     }
                 }
 
-                changed = view.isSelected() || isBig || isSmall;
                 if (view.isSelected())
                 {
                     even.setSelected(false);
@@ -547,8 +536,6 @@ public class K3_hz_fragment extends Fragment{
                         bool[i] = ((i % 2) == 1) && view.isSelected();
                     }
                 }
-
-                changed = view.isSelected() || isBig || isSmall;
 
                 if (view.isSelected())
                 {
@@ -586,7 +573,6 @@ public class K3_hz_fragment extends Fragment{
             public void onClick(View view) {
                 view.setSelected(!view.isSelected());
                 bool[6] = view.isSelected();
-                changed = true;
                 handler.sendEmptyMessage(UPDATE);
             }
         });
@@ -631,6 +617,7 @@ public class K3_hz_fragment extends Fragment{
 
         ExpandableHeightGridView gridView = (ExpandableHeightGridView)body.findViewById(R.id.selector_main);
         threeDiffAdapter = new ChooseCommonAdapter(this, bool);
+        threeDiffAdapter.setMissCount(((K3)getActivity()).getCurrentMiss());
         gridView.setAdapter(threeDiffAdapter);
         gridView.setExpanded(true);
 
@@ -648,7 +635,6 @@ public class K3_hz_fragment extends Fragment{
             public void onClick(View view) {
                 view.setSelected(!view.isSelected());
                 bool[6] = view.isSelected();
-                changed = true;
                 handler.sendEmptyMessage(UPDATE);
             }
         });
@@ -661,6 +647,7 @@ public class K3_hz_fragment extends Fragment{
 
         ExpandableHeightGridView gridView = (ExpandableHeightGridView)body.findViewById(R.id.selector_main);
         twoDiffAdapter = new ChooseCommonAdapter(this, bool);
+        twoDiffAdapter.setMissCount(((K3)getActivity()).getCurrentMiss());
         gridView.setAdapter(twoDiffAdapter);
         gridView.setExpanded(true);
 
@@ -691,6 +678,8 @@ public class K3_hz_fragment extends Fragment{
         dragFirstAdapter = new KSDragAdapter(this, bool, KSDragAdapter.FIRST,
                 isThreeDrag? KSDragAdapter.THREE_DRAG: KSDragAdapter.TWO_DRAG);
         dragSecondAdapter = new KSDragAdapter(this, bool, KSDragAdapter.SECOND);
+        dragFirstAdapter.setMissCount(((K3)getActivity()).getCurrentMiss());
+        dragSecondAdapter.setMissCount(((K3)getActivity()).getCurrentMiss());
 
         firstGridView.setAdapter(dragFirstAdapter);
         firstGridView.setExpanded(true);
@@ -1069,19 +1058,6 @@ public class K3_hz_fragment extends Fragment{
             return;
         }
 
-        //是否选了号码
-        boolean chosen = false;
-        for (int i = 0; i < updateData.size(); i++) {
-            if (bool[i] != updateData.get(i))
-            {
-                changed = true;
-            }
-
-            bool[i] = updateData.get(i);
-            chosen = chosen || bool[i];
-        }
-        changed = changed && chosen;
-
         handler.sendEmptyMessage(UPDATE);
     }
 
@@ -1338,5 +1314,26 @@ public class K3_hz_fragment extends Fragment{
             default:
                 break;
         }
+    }
+
+    public void notifyLeakUpdate()
+    {
+        ArrayList<String> currentMiss = ((K3)getActivity()).getCurrentMiss();
+
+        if (mActivity.mCaseIndex == 3) {
+            threeDiffAdapter.setMissCount(currentMiss);
+            threeDiffAdapter.notifyDataSetChanged();
+        }
+        else if (mActivity.mCaseIndex == 4) {
+            twoDiffAdapter.setMissCount(currentMiss);
+            twoDiffAdapter.notifyDataSetChanged();
+        }
+        else if (mActivity.mCaseIndex == 5 || mActivity.mCaseIndex == 6) {
+            dragFirstAdapter.setMissCount(currentMiss);
+            dragFirstAdapter.notifyDataSetChanged();
+            dragSecondAdapter.setMissCount(currentMiss);
+            dragSecondAdapter.notifyDataSetChanged();
+        }
+
     }
 }

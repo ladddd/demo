@@ -28,15 +28,21 @@ public class ElevenFiveCommonAdapter extends BaseAdapter {
     private final ArrayList<Boolean> mChecked;
     private final int type;
 
-    public ElevenFiveCommonAdapter(Fragment fragment, ArrayList<Boolean>checked)
+    private ArrayList<String> currentMiss;
+    private int maxIndex;
+
+    private boolean showLeak;
+
+    public ElevenFiveCommonAdapter(Fragment fragment, ArrayList<Boolean>checked, boolean showLeak)
     {
-        this(fragment, checked, FIRST);
+        this(fragment, checked, FIRST, showLeak);
     }
 
-    public ElevenFiveCommonAdapter(Fragment fragment, ArrayList<Boolean>checked, int type) {
+    public ElevenFiveCommonAdapter(Fragment fragment, ArrayList<Boolean>checked, int type, boolean showLeak) {
         this.fragment = fragment;
         this.mChecked = checked;
         this.type = type;
+        this.showLeak = showLeak;
     }
 
     @Override
@@ -56,6 +62,7 @@ public class ElevenFiveCommonAdapter extends BaseAdapter {
         // TODO Auto-generated method stub
         return position;
     }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
@@ -72,14 +79,19 @@ public class ElevenFiveCommonAdapter extends BaseAdapter {
 
         holder.selectCube.setSelected(mChecked.get(position));
         holder.type.setText(StringUtil.getResultNumberString(position + 1));
-        //int checkedBg = mIsRed?R.drawable.ball_red:R.drawable.ball_blue;
-//        if(mChecked.get(position)) {
-//         holder.type.setBackgroundResource(R.drawable.ball_blue);
-//         holder.type.setTextColor(mContext.getResources().getColor(android.R.color.white));
-//        } else {
-//         holder.type.setBackgroundResource(R.drawable.ball_gray);
-//         holder.type.setTextColor(mContext.getResources().getColor(R.color.blue));
-//        }
+
+        if (currentMiss != null && currentMiss.size() == 11)
+        {
+            holder.leak.setTextColor(fragment.getResources().getColor(R.color.setting_text));
+            if (position == maxIndex)
+            {
+                holder.leak.setTextColor(fragment.getResources().getColor(R.color.buyer_red));
+            }
+
+            holder.leak.setText(currentMiss.get(position));
+        }
+
+        holder.leak.setVisibility(showLeak?View.VISIBLE:View.GONE);
 
         holder.selectCube.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,4 +134,21 @@ public class ElevenFiveCommonAdapter extends BaseAdapter {
         }
     }
 
+    public void setCurrentMiss(ArrayList<String> currentMiss) {
+        this.currentMiss = currentMiss;
+        findMaxIndex();
+    }
+
+    private void findMaxIndex()
+    {
+        int max = 0;
+        for (int i = 1; i < currentMiss.size(); i++) {
+            if (Integer.valueOf(currentMiss.get(i)) >
+                    Integer.valueOf(currentMiss.get(i-1)))
+            {
+                max = i;
+            }
+        }
+        maxIndex = max;
+    }
 }

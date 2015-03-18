@@ -92,11 +92,11 @@ public class FrontThreezhixuanFragment extends Fragment {
 		mActivity = getActivity();
 
 		mFrontAdapter = new ElevenFiveCommonAdapter(this,
-				boolFront, ElevenFiveCommonAdapter.FIRST);
+				boolFront, ElevenFiveCommonAdapter.FIRST, false);
 		mBehindAdapter = new ElevenFiveCommonAdapter(this,
-				boolBehind, ElevenFiveCommonAdapter.SECOND);
+				boolBehind, ElevenFiveCommonAdapter.SECOND, false);
 		mLastAdapter = new ElevenFiveCommonAdapter(this,
-				boolLast, ElevenFiveCommonAdapter.THIRD);
+				boolLast, ElevenFiveCommonAdapter.THIRD, false);
 
 		mZhushu = mFrontBall.size() * mbehindBall.size()* mLastBall.size();
 
@@ -104,13 +104,8 @@ public class FrontThreezhixuanFragment extends Fragment {
 		behind_ball_group.setAdapter(mBehindAdapter);
 		last_ball_group.setAdapter(mLastAdapter);
 		mLocalClassName = mActivity.getLocalClassName();
-//		if ( mLocalClassName.equals("buycenter.Syiyunjin")) {
-//			((Syiyunjin) mActivity).setTouzhuResult(mZhushu);
-//		} else {
-//			((Syxw) mActivity).setTouzhuResult(mZhushu);
-//		}
 
-        updateCount();
+        updateCount(false);
 		mShakeListener = new ShakeListener(getActivity());
 		mShakeListener.setOnShakeListener(new shakeLitener());
 	}
@@ -198,13 +193,7 @@ public class FrontThreezhixuanFragment extends Fragment {
 		mbehindBall.add(shakeResult.get(1));
 		boolLast.set(Integer.valueOf(shakeResult.get(2)) - 1, true);
 		mLastBall.add(shakeResult.get(2));
-//		mZhushu = 1;
-//		if ( mLocalClassName.equals("buycenter.Syiyunjin")) {
-//			((Syiyunjin) mActivity).setTouzhuResult(mZhushu);
-//		} else {
-//			((Syxw) mActivity).setTouzhuResult(mZhushu);
-//		}
-        updateCount();
+        updateCount(true);
 		mFrontAdapter.notifyDataSetChanged();
 		mBehindAdapter.notifyDataSetChanged();
 		mLastAdapter.notifyDataSetChanged();
@@ -233,10 +222,7 @@ public class FrontThreezhixuanFragment extends Fragment {
 			mShakeListener.stop();
 		} else {
 			mShakeListener.start();
-			// mRedAdapter = new BallGridViewAdapter(getActivity(), r_content,
-			// boolLiu, true);
-			// front_ball_group.setAdapter(mRedAdapter);
-			// mRedAdapter.notifyDataSetChanged();
+            updateCount(false);
 		}
 	}
 
@@ -261,13 +247,7 @@ public class FrontThreezhixuanFragment extends Fragment {
 		mFrontAdapter.notifyDataSetChanged();
 		mBehindAdapter.notifyDataSetChanged();
 		mLastAdapter.notifyDataSetChanged();
-//		mZhushu = 0;
-//		if ( mLocalClassName.equals("buycenter.Syiyunjin")) {
-//			((Syiyunjin) mActivity).setTouzhuResult(mZhushu);
-//		} else {
-//			((Syxw) mActivity).setTouzhuResult(mZhushu);
-//		}
-        updateCount();
+        updateCount(true);
 	}
 
     public ArrayList<Boolean> getBoolFront() {
@@ -370,18 +350,18 @@ public class FrontThreezhixuanFragment extends Fragment {
             }
         }
 
-        updateCount();
+        updateCount(true);
     }
 
-    private void updateCount()
+    private void updateCount(boolean vibrate)
     {
+        if (vibrate) {
+            vibrator.vibrate(new long[]{0, 30}, -1);
+        }
+
         mZhushu = mFrontBall.size() * mbehindBall.size()* mLastBall.size();
 
-//        if ( mLocalClassName.equals("buycenter.Syiyunjin")) {
-//            ((Syiyunjin) mActivity).setTouzhuResult(mZhushu);
-//        } else {
-            ((Syxw) mActivity).setTouzhuResult(mZhushu);
-//        }
+        ((Syxw) mActivity).setTouzhuResult(mZhushu);
         ((Syxw) mActivity).setBuyTips(1170, 1170, mZhushu);
     }
 
@@ -421,6 +401,6 @@ public class FrontThreezhixuanFragment extends Fragment {
             }
         }
 
-        updateCount();
+        updateCount(true);
     }
 }

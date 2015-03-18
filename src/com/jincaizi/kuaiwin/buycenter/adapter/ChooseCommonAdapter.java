@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.jincaizi.R;
 import com.jincaizi.kuaiwin.buycenter.K3_hz_fragment;
 
+import java.util.ArrayList;
+
 /**
  * Created by chenweida on 2015/3/11.
  */
@@ -17,6 +19,10 @@ public class ChooseCommonAdapter extends BaseAdapter {
     private K3_hz_fragment fragment;
 
     private boolean[] selectedNumber;
+
+    private ArrayList<String> missCount;
+
+    private int maxIndex;
 
     public ChooseCommonAdapter(K3_hz_fragment fragment, boolean[] selectedNumber)
     {
@@ -56,6 +62,18 @@ public class ChooseCommonAdapter extends BaseAdapter {
         holder.selectCube.setSelected(selectedNumber[i]);
         holder.type.setText(String.valueOf((i+1)));
         holder.tips.setVisibility(View.GONE);
+        holder.leak.setVisibility(View.VISIBLE);
+
+        if (missCount != null && missCount.size() == 6)
+        {
+            holder.leak.setTextColor(fragment.getResources().getColor(R.color.setting_text));
+            if (i == maxIndex)
+            {
+                holder.leak.setTextColor(fragment.getResources().getColor(R.color.buyer_red));
+            }
+
+            holder.leak.setText(missCount.get(i));
+        }
 
         holder.selectCube.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,5 +106,25 @@ public class ChooseCommonAdapter extends BaseAdapter {
             leak = (TextView) view.findViewById(R.id.leak);
             selectCube = (RelativeLayout) view.findViewById(R.id.select_cube);
         }
+    }
+
+    public void setMissCount(ArrayList<String> missCount)
+    {
+        this.missCount = missCount;
+
+        findMaxIndex();
+    }
+
+    private void findMaxIndex()
+    {
+        int max = 0;
+        for (int i = 1; i < missCount.size(); i++) {
+            if (Integer.valueOf(missCount.get(i)) >
+                    Integer.valueOf(missCount.get(i-1)))
+            {
+                max = i;
+            }
+        }
+        maxIndex = max;
     }
 }

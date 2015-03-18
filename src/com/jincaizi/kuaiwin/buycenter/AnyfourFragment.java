@@ -21,8 +21,8 @@ public class AnyfourFragment extends BaseElevenFiveFragment {
 	}
 
     @Override
-    protected void updateCount() {
-        super.updateCount();
+    protected void updateCount(boolean vibrate) {
+        super.updateCount(vibrate);
 
         //选择号码的个数
         int selectedCount = 0;
