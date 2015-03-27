@@ -25,7 +25,7 @@ public class AnyfiveFragment extends BaseElevenFiveFragment {
         ((Syxw) mActivity).setBuyTips(540, 540, mZhushu);
     }
 
-	public ArrayList<String> getPlsResultList() {
+	public ArrayList<String> getNumPerSelList() {
 		ArrayList<String> result = new ArrayList<String>();
 		Collections.sort(mLiuBall);
 		for (int i = 0; i < mLiuBall.size(); i++) {

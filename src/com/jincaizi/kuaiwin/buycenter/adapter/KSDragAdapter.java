@@ -33,7 +33,7 @@ public class KSDragAdapter extends BaseAdapter {
 
     private ArrayList<String> missCount;
 
-    private int maxIndex;
+    private ArrayList<Integer> maxIndex;
 
     public KSDragAdapter(K3_hz_fragment fragment, boolean[] selectedNumber, int type)
     {
@@ -47,6 +47,7 @@ public class KSDragAdapter extends BaseAdapter {
         this.selectedNumber = selectedNumber;
         this.type = type;
         this.maxFirst = maxFirst;
+        maxIndex = new ArrayList<Integer>();
     }
 
     @Override
@@ -88,7 +89,7 @@ public class KSDragAdapter extends BaseAdapter {
         if (missCount != null && missCount.size() == 6)
         {
             holder.leak.setTextColor(fragment.getResources().getColor(R.color.setting_text));
-            if (i == maxIndex)
+            if (maxIndex.contains(i))
             {
                 holder.leak.setTextColor(fragment.getResources().getColor(R.color.buyer_red));
             }
@@ -165,14 +166,20 @@ public class KSDragAdapter extends BaseAdapter {
 
     private void findMaxIndex()
     {
-        int max = 0;
+        maxIndex.clear();
+        maxIndex.add(0);
         for (int i = 1; i < missCount.size(); i++) {
             if (Integer.valueOf(missCount.get(i)) >
-                    Integer.valueOf(missCount.get(i-1)))
+                    Integer.valueOf(missCount.get(maxIndex.get(0))))
             {
-                max = i;
+                maxIndex.clear();
+                maxIndex.add(i);
+            }
+            else if (Integer.valueOf(missCount.get(i)).equals(
+                    Integer.valueOf(missCount.get(maxIndex.get(0)))))
+            {
+                maxIndex.add(i);
             }
         }
-        maxIndex = max;
     }
 }

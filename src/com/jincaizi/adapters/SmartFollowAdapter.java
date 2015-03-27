@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jincaizi.R;
@@ -54,6 +55,7 @@ public class SmartFollowAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
         ViewHolder holder = null;
+        //TODO 为什么此处重用view 反而卡的动不了
 //        if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mActivity).inflate(R.layout.smartfollow_list_item, null, false);
@@ -63,8 +65,8 @@ public class SmartFollowAdapter extends BaseAdapter {
             holder.touruAmount = (TextView)convertView.findViewById(R.id.total_count);
             holder.yingliAmount = (TextView)convertView.findViewById(R.id.profit_count);
             holder.yingliProfit = (TextView)convertView.findViewById(R.id.profit_precent);
-            holder.add = (TextView)convertView.findViewById(R.id.tv_add);
-            holder.sub = (TextView)convertView.findViewById(R.id.tv_sub);
+            holder.add = (ImageView)convertView.findViewById(R.id.tv_add);
+            holder.sub = (ImageView)convertView.findViewById(R.id.tv_sub);
             convertView.setTag(holder);
 //        } else {
 //            holder = (ViewHolder) convertView.getTag();
@@ -225,8 +227,8 @@ public class SmartFollowAdapter extends BaseAdapter {
     	TextView touruAmount;
     	TextView yingliAmount;
     	TextView yingliProfit;
-    	TextView sub;
-    	TextView add;
+    	ImageView sub;
+        ImageView add;
     	
     }
     public static class SmartFollowElement {

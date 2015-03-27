@@ -29,7 +29,7 @@ public class ElevenFiveCommonAdapter extends BaseAdapter {
     private final int type;
 
     private ArrayList<String> currentMiss;
-    private int maxIndex;
+    private ArrayList<Integer> maxIndex;
 
     private boolean showLeak;
 
@@ -43,6 +43,7 @@ public class ElevenFiveCommonAdapter extends BaseAdapter {
         this.mChecked = checked;
         this.type = type;
         this.showLeak = showLeak;
+        maxIndex = new ArrayList<Integer>();
     }
 
     @Override
@@ -83,7 +84,7 @@ public class ElevenFiveCommonAdapter extends BaseAdapter {
         if (currentMiss != null && currentMiss.size() == 11)
         {
             holder.leak.setTextColor(fragment.getResources().getColor(R.color.setting_text));
-            if (position == maxIndex)
+            if (maxIndex.contains(position))
             {
                 holder.leak.setTextColor(fragment.getResources().getColor(R.color.buyer_red));
             }
@@ -141,14 +142,20 @@ public class ElevenFiveCommonAdapter extends BaseAdapter {
 
     private void findMaxIndex()
     {
-        int max = 0;
+        maxIndex.clear();
+        maxIndex.add(0);
         for (int i = 1; i < currentMiss.size(); i++) {
             if (Integer.valueOf(currentMiss.get(i)) >
-                    Integer.valueOf(currentMiss.get(i-1)))
+                    Integer.valueOf(currentMiss.get(maxIndex.get(0))))
             {
-                max = i;
+                maxIndex.clear();
+                maxIndex.add(i);
+            }
+            else if (Integer.valueOf(currentMiss.get(i)).equals(
+                    Integer.valueOf(currentMiss.get(maxIndex.get(0)))))
+            {
+                maxIndex.add(i);
             }
         }
-        maxIndex = max;
     }
 }

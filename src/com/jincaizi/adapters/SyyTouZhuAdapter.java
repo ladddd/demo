@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jincaizi.R;
+import com.jincaizi.kuaiwin.buycenter.SyxwPick;
 import com.jincaizi.kuaiwin.utils.Constants;
 import com.jincaizi.kuaiwin.utils.Constants.ShiyiyunType;
 
@@ -23,12 +25,14 @@ public class SyyTouZhuAdapter extends BaseAdapter {
 	private final Context mContext;
 	private final LinkedList<String> mBall;
 	private final LinkedList<ShiyiyunType> mType;
+    private final LinkedList<Integer> betCountList;
 
 	public SyyTouZhuAdapter(Context context, LinkedList<String> ball,
-			LinkedList<ShiyiyunType> type) {
+			LinkedList<ShiyiyunType> type, LinkedList<Integer> betCountList) {
 		this.mContext = context;
 		this.mBall = ball;
 		this.mType = type;
+        this.betCountList = betCountList;
 	}
 
 	@Override
@@ -50,7 +54,7 @@ public class SyyTouZhuAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		ViewHolder holder = null;
 		if (convertView == null) {
@@ -61,60 +65,77 @@ public class SyyTouZhuAdapter extends BaseAdapter {
 					.findViewById(R.id.tv_pls_item);
 			holder.tv_type = (TextView) convertView
 					.findViewById(R.id.tv_pls_type);
+            holder.delete = (ImageView) convertView.findViewById(R.id.pick_delete);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		holder.tv_ball.setText(mBall.get(position));
+
+        StringBuilder builder = new StringBuilder();
 		if (mType.get(position) == Constants.ShiyiyunType.ANYTWO) {
-			holder.tv_type.setText("[任二]");
+			builder.append("任选二");
 		} else if (mType.get(position) == Constants.ShiyiyunType.ANYTHREE) {
-			holder.tv_type.setText("[任三]");
+            builder.append("任选三");
 		} else if (mType.get(position) == Constants.ShiyiyunType.ANYFOUR) {
-			holder.tv_type.setText("[任四]");
+            builder.append("任选四");
 		} else if (mType.get(position) == Constants.ShiyiyunType.ANYFIVE) {
-			holder.tv_type.setText("[任五]");
+            builder.append("任选五");
 		} else if (mType.get(position) == Constants.ShiyiyunType.ANYSIX) {
-			holder.tv_type.setText("[任六]");
+            builder.append("任选六");
 		} else if (mType.get(position) == Constants.ShiyiyunType.ANYSEVEN) {
-			holder.tv_type.setText("[任七]");
+            builder.append("任选七");
 		} else if (mType.get(position) == Constants.ShiyiyunType.ANYEIGHT) {
-			holder.tv_type.setText("[任八]");
+            builder.append("任选五");
 		} else if (mType.get(position) == Constants.ShiyiyunType.FRONTONEZHI) {
-			holder.tv_type.setText("[前一直选]");
+            builder.append("前一直选");
 		} else if (mType.get(position) == Constants.ShiyiyunType.FRONTTWOZHI) {
-			holder.tv_type.setText("[前二直选]");
+            builder.append("前二直选");
 		} else if (mType.get(position) == Constants.ShiyiyunType.FRONTTWOZU) {
-			holder.tv_type.setText("[前二组选]");
+            builder.append("前二组选");
 		} else if (mType.get(position) == Constants.ShiyiyunType.FRONTTHREEZHI) {
-			holder.tv_type.setText("[前三直选]");
+            builder.append("前三直选");
 		} else if (mType.get(position) == Constants.ShiyiyunType.FRONTTHREEZU) {
-			holder.tv_type.setText("[前三组选]");
+			builder.append("前三组选");
 		} else if (mType.get(position) == Constants.ShiyiyunType.ANYTWODRAG) {
-			holder.tv_type.setText("[任二-胆拖]");
+			builder.append("任选二胆拖");
 		} else if (mType.get(position) == Constants.ShiyiyunType.ANYTHREEDRAG) {
-			holder.tv_type.setText("[任三-胆拖]");
+			builder.append("任选三胆拖");
 		} else if (mType.get(position) == Constants.ShiyiyunType.ANYFOURDRAG) {
-			holder.tv_type.setText("[任四-胆拖]");
+			builder.append("任选四胆拖");
 		} else if (mType.get(position) == Constants.ShiyiyunType.ANYFIVEDRAG) {
-			holder.tv_type.setText("[任五-胆拖]");
+			builder.append("任选五胆拖");
 		} else if (mType.get(position) == Constants.ShiyiyunType.ANYSIXDRAG) {
-			holder.tv_type.setText("[任六-胆拖]");
+			builder.append("任选六胆拖");
 		} else if (mType.get(position) == Constants.ShiyiyunType.ANYSEVENDRAG) {
-			holder.tv_type.setText("[任七-胆拖]");
+			builder.append("任选七胆拖");
 		} else if (mType.get(position) == Constants.ShiyiyunType.ANYEIGHTDRAG) {
-			holder.tv_type.setText("[任八-胆拖]");
+			builder.append("任选八胆拖");
 		} else if (mType.get(position) == Constants.ShiyiyunType.FRONTTWOZUDRAG) {
-			holder.tv_type.setText("[前二组选-胆拖]");
+			builder.append("前二组选胆拖");
 		} else if (mType.get(position) == Constants.ShiyiyunType.FRONTTHREEZUDRAG) {
-			holder.tv_type.setText("[前三组选-胆拖]");
+			builder.append("前三组选胆拖");
 		}
+        builder.append(" ");
+        builder.append(String.valueOf(betCountList.get(position)));
+        builder.append("注");
+        builder.append(String.valueOf(betCountList.get(position) * 2));
+        builder.append("元");
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((SyxwPick)mContext).deleteItemAtPosition(position);
+            }
+        });
+
+        holder.tv_type.setText(builder);
 		return convertView;
 	}
 
 	private static class ViewHolder {
-		TextView tv_ball;
-		TextView tv_type;
-
+		public TextView tv_ball;
+		public TextView tv_type;
+        public ImageView delete;
 	}
 }

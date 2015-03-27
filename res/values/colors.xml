@@ -71,5 +71,11 @@
 	<color name="buyer_red">#ff255f</color>
 	<color name="stroke_gray">#d7d6d1</color>
 	<color name="solid_red">#dd3333</color>
-    
+
+	<!--投注-->
+	<color name="box_gray">#b2b2b2</color>
+	<color name="widget_orange">#f6851f</color>
+	<color name="widget_orange_pressed">#aaf6851f</color>
+
+	<color name="title_sub_bg">#e0e0e0</color>
 </resources>

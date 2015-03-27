@@ -26,7 +26,7 @@ public class FrontOnezhixuanFragment extends BaseElevenFiveFragment {
         ((Syxw) mActivity).setBuyTips(13, 13, mZhushu);
     }
 
-	public ArrayList<String> getPlsResultList() {
+	public ArrayList<String> getNumPerSelList() {
 		ArrayList<String> result = new ArrayList<String>();
 			Collections.sort(mLiuBall);
 				for (int j = 0; j < mLiuBall.size(); j++) {

@@ -34,7 +34,7 @@ public class AnyfourFragment extends BaseElevenFiveFragment {
                 78 * Utils.getZuHeNum(Math.max(5 - (11 - selectedCount), 4), 4), mZhushu);
     }
 
-	public ArrayList<String> getPlsResultList() {
+	public ArrayList<String> getNumPerSelList() {
 		ArrayList<String> result = new ArrayList<String>();
 		Collections.sort(mLiuBall);
 		for (int i = 0; i < mLiuBall.size(); i++) {

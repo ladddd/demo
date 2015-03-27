@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:background="@color/timer_bg">
+
+	<View
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="@color/divider_dark"
+			/>
+
+	<LinearLayout
+			android:id="@+id/buy_tips_layout"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:gravity="center_vertical"
+			android:orientation="horizontal"
+			android:weightSum="2">
+
+		<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:orientation="horizontal"
+				android:gravity="center">
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="连续买"
+					android:textSize="14sp"
+					android:textColor="@color/chart_black"/>
+			<EditText
+					android:id="@+id/issue_edit"
+					android:layout_width="50dp"
+					android:layout_height="30dp"
+					android:layout_marginRight="2dp"
+					android:layout_marginLeft="2dp"
+					android:background="@drawable/btn_bg_normal"
+					android:gravity="center"
+					android:textSize="14sp"
+					android:text="1"
+					android:hint="1"/>
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="期"
+					android:textSize="14sp"
+					android:textColor="@color/chart_black"/>
+
+		</LinearLayout>
+
+		<View
+				android:layout_width="0.5dp"
+				android:layout_height="match_parent"
+				android:background="@color/divider_dark"
+				/>
+
+		<LinearLayout
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:orientation="horizontal"
+				android:gravity="center">
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="投"
+					android:textSize="14sp"
+					android:textColor="@color/chart_black"/>
+			<EditText
+					android:id="@+id/times_edit"
+					android:layout_width="50dp"
+					android:layout_height="30dp"
+					android:layout_marginRight="2dp"
+					android:layout_marginLeft="2dp"
+					android:background="@drawable/btn_bg_normal"
+					android:gravity="center"
+					android:textSize="14sp"
+					android:text="1"
+					android:hint="1"/>
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="倍"
+					android:textSize="14sp"
+					android:textColor="@color/chart_black"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<RelativeLayout
+			android:id="@+id/tips"
+			android:layout_width="match_parent"
+			android:layout_height="40dp"
+			android:visibility="gone">
+		<View
+				android:layout_width="match_parent"
+				android:layout_height="0.5dp"
+				android:background="@color/divider_dark"
+				android:layout_alignParentTop="true"/>
+
+		<CheckBox
+				android:id="@+id/tips_checkbox"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:button="@null"
+				android:background="@drawable/pick_checkbox"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="10dp"
+				android:checked="true"
+				/>
+
+		<TextView android:layout_width="wrap_content"
+		          android:layout_height="wrap_content"
+		          android:layout_toRightOf="@+id/tips_checkbox"
+		          android:layout_toEndOf="@+id/tips_checkbox"
+		          android:layout_centerVertical="true"
+		          android:layout_marginLeft="10dp"
+		          android:layout_marginStart="10dp"
+		          android:textColor="@color/chart_black"
+		          android:textSize="14sp"
+		          android:text="中奖后停止追号"/>
+	</RelativeLayout>
+
+	<View
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="@color/divider_dark"
+			/>
+
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/main_head_bar_height"
+			android:background="@color/timer_bg"
+			>
+
+		<TextView
+				android:id="@+id/left_footer_btn"
+				android:layout_width="wrap_content"
+				android:layout_height="35dp"
+				android:layout_marginLeft="10dp"
+				android:layout_marginStart="10dp"
+				android:paddingLeft="4dp"
+				android:paddingRight="4dp"
+				android:layout_centerVertical="true"
+				android:gravity="center"
+				android:layout_below="@+id/clear_image"
+				android:text="智能追号"
+				android:textSize="14sp"
+				android:textColor="@color/k3_orange"
+				android:background="@drawable/bottom_bg_selected"
+				/>
+
+		<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:orientation="vertical"
+				android:layout_centerInParent="true"
+				android:gravity="center">
+			<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:gravity="center">
+
+				<TextView
+						android:id="@+id/price_1"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textSize="16sp"
+						android:textColor="@color/chart_black"
+						android:text="共"/>
+				<TextView
+						android:id="@+id/price_2"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="@color/buyer_red"
+						android:textSize="16sp"
+						android:text="2"/>
+				<TextView
+						android:id="@+id/price_3"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textSize="16sp"
+						android:textColor="@color/chart_black"
+						android:text="元"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:layout_centerInParent="true"
+					android:gravity="center">
+
+				<TextView
+						android:id="@+id/bet_txt_1"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="@color/buyer_red"
+						android:textSize="16sp"
+						android:text="1"/>
+				<TextView
+						android:id="@+id/bet_txt_2"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textSize="16sp"
+						android:textColor="@color/chart_black"
+						android:text="注"/>
+				<TextView
+						android:id="@+id/bet_txt_3"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="@color/buyer_red"
+						android:textSize="16sp"
+						android:text="1"/>
+				<TextView
+						android:id="@+id/bet_txt_4"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textSize="16sp"
+						android:textColor="@color/chart_black"
+						android:text="倍"/>
+				<TextView
+						android:id="@+id/bet_txt_5"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="@color/buyer_red"
+						android:textSize="16sp"
+						android:text="1"/>
+				<TextView
+						android:id="@+id/bet_txt_6"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textSize="16sp"
+						android:textColor="@color/chart_black"
+						android:text="期"/>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+		<TextView
+				android:id="@+id/right_footer_btn"
+				android:layout_width="@dimen/main_footer_btn_weight"
+				android:layout_height="35dp"
+				android:layout_marginRight="10dp"
+				android:layout_marginEnd="10dp"
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true"
+				android:gravity="center"
+				android:background="@drawable/bottom_bg_selected"
+				android:textColor="@color/k3_orange"
+				android:textSize="14sp"
+				android:text="下一步"
+				/>
+
+	</RelativeLayout>
+
+</LinearLayout>

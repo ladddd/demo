@@ -32,7 +32,7 @@ public class AnysevenFragment extends BaseElevenFiveFragment {
         ((Syxw) mActivity).setBuyTips(profit, profit, mZhushu);
     }
 
-	public ArrayList<String> getPlsResultList() {
+	public ArrayList<String> getNumPerSelList() {
 		ArrayList<String> result = new ArrayList<String>();
 		Collections.sort(mLiuBall);
 		for (int i = 0; i < mLiuBall.size(); i++) {

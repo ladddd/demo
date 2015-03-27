@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.*;
 
 import com.jincaizi.R;
+import com.jincaizi.common.IntentData;
 import com.jincaizi.common.NumberUtil;
 import com.jincaizi.kuaiwin.buycenter.adapter.*;
 import com.jincaizi.kuaiwin.tool.K3Random;
@@ -64,6 +65,7 @@ public class K3_hz_fragment extends Fragment{
             "1", "2", "3","4","5","6",
             "三连号通选"};
     private boolean[] bool = new boolean[50];
+    private ArrayList<Integer> alreadySelected = new ArrayList<Integer>();
 
     private LinearLayout mLvMatch;
     private String mGameType;
@@ -93,6 +95,14 @@ public class K3_hz_fragment extends Fragment{
         super.onAttach(activity);
         Bundle bundle = getArguments();
         mGameType = bundle.getString(BETTYPE);
+        if (bundle.getSerializable(IntentData.SELECT_NUMBERS) != null)
+        {
+            alreadySelected = (ArrayList<Integer>)bundle.getSerializable(IntentData.SELECT_NUMBERS);
+        }
+        else
+        {
+            alreadySelected.clear();
+        }
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,8 +112,19 @@ public class K3_hz_fragment extends Fragment{
                 .getSystemService(Service.VIBRATOR_SERVICE);
     }
     private void _initBool(int size) {
-        for(int i=0; i<size; i++) {
-            bool[i] = false;
+        if (alreadySelected != null && alreadySelected.size() > 0)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                bool[i] = alreadySelected.contains(i);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < size; i++)
+            {
+                bool[i] = false;
+            }
         }
     }
     @Override
@@ -576,6 +597,7 @@ public class K3_hz_fragment extends Fragment{
                 handler.sendEmptyMessage(UPDATE);
             }
         });
+        specialChoose.setSelected(bool[6]);
 
         mLvMatch.addView(body);
     }
@@ -638,6 +660,7 @@ public class K3_hz_fragment extends Fragment{
                 handler.sendEmptyMessage(UPDATE);
             }
         });
+        specialChoose.setSelected(bool[6]);
 
         mLvMatch.addView(body);
     }
@@ -932,6 +955,7 @@ public class K3_hz_fragment extends Fragment{
 
     public String betTypes = "";
     public String betResult = "";
+    public ArrayList<Integer> selectedNumber = new ArrayList<Integer>();
     public void  getBetResult() {
         if(mGameType.equals(K3Type.threesamesingle.toString())) {
             StringBuilder builder = new StringBuilder();
@@ -943,6 +967,7 @@ public class K3_hz_fragment extends Fragment{
                     } else {
                         builder.append(three_same_content[i].substring(0, three_same_content[i].indexOf(" ")) + " ");
                     }
+                    selectedNumber.add(i);
                 }
             }
             if(TextUtils.isEmpty(tongxuan)) {
@@ -960,14 +985,28 @@ public class K3_hz_fragment extends Fragment{
             StringBuilder buildersinglesame = new StringBuilder();
             StringBuilder buildersinglediff = new StringBuilder();
             StringBuilder buildercouple = new StringBuilder();
+            boolean hasSame = false;
+            boolean hasDiff = false;
             for(int i=0; i<two_same_content.length; i++) {
                 if(bool[i]) {
                     if(i<=17 && i>=12) {
                         buildercouple.append(two_same_content[i] + " ");
+                        selectedNumber.add(i);
                     } else if(i>=0 && i<=5){
+                        hasSame = true;
                         buildersinglesame.append(two_same_content[i] + " ");
                     } else {
+                        hasDiff = true;
                         buildersinglediff.append(two_same_content[i] + " ");
+                    }
+                }
+            }
+            if (hasSame && hasDiff)
+            {
+                for (int i = 0; i < 12; i++)
+                {
+                    if (bool[i]) {
+                        selectedNumber.add(i);
                     }
                 }
             }
@@ -992,14 +1031,18 @@ public class K3_hz_fragment extends Fragment{
                     } else {
                         builder.append(three_diff_content[i] + " ");
                     }
+                    selectedNumber.add(i);
                 }
             }
+            String[] result = builder.toString().split(" ");
             if(TextUtils.isEmpty(tongxuan)) {
                 betResult = (builder.toString().trim());
                 betTypes = K3Type.threedifsingle.toString();
-            } else if(TextUtils.isEmpty(builder.toString().trim())) {
+            } else if(result.length < 3) {
                 betResult = tongxuan;
                 betTypes = K3Type.threedifdouble.toString() + " ";
+                selectedNumber.clear();
+                selectedNumber.add(6);
             } else {
                 betResult = (builder.toString().trim()+ "-" + tongxuan);
                 betTypes = K3Type.threedifsingle.toString() + " " + K3Type.threedifdouble.toString();
@@ -1013,6 +1056,7 @@ public class K3_hz_fragment extends Fragment{
                 for(int i=0; i<r_content.length; i++) {
                     if(bool[i]) {
                         builder.append(r_content[i].substring(0, r_content[i].indexOf(" ")) + " ");
+                        selectedNumber.add(i);
                     }
                 }
                 betResult = builder.toString().trim();
@@ -1020,6 +1064,7 @@ public class K3_hz_fragment extends Fragment{
                 for(int i=0; i<three_diff_content.length - 1; i++) {
                     if(bool[i]) {
                         builder.append(three_diff_content[i] + " ");
+                        selectedNumber.add(i);
                     }
                 }
                 betResult = builder.toString().trim();
@@ -1029,11 +1074,13 @@ public class K3_hz_fragment extends Fragment{
                 for(int i=0; i<6; i++) {
                     if(bool[i]) {
                         danBuilder.append((i+1) + " ");
+                        selectedNumber.add(i);
                     }
                 }
                 for(int i=6; i<12; i++) {
                     if(bool[i]) {
                         tuoBuilder.append((i-5) + " ");
+                        selectedNumber.add(i);
                     }
                 }
                 betResult = danBuilder.toString().trim() + "#"+tuoBuilder.toString().trim();
@@ -1056,6 +1103,10 @@ public class K3_hz_fragment extends Fragment{
         if (!mGameType.equals(gameType))
         {
             return;
+        }
+
+        for (int i = 0; i < updateData.size(); i++) {
+            bool[i] = updateData.get(i);
         }
 
         handler.sendEmptyMessage(UPDATE);
@@ -1318,6 +1369,11 @@ public class K3_hz_fragment extends Fragment{
 
     public void notifyLeakUpdate()
     {
+        if (!(getActivity() instanceof K3))
+        {
+            return;
+        }
+
         ArrayList<String> currentMiss = ((K3)getActivity()).getCurrentMiss();
 
         if (mActivity.mCaseIndex == 3) {

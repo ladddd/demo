@@ -1,5 +1,9 @@
 package com.jincaizi.common;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+
 /**
  * Created by chenweida on 2015/2/12.
  */
@@ -66,5 +70,37 @@ public class NumberUtil {
         {
             return 0;
         }
+    }
+
+    public static int getSumRandom()
+    {
+        Random random = new Random();
+        int nu1 = random.nextInt(6);
+        int nu2 = random.nextInt(6);
+        int nu3 = random.nextInt(6);
+
+        return nu1 + nu2 + nu3;
+    }
+
+    public static ArrayList<Integer> getPickAnySelection(int count) {
+        // 2、创建生成随即数的对象
+        Random random = new Random();
+        // 3、创建空白数组，用于存放红球
+        final int[] pool = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        // 4、从pool中随即产生红球
+        int i = 0;
+        while (i < count) {
+            int index = random.nextInt(11);
+            if (result.contains(pool[index])) {
+                continue;
+            }
+            result.add(pool[index]);
+            i++;
+        }
+
+        Collections.sort(result);
+
+        return result;
     }
 }

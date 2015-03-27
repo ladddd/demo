@@ -1,9 +1,23 @@
 package com.jincaizi.common;
 
+import java.util.ArrayList;
+
 /**
  * Created by chenweida on 2015/2/3.
  */
 public class StringUtil {
+
+    public static final String[] SUM_CONTENT = { "3", "4", "5", "6", "7", "8", "9",
+            "10", "11","12","13","14","15","16","17","18" };
+    public static String[] THREE_SAME_CONTENT = { "111", "222", "333",
+            "444", "555", "666", "三同号通选" };
+    public static String[] TWO_SAME_CONTENT = {"11", "22", "33","44","55","66",
+            "1", "2", "3","4","5","6",
+            "11*", "22*", "33*","44*","55*","66*"};
+    public static String[] THREE_DIFF_CONTENT = {
+            "1", "2", "3","4","5","6",
+            "三连号通选"};
+
     //字符串工具函数 取最后两位
     public static int getIssue(String source)
     {
@@ -104,5 +118,44 @@ public class StringUtil {
             return 0;
         }
         return Integer.valueOf(source.substring(source.length()-2, source.length()));
+    }
+
+    public static String getPickAnyResultString(ArrayList<Integer> selectedNumbers)
+    {
+        if (selectedNumbers == null || selectedNumbers.size() == 0)
+        {
+            return "";
+        }
+
+        StringBuilder builder = new StringBuilder();
+
+        for (Integer selectedNumber : selectedNumbers) {
+            builder.append(getResultNumberString(selectedNumber + 1));
+            builder.append(" ");
+        }
+
+        return builder.toString().trim();
+    }
+
+    public static String getFrontTwoResultString(ArrayList<Integer> selectedNumbers)
+    {
+        if (selectedNumbers == null || selectedNumbers.size() < 2)
+        {
+            return "";
+        }
+
+        return (getResultNumberString(selectedNumbers.get(0) + 1) + " | " + getResultNumberString(selectedNumbers.get(1) - 10)).trim();
+    }
+
+    public static String getFrontThreeResultString(ArrayList<Integer> selectedNumbers)
+    {
+        if (selectedNumbers == null || selectedNumbers.size() < 3)
+        {
+            return "";
+        }
+
+        return (getResultNumberString(selectedNumbers.get(0) + 1) + " | "
+                + getResultNumberString(selectedNumbers.get(1) - 10) + " | " +
+        getResultNumberString(selectedNumbers.get(2) - 21)).trim();
     }
 }

@@ -191,26 +191,25 @@ public class Syxw extends FragmentActivity implements OnClickListener {
     }
     private void _loadFragment() {
         Intent intent = getIntent();
-        if (!TextUtils.isEmpty(intent.getAction())
-                && intent.getAction().equals(IntentAction.CONTINUEPICKBALL)) {
-            startType = 1;
-            _showFragments(AnytwoFragment.TAG);
-            syyType = ShiyiyunType.ANYTWO;
-            mTitleView.setText(prefix+"-任选二(普通)");
-            int lastIndex = mNormalChecked.indexOf(true);
-            if(lastIndex != -1) {
-                mNormalChecked.set(lastIndex, false);
+        if (!TextUtils.isEmpty(intent.getAction()) && (intent.getAction().equals(IntentAction.CONTINUEPICKBALL) ||
+                        intent.getAction().equals(IntentAction.RETRYPICKBALL)))
+        {
+            String betType = intent.getStringExtra(IntentData.BET_TYPE);
+            ArrayList<Integer> indexList = (ArrayList<Integer>)intent.getSerializableExtra(IntentData.SELECTION_INDEX);
+
+            if (intent.getAction().equals(IntentAction.CONTINUEPICKBALL))
+            {
+                startType = 1;
             }
-            mNormalChecked.set(0, true);
-        } else if (!TextUtils.isEmpty(intent.getAction())
-                && intent.getAction().equals(IntentAction.RETRYPICKBALL)) {
-            startType = 2;
-            String ballStr = intent.getStringExtra(ShiyiyunPick.BALL);
-            String betType = intent.getStringExtra(ShiyiyunPick.BETTYPE);
+            else
+            {
+                startType = 2;
+            }
+
             if (betType.equals(ShiyiyunType.ANYTWO.toString())) {
                 _showFragments(AnytwoFragment.TAG);
                 AnytwoFragment zhixuanFragment = ((AnytwoFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.ANYTWO;
                 mTitleView.setText(prefix+"-任选二");
                 int lastIndex = mNormalChecked.indexOf(true);
@@ -222,7 +221,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             } else if (betType.equals(ShiyiyunType.ANYTHREE.toString())) {
                 _showFragments(AnythreeFragment.TAG);
                 AnythreeFragment zhixuanFragment = ((AnythreeFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.ANYTHREE;
                 mTitleView.setText(prefix+"-任选三");
                 int lastIndex = mNormalChecked.indexOf(true);
@@ -234,7 +233,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             }else if (betType.equals(ShiyiyunType.ANYFOUR.toString())) {
                 _showFragments(AnyfourFragment.TAG);
                 AnyfourFragment zhixuanFragment = ((AnyfourFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.ANYFOUR;
                 mTitleView.setText(prefix+"-任选四");
                 int lastIndex = mNormalChecked.indexOf(true);
@@ -246,7 +245,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             } else if (betType.equals(ShiyiyunType.ANYFIVE.toString())) {
                 _showFragments(AnyfiveFragment.TAG);
                 AnyfiveFragment zhixuanFragment = ((AnyfiveFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.ANYFIVE;
                 mTitleView.setText(prefix+"-任选五");
                 int lastIndex = mNormalChecked.indexOf(true);
@@ -258,7 +257,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             }else if (betType.equals(ShiyiyunType.ANYSIX.toString())) {
                 _showFragments(AnysixFragment.TAG);
                 AnysixFragment zhixuanFragment = ((AnysixFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.ANYSIX;
                 mTitleView.setText(prefix+"-任选六");
                 int lastIndex = mNormalChecked.indexOf(true);
@@ -270,7 +269,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             }else if (betType.equals(ShiyiyunType.ANYSEVEN.toString())) {
                 _showFragments(AnysevenFragment.TAG);
                 AnysevenFragment zhixuanFragment = ((AnysevenFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.ANYSEVEN;
                 mTitleView.setText(prefix+"-任选七");
                 int lastIndex = mNormalChecked.indexOf(true);
@@ -282,7 +281,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             }else if (betType.equals(ShiyiyunType.ANYEIGHT.toString())) {
                 _showFragments(AnyeightFragment.TAG);
                 AnyeightFragment zhixuanFragment = ((AnyeightFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.ANYEIGHT;
                 mTitleView.setText(prefix+"-任选八");
                 int lastIndex = mNormalChecked.indexOf(true);
@@ -295,7 +294,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             else if (betType.equals(ShiyiyunType.FRONTONEZHI.toString())) {
                 _showFragments(FrontOnezhixuanFragment.TAG);
                 FrontOnezhixuanFragment zhixuanFragment = ((FrontOnezhixuanFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.FRONTONEZHI;
                 mTitleView.setText(prefix+"-前一直选");
                 int lastIndex = mNormalChecked.indexOf(true);
@@ -307,7 +306,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             }else if (betType.equals(ShiyiyunType.FRONTTWOZHI.toString())) {
                 _showFragments(FrontTwozhixuanFragment.TAG);
                 FrontTwozhixuanFragment zhixuanFragment = ((FrontTwozhixuanFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.FRONTTWOZHI;
                 mTitleView.setText(prefix+"-前二直选");
                 int lastIndex = mNormalChecked.indexOf(true);
@@ -319,7 +318,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             }else if (betType.equals(ShiyiyunType.FRONTTWOZU.toString())) {
                 _showFragments(FrontTwozuxuanFragment.TAG);
                 FrontTwozuxuanFragment zhixuanFragment = ((FrontTwozuxuanFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.FRONTTWOZU;
                 mTitleView.setText(prefix+"-前二组选");
                 int lastIndex = mNormalChecked.indexOf(true);
@@ -331,8 +330,8 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             }else if (betType.equals(ShiyiyunType.FRONTTHREEZHI.toString())) {
                 _showFragments(FrontThreezhixuanFragment.TAG);
                 FrontThreezhixuanFragment zhixuanFragment = ((FrontThreezhixuanFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
-                syyType = ShiyiyunType.ANYTHREE;
+                zhixuanFragment.updateBallData(indexList);
+                syyType = ShiyiyunType.FRONTTHREEZHI;
                 mTitleView.setText(prefix+"-前三直选");
                 int lastIndex = mNormalChecked.indexOf(true);
                 if(lastIndex != -1) {
@@ -343,7 +342,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             }else if (betType.equals(ShiyiyunType.FRONTTHREEZU.toString())) {
                 _showFragments(FrontThreezuxuanFragment.TAG);
                 FrontThreezuxuanFragment zhixuanFragment = ((FrontThreezuxuanFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.FRONTTHREEZU;
                 mTitleView.setText(prefix+"-前三组选");
                 int lastIndex = mNormalChecked.indexOf(true);
@@ -355,7 +354,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             } else if (betType.equals(ShiyiyunType.ANYTWODRAG.toString())) {
                 _showFragments(AnyTwoDragFragment.TAG);
                 AnyTwoDragFragment zhixuanFragment = ((AnyTwoDragFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.ANYTWODRAG;
                 mTitleView.setText(prefix+"-任选二(胆拖)");
                 int lastIndex = mDragChecked.indexOf(true);
@@ -367,7 +366,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             } else if (betType.equals(ShiyiyunType.ANYTHREEDRAG.toString())) {
                 _showFragments(AnyThreeDragFragment.TAG);
                 AnyThreeDragFragment zhixuanFragment = ((AnyThreeDragFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.ANYTHREEDRAG;
                 mTitleView.setText(prefix+"-任选三(胆拖)");
                 int lastIndex = mDragChecked.indexOf(true);
@@ -379,7 +378,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             }else if (betType.equals(ShiyiyunType.ANYFOURDRAG.toString())) {
                 _showFragments(AnyFourDragFragment.TAG);
                 AnyFourDragFragment zhixuanFragment = ((AnyFourDragFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.ANYFOURDRAG;
                 mTitleView.setText(prefix+"-任选四(胆拖)");
                 int lastIndex = mDragChecked.indexOf(true);
@@ -391,7 +390,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             } else if (betType.equals(ShiyiyunType.ANYFIVEDRAG.toString())) {
                 _showFragments(AnyFiveDragFragment.TAG);
                 AnyFiveDragFragment zhixuanFragment = ((AnyFiveDragFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.ANYFIVEDRAG;
                 mTitleView.setText(prefix+"-任选五(胆拖)");
                 int lastIndex = mDragChecked.indexOf(true);
@@ -403,7 +402,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             }else if (betType.equals(ShiyiyunType.ANYSIXDRAG.toString())) {
                 _showFragments(AnySixDragFragment.TAG);
                 AnySixDragFragment zhixuanFragment = ((AnySixDragFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.ANYSIXDRAG;
                 mTitleView.setText(prefix+"-任选六(胆拖)");
                 int lastIndex = mDragChecked.indexOf(true);
@@ -415,7 +414,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             }else if (betType.equals(ShiyiyunType.ANYSEVENDRAG.toString())) {
                 _showFragments(AnySevenDragFragment.TAG);
                 AnySevenDragFragment zhixuanFragment = ((AnySevenDragFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.ANYSEVENDRAG;
                 mTitleView.setText(prefix+"-任选七(胆拖)");
                 int lastIndex = mDragChecked.indexOf(true);
@@ -427,7 +426,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             }else if (betType.equals(ShiyiyunType.ANYEIGHTDRAG.toString())) {
                 _showFragments(AnyEightDragFragment.TAG);
                 AnyEightDragFragment zhixuanFragment = ((AnyEightDragFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.ANYEIGHTDRAG;
                 mTitleView.setText(prefix+"-任选八(胆拖)");
                 int lastIndex = mDragChecked.indexOf(true);
@@ -440,7 +439,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             else if (betType.equals(ShiyiyunType.FRONTTHREEZUDRAG.toString())) {
                 _showFragments(FrontThreeZuDragFragment.TAG);
                 FrontThreeZuDragFragment zhixuanFragment = ((FrontThreeZuDragFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.FRONTONEZHI;
                 mTitleView.setText(prefix+"-前三组选(胆拖)");
                 int lastIndex = mDragChecked.indexOf(true);
@@ -452,7 +451,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             }else if (betType.equals(ShiyiyunType.FRONTTWOZUDRAG.toString())) {
                 _showFragments(FrontTwoZuDragFragment.TAG);
                 FrontTwoZuDragFragment zhixuanFragment = ((FrontTwoZuDragFragment) mCurrentFragment);
-                zhixuanFragment.updateBallData(ballStr);
+                zhixuanFragment.updateBallData(indexList);
                 syyType = ShiyiyunType.FRONTTWOZUDRAG;
                 mTitleView.setText(prefix+"-前二组选(胆拖)");
                 int lastIndex = mNormalChecked.indexOf(true);
@@ -462,7 +461,9 @@ public class Syxw extends FragmentActivity implements OnClickListener {
                 mNormalChecked.set(7, true);
                 _initNormalChecked();
             }
-        } else {
+        }
+        else
+        {
             startType = 0;
             _showFragments(AnytwoFragment.TAG);
             syyType = ShiyiyunType.ANYTWO;
@@ -635,45 +636,6 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             hzzlFragment.clearChoose();
         }
     }
-    private void _updateShakePick() {
-        if (mCurrentFragment.getTag().equals(AnytwoFragment.TAG)) {
-            AnytwoFragment zhixuanFragment = ((AnytwoFragment) mCurrentFragment);
-            zhixuanFragment.updateBallData();
-        } else if (mCurrentFragment.getTag().equals(AnythreeFragment.TAG)) {
-            AnythreeFragment zusanFragment = ((AnythreeFragment) mCurrentFragment);
-            zusanFragment.updateBallData();
-        } else if (mCurrentFragment.getTag().equals(AnyfourFragment.TAG)) {
-            AnyfourFragment zuliuFragment = ((AnyfourFragment) mCurrentFragment);
-            zuliuFragment.updateBallData();
-        } else if (mCurrentFragment.getTag().equals(AnyfiveFragment.TAG)) {
-            AnyfiveFragment hzzxFragment = ((AnyfiveFragment) mCurrentFragment);
-            hzzxFragment.updateBallData();
-        } else if (mCurrentFragment.getTag().equals(AnysixFragment.TAG)) {
-            AnysixFragment hzzsFragment = ((AnysixFragment) mCurrentFragment);
-            hzzsFragment.updateBallData();
-        } else if (mCurrentFragment.getTag().equals(AnysevenFragment.TAG)) {
-            AnysevenFragment hzzsFragment = ((AnysevenFragment) mCurrentFragment);
-            hzzsFragment.updateBallData();
-        }  else if (mCurrentFragment.getTag().equals(AnyeightFragment.TAG)) {
-            AnyeightFragment hzzsFragment = ((AnyeightFragment) mCurrentFragment);
-            hzzsFragment.updateBallData();
-        } else if (mCurrentFragment.getTag().equals(FrontOnezhixuanFragment.TAG)) {
-            FrontOnezhixuanFragment hzzsFragment = ((FrontOnezhixuanFragment) mCurrentFragment);
-            hzzsFragment.updateBallData();
-        } else if (mCurrentFragment.getTag().equals(FrontTwozhixuanFragment.TAG)) {
-            FrontTwozhixuanFragment hzzsFragment = ((FrontTwozhixuanFragment) mCurrentFragment);
-            hzzsFragment.updateBallData();
-        } else if (mCurrentFragment.getTag().equals(FrontTwozuxuanFragment.TAG)) {
-            FrontTwozuxuanFragment hzzsFragment = ((FrontTwozuxuanFragment) mCurrentFragment);
-            hzzsFragment.updateBallData();
-        } else if (mCurrentFragment.getTag().equals(FrontThreezhixuanFragment.TAG)) {
-            FrontThreezhixuanFragment hzzsFragment = ((FrontThreezhixuanFragment) mCurrentFragment);
-            hzzsFragment.updateBallData();
-        } else if(mCurrentFragment.getTag().equals(FrontThreezuxuanFragment.TAG)){
-            FrontThreezuxuanFragment hzzlFragment = ((FrontThreezuxuanFragment) mCurrentFragment);
-            hzzlFragment.updateBallData();
-        }
-    }
 
     @Override
     public void onClick(View v) {
@@ -714,6 +676,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
                     Toast.makeText(getApplicationContext(), "本期销售已停止",Toast.LENGTH_SHORT).show();
                     break;
                 }
+                //为测试注释，不要提交
                 if(TextUtils.isEmpty(mQihao)) {
                     Toast.makeText(getApplicationContext(), "未获取到当前期号",Toast.LENGTH_SHORT).show();
                     break;
@@ -800,93 +763,93 @@ public class Syxw extends FragmentActivity implements OnClickListener {
 
     private void _startActivity() {
         Intent syyPick = new Intent();
-        syyPick.putExtra(ShiyiyunPick.BETTYPE, syyType.toString());
+        syyPick.putExtra(IntentData.BET_TYPE, syyType.toString());
         syyPick.putExtra(CITY, mCity);
         syyPick.putExtra("qihao", mQihao);
         if (syyType == ShiyiyunType.ANYTWO) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
+            syyPick.putStringArrayListExtra(IntentData.NUMBERS_PER_SEL,
                     ((AnytwoFragment) mCurrentFragment)
-                            .getPlsResultList());
+                            .getNumPerSelList());
         } else if (syyType == ShiyiyunType.ANYTHREE) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
+            syyPick.putStringArrayListExtra(IntentData.NUMBERS_PER_SEL,
                     ((AnythreeFragment) mCurrentFragment)
-                            .getPlsResultList());
+                            .getNumPerSelList());
         } else if (syyType == ShiyiyunType.ANYFOUR) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
+            syyPick.putStringArrayListExtra(IntentData.NUMBERS_PER_SEL,
                     ((AnyfourFragment) mCurrentFragment)
-                            .getPlsResultList());
+                            .getNumPerSelList());
         } else if (syyType == ShiyiyunType.ANYFIVE) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
+            syyPick.putStringArrayListExtra(IntentData.NUMBERS_PER_SEL,
                     ((AnyfiveFragment) mCurrentFragment)
-                            .getPlsResultList());
+                            .getNumPerSelList());
         } else if (syyType == ShiyiyunType.ANYSIX) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
+            syyPick.putStringArrayListExtra(IntentData.NUMBERS_PER_SEL,
                     ((AnysixFragment) mCurrentFragment)
-                            .getPlsResultList());
+                            .getNumPerSelList());
         } else if (syyType == ShiyiyunType.ANYSEVEN) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
+            syyPick.putStringArrayListExtra(IntentData.NUMBERS_PER_SEL,
                     ((AnysevenFragment) mCurrentFragment)
-                            .getPlsResultList());
+                            .getNumPerSelList());
         } else if (syyType == ShiyiyunType.ANYEIGHT) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
+            syyPick.putStringArrayListExtra(IntentData.NUMBERS_PER_SEL,
                     ((AnyeightFragment) mCurrentFragment)
-                            .getPlsResultList());
+                            .getNumPerSelList());
         } else if (syyType == ShiyiyunType.FRONTONEZHI) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
+            syyPick.putStringArrayListExtra(IntentData.NUMBERS_PER_SEL,
                     ((FrontOnezhixuanFragment) mCurrentFragment)
-                            .getPlsResultList());
+                            .getNumPerSelList());
         } else if (syyType == ShiyiyunType.FRONTTWOZHI) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
+            syyPick.putStringArrayListExtra(IntentData.NUMBERS_PER_SEL,
                     ((FrontTwozhixuanFragment) mCurrentFragment)
-                            .getPlsResultList());
+                            .getNumPerSelList());
         } else if (syyType == ShiyiyunType.FRONTTWOZU) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
+            syyPick.putStringArrayListExtra(IntentData.NUMBERS_PER_SEL,
                     ((FrontTwozuxuanFragment) mCurrentFragment)
-                            .getPlsResultList());
+                            .getNumPerSelList());
         } else if (syyType == ShiyiyunType.FRONTTHREEZHI) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
+            syyPick.putStringArrayListExtra(IntentData.NUMBERS_PER_SEL,
                     ((FrontThreezhixuanFragment) mCurrentFragment)
-                            .getPlsResultList());
+                            .getNumPerSelList());
         } else if (syyType == ShiyiyunType.FRONTTHREEZU) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
+            syyPick.putStringArrayListExtra(IntentData.NUMBERS_PER_SEL,
                     ((FrontThreezuxuanFragment) mCurrentFragment)
-                            .getPlsResultList());
-        } else if (syyType == ShiyiyunType.ANYTWODRAG) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
-                    ((AnyTwoDragFragment) mCurrentFragment)
-                            .getPlsResultList());
-        } else if (syyType == ShiyiyunType.ANYTHREEDRAG) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
-                    ((AnyThreeDragFragment) mCurrentFragment)
-                            .getPlsResultList());
-        } else if (syyType == ShiyiyunType.ANYFOURDRAG) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
-                    ((AnyFourDragFragment) mCurrentFragment)
-                            .getPlsResultList());
-        } else if (syyType == ShiyiyunType.ANYFIVEDRAG) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
-                    ((AnyFiveDragFragment) mCurrentFragment)
-                            .getPlsResultList());
-        } else if (syyType == ShiyiyunType.ANYSIXDRAG) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
-                    ((AnySixDragFragment) mCurrentFragment)
-                            .getPlsResultList());
-        } else if (syyType == ShiyiyunType.ANYSEVENDRAG) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
-                    ((AnySevenDragFragment) mCurrentFragment)
-                            .getPlsResultList());
-        } else if (syyType == ShiyiyunType.ANYEIGHTDRAG) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
-                    ((AnyEightDragFragment) mCurrentFragment)
-                            .getPlsResultList());
-        }  else if (syyType == ShiyiyunType.FRONTTWOZUDRAG) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
-                    ((FrontTwoZuDragFragment) mCurrentFragment)
-                            .getPlsResultList());
-        }  else if (syyType == ShiyiyunType.FRONTTHREEZUDRAG) {
-            syyPick.putStringArrayListExtra(ShiyiyunPick.BALL,
-                    ((FrontThreeZuDragFragment) mCurrentFragment)
-                            .getPlsResultList());
+                            .getNumPerSelList());
+        } else {
+            syyPick.putStringArrayListExtra(IntentData.NUMBERS_PER_SEL,
+                    ((ElevenFiveBaseDragFragment) mCurrentFragment)
+                            .getNumPerSelList());
+        }
+
+        if (mCurrentFragment instanceof BaseElevenFiveFragment) {
+            syyPick.putExtra(IntentData.SELECT_NUMBERS,
+                    ((BaseElevenFiveFragment) mCurrentFragment).getPlsResultList());
+            syyPick.putExtra(IntentData.BET_COUNT, ((BaseElevenFiveFragment) mCurrentFragment).mZhushu);
+            syyPick.putExtra(IntentData.SELECTION_INDEX,
+                    ((BaseElevenFiveFragment) mCurrentFragment).getSelectedIndex());
+        }
+        else if (mCurrentFragment instanceof ElevenFiveBaseDragFragment)
+        {
+            syyPick.putExtra(IntentData.SELECT_NUMBERS,
+                    ((ElevenFiveBaseDragFragment) mCurrentFragment).getPlsResultList());
+            syyPick.putExtra(IntentData.BET_COUNT, ((ElevenFiveBaseDragFragment) mCurrentFragment).mZhushu);
+            syyPick.putExtra(IntentData.SELECTION_INDEX,
+                    ((ElevenFiveBaseDragFragment) mCurrentFragment).getSelectedIndex());
+        }
+        else if (mCurrentFragment instanceof FrontThreezhixuanFragment)
+        {
+            syyPick.putExtra(IntentData.SELECT_NUMBERS,
+                    ((FrontThreezhixuanFragment) mCurrentFragment).getPlsResultList());
+            syyPick.putExtra(IntentData.BET_COUNT, ((FrontThreezhixuanFragment) mCurrentFragment).mZhushu);
+            syyPick.putExtra(IntentData.SELECTION_INDEX,
+                    ((FrontThreezhixuanFragment) mCurrentFragment).getSelectedIndex());
+        }
+        else if (mCurrentFragment instanceof FrontTwozhixuanFragment)
+        {
+            syyPick.putExtra(IntentData.SELECT_NUMBERS,
+                    ((FrontTwozhixuanFragment) mCurrentFragment).getPlsResultList());
+            syyPick.putExtra(IntentData.BET_COUNT, ((FrontTwozhixuanFragment) mCurrentFragment).mZhushu);
+            syyPick.putExtra(IntentData.SELECTION_INDEX,
+                    ((FrontTwozhixuanFragment) mCurrentFragment).getSelectedIndex());
         }
         if (startType == 0) {
             syyPick.setClass(Syxw.this, SyxwPick.class);
@@ -1406,5 +1369,11 @@ public class Syxw extends FragmentActivity implements OnClickListener {
 
     public ArrayList<String> getCurrentMiss() {
         return currentMiss;
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(broadcastReceiver);
+        super.onDestroy();
     }
 }

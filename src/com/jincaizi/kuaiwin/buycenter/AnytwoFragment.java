@@ -35,7 +35,7 @@ public class AnytwoFragment extends BaseElevenFiveFragment {
                 mZhushu);
     }
 
-    public ArrayList<String> getPlsResultList() {
+    public ArrayList<String> getNumPerSelList() {
 		ArrayList<String> result = new ArrayList<String>();
 		Collections.sort(mLiuBall);
 		for (int j = 0; j < mLiuBall.size(); j++) {

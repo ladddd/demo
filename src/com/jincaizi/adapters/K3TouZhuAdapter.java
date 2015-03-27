@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jincaizi.R;
+import com.jincaizi.kuaiwin.buycenter.K3Pick;
 import com.jincaizi.kuaiwin.utils.Constants.K3Type;
 import com.jincaizi.kuaiwin.utils.Constants.SscType;
 
@@ -59,7 +61,7 @@ public class K3TouZhuAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		ViewHolder holder = null;
 		if (convertView == null) {
@@ -71,19 +73,27 @@ public class K3TouZhuAdapter extends BaseAdapter {
 			holder.tv_type = (TextView) convertView
 					.findViewById(R.id.tv_pls_type);
 			convertView.setTag(holder);
+            holder.delete = (ImageView) convertView.findViewById(R.id.pick_delete);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		holder.tv_ball.setText(mBall.get(position));
 		holder.tv_type.setText(typeName.get(mType.get(position)) + " " + mZhushu.get(position) + "注"+mZhushu.get(position)*2 + "元");
-		
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((K3Pick)mContext).deleteItemAtIndex(position);
+            }
+        });
+
 		return convertView;
 	}
 
 	private static class ViewHolder {
-		TextView tv_ball;
-		TextView tv_type;
-
+		public TextView tv_ball;
+		public TextView tv_type;
+        public ImageView delete;
 	}
 	private void generateK3TypeName() {
 		typeName.put(K3Type.hezhi.toString(), "和值");

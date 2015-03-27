@@ -211,26 +211,31 @@ public class ElevenFiveBaseDragFragment extends Fragment {
         updateCount(true);
     }
 
-    public void updateBallData(String ball) {
+    public void updateBallData(ArrayList<Integer> indexList) {
+        if (indexList == null || indexList.size() == 0)
+        {
+            return;
+        }
+
         _initData();
         mRedTuoBall.clear();
         mRedDanBall.clear();
-        String[] result = ball.split(" ");
-        int index_right = 0;
-        for (int i = 0; i < result.length; i++) {
-            if(result[i].equals("(")) {
-                continue;
-            }
-            if(result[i].equals(")")) {
-                index_right = i;
-                break;
-            }
-            mRedDanBall.add(result[i]);
-            boolReddan.set(Integer.valueOf(result[i]) - 1, true);
+
+        for (int i = 0; i < boolReddan.size(); i++) {
+            boolReddan.set(i, indexList.contains(i));
+            boolRedtuo.set(i, indexList.contains(i + boolReddan.size()));
         }
-        for(int i = index_right + 1; i < result.length; i++) {
-            mRedTuoBall.add(result[i]);
-            boolRedtuo.set(Integer.valueOf(result[i]) - 1, true);
+        for (int i = 0; i < boolReddan.size(); i++) {
+            String ballStr = StringUtil.getResultNumberString(i + 1);
+
+            if (boolReddan.get(i))
+            {
+                mRedDanBall.add(ballStr);
+            }
+            if (boolRedtuo.get(i))
+            {
+                mRedTuoBall.add(ballStr);
+            }
         }
     }
 
@@ -245,7 +250,24 @@ public class ElevenFiveBaseDragFragment extends Fragment {
         mRedTuoAdapter.notifyDataSetChanged();
     }
 
-    public ArrayList<String> getPlsResultList() {
+    public String getPlsResultList() {
+        Collections.sort(mRedDanBall);
+        Collections.sort(mRedTuoBall);
+        StringBuilder builder = new StringBuilder();
+        for (String aMRedDanBall : mRedDanBall) {
+            builder.append(" ");
+            builder.append(aMRedDanBall);
+        }
+        builder.append(" # ");
+        for (String aMRedDanBall : mRedTuoBall) {
+            builder.append(aMRedDanBall);
+            builder.append(" ");
+        }
+
+        return builder.toString().trim();
+    }
+
+    public ArrayList<String> getNumPerSelList() {
         ArrayList<String> result = new ArrayList<String>();
         Collections.sort(mRedDanBall);
         Collections.sort(mRedTuoBall);
@@ -264,5 +286,23 @@ public class ElevenFiveBaseDragFragment extends Fragment {
             result.add(builder.toString() + builderIn.toString());
         }
         return result;
+    }
+
+    public ArrayList<Integer> getSelectedIndex()
+    {
+        ArrayList<Integer> indexList = new ArrayList<Integer>();
+
+        for (int i = 0; i < boolReddan.size(); i++) {
+            if (boolReddan.get(i))
+            {
+                indexList.add(i);
+            }
+            if (boolRedtuo.get(i))
+            {
+                indexList.add(i + boolReddan.size());
+            }
+        }
+
+        return indexList;
     }
 }

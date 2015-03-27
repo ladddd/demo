@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
-import java.util.List;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -40,7 +38,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -101,6 +98,8 @@ public class K3 extends FragmentActivity implements OnClickListener {
     private TextView profit;
 
     private ArrayList<String> currentMiss;
+    private ArrayList<Integer> selectedNumbers;
+    private String prevBetType;
 
     private LotteryLeakRequester requester;
     private MyBroadcastReceiver broadcastReceiver;
@@ -118,11 +117,11 @@ public class K3 extends FragmentActivity implements OnClickListener {
             mDragChecked.add(false);
         }
         currentMiss = new ArrayList<String>();
+        selectedNumbers = new ArrayList<Integer>();
         _getLotteryType();
         _isForStartForResult();
         _findViews();
         _setListner();
-        _showFragments(K3_hz_fragment.TAG_HZ);
         _registerSensorListener();
         _requestData();
     }
@@ -138,12 +137,127 @@ public class K3 extends FragmentActivity implements OnClickListener {
     }
     private void _isForStartForResult() {
         Intent intent = getIntent();
-        if (!TextUtils.isEmpty(intent.getAction())
-                && intent.getAction().equals(IntentAction.CONTINUEPICKBALL)) {
-            startType = 1;
 
+        if (TextUtils.isEmpty(intent.getAction()))
+        {
+            _showFragments(K3_hz_fragment.TAG_HZ);
+        }
+        else
+        {
+            if (intent.getAction().equals(IntentAction.CONTINUEPICKBALL))
+            {
+                startType = 1;
+            }
+            else if (intent.getAction().equals(IntentAction.RETRYPICKBALL))
+            {
+                startType = 2;
+                selectedNumbers = (ArrayList<Integer>)intent.getSerializableExtra(IntentData.SELECT_NUMBERS);
+            }
+
+            String betType = intent.getStringExtra(IntentData.BET_TYPE);
+
+            if (betType.equals(K3Type.hezhi.toString()))
+            {
+                prevBetType = K3_hz_fragment.TAG_HZ;
+                syyType = K3Type.hezhi;
+                mCaseIndex = 0;
+                updatePopWindow(0);
+                _showFragments(K3_hz_fragment.TAG_HZ);
+            }
+            else if (betType.equals(K3Type.threesamesingle.toString()) ||
+                    betType.equals(K3Type.threesamedouble.toString()))
+            {
+                prevBetType = K3_hz_fragment.TAG_THREE_SAME;
+                syyType = K3Type.threesamesingle;
+                mCaseIndex = 1;
+                updatePopWindow(1);
+                _showFragments(K3_hz_fragment.TAG_THREE_SAME);
+            }
+            else if (betType.equals(K3Type.twosamesingle.toString()) ||
+                    betType.equals(K3Type.twosamedouble.toString()))
+            {
+                prevBetType = K3_hz_fragment.TAG_TWO_SAME;
+                syyType = K3Type.twosamesingle;
+                mCaseIndex = 2;
+                updatePopWindow(2);
+                _showFragments(K3_hz_fragment.TAG_TWO_SAME);
+            }
+            else if (betType.equals(K3Type.threedifsingle.toString()) ||
+                    betType.equals(K3Type.threedifdouble.toString()))
+            {
+                prevBetType = K3_hz_fragment.TAG_THREE_DIF;
+                syyType = K3Type.threedifsingle;
+                mCaseIndex = 3;
+                updatePopWindow(3);
+                _showFragments(K3_hz_fragment.TAG_THREE_DIF);
+            }
+            else if (betType.equals(K3Type.twodif.toString()))
+            {
+                prevBetType = K3_hz_fragment.TAG_TWO_DIF;
+                syyType = K3Type.twodif;
+                mCaseIndex = 4;
+                updatePopWindow(4);
+                _showFragments(K3_hz_fragment.TAG_TWO_DIF);
+            }
+            else if (betType.equals(K3Type.dragthree.toString()))
+            {
+                prevBetType = K3_hz_fragment.TAG_THREE_DIF_DRAG;
+                syyType = K3Type.dragthree;
+                mCaseIndex = 5;
+                updatePopWindow(5);
+                _showFragments(K3_hz_fragment.TAG_THREE_DIF_DRAG);
+            }
+            else if (betType.equals(K3Type.dragtwo.toString()))
+            {
+                prevBetType = K3_hz_fragment.TAG_TWO_DIF_DRAG;
+                syyType = K3Type.dragtwo;
+                mCaseIndex = 6;
+                updatePopWindow(6);
+                _showFragments(K3_hz_fragment.TAG_TWO_DIF_DRAG);
+            }
         }
     }
+
+    private void setTitle()
+    {
+        switch (mCaseIndex)
+        {
+            case 0:
+                mTitleView.setText("快3-和值");
+                break;
+            case 1:
+                mTitleView.setText("快3-三同号");
+                break;
+            case 2:
+                mTitleView.setText("快3-二同号");
+                break;
+            case 3:
+                mTitleView.setText("快3-三不同号");
+                break;
+            case 4:
+                mTitleView.setText("快3-二不同号");
+                break;
+            case 5:
+                mTitleView.setText("快3-三不同号(胆拖)");
+                break;
+            case 6:
+                mTitleView.setText("快3-二不同号(胆拖)");
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void updatePopWindow(int selectIndex)
+    {
+        _initNormalChecked();
+        mNormalChecked.set(selectIndex, true);
+        if (mMyDragAdapter != null)
+        {
+            mMyDragAdapter.notifyDataSetChanged();
+        }
+    }
+
     private void _registerSensorListener() {
 
         mShakeListener = new ShakeListener(this);
@@ -209,7 +323,7 @@ public class K3 extends FragmentActivity implements OnClickListener {
         mHeaderBar.setBackgroundColor(this.getResources().getColor(R.color.k3_orange));
         titleSelectorLayout = (RelativeLayout) findViewById(R.id.title_selector);
         mTitleView = (TextView) findViewById(R.id.current_lottery);
-        mTitleView.setText("快3-和值");
+        setTitle();
         mTitleView.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
         mZhuShuView = (TextView) findViewById(R.id.bet_txt_2);
         priceTextView = (TextView) findViewById(R.id.bet_txt_4);
@@ -383,11 +497,12 @@ public class K3 extends FragmentActivity implements OnClickListener {
         intent.putExtra(K3Pick.BETTYPE, fragment.betTypes);
         intent.putExtra(K3Pick.BALL,fragment.betResult);
         intent.putExtra(K3Pick.ZHUAMOUNT,fragment.mZhushu);
+        intent.putExtra(IntentData.SELECT_NUMBERS, fragment.selectedNumber);
         intent.putExtra("qihao", mQihao);
         if (startType == 0) {
             intent.setClass(this, K3Pick.class);
             startActivity(intent);
-        } else if (startType == 1) {
+        } else if (startType == 1 || startType == 2) {
             setResult(RESULT_OK, intent);
         }
         if(mc != null) {
@@ -528,45 +643,46 @@ public class K3 extends FragmentActivity implements OnClickListener {
     private void _showFragments(String fragmentTag) {
         FragmentManager mFragManager = getSupportFragmentManager();
         FragmentTransaction mFragTransaction = mFragManager.beginTransaction();
-        Fragment mFragment = (Fragment) mFragManager
-                .findFragmentByTag(fragmentTag);
+        Fragment mFragment = mFragManager.findFragmentByTag(fragmentTag);
+
         if (mFragment == null) {
-            if (fragmentTag.equals(K3_hz_fragment.TAG_HZ)) {
-                mFragment = new K3_hz_fragment();
-                Bundle bundle = new Bundle();
+            mFragment = new K3_hz_fragment();
+            Bundle bundle = new Bundle();
+            if (fragmentTag.equals(K3_hz_fragment.TAG_HZ))
+            {
                 bundle.putString(K3_hz_fragment.BETTYPE, K3Type.hezhi.toString());
-                mFragment.setArguments(bundle);
-            } else if(fragmentTag.equals(K3_hz_fragment.TAG_THREE_SAME)){
-                mFragment = new K3_hz_fragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(K3_hz_fragment.BETTYPE, K3Type.threesamesingle.toString());
-                mFragment.setArguments(bundle);
-            }else if(fragmentTag.equals(K3_hz_fragment.TAG_TWO_SAME)){
-                mFragment = new K3_hz_fragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(K3_hz_fragment.BETTYPE, K3Type.twosamesingle.toString());
-                mFragment.setArguments(bundle);
-            }else if(fragmentTag.equals(K3_hz_fragment.TAG_THREE_DIF)){
-                mFragment = new K3_hz_fragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(K3_hz_fragment.BETTYPE, K3Type.threedifsingle.toString());
-                mFragment.setArguments(bundle);
-            }else if(fragmentTag.equals(K3_hz_fragment.TAG_TWO_DIF)){
-                mFragment = new K3_hz_fragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(K3_hz_fragment.BETTYPE, K3Type.twodif.toString());
-                mFragment.setArguments(bundle);
-            }else if(fragmentTag.equals(K3_hz_fragment.TAG_THREE_DIF_DRAG)){
-                mFragment = new K3_hz_fragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(K3_hz_fragment.BETTYPE, K3Type.dragthree.toString());
-                mFragment.setArguments(bundle);
-            }else {
-                mFragment = new K3_hz_fragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(K3_hz_fragment.BETTYPE, K3Type.dragtwo.toString());
-                mFragment.setArguments(bundle);
             }
+            else if(fragmentTag.equals(K3_hz_fragment.TAG_THREE_SAME))
+            {
+                bundle.putString(K3_hz_fragment.BETTYPE, K3Type.threesamesingle.toString());
+            }
+            else if(fragmentTag.equals(K3_hz_fragment.TAG_TWO_SAME))
+            {
+                bundle.putString(K3_hz_fragment.BETTYPE, K3Type.twosamesingle.toString());
+            }
+            else if(fragmentTag.equals(K3_hz_fragment.TAG_THREE_DIF))
+            {
+                bundle.putString(K3_hz_fragment.BETTYPE, K3Type.threedifsingle.toString());
+            }
+            else if(fragmentTag.equals(K3_hz_fragment.TAG_TWO_DIF))
+            {
+                bundle.putString(K3_hz_fragment.BETTYPE, K3Type.twodif.toString());
+            }
+            else if(fragmentTag.equals(K3_hz_fragment.TAG_THREE_DIF_DRAG))
+            {
+                bundle.putString(K3_hz_fragment.BETTYPE, K3Type.dragthree.toString());
+            }
+            else
+            {
+                bundle.putString(K3_hz_fragment.BETTYPE, K3Type.dragtwo.toString());
+            }
+            if (startType == 2 && prevBetType != null
+                    && prevBetType.equals(fragmentTag))
+            {
+                bundle.putSerializable(IntentData.SELECT_NUMBERS, selectedNumbers);
+            }
+            mFragment.setArguments(bundle);
+
             mFragTransaction.add(R.id.fl_pls_pickarea, mFragment, fragmentTag);
         }
         if (mCurrentFragment != null) {
@@ -784,5 +900,11 @@ public class K3 extends FragmentActivity implements OnClickListener {
 
     public ArrayList<String> getCurrentMiss() {
         return currentMiss;
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(broadcastReceiver);
+        super.onDestroy();
     }
 }

@@ -310,7 +310,7 @@ containing a value of this type.
         public static final int list_alone_background=0x7f02008d;
         public static final int list_alone_nor=0x7f02008e;
         public static final int list_alone_sel=0x7f02008f;
-        public static final int list_arrow=0x7f020090;
+        public static final int list_arrow =0x7f020090;
         public static final int list_below_background=0x7f020091;
         public static final int list_below_nor=0x7f020092;
         public static final int list_below_sel=0x7f020093;

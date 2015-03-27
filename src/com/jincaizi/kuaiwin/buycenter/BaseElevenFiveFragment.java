@@ -19,6 +19,7 @@ import com.jincaizi.kuaiwin.widget.ExpandableHeightGridView;
 import com.jincaizi.kuaiwin.widget.ShakeListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by chenweida on 2015/3/4.
@@ -34,7 +35,7 @@ public class BaseElevenFiveFragment extends Fragment{
     protected TextView hintFirst;
     protected TextView hintPrice;
     protected String mLocalClassName;
-    protected ArrayList<Boolean> boolLiu = new ArrayList<Boolean>();
+    protected ArrayList<Boolean> boolLiu = new ArrayList<Boolean>(11);
     protected RelativeLayout randomSelect;
     protected Vibrator vibrator;
     protected boolean showLeak = true;
@@ -157,8 +158,7 @@ public class BaseElevenFiveFragment extends Fragment{
         ((Syxw) mActivity).setTouzhuResult(mZhushu);
     }
 
-    //更新父activity底部的投注数
-    private void updateBottom()
+    private void updateBallString()
     {
         mLiuBall.clear();
         for (int i = 0; i < 11; i++) {
@@ -177,6 +177,12 @@ public class BaseElevenFiveFragment extends Fragment{
                 mLiuBall.remove(ballStr);
             }
         }
+    }
+
+    //更新父activity底部的投注数
+    private void updateBottom()
+    {
+        updateBallString();
 
         updateCount(true);
     }
@@ -194,11 +200,8 @@ public class BaseElevenFiveFragment extends Fragment{
 
     public void updateBallData() {
         vibrator.vibrate(new long[] { 0, 30 }, -1);
-        // _initData();
-        ArrayList<String> shakeResult = new ArrayList<String>();
-        shakeResult = ShiyiyunRandom.getSyyBallNoRePeat(selectNumber);
-        _clearLiuData();
-        _initLiuBool();
+        _initData();
+        ArrayList<String> shakeResult = ShiyiyunRandom.getSyyBallNoRePeat(selectNumber);
         mLiuBall.clear();
         for (int i = 0; i < shakeResult.size(); i++) {
             boolLiu.set(Integer.valueOf(shakeResult.get(i)) - 1, true);
@@ -209,15 +212,18 @@ public class BaseElevenFiveFragment extends Fragment{
         updateCount(true);
     }
 
-    public void updateBallData(String ball) {
-        _clearLiuData();
-        _initLiuBool();
-        mLiuBall.clear();
-        String[]result = ball.split(" ");
-        for (int i = 0; i < result.length; i++) {
-            mLiuBall.add(result[i]);
-            boolLiu.set(Integer.valueOf(result[i]) - 1, true);
+    public void updateBallData(ArrayList<Integer> indexList) {
+        if (indexList == null || indexList.size() == 0)
+        {
+            return;
         }
+
+        _initData();
+
+        for (int i = 0; i < boolLiu.size(); i++) {
+            boolLiu.set(i, indexList.contains(i));
+        }
+        updateBallString();
     }
 
     public void clearChoose() {
@@ -274,5 +280,29 @@ public class BaseElevenFiveFragment extends Fragment{
 
         mRedAdapter.setCurrentMiss(currentMiss);
         mRedAdapter.notifyDataSetChanged();
+    }
+
+    public String getPlsResultList() {
+        StringBuilder builder = new StringBuilder();
+        Collections.sort(mLiuBall);
+        for (int i = 0; i < mLiuBall.size(); i++) {
+            builder.append(mLiuBall.get(i));
+            builder.append(" ");
+        }
+        return builder.toString().trim();
+    }
+
+    public ArrayList<Integer> getSelectedIndex()
+    {
+        ArrayList<Integer> indexList = new ArrayList<Integer>();
+
+        for (int i = 0; i < boolLiu.size(); i++) {
+            if (boolLiu.get(i))
+            {
+                indexList.add(i);
+            }
+        }
+
+        return indexList;
     }
 }

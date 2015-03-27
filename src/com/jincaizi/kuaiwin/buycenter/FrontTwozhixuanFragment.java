@@ -52,8 +52,9 @@ public class FrontTwozhixuanFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		// _initData();
-		_initLiuBool();
+		if (boolFront.size() == 0 && boolBehind.size() == 0) {
+            _initLiuBool();
+        }
         vibrator = (Vibrator) getActivity().getApplication()
                 .getSystemService(Service.VIBRATOR_SERVICE);
 	}
@@ -182,16 +183,20 @@ public class FrontTwozhixuanFragment extends Fragment {
 		mBehindAdapter.notifyDataSetChanged();
 	}
 
-	public void updateBallData(String ball) {
-		_clearLiuData();
-		_initLiuBool();
-		mFrontBall.clear();
-		mbehindBall.clear();
-		String[]result = ball.split(" ");
-		mFrontBall.add(result[0]);
-		boolFront.set(Integer.valueOf(result[0]) - 1, true);
-		mbehindBall.add(result[1]);
-		boolBehind.set(Integer.valueOf(result[1]) - 1, true);
+	public void updateBallData(ArrayList<Integer> indexList) {
+        if (indexList == null || indexList.size() == 0)
+        {
+            return;
+        }
+
+		_initData();
+
+        for (int i = 0; i < boolFront.size(); i++) {
+            boolFront.set(i, indexList.contains(i));
+            boolBehind.set(i, indexList.contains(i + boolFront.size()));
+        }
+
+        updateBallString();
 	}
 
 	@Override
@@ -206,16 +211,51 @@ public class FrontTwozhixuanFragment extends Fragment {
 		}
 	}
 
-	public ArrayList<String> getPlsResultList() {
-		ArrayList<String> result = new ArrayList<String>();
+	public String getPlsResultList() {
+        StringBuilder builder = new StringBuilder();
 		Collections.sort(mFrontBall);
 		Collections.sort(mbehindBall);
-		for (int i = 0; i < mFrontBall.size(); i++)
-			for (int j = 0; j < mbehindBall.size(); j++) {
-				result.add(mFrontBall.get(i) +" " + mbehindBall.get(j));
-			}
-		return result;
+        for (String aFrontBall : mFrontBall) {
+            builder.append(aFrontBall);
+            builder.append(" ");
+        }
+        builder.append("|");
+        for (String aBehindBall : mbehindBall) {
+            builder.append(" ");
+            builder.append(aBehindBall);
+        }
+
+		return builder.toString().trim();
 	}
+
+    public ArrayList<String> getNumPerSelList() {
+        ArrayList<String> result = new ArrayList<String>();
+        Collections.sort(mFrontBall);
+        Collections.sort(mbehindBall);
+        for (int i = 0; i < mFrontBall.size(); i++)
+            for (int j = 0; j < mbehindBall.size(); j++) {
+                result.add(mFrontBall.get(i) +" " + mbehindBall.get(j));
+            }
+        return result;
+    }
+
+    public ArrayList<Integer> getSelectedIndex()
+    {
+        ArrayList<Integer> indexList = new ArrayList<Integer>();
+
+        for (int i = 0; i < boolFront.size(); i++) {
+            if (boolFront.get(i))
+            {
+                indexList.add(i);
+            }
+            if (boolBehind.get(i))
+            {
+                indexList.add(i + boolFront.size());
+            }
+        }
+
+        return indexList;
+    }
 
 	public void clearChoose() {
 		_initData();
@@ -245,8 +285,7 @@ public class FrontTwozhixuanFragment extends Fragment {
         updateBottom();
     }
 
-    //更新父activity底部的投注数
-    private void updateBottom()
+    private void updateBallString()
     {
         mFrontBall.clear();
         mbehindBall.clear();
@@ -274,6 +313,12 @@ public class FrontTwozhixuanFragment extends Fragment {
                 mbehindBall.remove(ballStr);
             }
         }
+    }
+
+    //更新父activity底部的投注数
+    private void updateBottom()
+    {
+        updateBallString();
 
         updateCount(true);
     }
@@ -302,7 +347,10 @@ public class FrontTwozhixuanFragment extends Fragment {
                 mFrontBall.remove(ballStr);
             } else {
                 boolFront.set(position, true);
+                boolBehind.set(position, false);
                 mFrontBall.add(ballStr);
+                mFrontBall.remove(ballStr);
+                mBehindAdapter.notifyDataSetChanged();
             }
         }
         else if (type == ElevenFiveCommonAdapter.SECOND)
@@ -312,7 +360,10 @@ public class FrontTwozhixuanFragment extends Fragment {
                 mbehindBall.remove(ballStr);
             } else {
                 boolBehind.set(position, true);
+                boolFront.set(position, false);
                 mbehindBall.add(ballStr);
+                mFrontBall.remove(ballStr);
+                mFrontAdapter.notifyDataSetChanged();
             }
         }
         updateCount(true);

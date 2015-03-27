@@ -58,8 +58,9 @@ public class FrontThreezhixuanFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		// _initData();
-		_initLiuBool();
+        if (boolFront.size() == 0 && boolBehind.size() == 0 && boolLast.size() == 0) {
+            _initLiuBool();
+        }
         vibrator = (Vibrator) getActivity().getApplication()
                 .getSystemService(Service.VIBRATOR_SERVICE);
 	}
@@ -67,7 +68,6 @@ public class FrontThreezhixuanFragment extends Fragment {
 	private void _initData() {
 		_clearLiuData();
 		_initLiuBool();
-
 	}
 
 	private void _clearLiuData() {
@@ -199,20 +199,22 @@ public class FrontThreezhixuanFragment extends Fragment {
 		mLastAdapter.notifyDataSetChanged();
 	}
 
-	public void updateBallData(String ball) {
-		_clearLiuData();
-		_initLiuBool();
-		String[] result = ball.split(" ");
-		mFrontBall.clear();
-		mbehindBall.clear();
-		mLastBall.clear();
-		mFrontBall.add(result[0]);
-		boolFront.set(Integer.valueOf(result[0]) - 1, true);
-		mbehindBall.add(result[1]);
-		boolBehind.set(Integer.valueOf(result[1]) - 1, true);
-		mLastBall.add(result[2]);
-		boolLast.set(Integer.valueOf(result[2]) - 1, true);
-	}
+	public void updateBallData(ArrayList<Integer> indexList) {
+        if (indexList == null || indexList.size() == 0)
+        {
+            return;
+        }
+
+		_initData();
+
+        for (int i = 0; i < boolFront.size(); i++) {
+            boolFront.set(i, indexList.contains(i));
+            boolBehind.set(i, indexList.contains(i + boolFront.size()));
+            boolLast.set(i, indexList.contains(i + boolFront.size() + boolBehind.size()));
+        }
+
+        updateBallString();
+    }
 
 	@Override
 	public void onHiddenChanged(boolean hidden) {
@@ -226,18 +228,64 @@ public class FrontThreezhixuanFragment extends Fragment {
 		}
 	}
 
-	public ArrayList<String> getPlsResultList() {
-		ArrayList<String> result = new ArrayList<String>();
+	public String getPlsResultList() {
+        StringBuilder builder = new StringBuilder();
 		Collections.sort(mFrontBall);
 		Collections.sort(mbehindBall);
-		for (int i = 0; i < mFrontBall.size(); i++)
-			for (int j = 0; j < mbehindBall.size(); j++)
-				for (int k = 0; k < mLastBall.size(); k++) {
-					result.add(mFrontBall.get(i) + " " + mbehindBall.get(j)
-							+ " " + mLastBall.get(k));
-				}
-		return result;
+        Collections.sort(mLastBall);
+
+        for (String aFrontBall : mFrontBall) {
+            builder.append(aFrontBall);
+            builder.append(" ");
+        }
+        builder.append("|");
+        for (String aBehindBall : mbehindBall) {
+            builder.append(" ");
+            builder.append(aBehindBall);
+        }
+        builder.append(" |");
+        for (String aLastBall : mLastBall) {
+            builder.append(" ");
+            builder.append(aLastBall);
+        }
+
+		return builder.toString().trim();
 	}
+
+    public ArrayList<String> getNumPerSelList() {
+        ArrayList<String> result = new ArrayList<String>();
+        Collections.sort(mFrontBall);
+        Collections.sort(mbehindBall);
+        for (int i = 0; i < mFrontBall.size(); i++)
+            for (int j = 0; j < mbehindBall.size(); j++)
+                for (int k = 0; k < mLastBall.size(); k++) {
+                    result.add(mFrontBall.get(i) + " " + mbehindBall.get(j)
+                            + " " + mLastBall.get(k));
+                }
+        return result;
+    }
+
+    public ArrayList<Integer> getSelectedIndex()
+    {
+        ArrayList<Integer> indexList = new ArrayList<Integer>();
+
+        for (int i = 0; i < boolFront.size(); i++) {
+            if (boolFront.get(i))
+            {
+                indexList.add(i);
+            }
+            if (boolBehind.get(i))
+            {
+                indexList.add(i + boolFront.size());
+            }
+            if (boolLast.get(i))
+            {
+                indexList.add(i + boolFront.size() + boolBehind.size());
+            }
+        }
+
+        return indexList;
+    }
 
 	public void clearChoose() {
 		_initData();
@@ -311,8 +359,7 @@ public class FrontThreezhixuanFragment extends Fragment {
         updateBottom();
     }
 
-    //更新父activity底部的投注数
-    private void updateBottom()
+    private void updateBallString()
     {
         mFrontBall.clear();
         mbehindBall.clear();
@@ -349,6 +396,12 @@ public class FrontThreezhixuanFragment extends Fragment {
                 mLastBall.remove(ballStr);
             }
         }
+    }
+
+    //更新父activity底部的投注数
+    private void updateBottom()
+    {
+        updateBallString();
 
         updateCount(true);
     }
@@ -378,6 +431,12 @@ public class FrontThreezhixuanFragment extends Fragment {
             } else {
                 boolFront.set(position, true);
                 mFrontBall.add(ballStr);
+                boolBehind.set(position, false);
+                mbehindBall.remove(ballStr);
+                boolLast.set(position, false);
+                mLastBall.remove(ballStr);
+                mBehindAdapter.notifyDataSetChanged();
+                mLastAdapter.notifyDataSetChanged();
             }
         }
         else if (type == ElevenFiveCommonAdapter.SECOND)
@@ -388,6 +447,12 @@ public class FrontThreezhixuanFragment extends Fragment {
             } else {
                 boolBehind.set(position, true);
                 mbehindBall.add(ballStr);
+                boolFront.set(position, false);
+                mFrontBall.remove(ballStr);
+                boolLast.set(position, false);
+                mLastBall.remove(ballStr);
+                mFrontAdapter.notifyDataSetChanged();
+                mLastAdapter.notifyDataSetChanged();
             }
         }
         else if (type == ElevenFiveCommonAdapter.THIRD)
@@ -398,6 +463,12 @@ public class FrontThreezhixuanFragment extends Fragment {
             } else {
                 boolLast.set(position, true);
                 mLastBall.add(ballStr);
+                boolFront.set(position, false);
+                mFrontBall.remove(ballStr);
+                boolBehind.set(position, false);
+                mbehindBall.remove(ballStr);
+                mFrontAdapter.notifyDataSetChanged();
+                mBehindAdapter.notifyDataSetChanged();
             }
         }
 
