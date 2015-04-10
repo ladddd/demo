@@ -34,130 +34,168 @@
 					android:textSize="14sp"
 					android:layout_marginLeft="4dp"
 					android:layout_marginStart="4dp"/>
-
-			<!--<ImageView-->
-			<!--android:id="@+id/leak_icon"-->
-			<!--android:layout_width="wrap_content"-->
-			<!--android:layout_height="22dp"-->
-			<!--android:src="@drawable/leak_icon"-->
-			<!--android:layout_toRightOf="@+id/shake_text"-->
-			<!--android:layout_toEndOf="@+id/shake_text"-->
-			<!--android:layout_marginLeft="8dp"-->
-			<!--android:layout_marginStart="8dp"-->
-			<!--android:layout_marginTop="2dp"/>-->
-
-			<!--<TextView-->
-			<!--android:id="@+id/leak_text"-->
-			<!--android:layout_width="wrap_content"-->
-			<!--android:layout_height="wrap_content"-->
-			<!--android:text="遗漏"-->
-			<!--android:textColor="@color/k3_orange"-->
-			<!--android:layout_toRightOf="@+id/leak_icon"-->
-			<!--android:layout_toEndOf="@+id/leak_icon"-->
-			<!--android:layout_alignBottom="@+id/shake_text"-->
-			<!--android:textSize="14sp"-->
-			<!--android:layout_marginLeft="4dp"-->
-			<!--android:layout_marginStart="4dp"/>-->
 		</RelativeLayout>
 
-		<WebView
+		<TextView
 				android:id="@+id/ssc_touzhu_rule"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="start"
-				android:layout_margin="3dp"
+				android:textColor="@color/setting_text"
+				android:layout_marginRight="10dp"
+				android:layout_marginEnd="10dp"
+				android:layout_marginTop="5dp"
 				android:visibility="gone"
 				android:textSize="14sp"/>
 
+		<RelativeLayout
+				android:id="@+id/intro"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="5dp">
+
+			<TextView
+					android:id="@+id/pls_bai_hint"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:visibility="gone"/>
+
+			<TextView
+					android:id="@+id/text_first"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="至少选两个号，猜对任意两个开奖号即中"
+					android:textSize="14sp"
+					android:textColor="@color/setting_text"/>
+
+			<TextView
+					android:id="@+id/text_second"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="6"
+					android:textSize="14sp"
+					android:textColor="@color/buyer_red"
+					android:layout_toRightOf="@+id/text_first"/>
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="元"
+					android:textSize="14sp"
+					android:textColor="@color/setting_text"
+					android:layout_toRightOf="@+id/text_second"/>
+		</RelativeLayout>
+
 		<LinearLayout
 				android:id="@+id/lv_pls_wan"
-				style="@style/simple_corner"
-				android:layout_margin="10dp"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
 				android:orientation="vertical"
-				android:visibility="gone"
-				android:padding="4.0dip" >
+				android:visibility="gone">
 
-			<RelativeLayout
+			<LinearLayout
 					android:layout_width="fill_parent"
-					android:layout_height="wrap_content" >
+					android:layout_height="wrap_content"
+					android:background="@android:color/white"
+					android:orientation="horizontal">
+
+				<View
+						android:layout_width="0dp"
+						android:layout_height="1dp"
+						android:layout_gravity="center_vertical"
+						android:layout_weight="1"
+						android:layout_marginLeft="10dp"
+						android:layout_marginStart="10dp"
+						android:background="@drawable/divider_left" />
 
 				<TextView
-						android:id="@+id/pls_wan_title"
+						android:id="@+id/top_gridview_text"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_centerHorizontal="true"
-						android:text="万位"
-						android:textColor="@color/blue"
-						android:textSize="14sp" />
-
-				<TextView
-						android:id="@+id/pls_wan_hint"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_alignParentRight="true"
+						android:layout_marginLeft="10dp"
 						android:layout_marginRight="10dp"
-						android:text="至少选择1个球"
-						android:textColor="@color/gray_333"
-						android:textSize="12sp" />
-			</RelativeLayout>
+						android:text="万位"
+						android:textColor="@color/setting_text"
+						android:textSize="16sp"/>
 
-			<com.jincaizi.kuaiwin.widget.MyGridView
+				<View
+						android:layout_width="0dp"
+						android:layout_height="1dp"
+						android:layout_gravity="center_vertical"
+						android:layout_weight="1"
+						android:layout_marginRight="10dp"
+						android:layout_marginEnd="10dp"
+						android:background="@drawable/divider_right" />
+			</LinearLayout>
+
+			<com.jincaizi.kuaiwin.widget.ExpandableHeightGridView
 					android:id="@+id/pls_wan_ball_group"
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10dp"
-					android:horizontalSpacing="0.0dip"
 					android:listSelector="@android:color/transparent"
 					android:numColumns="auto_fit"
-					android:columnWidth="67px"
+					android:columnWidth="60dp"
 					android:stretchMode="columnWidth"
-					android:verticalSpacing="0.0dip" />
+					android:verticalSpacing="4dp"
+					android:overScrollMode="never" />
 		</LinearLayout>
 
 		<LinearLayout
 				android:id="@+id/lv_pls_qian"
-				style="@style/simple_corner"
-				android:layout_marginLeft="10dp"
-				android:layout_marginRight="10dp"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
 				android:orientation="vertical"
-				android:visibility="gone"
-				android:padding="4.0dip" >
+				android:visibility="gone">
 
-			<RelativeLayout
+			<LinearLayout
 					android:layout_width="fill_parent"
-					android:layout_height="wrap_content" >
+					android:layout_height="wrap_content"
+					android:background="@android:color/white"
+					android:orientation="horizontal">
+
+				<View
+						android:layout_width="0dp"
+						android:layout_height="1dp"
+						android:layout_gravity="center_vertical"
+						android:layout_weight="1"
+						android:layout_marginLeft="10dp"
+						android:layout_marginStart="10dp"
+						android:background="@drawable/divider_left" />
 
 				<TextView
-						android:id="@+id/pls_qian_title"
+						android:id="@+id/throusand_gridview_text"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_centerHorizontal="true"
-						android:text="千位"
-						android:textColor="@color/blue"
-						android:textSize="14sp" />
-
-				<TextView
-						android:id="@+id/pls_qian_hint"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_alignParentRight="true"
+						android:layout_marginLeft="10dp"
 						android:layout_marginRight="10dp"
-						android:text="至少选择1个球"
-						android:textColor="@color/gray_333"
-						android:textSize="12sp" />
-			</RelativeLayout>
+						android:text="千位"
+						android:textColor="@color/setting_text"
+						android:textSize="16sp"/>
 
-			<com.jincaizi.kuaiwin.widget.MyGridView
+				<View
+						android:layout_width="0dp"
+						android:layout_height="1dp"
+						android:layout_gravity="center_vertical"
+						android:layout_weight="1"
+						android:layout_marginRight="10dp"
+						android:layout_marginEnd="10dp"
+						android:background="@drawable/divider_right" />
+			</LinearLayout>
+
+			<com.jincaizi.kuaiwin.widget.ExpandableHeightGridView
 					android:id="@+id/pls_qian_ball_group"
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginTop="10dp"
-					android:horizontalSpacing="0.0dip"
 					android:listSelector="@android:color/transparent"
 					android:numColumns="auto_fit"
-					android:columnWidth="67px"
+					android:columnWidth="60dp"
 					android:stretchMode="columnWidth"
-					android:verticalSpacing="0.0dip" />
+					android:verticalSpacing="4dp"
+					android:overScrollMode="never" />
 		</LinearLayout>
 
 		<LinearLayout
@@ -167,47 +205,10 @@
 				android:layout_marginTop="10dp"
 				android:orientation="vertical">
 
-			<RelativeLayout
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content">
-
-				<TextView
-						android:id="@+id/pls_bai_hint"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:visibility="gone"/>
-
-				<TextView
-						android:id="@+id/text_first"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:text="至少选两个号，猜对任意两个开奖号即中"
-						android:textSize="14sp"
-						android:textColor="@color/setting_text"/>
-
-				<TextView
-						android:id="@+id/text_second"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:text="6"
-						android:textSize="14sp"
-						android:textColor="@color/buyer_red"
-						android:layout_toRightOf="@+id/text_first"/>
-
-				<TextView
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:text="元"
-						android:textSize="14sp"
-						android:textColor="@color/setting_text"
-						android:layout_toRightOf="@+id/text_second"/>
-			</RelativeLayout>
-
 			<LinearLayout
 					android:id="@+id/first_gridview_title"
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="10dp"
 					android:background="@android:color/white"
 					android:orientation="horizontal"
 					android:visibility="gone">
@@ -264,7 +265,6 @@
 			<LinearLayout
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
-					android:layout_marginTop="10dp"
 					android:background="@android:color/white"
 					android:orientation="horizontal">
 
@@ -359,6 +359,7 @@
 						android:background="@drawable/divider_left" />
 
 				<TextView
+						android:id="@+id/pls_ge_title"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginLeft="10dp"
@@ -389,6 +390,7 @@
 					android:verticalSpacing="4dp"
 					android:overScrollMode="never" />
 		</LinearLayout>
+
 	</LinearLayout>
 
 </ScrollView>

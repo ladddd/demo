@@ -43,8 +43,9 @@
 		<item name="android:paddingTop">5sp</item>
 	</style>
 	<style name="main_footbar_radio" parent="footbar">
-		<item name="android:textColor">@color/footer_text_color</item>
-		<item name="android:background">@drawable/footer_radiobutton_bg</item>
+		<item name="android:textColor">@drawable/indicator_text_color</item>
+		<item name="android:background">@color/timer_bg</item>
+		<item name="android:textSize">12sp</item>
 	</style>
 	<style name="main_head_divider">
 		<item name="android:layout_width">wrap_content</item>
@@ -148,7 +149,6 @@
 
 	<style name="list_item_bg">
 		<item name="android:gravity">center_vertical</item>
-		<item name="android:background">@drawable/list_bg_selector</item>
 		<item name="android:paddingLeft">3dip</item>
 		<item name="android:paddingTop">4dip</item>
 		<item name="android:paddingRight">5.0dip</item>

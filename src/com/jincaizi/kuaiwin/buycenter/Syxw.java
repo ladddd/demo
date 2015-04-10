@@ -57,7 +57,6 @@ public class Syxw extends FragmentActivity implements OnClickListener {
     private PopupWindow mPopWindow;
     private boolean isPopWindowShow = false;
     private Fragment mCurrentFragment;
-//    private TextView mShakeBtn;
     public ShiyiyunType syyType = Constants.ShiyiyunType.ANYTWO;
     int lastIndex = 0;
     private TextView mZhuShuView;
@@ -92,6 +91,8 @@ public class Syxw extends FragmentActivity implements OnClickListener {
     private LotteryLeakRequester requester;
     private MyBroadcastReceiver broadcastReceiver;
 
+    private final Object syncLock = new Object();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -109,13 +110,31 @@ public class Syxw extends FragmentActivity implements OnClickListener {
         for(int i=0; i<9; i++) {
             mDragChecked.add(false);
         }
-        currentMiss = new ArrayList<String>();
+        initCurrentMiss();
         _findViews();
         _setListner();
         _loadFragment();
         _getLotteryType();
-        _requestData();
+        _requestData(true);
     }
+
+    private void initCurrentMiss()
+    {
+        if (currentMiss == null)
+        {
+            currentMiss = new ArrayList<String>(11);
+            for (int i = 0; i < 11; i++) {
+                currentMiss.add(i, "0");
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 11; i++) {
+                currentMiss.set(i, "0");
+            }
+        }
+    }
+
     private void _getLotteryType() {
         if(mCity.equals(Constants.City.shandong.toString())) {
             lotterytype = "SD11x5";
@@ -133,6 +152,8 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             lotterytype = "SH11x5";
         }else if(mCity.equals(Constants.City.heilongjiang.toString())) {
             lotterytype = "HLJ11x5";
+        }else if(mCity.equals(Constants.City.zhejiang.toString())) {
+            lotterytype = "ZJ11x5";
         }
     }
     private void _initNormalChecked() {
@@ -153,7 +174,6 @@ public class Syxw extends FragmentActivity implements OnClickListener {
         right_footer_btn.setOnClickListener(this);
         clearPick.setOnClickListener(this);
         mBack.setOnClickListener(this);
-//		mYilouView.setOnClickListener(this);
         chart.setOnClickListener(this);
         mQihaoView.setOnClickListener(this);
     }
@@ -192,7 +212,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
     private void _loadFragment() {
         Intent intent = getIntent();
         if (!TextUtils.isEmpty(intent.getAction()) && (intent.getAction().equals(IntentAction.CONTINUEPICKBALL) ||
-                        intent.getAction().equals(IntentAction.RETRYPICKBALL)))
+                intent.getAction().equals(IntentAction.RETRYPICKBALL)))
         {
             String betType = intent.getStringExtra(IntentData.BET_TYPE);
             ArrayList<Integer> indexList = (ArrayList<Integer>)intent.getSerializableExtra(IntentData.SELECTION_INDEX);
@@ -479,7 +499,6 @@ public class Syxw extends FragmentActivity implements OnClickListener {
     public void setTouzhuResult(int count) {
         lotteryCount.setText(String.valueOf(count));
         price.setText(String.valueOf(2*count));
-//        mZhuShuView.setText(String.valueOf(count) + "注" + 2*count + "元");
     }
 
     public void setBuyTips(int max, int min, int count)
@@ -642,16 +661,12 @@ public class Syxw extends FragmentActivity implements OnClickListener {
         // TODO Auto-generated method stub
         switch (v.getId()) {
             case R.id.pre_num_str:
-                if(TextUtils.isEmpty(mQihaoView.getText()) || !mQihaoView.getText().toString().equals("正在获取当前期号")) {
-                    _requestData();
+                if(TextUtils.isEmpty(mQihaoView.getText()) ||
+                        mQihaoView.getText().toString().equals("获取期号失败，点击重新获取")) {
+                    _requestData(true);
                 }
                 break;
             case R.id.sumbit_group_buy:
-//			if(mCity.equals(Constants.City.shandong.toString())) {
-//				UiHelper.startSyxwYilou(this, lotterytype,prefix);
-//			} else {
-//				UiHelper.startSyxwYilou(this, lotterytype,Constants.City.getCityName(mCity)+prefix);
-//			}
                 //进入走势图
                 goToChart();
                 break;
@@ -666,7 +681,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
                 break;
             case R.id.title_selector:
                 if (!isPopWindowShow) {
-                    _setPopWindow((int) (v.getWidth() * 1.5 + 0.5f));
+                    _setPopWindow();
                     isPopWindowShow = true;
                 }
                 mPopWindow.showAsDropDown(v, -(v.getWidth() / 4), v.getTop());
@@ -865,7 +880,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
         finish();
     }
 
-    private void _setPopWindow(int width) {
+    private void _setPopWindow() {
         View view = LayoutInflater.from(this).inflate(R.layout.syxw_popview_layout, null);
         mPopWindow = new PopupWindow(view, LayoutParams.WRAP_CONTENT,
                 LayoutParams.MATCH_PARENT);
@@ -1124,10 +1139,12 @@ public class Syxw extends FragmentActivity implements OnClickListener {
         mFragTransaction.commit();
     }
 
-    private void _requestData() {
+    private void _requestData(boolean showText) {
         JinCaiZiHttpClient.closeExpireConnection();
-        mQihaoView.setText("正在获取当前期号");
-        mTimeDiffView.setText("");
+        if (showText) {
+            mQihaoView.setText("正在获取当前期号");
+            mTimeDiffView.setText("");
+        }
         RequestParams params = new RequestParams();
         params.add("act", "sellqihao");
 
@@ -1175,7 +1192,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
                         mQihaoView.setText("获取期号失败，点击重新获取");
                         mTimeDiffView.setText("");
                         //Toast.makeText(Syxw.this, "期号获取失败", Toast.LENGTH_SHORT).show();
-                        _requestData();
+//                        _requestData();
                     }
                 });
 
@@ -1211,11 +1228,14 @@ public class Syxw extends FragmentActivity implements OnClickListener {
             if(diff.startsWith("-")) {
                 isCanSale = false;
                 mQihaoView.setText(mQihao + "期代购截止");
-                _requestData();
+                _requestData(false);
             } else {
                 mQihaoView.setText("距" + mQihao + "期还有");
-                isCanSale = true;
-                mc  = new MyCount(Long.valueOf(diff)*1000, 1000);
+                if (TextUtils.isEmpty(diff))
+                {
+                    diff = "540";
+                }
+                mc = new MyCount(Long.valueOf(diff)*1000, 1000);
                 mc.start();
             }
         }
@@ -1228,7 +1248,7 @@ public class Syxw extends FragmentActivity implements OnClickListener {
         @Override
         public void onFinish() {
             //mQihaoView.setText("正在获取当前期号");
-            _requestData();
+            _requestData(false);
         }
         @Override
         public void onTick(long millisUntilFinished) {
@@ -1296,6 +1316,12 @@ public class Syxw extends FragmentActivity implements OnClickListener {
 
         @Override
         public void onReceive(Context context, Intent intent) {
+            String type = intent.getStringExtra("type");
+            if (type == null || !type.equals(lotterytype))
+            {
+                return;
+            }
+
             if (intent.getBooleanExtra("success",false))
             {
                 _readyilouFromJson(intent.getStringExtra("JSON"));
@@ -1308,23 +1334,25 @@ public class Syxw extends FragmentActivity implements OnClickListener {
         SafeAsyncTask<Boolean> getAllDaigouTask = new SafeAsyncTask<Boolean>() {
             @Override
             public Boolean call() throws Exception {
-                currentMiss.clear();
+                initCurrentMiss();
+                int count = 0;
                 reader.beginArray();
-                while (reader.hasNext()) {
+                while (reader.hasNext() && count < 11) {
                     reader.beginObject();
                     while (reader.hasNext()) {
                         String tagName = reader.nextName();
                         if (tagName.equals("nowyilou")) {
-                            currentMiss.add(reader.nextString());
-                        }
-                        else
-                        {
+//                            currentMiss.add(reader.nextString());
+                            currentMiss.set(count, reader.nextString());
+                        } else {
                             reader.nextString();
                         }
                     }
                     reader.endObject();
+                    count++;
                 }
                 reader.endArray();
+
                 return true;
             }
 

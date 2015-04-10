@@ -1,72 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-        <include
-        android:id="@+id/mylottery_record_head_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/main_head_bar_height"
-        layout="@layout/common_header_bar" />
-     <LinearLayout
-        style="@style/bet_tool_bar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/timer_bg">
+	<include
+			android:id="@+id/mylottery_record_head_bar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/main_head_bar_height"
+			layout="@layout/pick_title" />
+	<LinearLayout
+			style="@style/bet_tool_bar"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal" >
 
-        <RadioButton
-            android:id="@+id/mylottery_record_undone"
-            style="@style/btn_keep_pick"
-            android:layout_marginLeft="4dp"
-            android:background="@drawable/lottery_record_btn_selector"
-            android:button="@null"
-            android:checked="true"
-            android:text="未结投注" />
+		<RadioButton
+				android:id="@+id/mylottery_record_undone"
+				style="@style/btn_keep_pick"
+				android:layout_marginLeft="4dp"
+				android:background="@drawable/lottery_record_btn_selector"
+				android:button="@null"
+				android:checked="true"
+				android:text="未结投注"
+				android:textSize="16sp"
+				android:textColor="@drawable/indicator_text_selector"/>
 
-        <RadioButton
-            android:id="@+id/mylottery_record_recent"
-            style="@style/btn_keep_pick"
-            android:layout_marginLeft="4dp"
-            android:button="@null"
-            android:background="@drawable/lottery_record_btn_selector"
-            android:text="最近中奖" />
+		<RadioButton
+				android:id="@+id/mylottery_record_recent"
+				style="@style/btn_keep_pick"
+				android:layout_marginLeft="4dp"
+				android:button="@null"
+				android:background="@drawable/lottery_record_btn_selector"
+				android:text="最近中奖"
+				android:textSize="16sp"
+				android:textColor="@drawable/indicator_text_selector"/>
 
-        <RadioButton
-            android:id="@+id/mylottery_record_all"
-            style="@style/btn_keep_pick"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:button="@null"
-            android:background="@drawable/lottery_record_btn_selector"
-            android:text="全部" />
-    </LinearLayout>   
-    <com.jincaizi.kuaiwin.widget.PullToRefreshListView
-        android:id="@+id/mylottery_record_listView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginBottom="2dp"
-        android:layout_marginTop="2dp"
-        android:cacheColorHint="#00000000"
-        android:drawSelectorOnTop="false"
-        android:fadingEdgeLength="0dip"
-        android:fastScrollEnabled="false"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"
-        android:focusable="false"
-        android:groupIndicator="@null"
-        
-        android:scrollbarStyle="outsideOverlay" >
-    </com.jincaizi.kuaiwin.widget.PullToRefreshListView>
-        <TextView 
-        android:id="@+id/empty_mylotterylistview" 
-        android:layout_width="fill_parent" 
-        android:layout_height="fill_parent" 
-        android:text="您最近没有记录，点击刷新！" 
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textSize="16sp"
-        android:textColor="@android:color/darker_gray"
-        android:visibility="gone" /> 
+		<RadioButton
+				android:id="@+id/mylottery_record_all"
+				style="@style/btn_keep_pick"
+				android:layout_marginLeft="4dp"
+				android:layout_marginRight="4dp"
+				android:button="@null"
+				android:background="@drawable/lottery_record_btn_selector"
+				android:text="全部"
+				android:textSize="16sp"
+				android:textColor="@drawable/indicator_text_selector"/>
+	</LinearLayout>
+
+	<RelativeLayout android:layout_width="match_parent"
+	                android:layout_height="match_parent">
+		<com.jincaizi.kuaiwin.widget.PullToRefreshListView
+				android:id="@+id/mylottery_record_listView"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_marginBottom="2dp"
+				android:layout_marginTop="2dp"
+				android:cacheColorHint="#00000000"
+				android:drawSelectorOnTop="false"
+				android:fadingEdgeLength="0dip"
+				android:fastScrollEnabled="false"
+				android:divider="@android:color/transparent"
+				android:dividerHeight="0dp"
+				android:focusable="false"
+				android:groupIndicator="@null"
+				android:scrollbarStyle="outsideOverlay" >
+		</com.jincaizi.kuaiwin.widget.PullToRefreshListView>
+		<TextView
+				android:id="@+id/empty_mylotterylistview"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="您最近没有记录，点击刷新！"
+				android:layout_centerInParent="true"
+				android:padding="20dp"
+				android:gravity="center"
+				android:textSize="16sp"
+				android:textColor="@android:color/darker_gray"
+				android:visibility="gone" />
+	</RelativeLayout>
+
 </LinearLayout>

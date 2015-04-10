@@ -23,7 +23,7 @@
     <color name="light_yellow">#FFE4CA</color>
     <color name="light_blue">#ACD6FF</color>
     <color name="half_orange">#FFAD86</color>
-    <color name="k3_orange">#ff8040</color>
+    <color name="k3_orange">#f6851f</color>
     <color name="orange_44">#ffcc66</color>
     <color name="orange_33">#ffcc99</color>
     <color name="tc_toggle_off">#ff4e4234</color>
@@ -78,4 +78,11 @@
 	<color name="widget_orange_pressed">#aaf6851f</color>
 
 	<color name="title_sub_bg">#e0e0e0</color>
+
+	<!--登录-->
+	<color name="help_text">#764848</color>
+	
+	<color name="register_bg">#f2b33f</color>
+
+	<color name="ball_blue">#5598DC</color>
 </resources>

@@ -222,7 +222,7 @@ public class MainActivity extends FragmentActivity {
 		localDialog.setContentView(view);
 		Window dialogWindow = localDialog.getWindow();
 		WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-		lp.width = 300; // 宽度
+		lp.width = (int)(250 * getResources().getDisplayMetrics().density); // 宽度
 		dialogWindow.setAttributes(lp);
 		localOK.setOnClickListener(new OnClickListener() {
 

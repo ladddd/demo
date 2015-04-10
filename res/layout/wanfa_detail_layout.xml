@@ -8,7 +8,7 @@
         android:id="@+id/wanfa_detail_headbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_head_bar_height"
-        layout="@layout/common_header_bar" />
+        layout="@layout/pick_title" />
 
     <WebView
         android:id="@+id/wanfa_webview"

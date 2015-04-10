@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import android.widget.*;
+import com.jincaizi.common.IntentData;
 import org.apache.http.Header;
 
 import android.content.Intent;
@@ -19,7 +22,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,7 +29,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,12 +37,8 @@ import com.google.gson.stream.JsonReader;
 import com.jincaizi.adapters.PopViewAdapter;
 import com.jincaizi.R;
 import com.jincaizi.http.JinCaiZiHttpClient;
-import com.jincaizi.kuaiwin.buycenter.K3.MyCount;
-import com.jincaizi.kuaiwin.utils.Constants;
 import com.jincaizi.kuaiwin.utils.IntentAction;
-import com.jincaizi.kuaiwin.utils.UiHelper;
 import com.jincaizi.kuaiwin.utils.Utils;
-import com.jincaizi.kuaiwin.utils.Constants.City;
 import com.jincaizi.kuaiwin.utils.Constants.SscType;
 import com.jincaizi.kuaiwin.widget.ShakeListener;
 import com.jincaizi.kuaiwin.widget.ShakeListener.OnShakeListener;
@@ -60,9 +57,8 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 	private TextView mShakeBtn;
 	private TextView mZhuShuView;
 	private TextView right_footer_btn;
-	private TextView clearPick;
-	private ImageView mBack;
-	private TextView mPsInfoView;
+	private RelativeLayout clearPick;
+	private RelativeLayout mBack;
 	private TextView mYilouView;
 	private PopupWindow mPopWindow;
 	private SscType mType;
@@ -70,7 +66,13 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 	private int startType = 0; // 0, normal; 1, continuePick; 2, selectedAgain
 	private TextView mQihaoView;
 	private TextView mTimeDiffView;
+    private TextView priceTextView;
 	private String lotterytype = "JXSSC";
+
+    private PopViewAdapter popViewAdapter;
+
+    private String prevBetType;
+    private HashMap<String, ArrayList<Boolean>> selectedNumbersMap;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -84,18 +86,194 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 		_isForStartForResult();
 		_findViews();
 		_setListener();
-		_showFragments(Ssc_jx_fragment.TAG_FIVE_ZX);
+//		_showFragments(Ssc_jx_fragment.TAG_FIVE_ZX);
 		_registerSensor();
-		_requestData();
+		_requestData(true);
 	}
 	private void _isForStartForResult() {
-		Intent intent = getIntent();
-		if (!TextUtils.isEmpty(intent.getAction())
-				&& intent.getAction().equals(IntentAction.CONTINUEPICKBALL)) {
-			startType = 1;
-			
-		} 
+        Intent intent = getIntent();
+
+        if (TextUtils.isEmpty(intent.getAction()))
+        {
+            mType = SscType.fivestar_zhixuan;
+            prevBetType = Ssc_jx_fragment.TAG_FIVE_ZX;
+            _showFragments(prevBetType);
+        }
+        else {
+            if (intent.getAction().equals(IntentAction.CONTINUEPICKBALL)) {
+                startType = 1;
+            } else if (intent.getAction().equals(IntentAction.RETRYPICKBALL)) {
+                startType = 2;
+            }
+
+            String betType = intent.getStringExtra(IntentData.BET_TYPE);
+            selectedNumbersMap = (HashMap<String, ArrayList<Boolean>>)intent.
+                    getSerializableExtra(IntentData.SELECT_NUMBERS);
+
+            if (betType.equals(SscType.fivestar_zhixuan.toString()))
+            {
+                updatePopWindow(0);
+                mType = SscType.fivestar_zhixuan;
+                prevBetType = Ssc_jx_fragment.TAG_FIVE_ZX;
+            }
+            else if (betType.equals(SscType.fivestar_fuxuan.toString()))
+            {
+                updatePopWindow(1);
+                mType = SscType.fivestar_fuxuan;
+                prevBetType = Ssc_jx_fragment.TAG_FIVE_FX;
+            }
+            else if (betType.equals(SscType.fivestar_tongxuan.toString()))
+            {
+                updatePopWindow(2);
+                mType = SscType.fivestar_tongxuan;
+                prevBetType = Ssc_jx_fragment.TAG_FIVE_TX;
+            }
+            else if (betType.equals(SscType.fourstar_zhixuan.toString()))
+            {
+                updatePopWindow(3);
+                mType = SscType.fourstar_zhixuan;
+                prevBetType = Ssc_jx_fragment.TAG_FOUR_ZHIXUAN;
+            }
+            else if (betType.equals(SscType.fourstar_fuxuan.toString()))
+            {
+                updatePopWindow(4);
+                mType = SscType.fourstar_fuxuan;
+                prevBetType = Ssc_jx_fragment.TAG_FOUR_FUXUAN;
+            }
+            else if (betType.equals(SscType.threestar_zhixuan.toString()))
+            {
+                updatePopWindow(5);
+                mType = SscType.threestar_zhixuan;
+                prevBetType = Ssc_jx_fragment.TAG_THREE_ZX;
+            }
+            else if (betType.equals(SscType.threestar_fuxuan.toString()))
+            {
+                updatePopWindow(6);
+                mType = SscType.threestar_fuxuan;
+                prevBetType = Ssc_jx_fragment.TAG_THREE_FX;
+            }
+            else if (betType.equals(SscType.threestar_zhixuan_hezhi.toString()))
+            {
+                updatePopWindow(7);
+                mType = SscType.threestar_zhixuan_hezhi;
+                prevBetType = Ssc_jx_fragment.TAG_THREE_ZX_HEZHI;
+            }
+            else if (betType.equals(SscType.threestar_zusan.toString()))
+            {
+                updatePopWindow(8);
+                mType = SscType.threestar_zusan;
+                prevBetType = Ssc_jx_fragment.TAG_THREE_ZUSAN;
+            }
+            else if (betType.equals(SscType.threestar_zusan_baohao.toString()))
+            {
+                updatePopWindow(9);
+                mType = SscType.threestar_zusan_baohao;
+                prevBetType = Ssc_jx_fragment.TAG_THREE_ZUSAN_BH;
+            }
+            else if (betType.equals(SscType.threestar_zusan_hezhi.toString()))
+            {
+                updatePopWindow(10);
+                mType = SscType.threestar_zusan_hezhi;
+                prevBetType = Ssc_jx_fragment.TAG_THREE_ZUSAN_HZ;
+            }
+            else if (betType.equals(SscType.threestar_zuliu.toString()))
+            {
+                updatePopWindow(11);
+                mType = SscType.threestar_zuliu;
+                prevBetType = Ssc_jx_fragment.TAG_THREE_ZULIU;
+            }
+            else if (betType.equals(SscType.threestar_zuliu_baohao.toString()))
+            {
+                updatePopWindow(12);
+                mType = SscType.threestar_zuliu_baohao;
+                prevBetType = Ssc_jx_fragment.TAG_THREE_ZULIU_BH;
+            }
+            else if (betType.equals(SscType.threestar_zuliu_hezhi.toString()))
+            {
+                updatePopWindow(13);
+                mType = SscType.threestar_zuliu_hezhi;
+                prevBetType = Ssc_jx_fragment.TAG_THREE_ZULIU_HZ;
+            }
+            else if(betType.equals(SscType.twostar_zhixuan.toString()))
+            {
+                updatePopWindow(14);
+                mType = SscType.twostar_zhixuan;
+                prevBetType = Ssc_jx_fragment.TAG_TWO_ZHIXUAN;
+            }
+            else if(betType.equals(SscType.twostar_fuxuan.toString()))
+            {
+                updatePopWindow(15);
+                mType = SscType.twostar_fuxuan;
+                prevBetType = Ssc_jx_fragment.TAG_TWO_FX;
+            }
+            else if(betType.equals(SscType.twostar_zhixuan_hezhi.toString()))
+            {
+                updatePopWindow(16);
+                mType = SscType.twostar_zhixuan_hezhi;
+                prevBetType = Ssc_jx_fragment.TAG_TWO_ZHIXUAN_HZ;
+            }
+            else if(betType.equals(SscType.twostar_zuxuan.toString()))
+            {
+                updatePopWindow(17);
+                mType = SscType.twostar_zuxuan;
+                prevBetType = Ssc_jx_fragment.TAG_TWO_ZUXUAN;
+            }
+            else if(betType.equals(SscType.twostar_zuxuan_baohao.toString()))
+            {
+                updatePopWindow(18);
+                mType = SscType.twostar_zuxuan_baohao;
+                prevBetType = Ssc_jx_fragment.TAG_TWO_ZUXUAN_BH;
+            }
+            else if(betType.equals(SscType.twostar_zuxuan_hezhi.toString()))
+            {
+                updatePopWindow(19);
+                mType = SscType.twostar_zuxuan_hezhi;
+                prevBetType = Ssc_jx_fragment.TAG_TWO_ZUXUAN_HZ;
+            }
+            else if(betType.equals(SscType.onestar_zhixuan.toString()))
+            {
+                updatePopWindow(20);
+                mType = SscType.onestar_zhixuan;
+                prevBetType = Ssc_jx_fragment.TAG_ONE_ZX;
+            }
+            else if(betType.equals(SscType.dxds.toString()))
+            {
+                updatePopWindow(21);
+                mType = SscType.dxds;
+                prevBetType = Ssc_jx_fragment.TAG_DXDS;
+            }
+            else if(betType.equals(SscType.renxuan_two.toString()))
+            {
+                updatePopWindow(22);
+                mType = SscType.renxuan_two;
+                prevBetType = Ssc_jx_fragment.TAG_RENXUAN_TWO;
+            }
+            else if(betType.equals(SscType.renxuan_one.toString()))
+            {
+                updatePopWindow(23);
+                mType = SscType.renxuan_one;
+                prevBetType = Ssc_jx_fragment.TAG_RENXUAN_ONE;
+            }
+            _showFragments(prevBetType);
+        }
 	}
+
+    private void _initNormalChecked() {
+        for (int i = 0; i < 24; i++) {
+            mChecked.set(i, false);
+        }
+    }
+
+    private void updatePopWindow(int selectIndex)
+    {
+        _initNormalChecked();
+        mChecked.set(selectIndex, true);
+        if (popViewAdapter != null)
+        {
+            popViewAdapter.notifyDataSetChanged();
+        }
+    }
+
 	private void _registerSensor() {
 		mShakeListener = new ShakeListener(this);
 		mShakeListener.setOnShakeListener(new shakeLitener());
@@ -108,6 +286,7 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 		public void onShake() {
 			// TODO Auto-generated method stub
 			((Ssc_jx_fragment)mCurrentFragment).updateBallData();
+            ((Ssc_jx_fragment)mCurrentFragment).vibrate();
 			// mShakeListener.stop();
 		}
 
@@ -120,26 +299,122 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 	 }
 	private void _findViews() {
 		mTitleView = (TextView) findViewById(R.id.current_lottery);
-		mTitleView.setText("时时彩-五星直选");
-		mTitleView.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
-		mTitleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.triangle_white, 0);
-		mTitleView.setCompoundDrawablePadding(4);
+        setTitle();
 		mShakeBtn = (TextView) findViewById(R.id.my_pls_shake_pick);
-		mZhuShuView = (TextView) findViewById(R.id.bet_zhushu);
+        mZhuShuView = (TextView) findViewById(R.id.bet_txt_2);
+        priceTextView = (TextView) findViewById(R.id.bet_txt_4);
 		right_footer_btn = (TextView) findViewById(R.id.right_footer_btn);
-		clearPick = (TextView) findViewById(R.id.left_footer_btn);
-		mBack = (ImageView) findViewById(R.id.touzhu_leftmenu);
-		
-		mPsInfoView = (TextView)findViewById(R.id.ps_info);
-		mPsInfoView.setVisibility(View.VISIBLE);
-		mPsInfoView.setText("("+City.getCityName(mCity)+")");
+		clearPick = (RelativeLayout) findViewById(R.id.left_footer_btn);
+		mBack = (RelativeLayout) findViewById(R.id.left_layout);
+
 		mYilouView = (TextView)findViewById(R.id.sumbit_group_buy);
-		mYilouView.setText(this.getResources().getString(R.string.yilou));
+		mYilouView.setText("走势图");
 		
 		mQihaoView = (TextView)findViewById(R.id.pre_num_str);
 		mTimeDiffView = (TextView)findViewById(R.id.pre_win_num);
 		
 	}
+
+    private void setTitle()
+    {
+        if (mType == SscType.fivestar_zhixuan)
+        {
+           mTitleView.setText("时时彩-五星直选");
+        }
+        else if (mType == SscType.fivestar_fuxuan)
+        {
+            mTitleView.setText("时时彩-五星复选");
+        }
+        else if (mType == SscType.fivestar_tongxuan)
+        {
+            mTitleView.setText("时时彩-五星通选");
+        }
+        else if (mType == SscType.threestar_zhixuan)
+        {
+            mTitleView.setText("时时彩-三星直选");
+        }
+        else if (mType == SscType.threestar_fuxuan)
+        {
+            mTitleView.setText("时时彩-三星复选");
+        }
+        else if(mType == SscType.twostar_zhixuan)
+        {
+            mTitleView.setText("时时彩-二星直选");
+        }
+        else if(mType == SscType.twostar_fuxuan)
+        {
+            mTitleView.setText("时时彩-二星复选");
+        }
+        else if(mType == SscType.twostar_zhixuan_hezhi)
+        {
+            mTitleView.setText("时时彩-二星直选和值");
+        }
+        else if(mType == SscType.twostar_zuxuan)
+        {
+            mTitleView.setText("时时彩-二星组选");
+        }
+        else if(mType == SscType.twostar_zuxuan_baohao)
+        {
+            mTitleView.setText("时时彩-二星组选包号");
+        }
+        else if(mType == SscType.twostar_zuxuan_hezhi)
+        {
+            mTitleView.setText("时时彩-二星组选和值");
+        }
+        else if(mType == SscType.onestar_zhixuan)
+        {
+            mTitleView.setText("时时彩-一星直选");
+        }
+        else if(mType == SscType.dxds)
+        {
+            mTitleView.setText("时时彩-大小单双");
+        }
+        else if (mType == SscType.fourstar_zhixuan)
+        {
+            mTitleView.setText("时时彩-四星直选");
+        }
+        else if (mType == SscType.fourstar_fuxuan)
+        {
+            mTitleView.setText("时时彩-四星复选");
+        }
+        else if (mType == SscType.threestar_zhixuan_hezhi)
+        {
+            mTitleView.setText("时时彩-三星直选和值");
+        }
+        else if (mType == SscType.threestar_zusan)
+        {
+            mTitleView.setText("时时彩-三星组三");
+        }
+        else if (mType == SscType.threestar_zusan_baohao)
+        {
+            mTitleView.setText("时时彩-三星组三包号");
+        }
+        else if (mType == SscType.threestar_zusan_hezhi)
+        {
+            mTitleView.setText("时时彩-三星组三和值");
+        }
+        else if (mType == SscType.threestar_zuliu)
+        {
+            mTitleView.setText("时时彩-三星组六");
+        }
+        else if (mType == SscType.threestar_zuliu_baohao)
+        {
+            mTitleView.setText("时时彩-三星组六包号");
+        }
+        else if (mType == SscType.threestar_zuliu_hezhi)
+        {
+            mTitleView.setText("时时彩-三星组六和值");
+        }
+        else if (mType == SscType.renxuan_two)
+        {
+            mTitleView.setText("时时彩-任选二");
+        }
+        else if (mType == SscType.renxuan_one)
+        {
+            mTitleView.setText("时时彩-任选一");
+        }
+    }
+
 	private void _setListener() {
 		mTitleView.setOnClickListener(this);
 		mBack.setOnClickListener(this);
@@ -149,136 +424,73 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 		mYilouView.setOnClickListener(this);
 	}
 	public void setFooterBetValues(int zhushu) {
-		mZhuShuView.setText(zhushu+"注"+zhushu*2+"元");
+        mZhuShuView.setText(String.valueOf(zhushu));
+        priceTextView.setText(String.valueOf(zhushu * 2));
 	}
 	private void _showFragments(String fragmentTag) {
 		FragmentManager mFragManager = getSupportFragmentManager();
 		FragmentTransaction mFragTransaction = mFragManager.beginTransaction();
-		Fragment mFragment = (Fragment) mFragManager
-				.findFragmentByTag(fragmentTag);
+		Fragment mFragment = mFragManager.findFragmentByTag(fragmentTag);
+
 		if (mFragment == null) {
+
+            mFragment = new Ssc_jx_fragment();
+            Bundle bundle = new Bundle();
 			if (fragmentTag.equals(Ssc_jx_fragment.TAG_FIVE_ZX)) {
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.fivestar_zhixuan.toString());
-				mFragment.setArguments(bundle);
 			} else if(fragmentTag.equals(Ssc_jx_fragment.TAG_FIVE_TX)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.fivestar_tongxuan.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_FIVE_FX)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.fivestar_fuxuan.toString());
-				mFragment.setArguments(bundle);
 			} else if(fragmentTag.equals(Ssc_jx_fragment.TAG_FOUR_FUXUAN)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.fourstar_fuxuan.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_FOUR_ZHIXUAN)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.fourstar_zhixuan.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_THREE_FX)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.threestar_fuxuan.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_THREE_ZX)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.threestar_zhixuan.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_THREE_ZX_HEZHI)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.threestar_zhixuan_hezhi.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_THREE_ZUSAN)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.threestar_zusan.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_THREE_ZUSAN_BH)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.threestar_zusan_baohao.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_THREE_ZUSAN_HZ)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.threestar_zusan_hezhi.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_THREE_ZULIU)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.threestar_zuliu.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_THREE_ZULIU_BH)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.threestar_zuliu_baohao.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_THREE_ZULIU_HZ)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.threestar_zuliu_hezhi.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_TWO_FX)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.twostar_fuxuan.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_TWO_ZHIXUAN)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.twostar_zhixuan.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_TWO_ZHIXUAN_HZ)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.twostar_zhixuan_hezhi.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_TWO_ZUXUAN)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.twostar_zuxuan.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_TWO_ZUXUAN_HZ)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.twostar_zuxuan_hezhi.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_ONE_ZX)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.onestar_zhixuan.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_DXDS)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.dxds.toString());
-				mFragment.setArguments(bundle);
 			} else if(fragmentTag.equals(Ssc_jx_fragment.TAG_TWO_ZUXUAN_BH)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.twostar_zuxuan_baohao.toString());
-				mFragment.setArguments(bundle);
 			}else if(fragmentTag.equals(Ssc_jx_fragment.TAG_RENXUAN_TWO)){
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.renxuan_two.toString());
-				mFragment.setArguments(bundle);
 			} else {
-				mFragment = new Ssc_jx_fragment();
-				Bundle bundle = new Bundle();
 				bundle.putString(Ssc_jx_fragment.BETTYPE, SscType.renxuan_one.toString());
-				mFragment.setArguments(bundle);
 			}
-			
+            if (startType == 2 && prevBetType != null
+                    && prevBetType.equals(fragmentTag))
+            {
+                bundle.putSerializable(IntentData.SELECT_NUMBERS, selectedNumbersMap);
+            }
+            mFragment.setArguments(bundle);
 			mFragTransaction.add(R.id.fl_pls_pickarea, mFragment, fragmentTag);
 		}
 		if (mCurrentFragment != null) {
@@ -294,9 +506,8 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 		switch (v.getId()) {
 		case R.id.sumbit_group_buy:
 			Toast.makeText(this, "暂无", Toast.LENGTH_SHORT).show();
-			//UiHelper.startSyxwYilou(this, lotterytype,Constants.City.getCityName(mCity)+"时时彩");
 			break;
-		case R.id.touzhu_leftmenu:
+		case R.id.left_layout:
 			if(mc != null) {
 				mc.cancel();
 			}
@@ -317,14 +528,15 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 			break;
 		case R.id.right_footer_btn:
 			Ssc_jx_fragment fragment = (Ssc_jx_fragment)mCurrentFragment;
-			if(!isCanSale) {
-				Toast.makeText(getApplicationContext(), "本期销售已停止",Toast.LENGTH_SHORT).show();
-				break;
-			}
-			if(TextUtils.isEmpty(mQihao)) {
-				Toast.makeText(getApplicationContext(), "未获取到当前期号",Toast.LENGTH_SHORT).show();
-				break;
-			}
+            //测试注释
+//			if(!isCanSale) {
+//				Toast.makeText(getApplicationContext(), "本期销售已停止",Toast.LENGTH_SHORT).show();
+//				break;
+//			}
+//			if(TextUtils.isEmpty(mQihao)) {
+//				Toast.makeText(getApplicationContext(), "未获取到当前期号",Toast.LENGTH_SHORT).show();
+//				break;
+//			}
 			if(_isReadyStart(fragment)) {
 			    _startSscPick(fragment);
 			}
@@ -347,11 +559,12 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 		intent.putExtra(SscPick.BETTYPE, fragment.mGameType);
 		intent.putExtra(SscPick.BALL,fragment.betResult);
 		intent.putExtra(SscPick.ZHUAMOUNT,fragment.mZhushu);
+        intent.putExtra(IntentData.SELECT_NUMBERS, fragment.getResultMap());
 		intent.putExtra("qihao", mQihao);
 		if (startType == 0) {
 			intent.setClass(this, SscPick.class);
 			startActivity(intent);
-		} else if (startType == 1) {
+		} else if (startType == 1 || startType == 2) {
 			setResult(RESULT_OK, intent);
 		} 
 		if(mc != null) {
@@ -361,10 +574,10 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 	}
 	private void _setPopWindow(int width) {
 		View view = LayoutInflater.from(this).inflate(R.layout.popview, null);
-		mPopWindow = new PopupWindow(view, LayoutParams.WRAP_CONTENT,
+		mPopWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT,
 				LayoutParams.WRAP_CONTENT);
 		GridView mGridView = (GridView) view.findViewById(R.id.pop_gridview);
-		mGridView.setColumnWidth(120);
+        mGridView.setNumColumns(3);
 		final ArrayList<String> list = new ArrayList<String>();
 		list.add("五星直选");
 		list.add("五星复选");
@@ -394,8 +607,8 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 		
 		list.add("任选二");
 		list.add("任选一");
-		final PopViewAdapter mMyAdapter = new PopViewAdapter(this, list, mChecked);
-		mGridView.setAdapter(mMyAdapter);
+        popViewAdapter = new PopViewAdapter(this, list, mChecked);
+		mGridView.setAdapter(popViewAdapter);
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -505,7 +718,7 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 				    mChecked.set(lastIndex, false);
 				}
 				mChecked.set(arg2, true);
-				mMyAdapter.notifyDataSetChanged();
+                popViewAdapter.notifyDataSetChanged();
 				mPopWindow.dismiss();
 			}
 		});
@@ -526,10 +739,12 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 		finish();
 	}
 	
-	private void _requestData() {
+	private void _requestData(boolean showText) {
 		JinCaiZiHttpClient.closeExpireConnection();
-		mQihaoView.setText("正在获取当前期号");
-		mTimeDiffView.setText("");
+        if (showText) {
+            mQihaoView.setText("正在获取当前期号");
+            mTimeDiffView.setText("");
+        }
 		RequestParams params = new RequestParams();
 	    params.add("act", "sellqihao");
 	  
@@ -576,8 +791,6 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 						Log.d(TAG, "failure = " + error.toString());
 						mQihaoView.setText("获取期号失败，点击重新获取");
 						mTimeDiffView.setText("");
-						//Toast.makeText(SSC_CQ.this, "期号获取失败", Toast.LENGTH_SHORT).show();
-						_requestData();
 					}
 				});
 	}
@@ -603,16 +816,19 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
 		reader.close();
 		if(result == 0) {
 			
-			if(diff.startsWith("-")) {
-				isCanSale = false;
-				mQihaoView.setText(mQihao + "期代购截止");
-				_requestData();
-			} else {
-				mQihaoView.setText("距" + mQihao + "期还有");
-				isCanSale = true;
-				mc  = new MyCount(Long.valueOf(diff)*1000, 1000);  
-		        mc.start(); 
-			}
+            if(diff.startsWith("-")) {
+                isCanSale = false;
+                mQihaoView.setText(mQihao + "期代购截止");
+                _requestData(false);
+            } else {
+                mQihaoView.setText("距" + mQihao + "期还有");
+                if (TextUtils.isEmpty(diff))
+                {
+                    diff = "540";
+                }
+                mc = new MyCount(Long.valueOf(diff)*1000, 1000);
+                mc.start();
+            }
 		}
 	}
 	   /*定义一个倒计时的内部类*/  
@@ -621,15 +837,12 @@ public class SSC_JX extends FragmentActivity implements OnClickListener{
          super(millisInFuture, countDownInterval);     
      }     
      @Override     
-     public void onFinish() {     
-    	 //mQihaoView.setText("正在获取当前期号"); 
-         _requestData();
+     public void onFinish() {
+         _requestData(false);
      }     
      @Override     
-     public void onTick(long millisUntilFinished) {  
-     	//Log.d("test", millisUntilFinished+"");
-    	 mTimeDiffView.setText(Utils.formatDuring(millisUntilFinished));     
-        
+     public void onTick(long millisUntilFinished) {
+    	 mTimeDiffView.setText(Utils.formatDuring(millisUntilFinished));
      }    
  }
 	

@@ -32,43 +32,43 @@
     <string name="k3_drag2_num">猜开奖号码中2个指定的不同号码,奖金8元</string>
     <string name="k3_danma">胆码</string>
     <string name="k3_tuoma">托码</string>
-    <string name="ssc_fivestar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从五位各选至少1个或多个号码投注,选号与开奖号码一致(位置也相同)即中奖100,000元</font></body> </html> ]]></string>
-    <string name="ssc_fivestar_fuxuan"><![CDATA[<html><head></head><body style="text-align:justify;color:gray;background-color:white;"><font color="#0072E3" size="2">投注说明:从五位各选至少1个或多个号码投注,单注最高奖金101110元。如购买:4|5|6|7|8,该票共8元,由以下4注:45678(五星)、678(三星)、78(二星)、8(一星)构成</font></body> </html> ]]></string>
-    <string name="ssc_fivestar_tongxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从五位各选1个或多个号码投注,选号与开奖号码一致(位置也相同)即中2万元,前三或后三位按位一致即中200元,前二或后二位按位一致即中20元</font></body> </html> ]]></string>
-    <string name="ssc_threestar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从三位各选1个或多个号码,选号与开奖号码后三位一致(位置也相同)即中奖1000元</font></body> </html> ]]></string>
-    <string name="ssc_threestar_fuxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从三位各选至少1个或多个号码投注,单注最高奖金1110元,如购买:6|7|8,该票共6元,由以下3注:678(三星)、78(二星)、8(一星)构成</font></body> </html> ]]></string>
-    <string name="ssc_twostar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从两位各选1个或多个号码,选号与开奖号后两位一致(位置也相同)即中奖100元</font></body> </html> ]]></string>
-    <string name="ssc_twostar_fuxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从两位各选至少1个或多个号码投注,单注最高奖金110元,如购买:7|8,该票共4元,由以下2注:78(二星)、8(一星)构成</font></body> </html> ]]></string>
-    <string name="ssc_twostar_zhixuanhezhi"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择1个和值投注(选号分位),所选和值与开奖号码后两位和值一致即中奖100元</font></body> </html> ]]></string>
-    <string name="ssc_twostar_zuxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择一组1+1的数字,若开奖号码后两位不相同且和投注号码一致,则中50元</font></body> </html> ]]></string>
-    <string name="ssc_twostar_zuxuanhezhi"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择1个和值投注(选号不分位),所选和值与开奖号码后两位和值一致即中奖50元</font></body> </html> ]]></string>
-    <string name="ssc_onestar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从个位选择1个或多个号码,选号与开奖号码个位一致即中奖10元</font></body> </html> ]]></string>
-    <string name="ssc_dxds"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:对十、个位进行大小单双投注,所选大小单双与开奖号码十、个位大小单双一致即中奖4元</font></body> </html> ]]></string>
-    <string name="ssc_twostar_zuxuan_baohao"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:至少选择2个号码,选号与开奖号码后两位(不为对子)一致(位置不限)即中奖50元</font></body> </html> ]]></string>
-    <string name="jx_ssc_fivestar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从五位各选至少1个或多个号码投注,选号与开奖号码一致(位置也相同)即中奖116,000元</font></body> </html> ]]></string>
-    <string name="jx_ssc_fivestar_fuxuan"><![CDATA[<html><head></head><body style="text-align:justify;color:gray;background-color:white;"><font color="#0072E3" size="2">投注说明:从五位各选至少1个或多个号码投注,同时投注五星、四星、三星、二星和一星玩法</font></body> </html> ]]></string>
-    <string name="jx_ssc_fivestar_tongxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从五位各选1个或多个号码投注,选号与开奖号码一致(位置也相同)即中2万元,前三或后三位按位一致即中200元,前二或后二位按位一致即中30元</font></body> </html> ]]></string>
-    <string name="jx_ssc_fourstar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从四位各选1个或多个号码,选号与开奖号后四位按位一致即中1万元,与中间三位或后三位按位一致即中88元</font></body> </html> ]]></string>
-    <string name="jx_ssc_fourstar_fuxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从四位各选1个或多个号码,同时投注四星、三星、二星和一星玩法</font></body> </html> ]]></string>
-    <string name="jx_ssc_threestar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从三位各选1个或多个号码,选号与开奖号码后三位一致(位置也相同)即中奖1160元</font></body> </html> ]]></string>
-    <string name="jx_ssc_threestar_fuxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从三位各选1个或多个号码,同时投注三星、二星和一星玩法</font></body> </html> ]]></string>
-    <string name="jx_ssc_threestar_zhixuanhezhi"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择1个和值投注(选号分位),所选和值与开奖号码后三位和值一致即中奖1160元</font></body> </html> ]]></string>
-    <string name="jx_ssc_threestar_zusan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择一组2+1的数字,即三个号码中有两个相同,若开奖号码后三位出现相同的2+1,则中385元</font></body> </html> ]]></string>
-    <string name="jx_ssc_threestar_zusanbaohao"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择2个或2个以上数字,若开奖号码后三位有2个数字相同并且都在所选号码中,即中奖金385元</font></body> </html> ]]></string>
-    <string name="jx_ssc_threestar_zusanhezhi"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择1个数字,若开奖号码后三位有2个数字相同并且相加之和与它一样就中奖385元</font></body> </html> ]]></string>
-    <string name="jx_ssc_threestar_zuliu"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择3个数字各不相同,若开奖号码后三位不重复且与投注号码一样即中奖金190元</font></body> </html> ]]></string>
-    <string name="jx_ssc_threestar_zuliubaohao"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择3个或3以上数字,若开奖号码后三位不重复且包含投注内容即中奖金190元</font></body> </html> ]]></string>
-    <string name="jx_ssc_threestar_zuliuhezhi"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择1个数字,若开奖号码后三位不重复并且相加之和与它一样就中奖190元</font></body> </html> ]]></string>
-    <string name="jx_ssc_twostar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从两位各选1个或多个号码,选号与开奖号后两位一致(位置也相同)即中奖116元</font></body> </html> ]]></string>
-    <string name="jx_ssc_twostar_fuxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从两位各选1个或多个号码,同时投注二星和一星玩法</font></body> </html> ]]></string>
-    <string name="jx_ssc_twostar_zhixuanhezhi"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择1个和值投注(选号分位),所选和值与开奖号码后两位和值一致即中奖116元</font></body> </html> ]]></string>
-    <string name="jx_ssc_twostar_zuxuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择一组1+1的数字,若开奖号码后两位不相同且和投注号码一致,则中58元</font></body> </html> ]]></string>
-    <string name="jx_ssc_twostar_zuxuanhezhi"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:选择1个和值投注(选号不分位且不为对子),所选和值与开奖号码后两位和值一致即中奖58元</font></body> </html> ]]></string>
-    <string name="jx_ssc_onestar_zhixuan"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从个位选择1个或多个号码,选号与开奖号码个位一致即中奖11元</font></body> </html> ]]></string>
-    <string name="jx_ssc_dxds"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:对十、个位进行大小单双投注,所选大小单双与开奖号码十、个位大小单双一致即中奖4元</font></body> </html> ]]></string>
-    <string name="jx_ssc_twostar_zuxuan_baohao"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:至少选择2个号码,选号与开奖号码后两位(不为对子)一致(位置不限)即中奖58元</font></body> </html> ]]></string>
-    <string name="jx_ssc_renxuan_two"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从5位中定位选择2个或更多号码,选号与开奖号码对应位置的两位号码一致即中奖116元</font></body> </html> ]]></string>
-    <string name="jx_ssc_renxuan_one"><![CDATA[<html><head></head><body style="text-align:justify;background-color:white;"><font color="#0072E3" size="2">投注说明:从5位中定位选择1个或更多号码,选号与开奖号码对应位置的一位号码一致即中奖11元</font></body> </html> ]]></string>
+    <string name="ssc_fivestar_zhixuan">从五位各选至少1个或多个号码投注,选号与开奖号码一致(位置也相同)即中奖100000元</string>
+    <string name="ssc_fivestar_fuxuan">从五位各选至少1个或多个号码投注,单注最高奖金101110元。如购买:4|5|6|7|8,该票共8元,由以下4注:45678(五星)、678(三星)、78(二星)、8(一星)构成</string>
+    <string name="ssc_fivestar_tongxuan">从五位各选1个或多个号码投注,选号与开奖号码一致(位置也相同)即中20000元,前三或后三位按位一致即中200元,前二或后二位按位一致即中20元</string>
+    <string name="ssc_threestar_zhixuan">从三位各选1个或多个号码,选号与开奖号码后三位一致(位置也相同)即中奖1000元</string>
+    <string name="ssc_threestar_fuxuan">从三位各选至少1个或多个号码投注,单注最高奖金1110元,如购买:6|7|8,该票共6元,由以下3注:678(三星)、78(二星)、8(一星)构成</string>
+    <string name="ssc_twostar_zhixuan">从两位各选1个或多个号码,选号与开奖号后两位一致(位置也相同)即中奖100元</string>
+    <string name="ssc_twostar_fuxuan">从两位各选至少1个或多个号码投注,单注最高奖金110元,如购买:7|8,该票共4元,由以下2注:78(二星)、8(一星)构成</string>
+    <string name="ssc_twostar_zhixuanhezhi">选择1个和值投注(选号分位),所选和值与开奖号码后两位和值一致即中奖100元</string>
+    <string name="ssc_twostar_zuxuan">选择一组1+1的数字,若开奖号码后两位不相同且和投注号码一致,则中50元</string>
+    <string name="ssc_twostar_zuxuanhezhi">选择1个和值投注(选号不分位),所选和值与开奖号码后两位和值一致即中奖50元</string>
+    <string name="ssc_onestar_zhixuan">从个位选择1个或多个号码,选号与开奖号码个位一致即中奖10元</string>
+    <string name="ssc_dxds">对十、个位进行大小单双投注,所选大小单双与开奖号码十、个位大小单双一致即中奖4元</string>
+    <string name="ssc_twostar_zuxuan_baohao">至少选择2个号码,选号与开奖号码后两位(不为对子)一致(位置不限)即中奖50元</string>
+    <string name="jx_ssc_fivestar_zhixuan">从五位各选至少1个或多个号码投注,选号与开奖号码一致(位置也相同)即中奖116000元</string>
+    <string name="jx_ssc_fivestar_fuxuan">从五位各选至少1个或多个号码投注,同时投注五星、四星、三星、二星和一星玩法</string>
+    <string name="jx_ssc_fivestar_tongxuan">从五位各选1个或多个号码投注,选号与开奖号码一致(位置也相同)即中20000元,前三或后三位按位一致即中200元,前二或后二位按位一致即中30元</string>
+    <string name="jx_ssc_fourstar_zhixuan">从四位各选1个或多个号码,选号与开奖号后四位按位一致即中1万元,与中间三位或后三位按位一致即中88元</string>
+    <string name="jx_ssc_fourstar_fuxuan">从四位各选1个或多个号码,同时投注四星、三星、二星和一星玩法</string>
+    <string name="jx_ssc_threestar_zhixuan">从三位各选1个或多个号码,选号与开奖号码后三位一致(位置也相同)即中奖1160元</string>
+    <string name="jx_ssc_threestar_fuxuan">从三位各选1个或多个号码,同时投注三星、二星和一星玩法</string>
+    <string name="jx_ssc_threestar_zhixuanhezhi">选择1个和值投注(选号分位),所选和值与开奖号码后三位和值一致即中奖1160元</string>
+    <string name="jx_ssc_threestar_zusan">选择一组2+1的数字,即三个号码中有两个相同,若开奖号码后三位出现相同的2+1,则中385元</string>
+    <string name="jx_ssc_threestar_zusanbaohao">选择2个或2个以上数字,若开奖号码后三位有2个数字相同并且都在所选号码中,即中奖金385元</string>
+    <string name="jx_ssc_threestar_zusanhezhi">选择1个数字,若开奖号码后三位有2个数字相同并且相加之和与它一样就中奖385元</string>
+    <string name="jx_ssc_threestar_zuliu">选择3个数字各不相同,若开奖号码后三位不重复且与投注号码一样即中奖金190元</string>
+    <string name="jx_ssc_threestar_zuliubaohao">选择3个或3以上数字,若开奖号码后三位不重复且包含投注内容即中奖金190元</string>
+    <string name="jx_ssc_threestar_zuliuhezhi">选择1个数字,若开奖号码后三位不重复并且相加之和与它一样就中奖190元</string>
+    <string name="jx_ssc_twostar_zhixuan">从两位各选1个或多个号码,选号与开奖号后两位一致(位置也相同)即中奖116元</string>
+    <string name="jx_ssc_twostar_fuxuan">从两位各选1个或多个号码,同时投注二星和一星玩法</string>
+    <string name="jx_ssc_twostar_zhixuanhezhi">选择1个和值投注(选号分位),所选和值与开奖号码后两位和值一致即中奖116元</string>
+    <string name="jx_ssc_twostar_zuxuan">选择一组1+1的数字,若开奖号码后两位不相同且和投注号码一致,则中58元</string>
+    <string name="jx_ssc_twostar_zuxuanhezhi">选择1个和值投注(选号不分位且不为对子),所选和值与开奖号码后两位和值一致即中奖58元</string>
+    <string name="jx_ssc_onestar_zhixuan">从个位选择1个或多个号码,选号与开奖号码个位一致即中奖11元</string>
+    <string name="jx_ssc_dxds">对十、个位进行大小单双投注,所选大小单双与开奖号码十、个位大小单双一致即中奖4元</string>
+    <string name="jx_ssc_twostar_zuxuan_baohao">至少选择2个号码,选号与开奖号码后两位(不为对子)一致(位置不限)即中奖58元</string>
+    <string name="jx_ssc_renxuan_two">从5位中定位选择2个或更多号码,选号与开奖号码对应位置的两位号码一致即中奖116元</string>
+    <string name="jx_ssc_renxuan_one">从5位中定位选择1个或更多号码,选号与开奖号码对应位置的一位号码一致即中奖11元</string>
 
     
         <string name="bet_option">投注选项：</string>

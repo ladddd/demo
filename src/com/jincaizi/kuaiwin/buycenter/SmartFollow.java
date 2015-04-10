@@ -139,7 +139,7 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
         _findViews();
         _setListener();
         _setAdapter();
-        _requestData();
+        _requestData(true);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -184,8 +184,6 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
         }
     }
     private void _initData() {
-
-        //HashMap<String,Integer> map = BeiTouGenerator.generateBettype(City.getCityBetType(mCity, mLotteryType));
         mData.clear();
         String[]qihaos = BeiTouGenerator.generateQihaos(perDayTermCount, mQihao, mZhuiHaoNums, mLotteryType);
         for(int i=0; i<mZhuiHaoNums; i++) {
@@ -288,6 +286,18 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
             mTitleStr = "内蒙古";
             lotterytype = "NMG"+mLotteryType;
             perDayTermCount = 73;
+        }else if(mCity.equals(Constants.City.zhejiang.toString())) {
+            mTitleStr = "浙江";
+            lotterytype = "ZJ"+mLotteryType;
+            perDayTermCount = 80;
+        }else if(mCity.equals(Constants.City.hubei.toString())) {
+            mTitleStr = "湖北";
+            lotterytype = "HB"+mLotteryType;
+            perDayTermCount = 78;
+        }else if(mCity.equals(Constants.City.jilin.toString())) {
+            mTitleStr = "吉林";
+            lotterytype = "JL"+mLotteryType;
+            perDayTermCount = 79;
         }
         if(mLotteryType.equals("11x5")) {
             mTitleStr += "11选5";
@@ -321,7 +331,6 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
         mTitleView = (TextView)findViewById(R.id.current_lottery);
         mTitleView.setText(mTitleStr);
         mListView = (ListView)findViewById(R.id.follow_plan_list);
-//    	findViewById(R.id.left_footer_btn).setVisibility(View.GONE);
         pickBtn = (TextView)findViewById(R.id.pick_btn);
         backBtn = (RelativeLayout)findViewById(R.id.left_layout);
         mBetMoney = (TextView)findViewById(R.id.bet_txt_5);
@@ -340,8 +349,6 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
         issueCountTxt.setText(String.valueOf(mZhuiHaoNums));
 
         mGroupBuyView = (TextView)findViewById(R.id.sumbit_group_buy);
-        //findViewById(R.id.right_divider).setVisibility(View.GONE);
-
         mQihaoView = (TextView)findViewById(R.id.period_qihao_tv);
         mTimeDiffView = (TextView)findViewById(R.id.period_time_tv);
 
@@ -433,9 +440,6 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
-//            case R.id.follow_mode:
-//                isStopZhui = followMode.isChecked();
-//                break;
             case R.id.sumbit_group_buy:
                 if(mData.size() < 1) {
                     Toast.makeText(this, "请至少选择一注", Toast.LENGTH_SHORT).show();
@@ -457,7 +461,10 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
 
                 break;
             case R.id.period_qihao_tv:
-                _requestData();
+                if(TextUtils.isEmpty(mQihaoView.getText()) ||
+                        mQihaoView.getText().toString().equals("获取期号失败，点击重新获取")) {
+                    _requestData(true);
+                }
                 break;
             case R.id.left_layout:
                 if(mc != null) {
@@ -478,14 +485,6 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
                 break;
             case R.id.period_add:
                 int period = Integer.parseInt(periodValue.getText().toString()) + 1;
-//                if(period < 1) {
-//                    periodValue.setText("1");
-//                } else if(period > 200) {
-//                    periodValue.setText("200");
-//                } else {
-//                    periodValue.setText(period+"");
-//                }
-//                periodValue.setSelection(periodValue.getText().length()-1);
                 periodValue.setText(period + "");
                 periodValue.setSelection(periodValue.getText().length()-1);
                 break;
@@ -579,9 +578,6 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
         profitBonusRadio = (RadioButton)view.findViewById(R.id.profit_bonus_plan);
         profitBonusTv = (EditText)view.findViewById(R.id.profit_bonus_tv);
 
-//        followMode = (ToggleButton)view.findViewById(R.id.follow_mode);
-//        followMode.setChecked(isStopZhui);
-
         btnCancel = (Button)view.findViewById(R.id.bt_cancel);
         btnYes = (Button)view.findViewById(R.id.bt_yes);
     }
@@ -605,15 +601,6 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
                 profitBonusTv.setEnabled(true);
                 break;
         }
-//        try {
-//			profitRateTv.setText(Utils.formatDoubleForTwo(mMinProfitRate));
-//			profitFisrtPeriodTv.setText(profitFirstPeriodValue+"");
-//			profitFisrtRateTv.setText(Utils.formatDoubleForTwo(profitFirstRateValue));
-//			profitSecondRateTv.setText(Utils.formatDoubleForTwo(profitSecondRateValue));
-//			profitBonusTv.setText(Utils.formatDoubleForTwo(profitBonusValue));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
     }
     private void _setDialogListeners() {
         periodSub.setOnClickListener(this);
@@ -638,8 +625,6 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
 
         btnCancel.setOnClickListener(this);
         btnYes.setOnClickListener(this);
-//        followMode.setOnClickListener(this);
-
     }
 
     private class SubIssueWather implements TextWatcher {
@@ -704,7 +689,6 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
             } else if(Integer.parseInt(s.toString()) < 1 ) {
                 editText.setText("1");
             }
-//            mZhuiHaoNums = Integer.parseInt(editText.getText().toString());
             editText.setSelection(editText.getText().length());
         }
 
@@ -1127,10 +1111,12 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
     }
 
 
-    private void _requestData() {
+    private void _requestData(boolean showText) {
         JinCaiZiHttpClient.closeExpireConnection();
-        mQihaoView.setText("正在获取当前期号");
-        mTimeDiffView.setText("");
+        if (showText) {
+            mQihaoView.setText("正在获取当前期号");
+            mTimeDiffView.setText("");
+        }
         RequestParams params = new RequestParams();
         params.add("act", "sellqihao");
 
@@ -1181,8 +1167,6 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
                         Log.d(TAG, "failure = " + error.toString());
                         mQihaoView.setText("获取期号失败，点击重新获取");
                         mTimeDiffView.setText("");
-                        Toast.makeText(SmartFollow.this, "期号获取失败", Toast.LENGTH_SHORT).show();
-                        _requestData();
                     }
                 });
     }
@@ -1209,7 +1193,7 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
 
             if(diff.startsWith("-")) {
                 mQihaoView.setText(mQihao + "期代购截止");
-                _requestData();
+                _requestData(false);
             } else {
                 mQihaoView.setText("距" + mQihao + "期还有");
                 if (TextUtils.isEmpty(diff))
@@ -1230,7 +1214,7 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
         public void onFinish() {
             //mQihaoView.setText("正在获取当前期号");
             Toast.makeText(SmartFollow.this, mQihao+"已过期， 将自动切换至下一期", Toast.LENGTH_SHORT).show();
-            _requestData();
+            _requestData(false);
 
         }
         @Override
@@ -1316,7 +1300,6 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
                             .findViewById(R.id.submit_dialog_content);
                     TextView localCancel = (TextView) view.findViewById(R.id.tv_submit_cancel);
                     localCancel.setVisibility(View.GONE);
-                    ////view.findViewById(R.id.dialog_divider).setVisibility(View.GONE);
                     TextView localOK = (TextView) view.findViewById(R.id.tv_submit_ok);
                     localOK.setText("确定");
                     localDialog.setContentView(view);
@@ -1477,13 +1460,16 @@ public class SmartFollow extends Activity implements OnClickListener, OnCheckedC
             if(TextUtils.isEmpty(s) || s.toString().contains(".")) {
 //                mTraceIssue.setText("" + MINZHUIHAO);
                 mZhuiHaoNums = MINZHUIHAO;
-            } else if(Integer.parseInt(s.toString()) < MINZHUIHAO) {
-                issueEdit.setText("" + MINZHUIHAO);
-            } else if(Integer.parseInt(s.toString()) > MAXZHUIHAO) {
-                issueEdit.setText(""+MAXZHUIHAO);
+            }
+            else {
+                if (Integer.parseInt(s.toString()) < MINZHUIHAO) {
+                    issueEdit.setText("" + MINZHUIHAO);
+                } else if (Integer.parseInt(s.toString()) > MAXZHUIHAO) {
+                    issueEdit.setText("" + MAXZHUIHAO);
+                }
+                mZhuiHaoNums = Integer.parseInt(issueEdit.getText().toString());
             }
 
-            mZhuiHaoNums = Integer.parseInt(issueEdit.getText().toString());
             issueCountTxt.setText("" + mZhuiHaoNums);
             issueEdit.setSelection(issueEdit.getText().length());
         }

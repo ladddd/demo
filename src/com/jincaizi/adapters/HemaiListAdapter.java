@@ -65,7 +65,7 @@ public class HemaiListAdapter extends BaseAdapter {
             holder.progress_jindu = (RoundProgressBar)convertView.findViewById(R.id.group_roundProgressBar);
             holder.tv_faqiren = (TextView)convertView.findViewById(R.id.group_faqiren);
             holder.tv_zongjine = (TextView)convertView.findViewById(R.id.group_zongjine_content);
-            holder.tv_jineAverage = (TextView)convertView.findViewById(R.id.group_jineaverag_content);
+            holder.tv_baodi = (TextView)convertView.findViewById(R.id.group_jineaverag_content);
             holder.tv_left = (TextView)convertView.findViewById(R.id.group_left_content);
             convertView.setTag(holder);
         } else {
@@ -78,11 +78,12 @@ public class HemaiListAdapter extends BaseAdapter {
        // }
         float jindu = Float.valueOf(mRecordList.get(position).getBetJindu());
         holder.progress_jindu.setProgress((int)jindu);
-        holder.progress_jindu.setBaodi(Integer.valueOf(mRecordList.get(position).getBetBaodi()));
         holder.tv_faqiren.setText(mRecordList.get(position).getBetHost());
         holder.tv_zongjine.setText(mRecordList.get(position).getBetAmount());
-        holder.tv_jineAverage.setText(mRecordList.get(position).getBetAverage());
-        holder.tv_left.setText(mRecordList.get(position).getBetLeft());
+        int baodi = Integer.valueOf(mRecordList.get(position).getBetBaodi());
+        int baodiPercent = (int)(((float)baodi / 100.0f) * 100);
+        holder.tv_baodi.setText(String.valueOf(baodiPercent) + "%");
+        holder.tv_left.setText(mRecordList.get(position).getBetLeft() + "元");
         return convertView;
     }
 
@@ -91,7 +92,7 @@ public class HemaiListAdapter extends BaseAdapter {
         RoundProgressBar progress_jindu;
         TextView tv_faqiren;
         TextView tv_zongjine;
-        TextView tv_jineAverage;
+        TextView tv_baodi;
         TextView tv_left;
         
     }

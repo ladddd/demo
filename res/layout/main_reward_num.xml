@@ -1,38 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical" >
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@color/timer_bg"
+              android:orientation="vertical" >
 
-    <FrameLayout
-        style="@style/title"
-        android:layout_width="fill_parent"
-        android:gravity="center"
-        android:orientation="horizontal" >
+	<FrameLayout
+			style="@style/title"
+			android:layout_width="fill_parent"
+			android:gravity="center"
+			android:orientation="horizontal"
+			android:background="@color/k3_orange">
 
-        <TextView
-            style="@style/title_text"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:text="@string/kjxx_title" />
-    </FrameLayout>
+		<TextView
+				style="@style/title_text"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_gravity="center"
+				android:text="@string/kjxx_title"
+				android:textSize="16sp"/>
+	</FrameLayout>
 
-    <com.jincaizi.kuaiwin.widget.PullToRefreshListView
-        android:id="@+id/kjxx_list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
-        <TextView 
-        android:id="@+id/empty_mylotterylistview" 
-        android:layout_width="fill_parent" 
-        android:layout_height="fill_parent" 
-        android:text="@string/empty_hint" 
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textSize="16sp"
-        android:textColor="@android:color/darker_gray"
-        android:visibility="gone" /> 
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+		<com.jincaizi.kuaiwin.widget.PullToRefreshListView
+				android:id="@+id/kjxx_list"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"/>
+		<TextView
+				android:id="@+id/empty_mylotterylistview"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/empty_hint"
+				android:layout_centerInParent="true"
+				android:padding="20dp"
+				android:textSize="16sp"
+				android:textColor="@android:color/darker_gray"
+				android:visibility="gone"/>
+
+	</RelativeLayout>
+
+
 </LinearLayout>

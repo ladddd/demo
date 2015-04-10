@@ -1,39 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical" >
 
-   <include
-        android:id="@+id/zuihaodetail_head_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/main_head_bar_height"
-        layout="@layout/common_header_bar" />
+	<RelativeLayout android:layout_width="match_parent"
+	                android:layout_height="46dp"
+	                android:background="@color/k3_orange">
+		<TextView
+				android:id="@+id/current_lottery"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				android:gravity="center"
+				android:textColor="@color/white"
+				android:textSize="17sp"
+				android:text="购彩大厅"/>
+	</RelativeLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical" >
+	<RelativeLayout android:layout_width="match_parent"
+	                android:layout_height="30dp"
+	                android:background="@color/timer_bg">
 
-      <ListView
-        android:id="@+id/buycenter_listView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-       
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="2dp"
-        android:cacheColorHint="#00000000"
-        android:drawSelectorOnTop="false"
-        android:fadingEdgeLength="0dip"
-        android:fastScrollEnabled="false"
-        android:divider="@android:color/transparent"
-        android:listSelector="@android:color/transparent"
-        android:dividerHeight="8dp"
-        android:focusable="false"
-        android:groupIndicator="@null"
-        android:scrollbarStyle="outsideOverlay" />
-    </LinearLayout>
+		<ImageView
+				android:id="@+id/notify_image"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_alignParentLeft="true"
+				android:layout_alignParentStart="true"
+				android:layout_marginLeft="10dp"
+				android:layout_marginStart="10dp"
+				android:src="@drawable/announcement"/>
+
+		<com.jincaizi.kuaiwin.widget.SlidingTextView
+				android:id="@+id/sliding_txt"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_toRightOf="@+id/notify_image"
+				android:layout_toEndOf="@+id/notify_image"
+				android:layout_marginLeft="6dp"
+				android:layout_marginStart="2dp">
+			<TextView android:layout_width="wrap_content"
+			          android:layout_height="wrap_content"
+			          android:textColor="@color/setting_text"
+			          android:textSize="12sp"/>
+		</com.jincaizi.kuaiwin.widget.SlidingTextView>
+	</RelativeLayout>
+
+	<LinearLayout android:layout_width="match_parent"
+	              android:layout_height="35dp"
+	              android:orientation="horizontal"
+	              android:weightSum="4"
+	              android:background="@color/chart_white">
+		<TextView
+				android:id="@+id/eleven_five_title"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:gravity="center"
+				android:textColor="@drawable/indicator_text_color"
+				android:textSize="16sp"
+				android:text="11选5"/>
+		<TextView
+				android:id="@+id/quick_three_title"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:gravity="center"
+				android:textColor="@drawable/indicator_text_color"
+				android:textSize="16sp"
+				android:text="快3"/>
+		<TextView
+				android:id="@+id/other_frequent_title"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:gravity="center"
+				android:textColor="@drawable/indicator_text_color"
+				android:textSize="16sp"
+				android:text="其他高频"/>
+		<TextView
+				android:id="@+id/other_type_title"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:gravity="center"
+				android:textColor="@drawable/indicator_text_color"
+				android:textSize="16sp"
+				android:text="其他彩种"/>
+	</LinearLayout>
+
+	<com.jincaizi.kuaiwin.widget.UnderlinePageIndicator
+			android:id="@+id/indicator"
+			android:layout_height="2dp"
+			android:layout_width="fill_parent"/>
+
+	<android.support.v4.view.ViewPager
+			android:id="@+id/pager"
+			android:layout_width="fill_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"/>
 
 </LinearLayout>

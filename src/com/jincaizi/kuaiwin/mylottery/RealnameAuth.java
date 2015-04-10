@@ -4,6 +4,7 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 
+import android.widget.*;
 import org.apache.http.Header;
 
 import android.app.Activity;
@@ -15,11 +16,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.stream.JsonReader;
 import com.jincaizi.R;
@@ -37,7 +33,7 @@ public class RealnameAuth extends Activity implements OnClickListener{
 	private int userid;
 	private String mUpk;
 	private String userName;
-	private ImageView mLeftBack;
+	private RelativeLayout mLeftBack;
 	private TextView userNameView;
 	private Button mAuthButton;
 	private EditText mRealNameView;
@@ -59,7 +55,6 @@ public class RealnameAuth extends Activity implements OnClickListener{
 		Log.d("test", "userid = " + userid + ";upk=" + mUpk);
 		userName = sp.getString("username", "");
 		userNameView.setText(userName);
-		userNameView.setTextColor(getResources().getColor(android.R.color.darker_gray));
 		mActivity = this;
 	
 		_setListener();	
@@ -77,14 +72,13 @@ public class RealnameAuth extends Activity implements OnClickListener{
 			Log.d("test", "userid = " + userid + ";upk=" + mUpk);
 			userName = sp.getString("username", "");
 			userNameView.setText(userName);
-			userNameView.setTextColor(getResources().getColor(android.R.color.darker_gray));
 			_getAuthInfo();
 		}
 		
 	}
 
 	private void _findViews() {
-    	mLeftBack = (ImageView)findViewById(R.id.touzhu_leftmenu);
+    	mLeftBack = (RelativeLayout)findViewById(R.id.left_layout);
     	TextView titleView = (TextView)findViewById(R.id.current_lottery);
     	titleView.setText("实名认证");
     	titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
@@ -97,6 +91,7 @@ public class RealnameAuth extends Activity implements OnClickListener{
     	mIdentityView = (EditText)findViewById(R.id.identity_id);
     	
     	mAuthHintView = (TextView)findViewById(R.id.auth_hint);
+        findViewById(R.id.sumbit_group_buy).setVisibility(View.GONE);
     }
     private void _setListener() {
     	mLeftBack.setOnClickListener(this);
@@ -108,7 +103,7 @@ public class RealnameAuth extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch(v.getId()) {
-		case R.id.touzhu_leftmenu:
+		case R.id.left_layout:
 			finish();
 			break;
 		case R.id.submit_auth:
@@ -167,7 +162,6 @@ public class RealnameAuth extends Activity implements OnClickListener{
 			public void onSuccess(int statusCode, Header[] headers,
 					byte[] responseBody) {
 				try {
-					// Object jsonResponse = parseResponse(responseBody);
 					isSuccess = true;
 					String charset;
 					if(Utils.isCmwapNet(RealnameAuth.this)) {
@@ -212,8 +206,10 @@ public class RealnameAuth extends Activity implements OnClickListener{
 								Toast.LENGTH_SHORT).show();
 					} else if (returnResult == 1) {
 						mAuthHintView.setText(returnName);
+                        mAuthHintView.setVisibility(View.VISIBLE);
 					}else if(returnResult == 0){	
 						mAuthHintView.setText(returnName);
+                        mAuthHintView.setVisibility(View.VISIBLE);
 						mRealNameView.setText(realName);
 						mIdentityView.setText(idNum);
 						mRealNameView.setEnabled(false);
@@ -241,6 +237,7 @@ public class RealnameAuth extends Activity implements OnClickListener{
 				_hideProgress();
 				Toast.makeText(mActivity, "获取失败", Toast.LENGTH_SHORT).show();
 				mAuthHintView.setText("点击此处重新获取认证信息");
+                mAuthHintView.setVisibility(View.VISIBLE);
 			}
 		});
 	}
@@ -302,8 +299,10 @@ public class RealnameAuth extends Activity implements OnClickListener{
 								Toast.LENGTH_SHORT).show();
 					} else if (returnResult == 1) {
 						mAuthHintView.setText(returnName);
+                        mAuthHintView.setVisibility(View.VISIBLE);
 					}else if(returnResult == 0){	
 						mAuthHintView.setText(returnName);
+                        mAuthHintView.setVisibility(View.VISIBLE);
 						String str = mIdentityView.getText().toString();
 						mIdentityView.setText(str.substring(0, str.length() - 6) + "******");
 						mRealNameView.setEnabled(false);
@@ -326,11 +325,9 @@ public class RealnameAuth extends Activity implements OnClickListener{
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
-				//Log.d(TAG, "failure = " + error.toString());
 				_hideProgress();
 				responseMsg = "认证失败，请重新提交！";
 				Toast.makeText(RealnameAuth.this, responseMsg, Toast.LENGTH_SHORT).show();
-				//finish();
 			}
 		});  
 	}

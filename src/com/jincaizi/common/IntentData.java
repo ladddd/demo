@@ -26,4 +26,12 @@ public class IntentData {
     public static final String SELECTION_INDEX = "selection_index";
 
     public static final String NUMBERS_PER_SEL = "numbers_per_selection";
+
+    public static final String BUY_TYPE = "buy_type";
+
+    public static final String WAN = "wan";
+    public static final String QIAN = "qian";
+    public static final String BAI = "bai";
+    public static final String SHI = "shi";
+    public static final String GE = "ge";
 }

@@ -1,23 +1,27 @@
 package com.jincaizi.kuaiwin.buycenter;
 
 import android.app.Activity;
-import android.app.Service;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jincaizi.adapters.SscGriViewAdapter;
 import com.jincaizi.R;
+import com.jincaizi.common.IntentData;
 import com.jincaizi.kuaiwin.tool.SscRandom;
 import com.jincaizi.kuaiwin.utils.Constants.SscType;
 import com.jincaizi.kuaiwin.utils.Utils;
-import com.jincaizi.kuaiwin.widget.MyGridView;
+import com.jincaizi.kuaiwin.widget.ExpandableHeightGridView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Ssc_cq_fragment extends Fragment{
 	public static final String TAG_FIVE_ZX = "fivestar_zhixuan";
@@ -41,6 +45,9 @@ public class Ssc_cq_fragment extends Fragment{
 	private String[]mTwoStarZuxuan_hezhi={"1", "2", "3", "4", "5", "6", "7", "8",
 			"9","10","11","12","13","14","15","16","17"};
 	private String[] mDxdsContent = { "大","小", "单", "双"};
+
+    private HashMap<String, ArrayList<Boolean>> alreadySelected = new HashMap<String, ArrayList<Boolean>>();
+
 	public boolean[] boolWan, boolQian, boolBai, boolShi, boolGe;
 	public String mGameType;
 	private LinearLayout mLvWan;
@@ -53,27 +60,40 @@ public class Ssc_cq_fragment extends Fragment{
 	private SscGriViewAdapter mBaiAdapter;
 	private SscGriViewAdapter mShiAdapter;
 	private SscGriViewAdapter mGeAdapter;
-	private MyGridView mWanGV;
-	private MyGridView mQianGV;
-	private MyGridView mBaiGV;
-	private MyGridView mShiGV;
-	private MyGridView mGeGV;
+	private ExpandableHeightGridView mWanGV;
+	private ExpandableHeightGridView mQianGV;
+	private ExpandableHeightGridView mBaiGV;
+	private ExpandableHeightGridView mShiGV;
+	private ExpandableHeightGridView mGeGV;
+    private RelativeLayout randomLayout;
+
 	public int mZhushu = 0;
 	private SSC_CQ mActivity;
 	private TextView mGeweiMark;
 	private TextView mGeweiHint;
+
+    private Vibrator vibrator;
 	@Override
 	public void onAttach(Activity activity) {
 		// TODO Auto-generated method stub
 		super.onAttach(activity);
 		Bundle bundle = getArguments();
 		mGameType = bundle.getString(BETTYPE);
+        if (bundle.getSerializable(IntentData.SELECT_NUMBERS) != null)
+        {
+            alreadySelected = (HashMap<String, ArrayList<Boolean>>)bundle.getSerializable(IntentData.SELECT_NUMBERS);
+        }
+        else
+        {
+            alreadySelected.clear();
+        }
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		mActivity = (SSC_CQ)getActivity();
+        vibrator = (Vibrator)getActivity().getApplication().getSystemService(Context.VIBRATOR_SERVICE);
 	}
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -91,7 +111,7 @@ public class Ssc_cq_fragment extends Fragment{
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		
-	
+
 		computeZhuShu();
 	}
 
@@ -101,19 +121,42 @@ public class Ssc_cq_fragment extends Fragment{
 		mLvBai = (LinearLayout)view.findViewById(R.id.lv_pls_bai);
 		mLvShi = (LinearLayout)view.findViewById(R.id.lv_pls_shi);
 		mLvGe = (LinearLayout)view.findViewById(R.id.lv_pls_ge);
-		mWanGV = (MyGridView)view.findViewById(R.id.pls_wan_ball_group);
-		mQianGV = (MyGridView)view.findViewById(R.id.pls_qian_ball_group);
-		mBaiGV = (MyGridView)view.findViewById(R.id.pls_bai_ball_group);
-		mShiGV = (MyGridView)view.findViewById(R.id.pls_shi_ball_group);
-		mGeGV = (MyGridView)view.findViewById(R.id.pls_ge_ball_group);
+		mWanGV = (ExpandableHeightGridView)view.findViewById(R.id.pls_wan_ball_group);
+        mWanGV.setExpanded(true);
+		mQianGV = (ExpandableHeightGridView)view.findViewById(R.id.pls_qian_ball_group);
+        mQianGV.setExpanded(true);
+		mBaiGV = (ExpandableHeightGridView)view.findViewById(R.id.pls_bai_ball_group);
+        mBaiGV.setExpanded(true);
+		mShiGV = (ExpandableHeightGridView)view.findViewById(R.id.pls_shi_ball_group);
+        mShiGV.setExpanded(true);
+		mGeGV = (ExpandableHeightGridView)view.findViewById(R.id.pls_ge_ball_group);
+        mGeGV.setExpanded(true);
 		mGeweiMark = (TextView)view.findViewById(R.id.gewei_mark);
 		mGeweiHint = (TextView)view.findViewById(R.id.gewei_hintview);
-		
-		WebView mRuleHintView = (WebView)view.findViewById(R.id.ssc_touzhu_rule);
+        randomLayout = (RelativeLayout) view.findViewById(R.id.shake_random_layout);
+
+        randomLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                vibrator.vibrate(new long[] { 0, 30 }, -1);
+                updateBallData();
+            }
+        });
+
+        view.findViewById(R.id.first_gridview_title).setVisibility(View.VISIBLE);
+
+		TextView mRuleHintView = (TextView)view.findViewById(R.id.ssc_touzhu_rule);
 		mRuleHintView.setVisibility(View.VISIBLE);
-		 view.setVerticalScrollBarEnabled(false);
-        mRuleHintView.loadDataWithBaseURL("",SscType.getSscHint(getActivity(), mGameType), "text/html", "utf-8", "");
-		//mRuleHintView.setText(SscType.getSscHint(getActivity(), mGameType));
+		view.setVerticalScrollBarEnabled(false);
+		mRuleHintView.setText(SscType.getSscHint(getActivity(), mGameType));
+
+        ((TextView)view.findViewById(R.id.pls_bai_title)).setText("百位");
+        ((TextView)view.findViewById(R.id.second_gridview_text)).setText("十位");
+        ((TextView)view.findViewById(R.id.pls_ge_title)).setText("个位");
+
+
+        view.findViewById(R.id.intro).setVisibility(View.GONE);
 		if(mGameType.equals(SscType.fivestar_zhixuan.toString()) 
 				|| mGameType.equals(SscType.fivestar_fuxuan.toString())
 				|| mGameType.equals(SscType.fivestar_tongxuan.toString())) {
@@ -121,24 +164,24 @@ public class Ssc_cq_fragment extends Fragment{
 			mLvQian.setVisibility(View.VISIBLE);
 			
 			boolWan = _initBool(10);
-			mWanAdapter = new SscGriViewAdapter( this,mContent,
-					boolWan, mActivity.mCity);
-			
-			boolQian = _initBool(10);
-			mQianAdapter = new SscGriViewAdapter(this,mContent,
-					boolQian, mActivity.mCity);
-			
-			boolBai = _initBool(10);
-			mBaiAdapter = new SscGriViewAdapter(this, mContent,
-					boolBai, mActivity.mCity);
-			
-			boolShi = _initBool(10);
-			mShiAdapter = new SscGriViewAdapter(this, mContent,
-					boolShi, mActivity.mCity);
-			
-			boolGe = _initBool(10);
-			mGeAdapter = new SscGriViewAdapter(this, mContent,
-					boolGe, mActivity.mCity);
+            boolQian = _initBool(10);
+            boolBai = _initBool(10);
+            boolShi = _initBool(10);
+            boolGe = _initBool(10);
+
+            initAlreadySelected();
+
+            mGeAdapter = new SscGriViewAdapter(this, mContent,
+                    boolGe, mActivity.mCity);
+            mShiAdapter = new SscGriViewAdapter(this, mContent,
+                    boolShi, mActivity.mCity);
+            mBaiAdapter = new SscGriViewAdapter(this, mContent,
+                    boolBai, mActivity.mCity);
+            mQianAdapter = new SscGriViewAdapter(this,mContent,
+                    boolQian, mActivity.mCity);
+            mWanAdapter = new SscGriViewAdapter( this,mContent,
+                    boolWan, mActivity.mCity);
+
 			mWanGV.setAdapter(mWanAdapter);
 			mQianGV.setAdapter(mQianAdapter);
 			mBaiGV.setAdapter(mBaiAdapter);
@@ -151,11 +194,13 @@ public class Ssc_cq_fragment extends Fragment{
 				) {
 			mLvBai.setVisibility(View.GONE);
 			boolShi = _initBool(10);
-			mShiAdapter = new SscGriViewAdapter(this, mContent,
-					boolShi, mActivity.mCity,1);
-			
-			boolGe = _initBool(10);
-			mGeAdapter = new SscGriViewAdapter(this, mContent,
+            boolGe = _initBool(10);
+
+            initAlreadySelected();
+
+            mShiAdapter = new SscGriViewAdapter(this, mContent,
+                    boolShi, mActivity.mCity,1);
+            mGeAdapter = new SscGriViewAdapter(this, mContent,
 					boolGe, mActivity.mCity,0);
 			mShiGV.setAdapter(mShiAdapter);
 			mGeGV.setAdapter(mGeAdapter);
@@ -165,7 +210,10 @@ public class Ssc_cq_fragment extends Fragment{
 			mGeweiHint.setVisibility(View.GONE);
 			mGeweiMark.setVisibility(View.GONE);
 			boolGe = _initBool(19);
-			mGeAdapter = new SscGriViewAdapter(this, mTwoStarZhixuan_hezhi,
+
+            initAlreadySelected();
+
+            mGeAdapter = new SscGriViewAdapter(this, mTwoStarZhixuan_hezhi,
 					boolGe, mActivity.mCity);
 			mGeGV.setAdapter(mGeAdapter);
 		} else if(mGameType.equals(SscType.twostar_zuxuan_hezhi.toString())) {
@@ -174,7 +222,10 @@ public class Ssc_cq_fragment extends Fragment{
 			mGeweiHint.setVisibility(View.GONE);
 			mGeweiMark.setVisibility(View.GONE);
 			boolGe = _initBool(17);
-			mGeAdapter = new SscGriViewAdapter(this, mTwoStarZuxuan_hezhi,
+
+            initAlreadySelected();
+
+            mGeAdapter = new SscGriViewAdapter(this, mTwoStarZuxuan_hezhi,
 					boolGe, mActivity.mCity);
 			mGeGV.setAdapter(mGeAdapter);
 		}
@@ -187,33 +238,38 @@ public class Ssc_cq_fragment extends Fragment{
 				mGeweiMark.setVisibility(View.GONE);
 			}
 			boolGe = _initBool(10);
+
+            initAlreadySelected();
 			mGeAdapter = new SscGriViewAdapter(this, mContent,
 					boolGe, mActivity.mCity);
 			mGeGV.setAdapter(mGeAdapter);
 		} else if(mGameType.equals(SscType.dxds.toString())) {
 			mLvBai.setVisibility(View.GONE);
 			boolShi = _initBool(4);
-			mShiAdapter = new SscGriViewAdapter(this, mDxdsContent,
-					boolShi, mActivity.mCity);
-			
-			boolGe = _initBool(4);
-			mGeAdapter = new SscGriViewAdapter(this, mDxdsContent,
+            boolGe = _initBool(4);
+
+            initAlreadySelected();
+
+            mShiAdapter = new SscGriViewAdapter(this, mDxdsContent,
+                    boolShi, mActivity.mCity);
+            mGeAdapter = new SscGriViewAdapter(this, mDxdsContent,
 					boolGe, mActivity.mCity);
 			mShiGV.setAdapter(mShiAdapter);
 			mGeGV.setAdapter(mGeAdapter);
 		} else {
 			boolBai = _initBool(10);
-			mBaiAdapter = new SscGriViewAdapter(this, mContent,
-					boolBai, mActivity.mCity);
-			
-			boolShi = _initBool(10);
-			mShiAdapter = new SscGriViewAdapter(this, mContent,
-					boolShi, mActivity.mCity);
-			
-			boolGe = _initBool(10);
-			mGeAdapter = new SscGriViewAdapter(this, mContent,
+            boolShi = _initBool(10);
+            boolGe = _initBool(10);
+
+            initAlreadySelected();
+
+            mGeAdapter = new SscGriViewAdapter(this, mContent,
 					boolGe, mActivity.mCity);
-			mBaiGV.setAdapter(mBaiAdapter);
+            mShiAdapter = new SscGriViewAdapter(this, mContent,
+                    boolShi, mActivity.mCity);
+            mBaiAdapter = new SscGriViewAdapter(this, mContent,
+                    boolBai, mActivity.mCity);
+            mBaiGV.setAdapter(mBaiAdapter);
 			mShiGV.setAdapter(mShiAdapter);
 			mGeGV.setAdapter(mGeAdapter);
 		}
@@ -225,6 +281,12 @@ public class Ssc_cq_fragment extends Fragment{
     	}
     	return bool;
     }
+
+    public void vibrate()
+    {
+        vibrator.vibrate(new long[]{0, 30}, -1);
+    }
+
 	public void computeZhuShu() {
 		if(mGameType.equals(SscType.fivestar_zhixuan.toString()) 
 				|| mGameType.equals(SscType.fivestar_fuxuan.toString())
@@ -351,6 +413,50 @@ public class Ssc_cq_fragment extends Fragment{
 		}
 		mActivity.setFooterBetValues(mZhushu);
 	}
+
+    private void initAlreadySelected()
+    {
+        if (alreadySelected != null && alreadySelected.size() > 0)
+        {
+            ArrayList<Boolean> wan = alreadySelected.get(IntentData.WAN);
+            ArrayList<Boolean> qian = alreadySelected.get(IntentData.QIAN);
+            ArrayList<Boolean> bai = alreadySelected.get(IntentData.BAI);
+            ArrayList<Boolean> shi = alreadySelected.get(IntentData.SHI);
+            ArrayList<Boolean> ge = alreadySelected.get(IntentData.GE);
+
+            if (wan != null && wan.size() > 0)
+            {
+                for (int i = 0; i < wan.size(); i++) {
+                    boolWan[i] = wan.get(i);
+                }
+            }
+            if (qian != null && qian.size() > 0)
+            {
+                for (int i = 0; i < qian.size(); i++) {
+                    boolQian[i] = qian.get(i);
+                }
+            }
+            if (bai != null && bai.size() > 0)
+            {
+                for (int i = 0; i < bai.size(); i++) {
+                    boolBai[i] = bai.get(i);
+                }
+            }
+            if (shi != null && shi.size() > 0)
+            {
+                for (int i = 0; i < shi.size(); i++) {
+                    boolShi[i] = shi.get(i);
+                }
+            }
+            if (ge != null && ge.size() > 0)
+            {
+                for (int i = 0; i < ge.size(); i++) {
+                    boolGe[i] = ge.get(i);
+                }
+            }
+        }
+    }
+
 	private int _computeTwoStarZhiHZ(int sum) {
 		int count = 0;
 		for(int i=0; i<10; i++) {
@@ -374,6 +480,7 @@ public class Ssc_cq_fragment extends Fragment{
 		return count;
 	}
 	public void clearSelectResult() {
+        vibrator.vibrate(new long[]{0, 30}, -1);
 		if(boolWan != null) {
 			for(int i=0; i<boolWan.length; i++) {
 				boolWan[i] = false;
@@ -408,10 +515,7 @@ public class Ssc_cq_fragment extends Fragment{
 	}
 
 	public void updateBallData() {
-		Vibrator vibrator = (Vibrator) getActivity().getApplication()
-				.getSystemService(Service.VIBRATOR_SERVICE);
-		vibrator.vibrate(new long[] { 0, 200 }, -1);
-		if(mGameType.equals(SscType.fivestar_zhixuan.toString()) 
+		if(mGameType.equals(SscType.fivestar_zhixuan.toString())
 				|| mGameType.equals(SscType.fivestar_fuxuan.toString())
 				|| mGameType.equals(SscType.fivestar_tongxuan.toString())) {
 			for(int i=0; i<boolGe.length; i++) {
@@ -543,9 +647,9 @@ public class Ssc_cq_fragment extends Fragment{
 					gBuilder.append(i + " ");
 				}
 			}
-			betResult = wBuilder.toString().trim().replace(" ", ",") + "|"+ qBuilder.toString().trim().replace(" ", ",")
-					+"|" +bBuilder.toString().trim().replace(" ", ",") + "|" +sBuilder.toString().trim().replace(" ", ",")
-					+ "|" +gBuilder.toString().trim().replace(" ", ",");
+			betResult = wBuilder.toString().trim() + " | "+ qBuilder.toString().trim()
+					+" | " +bBuilder.toString().trim() + " | " +sBuilder.toString().trim()
+					+ " | " +gBuilder.toString().trim();
 		} else if(mGameType.equals(SscType.twostar_fuxuan.toString())
 				||mGameType.equals(SscType.twostar_zhixuan.toString())) {
 			StringBuilder sBuilder = new StringBuilder();
@@ -558,7 +662,7 @@ public class Ssc_cq_fragment extends Fragment{
 					gBuilder.append(i + " ");
 				}
 			}
-			betResult = sBuilder.toString().trim().replace(" ", ",") +"|" + gBuilder.toString().trim().replace(" ", ",");
+			betResult = sBuilder.toString().trim() +" | " + gBuilder.toString().trim();
 		} else if(mGameType.equals(SscType.twostar_zuxuan.toString())) {
 			StringBuilder sBuilder = new StringBuilder();
 			StringBuilder gBuilder = new StringBuilder();
@@ -570,7 +674,7 @@ public class Ssc_cq_fragment extends Fragment{
 					gBuilder.append(i+ " ");
 				}
 			}
-			betResult = sBuilder.toString().trim().replace(" ", ",") + "|" +gBuilder.toString().trim().replace(" ", ",");
+			betResult = sBuilder.toString().trim() + " | " +gBuilder.toString().trim();
 		}else if(mGameType.equals(SscType.twostar_zhixuan_hezhi.toString())) {
 			StringBuilder gBuilder = new StringBuilder();
 			for(int i=0; i<boolGe.length; i++) {
@@ -578,7 +682,7 @@ public class Ssc_cq_fragment extends Fragment{
 					gBuilder.append(i + " ");
 				}
 			}
-			betResult = gBuilder.toString().trim().replace(" ", ",");
+			betResult = gBuilder.toString().trim();
 		} else if(mGameType.equals(SscType.twostar_zuxuan_hezhi.toString())) {
 			StringBuilder gBuilder = new StringBuilder();
 			for(int i=0; i<boolGe.length; i++) {
@@ -586,7 +690,7 @@ public class Ssc_cq_fragment extends Fragment{
 					gBuilder.append((i+1) + " ");
 				}
 			}
-			betResult = gBuilder.toString().trim().trim().replace(" ", ",");
+			betResult = gBuilder.toString().trim().trim();
 		}else if(mGameType.equals(SscType.twostar_zuxuan_baohao.toString())) {
 			StringBuilder gBuilder = new StringBuilder();
 			for(int i=0; i<boolGe.length; i++) {
@@ -594,7 +698,7 @@ public class Ssc_cq_fragment extends Fragment{
 					gBuilder.append(i+ " ");
 				}
 			}
-			betResult = gBuilder.toString().trim().replace(" ", ",");
+			betResult = gBuilder.toString().trim();
 		} else if(mGameType.equals(SscType.onestar_zhixuan.toString())) {
 			StringBuilder gBuilder = new StringBuilder();
 			for(int i=0; i<boolGe.length; i++) {
@@ -602,7 +706,7 @@ public class Ssc_cq_fragment extends Fragment{
 					gBuilder.append(i + " ");
 				}
 			}
-			betResult = gBuilder.toString().trim().replace(" ", ",");
+			betResult = gBuilder.toString().trim();
 		} else if(mGameType.equals(SscType.dxds.toString())) {
 			StringBuilder sBuilder = new StringBuilder();
 			StringBuilder gBuilder = new StringBuilder();
@@ -614,7 +718,7 @@ public class Ssc_cq_fragment extends Fragment{
 					gBuilder.append(mDxdsContent[i] + " ");
 				}
 			}
-			betResult = sBuilder.toString().trim().replace(" ", ",") +"|" + gBuilder.toString().trim().replace(" ", ",");
+			betResult = sBuilder.toString().trim() +" | " + gBuilder.toString().trim();
 		} else {
 			StringBuilder bBuilder = new StringBuilder();
 			StringBuilder sBuilder = new StringBuilder();
@@ -630,7 +734,54 @@ public class Ssc_cq_fragment extends Fragment{
 					gBuilder.append(i + " ");
 				}
 			}
-			betResult = bBuilder.toString().trim().replace(" ", ",") + "|" +sBuilder.toString().trim().replace(" ", ",") + "|" +gBuilder.toString().trim().replace(" ", ",");
+			betResult = bBuilder.toString().trim() + " | " +sBuilder.toString().trim() + " | " +gBuilder.toString().trim();
 		}
 	}
+
+    public HashMap<String, ArrayList<Boolean>> getResultMap()
+    {
+        HashMap<String, ArrayList<Boolean>> map = new HashMap<String, ArrayList<Boolean>>();
+
+        if (boolGe != null) {
+            ArrayList<Boolean> list = new ArrayList<Boolean>();
+
+            for (boolean aBoolGe : boolGe) list.add(aBoolGe);
+            
+            map.put(IntentData.GE, list);
+        }
+
+        if (boolShi != null) {
+            ArrayList<Boolean> list = new ArrayList<Boolean>();
+
+            for (boolean aBoolGe : boolShi) list.add(aBoolGe);
+
+            map.put(IntentData.SHI, list);
+        }
+
+        if (boolBai != null) {
+            ArrayList<Boolean> list = new ArrayList<Boolean>();
+
+            for (boolean aBoolGe : boolBai) list.add(aBoolGe);
+
+            map.put(IntentData.BAI, list);
+        }
+
+        if (boolQian != null) {
+            ArrayList<Boolean> list = new ArrayList<Boolean>();
+
+            for (boolean aBoolGe : boolQian) list.add(aBoolGe);
+
+            map.put(IntentData.QIAN, list);
+        }
+
+        if (boolWan != null) {
+            ArrayList<Boolean> list = new ArrayList<Boolean>();
+
+            for (boolean aBoolGe : boolWan) list.add(aBoolGe);
+
+            map.put(IntentData.WAN, list);
+        }
+
+        return map;
+    }
 }

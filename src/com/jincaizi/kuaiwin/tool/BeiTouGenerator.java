@@ -1580,12 +1580,11 @@ public class BeiTouGenerator {
 			if(mGameType.equals(SscType.twostar_zuxuan_baohao.toString())
 					|| mGameType.equals(SscType.onestar_zhixuan.toString())) {
 				for(int i=0; i<resource.size(); i++) {
-					String tempStr = resource.get(i).replace(",", " ");
-					data.add(tempStr);
+                    data.add(resource.get(i));
 				}
 			} else {
 			for(int i=0; i<resource.size(); i++) {
-				String tempStr = resource.get(i).replace(",", "");
+				String tempStr = resource.get(i).replace(" | ", "|").replace(" ", "");
 				data.add(tempStr.replace("|", " "));
 			}
 			}

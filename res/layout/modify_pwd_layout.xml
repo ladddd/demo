@@ -1,172 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/timer_bg">
 
-    <include
-        android:id="@+id/modify_pwd_headbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/main_head_bar_height"
-        layout="@layout/common_header_bar" />
+	<include
+			android:id="@+id/modify_pwd_headbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/main_head_bar_height"
+			layout="@layout/pick_title" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/main_head_bar_height"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal"
-        android:background="@drawable/list_above_background" >
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="40dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_marginTop="20dp"
+			android:orientation="horizontal"
+			android:background="@drawable/list_above_background" >
 
-        <TextView
-            android:id="@+id/old_pwd_title"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:gravity="center_vertical|left"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="原密码"
-            />
+		<TextView
+				android:id="@+id/old_pwd_title"
+				android:layout_width="70dp"
+				android:layout_height="fill_parent"
+				android:gravity="center_vertical|left"
+				android:layout_marginTop="10dp"
+				android:layout_marginBottom="10dp"
+				android:layout_marginLeft="10dp"
+				android:text="原密码"
+				android:textSize="14sp"
+				/>
+		<LinearLayout
+				android:layout_width="0dip"
+				android:layout_height="0dip"
+				android:focusable="true"
+				android:focusableInTouchMode="true" />
 
-        <EditText
-            android:id="@+id/old_pwd_view"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_margin="10dp"
-            android:gravity="right|center_vertical"
-            android:inputType="textPassword"
-            android:background="@null"
-            android:hint="6-15位字母，数字" 
-            android:layout_weight="1" />
-                <ToggleButton 
-            android:id="@+id/monitor_oldpwd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/red_mask_bg"
-            android:checked="true"
-            android:text="显示"
-            android:textOn="显示"
-            android:textOff="隐藏"
-            android:textColor="@android:color/white"
-            android:layout_gravity="right|center_vertical"
-            android:gravity="center"
-            android:padding="2dp"
-            android:layout_marginRight="4dp"
-            />
-    </LinearLayout>
+		<EditText
+				android:id="@+id/old_pwd_view"
+				android:layout_width="0dp"
+				android:layout_height="fill_parent"
+				android:singleLine="true"
+				android:maxLength="15"
+				android:inputType="textPassword"
+				android:background="@null"
+				android:hint="6-15位字母，数字"
+				android:textColorHint="@color/box_gray"
+				android:textSize="14sp"
+				android:layout_weight="1" />
+		<ToggleButton
+				android:id="@+id/monitor_oldpwd"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/red_mask_bg"
+				android:checked="true"
+				android:text="显示"
+				android:textOn="显示"
+				android:textOff="隐藏"
+				android:textColor="@android:color/white"
+				android:layout_gravity="right|center_vertical"
+				android:gravity="center"
+				android:padding="2dp"
+				android:layout_marginRight="4dp"
+				android:visibility="gone"/>
+	</LinearLayout>
 
-   <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/main_head_bar_height"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal"
-        android:background="@drawable/list_mid_backgroud" >
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="40dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:orientation="horizontal"
+			android:background="@drawable/list_mid_backgroud" >
 
-        <TextView
-            android:id="@+id/nick_title"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:text="新密码" />
+		<TextView
+				android:id="@+id/nick_title"
+				android:layout_width="70dp"
+				android:layout_height="fill_parent"
+				android:layout_marginLeft="10dp"
+				android:gravity="center_vertical"
+				android:text="新密码"
+				android:textSize="14sp"/>
 
-        <EditText
-            android:id="@+id/new_pwd_view"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_margin="10dp"
-            android:gravity="right|center_vertical"
-            android:inputType="textPassword"
-            android:background="@null"
-            android:hint="6-15位字母，数字" 
-            android:layout_weight="1" />
-                <ToggleButton 
-            android:id="@+id/monitor_newpwd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/red_mask_bg"
-            android:checked="true"
-            android:text="显示"
-            android:textOn="显示"
-            android:textOff="隐藏"
-            android:textColor="@android:color/white"
-            android:layout_gravity="right|center_vertical"
-            android:gravity="center"
-            android:padding="2dp"
-            android:layout_marginRight="4dp"
-            />
-    </LinearLayout>
+		<EditText
+				android:id="@+id/new_pwd_view"
+				android:layout_width="0dp"
+				android:layout_height="fill_parent"
+				android:singleLine="true"
+				android:maxLength="15"
+				android:inputType="textPassword"
+				android:background="@null"
+				android:hint="6-15位字母，数字"
+				android:textColorHint="@color/box_gray"
+				android:textSize="14sp"
+				android:layout_weight="1" />
+		<ToggleButton
+				android:id="@+id/monitor_newpwd"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/red_mask_bg"
+				android:checked="true"
+				android:text="显示"
+				android:textOn="显示"
+				android:textOff="隐藏"
+				android:textColor="@android:color/white"
+				android:layout_gravity="right|center_vertical"
+				android:gravity="center"
+				android:padding="2dp"
+				android:layout_marginRight="4dp"
+				android:visibility="gone"/>
+	</LinearLayout>
 
-<LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/main_head_bar_height"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:orientation="horizontal"
-        android:background="@drawable/list_below_background" >
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="40dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:orientation="horizontal"
+			android:background="@drawable/list_below_background" >
 
-        <TextView
-            android:id="@+id/email_title"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="10dp"
-            android:gravity="center_vertical"
-            android:text="确认密码" />
+		<TextView
+				android:id="@+id/email_title"
+				android:layout_width="70dp"
+				android:layout_height="fill_parent"
+				android:layout_marginLeft="10dp"
+				android:gravity="center_vertical"
+				android:text="确认密码"
+				android:textSize="14sp"/>
 
-        <EditText
-            android:id="@+id/repeat_pwd_view"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_margin="10dp"
-            android:gravity="right|center_vertical"
-            android:inputType="textPassword"
-            android:background="@null"
-            android:hint="请输入确认密码" 
-            android:layout_weight="1" />
-                <ToggleButton 
-            android:id="@+id/monitor_newpwdsure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/red_mask_bg"
-            android:checked="true"
-            android:text="显示"
-            android:textOn="显示"
-            android:textOff="隐藏"
-            android:textColor="@android:color/white"
-            android:layout_gravity="right|center_vertical"
-            android:gravity="center"
-            android:padding="2dp"
-            android:layout_marginRight="4dp"
-            />
-    </LinearLayout>
-      <TextView
-            android:id="@+id/verify_hint_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:textColor="#F33030"
-            android:drawableLeft="@drawable/verify_hint"
-            android:drawablePadding="10dp"
-            android:visibility="invisible"
-            android:text="新密码与确认密码不一致！" />
-                <Button
-                    android:id="@+id/modifypwd_ok_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/button_general"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp"
-                    android:paddingTop="10dp"
-                    android:text="确认"
-                    android:textColor="@android:color/white" />
+		<EditText
+				android:id="@+id/repeat_pwd_view"
+				android:layout_width="0dp"
+				android:layout_height="fill_parent"
+				android:singleLine="true"
+				android:maxLength="15"
+				android:inputType="textPassword"
+				android:background="@null"
+				android:hint="请输入确认密码"
+				android:textSize="14sp"
+				android:textColorHint="@color/box_gray"
+				android:layout_weight="1" />
+		<ToggleButton
+				android:id="@+id/monitor_newpwdsure"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/red_mask_bg"
+				android:checked="true"
+				android:text="显示"
+				android:textOn="显示"
+				android:textOff="隐藏"
+				android:textColor="@android:color/white"
+				android:layout_gravity="right|center_vertical"
+				android:gravity="center"
+				android:padding="2dp"
+				android:layout_marginRight="4dp"
+				android:visibility="gone"/>
+	</LinearLayout>
+	<RelativeLayout android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:minHeight="10dp">
+		<TextView
+				android:id="@+id/verify_hint_view"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:layout_marginTop="10dp"
+				android:gravity="center_vertical"
+				android:textColor="#F33030"
+				android:drawableLeft="@drawable/verify_hint"
+				android:drawablePadding="10dp"
+				android:visibility="gone"
+				android:text="新密码与确认密码不一致！" />
+	</RelativeLayout>
+
+	<Button
+			android:id="@+id/modifypwd_ok_btn"
+			android:background="@drawable/btn_orange_round_corner"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical|right"
+			android:layout_marginTop="10dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:paddingBottom="10dp"
+			android:paddingTop="10dp"
+			android:text="确认"
+			android:textSize="16sp"
+			android:textColor="@android:color/white" />
 </LinearLayout>

@@ -5,19 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.jincaizi.R;
 
 public class WanFaIntroActivity extends Activity implements OnClickListener{
 
 	private ListView mListView;
-	private ImageView mBackBtn;
+	private RelativeLayout mBackBtn;
 	private String[] nameItems;
 	private String[] urlItems;
 	@Override
@@ -25,11 +21,10 @@ public class WanFaIntroActivity extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.wanfa_activity);
-		mBackBtn = (ImageView) findViewById(R.id.touzhu_leftmenu);
+		mBackBtn = (RelativeLayout) findViewById(R.id.left_layout);
 		mBackBtn.setOnClickListener(this);
 		TextView mTitle = (TextView) findViewById(R.id.current_lottery);
 		mTitle.setText("玩法说明");
-		findViewById(R.id.right_divider).setVisibility(View.GONE);
 		findViewById(R.id.sumbit_group_buy).setVisibility(View.GONE);
 		mListView = (ListView)findViewById(R.id.wanfa_list);
 		nameItems = this.getResources().getStringArray(R.array.help_wanfa_name_items);
@@ -55,7 +50,7 @@ public class WanFaIntroActivity extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()) {
-		case R.id.touzhu_leftmenu:
+		case R.id.left_layout:
 			finish();
 			break;
 			default:

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jincaizi.R;
@@ -21,7 +21,7 @@ import com.jincaizi.R;
  */
 public class AboutActivity extends Activity implements OnClickListener{
 
-	private ImageView mBackBtn;
+	private RelativeLayout mBackBtn;
 	private TextView tvCall;
 	private Dialog myDialog;
 	private TextView dialogCancel;
@@ -32,11 +32,10 @@ public class AboutActivity extends Activity implements OnClickListener{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about_kw);
-		mBackBtn = (ImageView) findViewById(R.id.touzhu_leftmenu);
+		mBackBtn = (RelativeLayout) findViewById(R.id.left_layout);
 		mBackBtn.setOnClickListener(this);
 		TextView mTitle = (TextView) findViewById(R.id.current_lottery);
 		mTitle.setText("关于");
-		findViewById(R.id.right_divider).setVisibility(View.GONE);
 		findViewById(R.id.sumbit_group_buy).setVisibility(View.GONE);
 		tvCall = (TextView)findViewById(R.id.tv_tel);
 		tvCall.setOnClickListener(this);
@@ -82,7 +81,7 @@ public class AboutActivity extends Activity implements OnClickListener{
 			});
 			myDialog.show();
 			break;
-		case R.id.touzhu_leftmenu:
+		case R.id.left_layout:
 			finish();
 			break;
 			default:

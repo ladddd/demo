@@ -3,6 +3,7 @@ package com.jincaizi.kuaiwin.hemaicenter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import android.widget.*;
 import com.jincaizi.adapters.PopViewAdapter;
 import com.jincaizi.kuaiwin.FragmentCallbacks;
 import com.jincaizi.R;
@@ -26,20 +27,14 @@ import android.view.View.OnTouchListener;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.FrameLayout;
-import android.widget.GridView;
-import android.widget.PopupWindow;
-import android.widget.RadioButton;
-import android.widget.TextView;
 
 public class HemaiCenter extends Fragment implements OnClickListener,
 		OnGestureListener,FragmentCallbacks {
 	public static final String TAG = "HemaiCenter";
-	private String[] mItemName = { "全部彩种","十一运夺金","江西11选5" ,"广东11选5","安徽11选5", "重庆11选5", "辽宁11选5", "上海11选5","黑龙江11选5", "江苏快3",  "安徽快3", "内蒙古快3",
-		"重庆时时彩",   "江西时时彩","双色球", "大乐透","排列3", "排列5",  "福彩3D", "七星彩",
-		"七乐彩","22选5"};
+	private String[] mItemName = { "全部彩种","十一运夺金","江西11选5" ,"广东11选5","安徽11选5", "重庆11选5",
+            "辽宁11选5", "上海11选5","黑龙江11选5", "江苏快3", "吉林快3","安徽快3", "湖北快3",
+		"重庆时时彩",   "江西时时彩"};
 	private TextView mTitleView;
 	private ArrayList<Boolean> mChecked = new ArrayList<Boolean>();
 	private boolean isPopWindowShow = false;
@@ -56,6 +51,11 @@ public class HemaiCenter extends Fragment implements OnClickListener,
 	public String sortId = "Progress"; // 是否按总金额升序排列
 	private GestureDetector mMyGestureDetector;
 	private FrameLayout mHemaiContent;
+
+    private View firstIndicator;
+    private View secondIndicator;
+
+    private ImageView search;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -94,15 +94,17 @@ public class HemaiCenter extends Fragment implements OnClickListener,
 		for (int i = 1; i < mItemName.length; i++) {
 			mChecked.add(false);
 		}
-		view.findViewById(R.id.touzhu_leftmenu).setVisibility(View.GONE);
-		view.findViewById(R.id.left_divider).setVisibility(
-				View.GONE);
 		mTitleView = (TextView) view.findViewById(R.id.current_lottery);
 		mTitleView.setText("全部彩种");
 		mJinduSort = (RadioButton) view.findViewById(R.id.sort_jindu);
 		mZongjineSort = (RadioButton) view.findViewById(R.id.sort_jine);
 		mHemaiContent = (FrameLayout) view.findViewById(R.id.hemai_child_fragment_content);
 		mJinduSort.performClick();
+
+        firstIndicator = view.findViewById(R.id.first_indicator);
+        secondIndicator = view.findViewById(R.id.second_indicator);
+
+        search = (ImageView) view.findViewById(R.id.search);
 	}
 
 	private void _setListener() {
@@ -118,6 +120,14 @@ public class HemaiCenter extends Fragment implements OnClickListener,
 				return mMyGestureDetector.onTouchEvent(event);
 			}
 		});
+
+        //TODO 合买人搜索
+//        search.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
 	}
 
 	@Override
@@ -152,6 +162,8 @@ public class HemaiCenter extends Fragment implements OnClickListener,
 		}
 		mJinduSort.setChecked(true);
 		mZongjineSort.setChecked(false);
+        firstIndicator.setBackgroundColor(getResources().getColor(R.color.widget_orange));
+        secondIndicator.setBackgroundColor(getResources().getColor(R.color.box_gray));
 
 		if (isJinduSortUp) {
 			mJinduSort.setCompoundDrawablesWithIntrinsicBounds(0, 0,
@@ -189,6 +201,8 @@ public class HemaiCenter extends Fragment implements OnClickListener,
 		}
 		mJinduSort.setChecked(false);
 		mZongjineSort.setChecked(true);
+        firstIndicator.setBackgroundColor(getResources().getColor(R.color.box_gray));
+        secondIndicator.setBackgroundColor(getResources().getColor(R.color.widget_orange));
 
 		if (isZonjineSortUp) {
 			mZongjineSort.setCompoundDrawablesWithIntrinsicBounds(0, 0,
@@ -216,7 +230,7 @@ public class HemaiCenter extends Fragment implements OnClickListener,
 	private void _setPopWindow() {
 		View view = LayoutInflater.from(getActivity()).inflate(
 				R.layout.popview, null);
-		mPopWindow = new PopupWindow(view, LayoutParams.WRAP_CONTENT,
+		mPopWindow = new PopupWindow(view, LayoutParams.MATCH_PARENT,
 				LayoutParams.WRAP_CONTENT);
 		mGridView = (GridView) view.findViewById(R.id.pop_gridview);
 //		mGridView.setBackgroundColor(this.getResources().getColor(

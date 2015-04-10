@@ -28,17 +28,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
 import org.apache.http.Header;
 
 import com.google.gson.stream.JsonReader;
@@ -59,7 +50,7 @@ public class MyTikuan extends Activity implements OnClickListener{
 	private SharedPreferences sp;
 	private int userid;
 	private String mUpk;
-	private ImageView mLeftMenu;
+	private RelativeLayout mLeftMenu;
 	private TextView mCardKind;
 	private Button mSubmitTikuan;
 	private boolean mHasPopwindowCreated = false;
@@ -104,10 +95,9 @@ public class MyTikuan extends Activity implements OnClickListener{
 	}
 
 	private void _findViews() {
-		findViewById(R.id.right_divider).setVisibility(View.GONE);
 		findViewById(R.id.sumbit_group_buy).setVisibility(View.GONE);
-		((TextView)findViewById(R.id.current_lottery)).setText("提    款");
-		mLeftMenu = (ImageView)findViewById(R.id.touzhu_leftmenu);
+		((TextView)findViewById(R.id.current_lottery)).setText("提款");
+		mLeftMenu = (RelativeLayout)findViewById(R.id.left_layout);
 		mCardKind = (TextView)findViewById(R.id.card_kind);
 		mSubmitTikuan = (Button)findViewById(R.id.submit_tikuan);
 		mCardKindLayout = (LinearLayout)findViewById(R.id.card_kind_layout);
@@ -134,7 +124,7 @@ public class MyTikuan extends Activity implements OnClickListener{
 		case R.id.tikuan_legal:
 			_getUserInfo();
 			break;
-		case R.id.touzhu_leftmenu:
+		case R.id.left_layout:
 			finish();
 			break;
 		case R.id.submit_tikuan:
@@ -153,11 +143,6 @@ public class MyTikuan extends Activity implements OnClickListener{
 						Toast.LENGTH_SHORT).show();
                 break;
 			}
-//			if(mTikuanNum.getText().toString().compareTo(availableAmount) > 0) {
-//				Toast.makeText(this, "您的最大提款金额为"+availableAmount+"元！", Toast.LENGTH_SHORT).show();
-//				break;
-//			}
-			
 			if(TextUtils.isEmpty(mCardKind.getText())) {
 				Toast.makeText(this, "请选择收款银行", Toast.LENGTH_SHORT).show();
 				break;
@@ -189,7 +174,6 @@ public class MyTikuan extends Activity implements OnClickListener{
 	        View view = LayoutInflater.from(this).inflate(R.layout.tikuan_popview, null);
 	        mPopWindow = new PopupWindow(view, width, LayoutParams.WRAP_CONTENT);
 	        GridView mListView = (GridView) view.findViewById(R.id.pop_listview);
-	        mListView.setBackgroundColor(this.getResources().getColor(R.color.white));
 	        final String[]tikuan_card_kind = this.getResources().getStringArray(R.array.tikuan_card_kind);
 	        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 	                R.layout.tikuan_popview_item, tikuan_card_kind);

@@ -81,7 +81,7 @@ public class ElevenFiveCommonAdapter extends BaseAdapter {
         holder.selectCube.setSelected(mChecked.get(position));
         holder.type.setText(StringUtil.getResultNumberString(position + 1));
 
-        if (currentMiss != null && currentMiss.size() == 11)
+        if (currentMiss != null && currentMiss.size() == 11 && isCurrentMissInitialed())
         {
             holder.leak.setTextColor(fragment.getResources().getColor(R.color.setting_text));
             if (maxIndex.contains(position))
@@ -157,5 +157,15 @@ public class ElevenFiveCommonAdapter extends BaseAdapter {
                 maxIndex.add(i);
             }
         }
+    }
+
+    private boolean isCurrentMissInitialed()
+    {
+        for (String currentMis : currentMiss) {
+            if (Integer.valueOf(currentMis) != 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }

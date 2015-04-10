@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jincaizi.R;
@@ -14,7 +14,7 @@ import com.jincaizi.R;
 
 public class IdAuthActivity extends Activity implements OnClickListener{
 
-	private ImageView mLeftBack;
+	private RelativeLayout mLeftBack;
 	private LinearLayout mRealNameView;
 	private LinearLayout mPhoneView;
 	private LinearLayout mEmailView;
@@ -27,13 +27,14 @@ public class IdAuthActivity extends Activity implements OnClickListener{
 		_setListener();
 	}
     private void _findViews() {
-    	mLeftBack = (ImageView)findViewById(R.id.touzhu_leftmenu);
+    	mLeftBack = (RelativeLayout)findViewById(R.id.left_layout);
     	TextView titleView = (TextView)findViewById(R.id.current_lottery);
     	titleView.setText("身份认证");
     	titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
     	mRealNameView = (LinearLayout)findViewById(R.id.realname_auth);
     	mPhoneView = (LinearLayout)findViewById(R.id.phone_auth);
     	mEmailView = (LinearLayout)findViewById(R.id.email_auth);
+        findViewById(R.id.sumbit_group_buy).setVisibility(View.GONE);
     }
     private void _setListener() {
     	mLeftBack.setOnClickListener(this);
@@ -45,7 +46,7 @@ public class IdAuthActivity extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch(v.getId()) {
-		case R.id.touzhu_leftmenu:
+		case R.id.left_layout:
 			finish();
 			break;
 		case R.id.realname_auth:

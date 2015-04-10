@@ -323,7 +323,8 @@ public class HemaiZongjineFragment extends Fragment implements OnRefreshListener
 			}
 		}
 		double baodi = (insureCount*1.0/totalShare*1.0)*100.0;
-		float left = (Float.valueOf(totolAmount)-Float.valueOf(hadByAmount))/Float.valueOf(perAmount);
+        //剩余份数改为金额
+		float left = (Float.valueOf(totolAmount)-Float.valueOf(hadByAmount));
 		kjEntity.setBetBaodi(String.valueOf((int)baodi));
 		kjEntity.setBetLeft(String.valueOf((int)left));
 		reader.endObject();

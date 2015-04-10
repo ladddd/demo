@@ -453,7 +453,6 @@ public class K3Pick extends Activity implements OnClickListener, AdapterView.OnI
                 startActivityForResult(continuePick, CONTINUEPICK);
                 break;
             case R.id.random_layout:
-                //TODO 机选一注
                 addOneRandom();
                 break;
             default:

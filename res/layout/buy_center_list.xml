@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/timer_bg">
+
+	<ListView
+			android:id="@+id/buy_listview"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:paddingLeft="4dp"
+			android:paddingRight="4dp"
+			android:listSelector="@android:color/transparent"
+			android:divider="@android:color/transparent"
+			android:dividerHeight="4dp">
+
+
+	</ListView>
+
+</LinearLayout>

@@ -3,6 +3,7 @@ package com.jincaizi.kuaiwin.mylottery;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 
+import android.widget.*;
 import org.apache.http.Header;
 
 import android.app.Activity;
@@ -20,11 +21,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.stream.JsonReader;
 import com.jincaizi.R;
@@ -42,7 +38,7 @@ public class PhoneAuth extends Activity implements OnClickListener {
 	private int userid;
 	private String mUpk;
 	private String userName;
-	private ImageView mLeftBack;
+	private RelativeLayout mLeftBack;
 	private EditText mIdNumView;
 	private TextView userNameView;
 	private Button mAuthButton;
@@ -89,7 +85,7 @@ public class PhoneAuth extends Activity implements OnClickListener {
 		
 	}
     private void _findViews() {
-    	mLeftBack = (ImageView)findViewById(R.id.touzhu_leftmenu);
+    	mLeftBack = (RelativeLayout)findViewById(R.id.left_layout);
     	TextView titleView = (TextView)findViewById(R.id.current_lottery);
     	titleView.setText("手机认证");
     	titleView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
@@ -108,6 +104,7 @@ public class PhoneAuth extends Activity implements OnClickListener {
     	mAuthButton.setText("手机验证");
     	
     	mAuthHintView = (TextView)findViewById(R.id.auth_hint);
+        findViewById(R.id.sumbit_group_buy).setVisibility(View.GONE);
     }
     
     private void _setListener() {
@@ -120,7 +117,7 @@ public class PhoneAuth extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch(v.getId()) {
-		case R.id.touzhu_leftmenu:
+		case R.id.left_layout:
 			finish();
 			break;
 		case R.id.submit_auth:

@@ -106,6 +106,10 @@ public class QiHaoTool {
 		return qihao;
 	}
     public static String  getSscNextQihao(String theQihao, int perDayTermCount) {
+        if (theQihao == null || theQihao.length() < 12)
+        {
+            return theQihao;
+        }
     	int year=Integer.parseInt(theQihao.substring(0,4));
 		int month=Integer.parseInt(theQihao.substring(4,6));
 		int day=Integer.parseInt(theQihao.substring(6,8));

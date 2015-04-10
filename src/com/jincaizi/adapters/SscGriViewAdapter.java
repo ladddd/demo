@@ -1,5 +1,6 @@
 package com.jincaizi.adapters;
 
+import android.widget.TextView;
 import com.jincaizi.R;
 import com.jincaizi.kuaiwin.buycenter.Ssc_cq_fragment;
 import com.jincaizi.kuaiwin.buycenter.Ssc_jx_fragment;
@@ -12,8 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ToggleButton;
 
 /**
  * 投注适配器
@@ -63,25 +62,22 @@ public class SscGriViewAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = LayoutInflater.from(mFragment.getActivity()).inflate(R.layout.ssc_gridview_item, null, false);
-            convertView.setLayoutParams(new GridView.LayoutParams(67, 67));//重点行
-
-            holder.type = (ToggleButton) convertView.findViewById(R.id.ssc_toggle_btn);
+            convertView = LayoutInflater.from(mFragment.getActivity()).inflate(R.layout.ball, null, false);
+            holder.type = (TextView) convertView.findViewById(R.id.tv_ssq_ball);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.type.setText(mData[position]);
-        holder.type.setTextOff(mData[position]);
-        holder.type.setTextOn(mData[position]);
-        holder.type.setChecked(mChecked[position]);
-        holder.type.setOnClickListener(new MyClick(position));
+        convertView.findViewById(R.id.select_cube).setSelected(mChecked[position]);
+        convertView.findViewById(R.id.select_cube).setOnClickListener(new MyClick(position));
         return convertView;
     }
 
     private static class ViewHolder {
-        ToggleButton type;
+        TextView type;
     }
+
     class MyClick implements OnClickListener {
     	int position;
 
@@ -92,8 +88,8 @@ public class SscGriViewAdapter extends BaseAdapter {
 
 		@Override
 		public void onClick(View v) {
-			ToggleButton tb = (ToggleButton)v;
-			
+            v.setSelected(!v.isSelected());
+
 			if(mCity.equals(City.chongqing.toString())) {
 				Ssc_cq_fragment fragment = ((Ssc_cq_fragment)mFragment);
 				if(fragment.mGameType.equals(SscType.twostar_zuxuan.toString())) {
@@ -104,7 +100,7 @@ public class SscGriViewAdapter extends BaseAdapter {
 					} else{
 						for(int i=0; i<fragment.boolGe.length; i++) {
 							mChecked[i] = false;
-							mChecked[position] = tb.isChecked();
+							mChecked[position] = v.isSelected();
 						}
 					}
 					notifyDataSetChanged();
@@ -113,19 +109,20 @@ public class SscGriViewAdapter extends BaseAdapter {
 					for(int i=0; i< mChecked.length; i++) {
 						mChecked[i] = false;
 					}
-					mChecked[position] = tb.isChecked();
+					mChecked[position] = v.isSelected();
 					notifyDataSetChanged();
-				} 
-				
-				else {
-					mChecked[position] = tb.isChecked();
 				}
+
+				else {
+					mChecked[position] = v.isSelected();
+				}
+                fragment.vibrate();
 				fragment.computeZhuShu();
-				
+
 			} else {//江西
 				Ssc_jx_fragment fragment = ((Ssc_jx_fragment)mFragment);
 				if(fragment.mGameType.equals(SscType.threestar_zusan.toString())) {
-					
+
 					if(mMark == 0 && (fragment.boolBai[position] || fragment.boolShi[position])) {
 						mChecked[position] = false;
 					} else if((mMark == 1 || mMark == 2 )&& fragment.boolGe[position]){
@@ -135,19 +132,17 @@ public class SscGriViewAdapter extends BaseAdapter {
 						}
 					} else if(mMark == 1 || mMark == 2) {
 						for(int i=0; i<fragment.boolGe.length; i++) {
-							//mChecked[i] = false;
-							//mChecked[position] = tb.isChecked();
 							fragment.boolBai[i] = false;
-							fragment.boolBai[position] = tb.isChecked();
+							fragment.boolBai[position] = v.isSelected();
 							fragment.boolShi[i] = false;
-							fragment.boolShi[position] = tb.isChecked();
+							fragment.boolShi[position] = v.isSelected();
 						}
 					} else{
 						for(int i=0; i<fragment.boolGe.length; i++) {
 							mChecked[i] = false;
-							mChecked[position] = tb.isChecked();
+							mChecked[position] = v.isSelected();
 						}
-					} 
+					}
 					fragment.threeZusanNotifyAdapter();
 				} else if(fragment.mGameType.equals(SscType.threestar_zuliu.toString())) {
 					if(mMark == 0 && (fragment.boolBai[position] || fragment.boolShi[position])) {
@@ -159,7 +154,7 @@ public class SscGriViewAdapter extends BaseAdapter {
 					} else {
 						for(int i=0; i<fragment.boolGe.length; i++) {
 							mChecked[i] = false;
-							mChecked[position] = tb.isChecked();
+							mChecked[position] = v.isSelected();
 						}
 					}
 					notifyDataSetChanged();
@@ -171,12 +166,12 @@ public class SscGriViewAdapter extends BaseAdapter {
 					} else{
 						for(int i=0; i<fragment.boolGe.length; i++) {
 							mChecked[i] = false;
-							mChecked[position] = tb.isChecked();
+							mChecked[position] = v.isSelected();
 						}
 					}
 					notifyDataSetChanged();
 				}  else if(fragment.mGameType.equals(SscType.twostar_zuxuan_hezhi.toString())
-						|| fragment.mGameType.equals(SscType.twostar_zhixuan_hezhi.toString()) 
+						|| fragment.mGameType.equals(SscType.twostar_zhixuan_hezhi.toString())
 						|| fragment.mGameType.equals(SscType.threestar_zhixuan_hezhi.toString())
 						|| fragment.mGameType.equals(SscType.threestar_zuliu_hezhi.toString())
 						|| fragment.mGameType.equals(SscType.threestar_zusan_hezhi.toString())
@@ -184,17 +179,18 @@ public class SscGriViewAdapter extends BaseAdapter {
 					for(int i=0; i< mChecked.length; i++) {
 						mChecked[i] = false;
 					}
-					mChecked[position] = tb.isChecked();
+					mChecked[position] = v.isSelected();
 					notifyDataSetChanged();
 				}
 				else {
-					mChecked[position] = tb.isChecked();
+					mChecked[position] = v.isSelected();
 				}
+                fragment.vibrate();
 				fragment.computeZhuShu();
 			}
-			
+
 		}
-    	
+
     }
     
 }

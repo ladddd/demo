@@ -75,7 +75,7 @@
             android:name=".kuaiwin.buycenter.SscPick"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+            android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         
          <activity

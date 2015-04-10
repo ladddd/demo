@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.jincaizi.R;
 import com.jincaizi.kuaiwin.buycenter.K3Pick;
+import com.jincaizi.kuaiwin.buycenter.SscPick;
 import com.jincaizi.kuaiwin.utils.Constants.K3Type;
 import com.jincaizi.kuaiwin.utils.Constants.SscType;
 
@@ -83,7 +84,13 @@ public class K3TouZhuAdapter extends BaseAdapter {
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((K3Pick)mContext).deleteItemAtIndex(position);
+                if (mContext instanceof  K3Pick) {
+                    ((K3Pick) mContext).deleteItemAtIndex(position);
+                }
+                else if (mContext instanceof SscPick)
+                {
+                    ((SscPick) mContext).deleteItemAtIndex(position);
+                }
             }
         });
 

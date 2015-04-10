@@ -8,14 +8,11 @@
         android:id="@+id/wanfa_headbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/main_head_bar_height"
-        layout="@layout/common_header_bar" />
+        layout="@layout/pick_title" />
     <ListView
         android:id="@+id/wanfa_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="6.0dip"
-        android:layout_marginRight="6.0dip"
-        android:layout_marginTop="6.0dip"
         android:cacheColorHint="@android:color/transparent"
         android:fadingEdge="none"
         android:hapticFeedbackEnabled="false"

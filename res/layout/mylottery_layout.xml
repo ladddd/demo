@@ -1,234 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#eeeeee"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/timer_bg"
+              android:orientation="vertical" >
 
-    <include
-        android:id="@+id/mylottery_head_bar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/main_head_bar_height"
-        layout="@layout/common_header_bar" />
+	<include
+			android:id="@+id/mylottery_head_bar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/main_head_bar_height"
+			layout="@layout/pick_title" />
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+		<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+			<LinearLayout android:layout_width="match_parent"
+			              android:layout_height="60dp"
+			              android:orientation="horizontal"
+			              android:background="@color/chart_white">
 
-            <TextView
-                android:id="@+id/login_hint_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:drawableLeft="@drawable/verify_hint"
-                android:drawablePadding="10dp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:text="您还未登录，登录后可查看详细信息"
-                android:textColor="#000000" />
-           <TextView
-               android:id="@+id/money_brief"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/footer_blue"
-                android:gravity="left"
-                android:paddingBottom="4dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="4dp"
-                android:text="账户速览"
-                android:visibility="gone"
-                android:textColor="#eeeeee" />
-            <TextView
-                android:id="@+id/money_all_left"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/gold"
-                android:drawablePadding="5dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="当前余额：0元"
-                android:visibility="gone"
-                android:textColor="#000000" />
+				<ImageView android:layout_width="40dp"
+				           android:layout_height="40dp"
+				           android:layout_marginLeft="10dp"
+				           android:layout_marginStart="10dp"
+				           android:src="@drawable/self_info"
+				           android:layout_gravity="center_vertical"/>
 
-            <TextView
-                android:id="@+id/money_in_use"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/copper"
-                android:drawablePadding="5dp"
-                android:layout_marginTop="2dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="可用余额：0元"
-                android:visibility="gone"
-                android:textColor="#000000" />
-            <TextView
-                android:id="@+id/money_in_freez"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/silver"
-                android:drawablePadding="5dp"
-                android:layout_marginTop="2dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="冻结余额：0元"
-                android:visibility="gone"
-                android:textColor="#000000" />
-            <TextView
-                android:id="@+id/money_get_failure"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/verify_hint"
-                android:drawablePadding="5dp"
-                android:layout_marginTop="2dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:visibility="gone"
-                android:textColor="#000000" />
+				<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginRight="10dp"
+						android:layout_marginEnd="10dp"
+						android:orientation="vertical"
+						android:layout_gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/mylottery_touzhu_title"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@color/footer_blue"
-                android:gravity="left"
-                android:paddingBottom="4dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="4dp"
-                android:text="投注管理"
-                android:textColor="#eeeeee" />
+					<TextView
+							android:id="@+id/login_hint_view"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="请登录"
+							android:layout_marginLeft="10dp"
+							android:textColor="@color/setting_text" />
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal" >
+					<TextView
+							android:id="@+id/money"
+							android:layout_width="fill_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="10dp"
+							android:layout_marginStart="10dp"
+							android:layout_marginTop="5dp"
+							android:text="当前余额:0元"
+							android:textColor="@color/setting_text"/>
 
-                <TextView
-                    android:id="@+id/mylottory_daigou_record"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableTop="@drawable/daigou_pic"
-                    android:gravity="center_horizontal"
-                    android:text="代购记录" />
+				</LinearLayout>
 
-                <TextView
-                    android:id="@+id/mylottory_hemai_record"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableTop="@drawable/hemai_pic"
-                    android:gravity="center_horizontal"
-                    android:text="合买记录" />
+			</LinearLayout>
 
-                <TextView
-                    android:id="@+id/mylottory_zhuihao_record"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableTop="@drawable/zhuihao_pic"
-                    android:gravity="center_horizontal"
-                    android:text="追号记录" />
-            </LinearLayout>
+			<View android:layout_width="match_parent"
+			      android:layout_height="0.5dp"
+			      android:background="@color/divider_dark"/>
 
-            <TextView
-                android:id="@+id/mylottery_zhanghu_title"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/footer_blue"
-                android:gravity="left"
-                android:paddingBottom="4dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="4dp"
-                android:text="账户明细"
-                android:textColor="#eeeeee" />
+			<GridView
+					android:id="@+id/gridview"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:paddingLeft="4dp"
+					android:paddingRight="4dp"
+					android:layout_marginTop="10dp"
+					android:layout_marginBottom="10dp"
+					android:numColumns="3"
+					android:verticalSpacing="1dp"
+					android:horizontalSpacing="1dp"
+					android:listSelector="@android:color/transparent"/>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:id="@+id/mylottory_mingxi_record"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableTop="@drawable/zhanghu_pic"
-                    android:gravity="center_horizontal"
-                    android:text="账户明细" />
-
-                <TextView
-                    android:id="@+id/mylottory_chongzhi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableTop="@drawable/chongchi_pic"
-                    android:gravity="center_horizontal"
-                    android:text="充值" />
-
-                <TextView
-                    android:id="@+id/mylottory_tikuan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableTop="@drawable/tikuan_pic"
-                    android:gravity="center_horizontal"
-                    android:text="提款" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/mylottery_zhanghu_title"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/footer_blue"
-                android:gravity="left"
-                android:paddingBottom="4dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="4dp"
-                android:text="安全中心"
-                android:textColor="#eeeeee" />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:id="@+id/mylottory_modify_pwd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableTop="@drawable/pwd_pic"
-                    android:text="修改密码" />
-
-                <TextView
-                    android:id="@+id/mylottory_bangding_card"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableTop="@drawable/card_pic"
-                    android:text="绑定银行卡" />
-                
-                <TextView
-                    android:id="@+id/mylottory_id_auth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:drawableTop="@drawable/id_auth"
-                    android:text="身份认证" />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+		</LinearLayout>
 
 </LinearLayout>

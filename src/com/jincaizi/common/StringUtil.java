@@ -158,4 +158,21 @@ public class StringUtil {
                 + getResultNumberString(selectedNumbers.get(1) - 10) + " | " +
         getResultNumberString(selectedNumbers.get(2) - 21)).trim();
     }
+
+    public static String getDXDSString(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                return "大";
+            case 1:
+                return "小";
+            case 2:
+                return "单";
+            case 3:
+                return "双";
+            default:
+                return "";
+        }
+    }
 }

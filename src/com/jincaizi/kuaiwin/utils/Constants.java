@@ -252,7 +252,7 @@ public class Constants {
 	 */
 	public enum City {
 		jiangxi(0), guangdong(1), anhui(2), chongqing(3), liaoning(4), shanghai(
-				5), heilongjiang(6), neimenggu(7), jiangsu(8), shandong(9);
+				5), heilongjiang(6), neimenggu(7), jiangsu(8), shandong(9), jilin(10), hubei(11), zhejiang(12);
 		private final int mCity;
 
 		City(final int i) {
@@ -283,9 +283,18 @@ public class Constants {
 				return City.neimenggu;
 			} else if(type.equals("8")){
 				return City.jiangsu;
-			} else {
+			} else if(type.equals("9")){
 				return City.shandong;
 			}
+            else if(type.equals("10")){
+                return City.jilin;
+            }
+            else if (type.equals("11")){
+                return City.hubei;
+            }
+            else {
+                return City.zhejiang;
+            }
 		}
 		public static String getCityName(String type) {
 			if (type.equals("0")) {
@@ -306,9 +315,17 @@ public class Constants {
 				return "内蒙古";
 			} else if(type.equals("8")){
 				return "江苏";
-			} else {
+			} else if (type.equals("9")){
 				return "山东";
-			}
+			} else if(type.equals("10")){
+                return "吉林";
+            }
+            else if (type.equals("11")){
+                return "湖北";
+            }
+            else {
+                return "浙江";
+            }
 		}
 		public static String getCityBetType(String city, String lotteryType) {
 			String cStr = "";
@@ -330,9 +347,15 @@ public class Constants {
 				cStr = "nmg";
 			} else if(city.equals("8")){
 				cStr = "js";
-			} else {
-				cStr = "sd";
-			}
+			} else if(city.equals("9")) {
+                cStr = "sd";
+            } else if(city.equals("10")){
+                return "jl";
+            } else if(city.equals("11")){
+                return "hb";
+            } else {
+                return "zj";
+            }
 			return cStr+lotteryType;
 		}
 	}
@@ -641,7 +664,7 @@ public class Constants {
 	public enum LotteryType {
 		sd11x5(0), jx11x5(1), gd11x5(2), ah11x5(3),cq11x5(4), ln11x5(
 			5),sh11x5(6), hlj11x5(7), jsk3(8), ahk3(9), nmgk3(10), cqssc(11), jxssc(12),ALLTYPE(13),UNDEFINETYPE(14), SSQ(15), 
-			FC3D(16), QLC(17), DLT(18), PL3(19), PL5(20), QXC(21), TC22x5(22);
+			FC3D(16), QLC(17), DLT(18), PL3(19), PL5(20), QXC(21), TC22x5(22), jlk3(23), hbk3(24);
 		private final int mLotteryType;
 
 		LotteryType(final int i) {
@@ -675,7 +698,11 @@ public class Constants {
 				return LotteryType.ahk3;
 			}  else if(type.equals("内蒙古快3")) {
 				return LotteryType.nmgk3;
-			} else if(type.equals("重庆时时彩")) {
+			} else if(type.equals("吉林快3")) {
+                return LotteryType.jlk3;
+            } else if(type.equals("湖北快3")) {
+                return LotteryType.hbk3;
+            } else if(type.equals("重庆时时彩")) {
 				return LotteryType.cqssc;
 			} else if(type.equals("江西时时彩")) {
 				return LotteryType.jxssc;
@@ -725,7 +752,11 @@ public class Constants {
 				return "AHK3";
 			}else if(type == nmgk3) {
 				return "NMGK3";
-			}else if(type == cqssc) {
+			}else if(type == jlk3){
+                return "JLK3";
+            }else if(type == hbk3){
+                return "HBK3";
+            }if(type == cqssc) {
 				return "CQSSC";
 			}else if(type == jxssc) {
 				return "JXSSC";

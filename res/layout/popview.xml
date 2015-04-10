@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/pop_gridview"
-        android:divider="#616065"
-        android:dividerHeight="1dp"
-        android:listSelector="@android:color/transparent"
-        android:background="@drawable/footer_select"
-        android:scrollbarStyle="@null"
-        android:layout_width="fill_parent"
-        android:layout_gravity="bottom"
-        android:numColumns="auto_fit"
-        android:columnWidth="70dp"
-        android:stretchMode="columnWidth"
-        android:horizontalSpacing="4dp"
-        android:verticalSpacing="4dp"
-        android:padding="10dp"
-        android:layout_height="wrap_content"
-        
-        >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:background="@color/chart_white">
+	<GridView
+			android:id="@+id/pop_gridview"
+			android:divider="#616065"
+			android:dividerHeight="1dp"
+			android:listSelector="@android:color/transparent"
+			android:scrollbarStyle="@null"
+			android:layout_width="fill_parent"
+			android:layout_gravity="bottom"
+			android:numColumns="auto_fit"
+			android:columnWidth="70dp"
+			android:stretchMode="columnWidth"
+			android:horizontalSpacing="4dp"
+			android:verticalSpacing="4dp"
+			android:padding="10dp"
+			android:layout_height="wrap_content"
+			android:overScrollMode="never"
+			>
 
-    </GridView>
+	</GridView>
+
+	<View android:layout_width="match_parent"
+	      android:layout_height="0.5dp"
+	      android:background="@color/divider_dark"/>
+
+</LinearLayout>

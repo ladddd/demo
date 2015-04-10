@@ -295,7 +295,19 @@ public class SumbitGroupBuy extends Activity implements OnClickListener {
 				mTitleStr = "内蒙古";
 				lotterytype = "NMG"+mLotteryType;
 				perDayTermCount = 73;
-			}
+			}else if(mCity.equals(Constants.City.zhejiang.toString())) {
+                mTitleStr = "浙江";
+                lotterytype = "ZJ"+mLotteryType;
+                perDayTermCount = 80;
+            }else if(mCity.equals(Constants.City.hubei.toString())) {
+                mTitleStr = "湖北";
+                lotterytype = "HB"+mLotteryType;
+                perDayTermCount = 78;
+            }else if(mCity.equals(Constants.City.jilin.toString())) {
+                mTitleStr = "吉林";
+                lotterytype = "JL"+mLotteryType;
+                perDayTermCount = 79;
+            }
 		    if(mLotteryType.equals("11x5")) {
 		    	mTitleStr += "11选5";
 		    } else if(mLotteryType.equals("K3")) {
@@ -416,7 +428,7 @@ public class SumbitGroupBuy extends Activity implements OnClickListener {
 		localDialog.setContentView(view);
 		Window dialogWindow = localDialog.getWindow();
 		WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-		lp.width = 300; // 宽度
+		lp.width = 250 * (int)getResources().getDisplayMetrics().density; // 宽度
 		dialogWindow.setAttributes(lp);
 		localOK.setOnClickListener(new OnClickListener() {
 			

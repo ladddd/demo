@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/timer_bg">
+
+	<LinearLayout
+			android:id="@+id/download_layout"
+			android:layout_width="wrap_content"
+	              android:layout_height="35dp"
+	              android:gravity="center_vertical">
+		<ImageView android:layout_width="wrap_content"
+		           android:layout_height="wrap_content"
+		           android:src="@drawable/pptit"
+		           android:layout_marginLeft="4dp"
+		           android:layout_marginStart="4dp"/>
+		<TextView android:layout_width="wrap_content"
+		          android:layout_height="wrap_content"
+		          android:layout_marginLeft="4dp"
+		          android:layout_marginStart="4dp"
+		          android:textSize="14sp"
+		          android:textColor="@color/footer_black"
+		          android:text="点击下载喜彩apk"/>
+	</LinearLayout>
+
+	<GridView
+			android:id="@+id/other_gridview"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:paddingLeft="4dp"
+			android:paddingRight="4dp"
+			android:numColumns="3"
+			android:verticalSpacing="1dp"
+			android:horizontalSpacing="1dp"
+			android:listSelector="@android:color/transparent">
+
+
+	</GridView>
+
+</LinearLayout>

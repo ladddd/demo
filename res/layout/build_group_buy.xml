@@ -1,400 +1,399 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical" >
-
-        <RelativeLayout
-            android:id="@+id/layout_title"
-            style="@style/title"
-            android:layout_width="fill_parent"
-            android:padding="3.0dip" >
-
-            <ImageView
-                android:id="@+id/groupBuy_leftmenu"
-                android:layout_width="54dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true"
-                android:background="@drawable/digital_head_btn_bg"
-                android:contentDescription="@null"
-                android:gravity="center"
-                android:src="@drawable/return_back"
-                android:textColor="@android:color/white" />
-
-            <ImageView
-            android:layout_width="0.5dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:background="@android:color/white"
-            android:layout_toRightOf="@+id/groupBuy_leftmenu"
-            android:contentDescription="@null" />
-
-            <TextView
-                android:id="@+id/tv_groupBuy_title"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="16.0sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/group_buy_header_bg"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/group_buy_fanan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
-                android:text="方案总额：" />
-
-            <TextView
-                android:id="@+id/group_buy_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/group_buy_fanan"
-                android:background="@null"
-                android:drawableRight="@null"
-                android:text="10" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/group_buy_amount"
-                android:background="@null"
-                android:drawableRight="@null"
-                android:text="元" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_toLeftOf="@+id/group_buy_count"
-                android:text="合买份数：" />
-
-            <TextView
-                android:id="@+id/group_buy_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/group_buy_count_unit"
-                android:text="12" />
-            <TextView
-                android:id="@+id/group_buy_count_unit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:text="份" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rv_per_money"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/contact_info_item_height"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/list_above_background"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
-                android:drawableRight="@null"
-                android:text="每份金额" />
-
-            <TextView
-                android:id="@+id/group_buy_permoney_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="35dp"
-                android:background="@null"
-                android:text="1.00" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rv_security_level"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/contact_info_item_height"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/list_mid_backgroud"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
-                android:drawableRight="@null"
-                android:text="是否保密" />
-
-            <TextView
-                android:id="@+id/group_buy_security"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:background="@null"
-                android:drawablePadding="10dp"
-                android:drawableRight="@drawable/list_arrow"
-                android:text="公开" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rv_salary_scale"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/contact_info_item_height"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/list_below_background"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10dp"
-                android:drawableRight="@null"
-                android:text="佣金比例" />
-
-            <TextView
-                android:id="@+id/group_buy_salary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:background="@null"
-                android:drawablePadding="10dp"
-                android:drawableRight="@drawable/list_arrow"
-                android:text="0%" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/contact_info_item_height"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/list_above_background"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/group_buy_mybuy_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="我要认购" />
-
-            <View
-                android:layout_width="0.5dp"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="9dp"
-                android:layout_toRightOf="@+id/group_buy_mybuy_title"
-                android:background="#E6E4E4" />
-
-            <EditText
-                android:id="@+id/group_buy_mybuy_content"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:layout_toRightOf="@+id/group_buy_mybuy_title"
-                android:background="@null"
-                android:hint="至少认购1份"
-                android:inputType="numberDecimal"
-                android:digits="1234567890"  
-                android:textSize="14sp" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/contact_info_item_height"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/list_mid_backgroud"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/group_buy_baodi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="我要保底" />
-
-            <View
-                android:layout_width="0.5dp"
                 android:layout_height="fill_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/group_buy_baodi"
-                android:background="#E6E4E4" />
+                android:background="@color/chart_white">
 
-            <EditText
-                android:id="@+id/group_buy_baodi_content"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/group_buy_baodi"
-                android:background="@null"
-                android:inputType="numberDecimal"
-                android:digits="1234567890"  
-                android:hint="可以不保底"
-                android:textSize="14sp" />
-        </RelativeLayout>
-      <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/contact_info_item_height"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/list_mid_backgroud"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_alignParentTop="true"
+			android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/group_buy_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="我的标题" />
+		<RelativeLayout
+				android:id="@+id/layout_title"
+				android:layout_height="46dp"
+				android:layout_width="fill_parent"
+				android:background="@color/k3_orange">
 
-            <View
-                android:layout_width="0.5dp"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/group_buy_title"
-                android:background="#E6E4E4" />
+			<ImageView
+					android:id="@+id/groupBuy_leftmenu"
+					android:layout_width="54dp"
+					android:layout_height="54dp"
+					android:layout_alignParentLeft="true"
+					android:scaleType="centerInside"
+					android:background="@drawable/digital_head_btn_bg"
+					android:contentDescription="@null"
+					android:gravity="center"
+					android:src="@drawable/return_back"/>
 
-            <EditText
-                android:id="@+id/group_buy_title_content"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/group_buy_title"
-                android:background="@null"
-                android:inputType="none"
-                android:hint="可以不填写"
-                android:textSize="14sp" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/contact_info_item_height"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/list_below_background"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
+			<TextView
+					android:id="@+id/tv_groupBuy_title"
+					android:layout_width="wrap_content"
+					android:layout_height="fill_parent"
+					android:layout_centerInParent="true"
+					android:gravity="center"
+					android:textColor="@color/white"
+					android:textSize="17sp" />
+		</RelativeLayout>
 
-            <TextView
-                android:id="@+id/goup_buy_theme_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:text="我的描述" />
+		<RelativeLayout
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="15dp"
+				android:layout_marginRight="15dp"
+				android:layout_marginTop="15dp"
+				android:gravity="center_vertical"
+				android:orientation="horizontal" >
 
-            <View
-                android:layout_width="0.5dp"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@+id/goup_buy_theme_title"
-                android:background="#E6E4E4" />
+			<TextView
+					android:id="@+id/group_buy_fanan"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true"
+					android:text="方案总额："
+					android:textSize="14sp"/>
 
-            <EditText
-                android:id="@+id/group_buy_theme_content"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/goup_buy_theme_title"
-                android:background="@null"
-                android:hint="可以不填写"
-                android:inputType="none"
-                android:textSize="14sp" />
-        </RelativeLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical" >
+			<TextView
+					android:id="@+id/group_buy_amount"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_toRightOf="@+id/group_buy_fanan"
+					android:background="@null"
+					android:drawableRight="@null"
+					android:text="10"
+					android:textColor="@color/buyer_red"/>
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_toRightOf="@+id/group_buy_amount"
+					android:background="@null"
+					android:drawableRight="@null"
+					android:text="元"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="10dp"
+					android:layout_toLeftOf="@+id/group_buy_count"
+					android:text="合买份数：" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/main_head_bar_height"
-            android:background="@color/white" >
+			<TextView
+					android:id="@+id/group_buy_count"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_toLeftOf="@+id/group_buy_count_unit"
+					android:text="12"
+					android:textColor="@color/buyer_red"/>
+			<TextView
+					android:id="@+id/group_buy_count_unit"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentRight="true"
+					android:text="份"/>
+		</RelativeLayout>
 
-            <Button
-                android:id="@+id/group_buy_right_footer_btn"
-                android:layout_width="@dimen/main_footer_btn_weight"
-      android:layout_height="fill_parent"
-      android:layout_alignParentRight="true"
-      android:layout_centerVertical="true"
-      android:gravity="center"
-      android:background="@drawable/common_footer_btn_bg"
-      android:textColor="@color/right_footer_text_color"
-                android:text="提交订单" />
+		<RelativeLayout
+				android:id="@+id/rv_per_money"
+				android:layout_width="fill_parent"
+				android:layout_height="@dimen/contact_info_item_height"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:layout_marginTop="10dp"
+				android:gravity="center_vertical"
+				android:background="@drawable/list_above_background"
+				android:orientation="horizontal" >
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:layout_centerVertical="true"
-                android:orientation="horizontal" >
+			<TextView
+					android:id="@+id/textview_per_money"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="10dp"
+					android:layout_alignParentLeft="true"
+					android:drawableRight="@null"
+					android:text="每份金额"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_marginRight="20.0dip"
-                    android:gravity="center_vertical"
-                    android:text="应付金额：" />
+			<TextView
+					android:id="@+id/group_buy_permoney_content"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentRight="true"
+					android:layout_marginRight="10dp"
+					android:background="@null"
+					android:text="1.00"/>
+		</RelativeLayout>
 
-                <TextView
-                    android:id="@+id/group_buy_pay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0" />
+		<RelativeLayout
+				android:id="@+id/rv_security_level"
+				android:layout_width="fill_parent"
+				android:layout_height="@dimen/contact_info_item_height"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:background="@drawable/list_mid_backgroud"
+				android:gravity="center_vertical"
+				android:orientation="horizontal" >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="元" />
-            </LinearLayout>
-        </RelativeLayout>
-    </LinearLayout>
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true"
+					android:layout_marginLeft="10dp"
+					android:drawableRight="@null"
+					android:text="是否保密" />
+
+			<TextView
+					android:id="@+id/group_buy_security"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentRight="true"
+					android:layout_marginRight="10dp"
+					android:background="@null"
+					android:drawablePadding="10dp"
+					android:drawableRight="@drawable/list_arrow"
+					android:text="公开" />
+		</RelativeLayout>
+
+		<RelativeLayout
+				android:id="@+id/rv_salary_scale"
+				android:layout_width="fill_parent"
+				android:layout_height="@dimen/contact_info_item_height"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:background="@drawable/list_below_background"
+				android:gravity="center_vertical"
+				android:orientation="horizontal" >
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true"
+					android:layout_marginLeft="10dp"
+					android:drawableRight="@null"
+					android:text="佣金比例" />
+
+			<TextView
+					android:id="@+id/group_buy_salary"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentRight="true"
+					android:layout_marginRight="10dp"
+					android:background="@null"
+					android:drawablePadding="10dp"
+					android:drawableRight="@drawable/list_arrow"
+					android:text="0%" />
+		</RelativeLayout>
+
+		<RelativeLayout
+				android:layout_width="fill_parent"
+				android:layout_height="@dimen/contact_info_item_height"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:layout_marginTop="10dp"
+				android:background="@drawable/list_above_background"
+				android:gravity="center_vertical"
+				android:orientation="horizontal" >
+
+			<TextView
+					android:id="@+id/group_buy_mybuy_title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="10dp"
+					android:text="我要认购" />
+
+			<View
+					android:layout_width="0.5dp"
+					android:layout_height="fill_parent"
+					android:layout_marginLeft="9dp"
+					android:layout_toRightOf="@+id/group_buy_mybuy_title"
+					android:background="#E6E4E4" />
+
+			<EditText
+					android:id="@+id/group_buy_mybuy_content"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="20dp"
+					android:layout_marginRight="10dp"
+					android:layout_toRightOf="@+id/group_buy_mybuy_title"
+					android:background="@null"
+					android:hint="至少认购1份"
+					android:inputType="numberDecimal"
+					android:digits="1234567890"
+					android:textSize="14sp" />
+		</RelativeLayout>
+		<RelativeLayout
+				android:layout_width="fill_parent"
+				android:layout_height="@dimen/contact_info_item_height"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:background="@drawable/list_mid_backgroud"
+				android:gravity="center_vertical"
+				android:orientation="horizontal" >
+
+			<TextView
+					android:id="@+id/group_buy_baodi"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="10dp"
+					android:text="我要保底" />
+
+			<View
+					android:layout_width="0.5dp"
+					android:layout_height="fill_parent"
+					android:layout_marginLeft="10dp"
+					android:layout_toRightOf="@+id/group_buy_baodi"
+					android:background="#E6E4E4" />
+
+			<EditText
+					android:id="@+id/group_buy_baodi_content"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="20dp"
+					android:layout_toRightOf="@+id/group_buy_baodi"
+					android:background="@null"
+					android:inputType="numberDecimal"
+					android:digits="1234567890"
+					android:hint="可以不保底"
+					android:textSize="14sp" />
+		</RelativeLayout>
+		<RelativeLayout
+				android:layout_width="fill_parent"
+				android:layout_height="@dimen/contact_info_item_height"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:background="@drawable/list_mid_backgroud"
+				android:gravity="center_vertical"
+				android:orientation="horizontal" >
+
+			<TextView
+					android:id="@+id/group_buy_title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="10dp"
+					android:text="我的标题" />
+
+			<View
+					android:layout_width="0.5dp"
+					android:layout_height="fill_parent"
+					android:layout_marginLeft="10dp"
+					android:layout_toRightOf="@+id/group_buy_title"
+					android:background="#E6E4E4" />
+
+			<EditText
+					android:id="@+id/group_buy_title_content"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="20dp"
+					android:layout_toRightOf="@+id/group_buy_title"
+					android:background="@null"
+					android:inputType="none"
+					android:hint="可以不填写"
+					android:textSize="14sp" />
+		</RelativeLayout>
+		<RelativeLayout
+				android:layout_width="fill_parent"
+				android:layout_height="@dimen/contact_info_item_height"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:background="@drawable/list_below_background"
+				android:gravity="center_vertical"
+				android:orientation="horizontal" >
+
+			<TextView
+					android:id="@+id/goup_buy_theme_title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="10dp"
+					android:text="我的描述" />
+
+			<View
+					android:layout_width="0.5dp"
+					android:layout_height="fill_parent"
+					android:layout_marginLeft="10dp"
+					android:layout_toRightOf="@+id/goup_buy_theme_title"
+					android:background="#E6E4E4" />
+
+			<EditText
+					android:id="@+id/group_buy_theme_content"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerVertical="true"
+					android:layout_marginLeft="20dp"
+					android:layout_toRightOf="@+id/goup_buy_theme_title"
+					android:background="@null"
+					android:hint="可以不填写"
+					android:inputType="none"
+					android:textSize="14sp" />
+		</RelativeLayout>
+	</LinearLayout>
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:orientation="vertical" >
+
+		<View
+				android:layout_width="match_parent"
+				android:layout_height="0.5dp"
+				android:background="@color/divider_dark" />
+
+		<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/main_head_bar_height"
+				android:background="@color/timer_bg" >
+
+			<Button
+					android:id="@+id/group_buy_right_footer_btn"
+					android:layout_width="wrap_content"
+					android:layout_height="35dp"
+					android:layout_marginRight="10dp"
+					android:layout_marginEnd="10dp"
+					android:paddingLeft="4dp"
+					android:paddingRight="4dp"
+					android:layout_alignParentRight="true"
+					android:layout_centerVertical="true"
+					android:gravity="center"
+					android:background="@drawable/bottom_bg_selected"
+					android:textColor="@color/k3_orange"
+					android:text="提交订单" />
+
+			<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:gravity="center"
+					android:layout_centerVertical="true"
+					android:orientation="horizontal" >
+
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="fill_parent"
+						android:gravity="center_vertical"
+						android:text="应付金额：" />
+
+				<TextView
+						android:id="@+id/group_buy_pay"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="0"
+						android:textColor="@color/buyer_red"/>
+
+				<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="元" />
+			</LinearLayout>
+		</RelativeLayout>
+	</LinearLayout>
 
 </RelativeLayout>

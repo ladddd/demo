@@ -1,218 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-        <include
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/main_head_bar_height"
-        layout="@layout/common_header_bar" />
-     <TextView 
-         android:id="@+id/getuserinfo_hint"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:textColor="@color/red"
-         android:hint="@string/get_user_info"
-         android:drawableBottom="@drawable/shadow"
-         android:padding="10dp"
-         />   
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/timer_bg">
+	<include
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/main_head_bar_height"
+			layout="@layout/pick_title" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/contact_info_item_height"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/list_above_background"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+	<RelativeLayout android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:minHeight="20dp">
+		<TextView
+				android:id="@+id/getuserinfo_hint"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textColor="@color/help_text"
+				android:hint="@string/get_user_info"
+				android:paddingBottom="8dp"
+				android:paddingRight="10dp"
+				android:paddingLeft="10dp"
+				android:paddingTop="10dp"
+				android:visibility="gone"/>
+	</RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:drawableRight="@null"
-            android:text="@string/user_realname" />
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="@dimen/contact_info_item_height"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:background="@drawable/list_above_background"
+			android:gravity="center_vertical"
+			android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/user_realname"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:gravity="center_vertical"
-            android:layout_weight="1"
-            android:layout_marginLeft="25dp"
-            android:background="@null"
-            android:drawableRight="@null"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
-            android:hint="@string/user_realname_hint" />
-    </LinearLayout>
-<LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/contact_info_item_height"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/list_mid_backgroud"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+		<TextView
+				android:layout_width="80dp"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:drawableRight="@null"
+				android:text="@string/user_realname" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@null"
-            android:drawableRight="@null"
-            android:text="@string/user_cardID" />
+		<TextView
+				android:id="@+id/user_realname"
+				android:layout_width="0dp"
+				android:layout_height="fill_parent"
+				android:gravity="center_vertical"
+				android:layout_weight="1"
+				android:background="@null"
+				android:drawableRight="@null"
+				android:textSize="14sp"
+				android:hint="@string/user_realname_hint"
+				android:textColorHint="@color/box_gray"/>
+	</LinearLayout>
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="@dimen/contact_info_item_height"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:background="@drawable/list_mid_backgroud"
+			android:gravity="center_vertical"
+			android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/user_cardID"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="25dp"
-            android:background="@null"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:paddingRight="4dp"
-            android:textColor="@android:color/darker_gray"
-            android:hint="@string/user_cardID_hint" />
-    
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/card_type_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/contact_info_item_height"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/list_mid_backgroud"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+		<TextView
+				android:layout_width="80dp"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:background="@null"
+				android:drawableRight="@null"
+				android:text="@string/user_cardID" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@null"
-            android:drawableRight="@null"
-            android:text="@string/card_type" />
+		<TextView
+				android:id="@+id/user_cardID"
+				android:layout_width="0dp"
+				android:layout_height="fill_parent"
+				android:gravity="center_vertical"
+				android:background="@null"
+				android:textSize="14sp"
+				android:layout_weight="1"
+				android:paddingRight="4dp"
+				android:hint="@string/user_cardID_hint"
+				android:textColorHint="@color/box_gray"/>
 
-        <TextView
-            android:id="@+id/card_type"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="25dp"
-            android:background="@null"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:drawableRight="@drawable/list_arrow"
-            android:paddingRight="4dp"
-            android:hint="@string/card_type_hint" />
-    
-    </LinearLayout>
-    
-        <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/contact_info_item_height"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/list_mid_backgroud"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+	</LinearLayout>
+	<LinearLayout
+			android:id="@+id/card_type_layout"
+			android:layout_width="fill_parent"
+			android:layout_height="@dimen/contact_info_item_height"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:background="@drawable/list_mid_backgroud"
+			android:gravity="center_vertical"
+			android:orientation="horizontal" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@null"
-            android:drawableRight="@null"
-            android:text="@string/card_openspace" />
+		<TextView
+				android:layout_width="80dp"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:background="@null"
+				android:drawableRight="@null"
+				android:text="@string/card_type" />
 
-        <EditText
-            android:id="@+id/card_openspace"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:background="@null"
-            android:drawableRight="@null"
-            android:inputType="text"
-            android:layout_weight="1"
-            android:textSize="14sp"
-            android:hint="@string/card_openspace_hint"/>
-    
-    </LinearLayout>
+		<TextView
+				android:id="@+id/card_type"
+				android:layout_width="0dp"
+				android:layout_height="fill_parent"
+				android:gravity="center_vertical"
+				android:background="@null"
+				android:textSize="14sp"
+				android:layout_weight="1"
+				android:drawableRight="@drawable/list_arrow"
+				android:paddingRight="10dp"
+				android:hint="@string/card_type_hint"
+				android:textColorHint="@color/box_gray"/>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/contact_info_item_height"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/list_below_background"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+	</LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:drawableRight="@null"
-            android:text="@string/card_number" />
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="@dimen/contact_info_item_height"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:background="@drawable/list_mid_backgroud"
+			android:gravity="center_vertical"
+			android:orientation="horizontal" >
 
-        <EditText
-            android:id="@+id/card_num"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="25dp"
-            android:background="@null"
-            android:drawableRight="@null"
-            android:inputType="text"
-            android:layout_weight="1"
-             android:textSize="14sp"
-            android:hint="@string/card_number_hint" />
-    </LinearLayout>
-    
-  
-        
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10.0dip" >
+		<TextView
+				android:layout_width="80dp"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:background="@null"
+				android:drawableRight="@null"
+				android:text="@string/card_openspace" />
 
-            <Button
-                android:id="@+id/btn_unbind"
-                style="@style/btn_silvery_style"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:onClick="register"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:text="@string/btn_unbind" />
+		<LinearLayout
+				android:layout_width="0dip"
+				android:layout_height="0dip"
+				android:focusable="true"
+				android:focusableInTouchMode="true" />
 
-            <Button
-                android:id="@+id/btn_bind"
-                style="@style/button_general"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:onClick="login"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:text="@string/btn_bind"
-                android:textColor="@android:color/white"
-                android:textSize="16.0sp" />
-        </LinearLayout>
-          <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:drawableRight="@null"
-            android:textSize="12sp"
-            android:textColor="@android:color/darker_gray"
-            android:autoLink="phone"
-            android:text="@string/cardbind_hint" />
+		<EditText
+				android:id="@+id/card_openspace"
+				android:layout_width="0dp"
+				android:layout_height="fill_parent"
+				android:gravity="center_vertical"
+				android:background="@null"
+				android:drawableRight="@null"
+				android:singleLine="true"
+				android:inputType="text"
+				android:layout_weight="1"
+				android:textSize="14sp"
+				android:hint="@string/card_openspace_hint"
+				android:textColorHint="@color/box_gray"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="@dimen/contact_info_item_height"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:background="@drawable/list_below_background"
+			android:gravity="center_vertical"
+			android:orientation="horizontal" >
+
+		<TextView
+				android:layout_width="80dp"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:drawableRight="@null"
+				android:text="@string/card_number" />
+
+		<EditText
+				android:id="@+id/card_num"
+				android:layout_width="0dp"
+				android:layout_height="fill_parent"
+				android:gravity="center_vertical"
+				android:background="@null"
+				android:drawableRight="@null"
+				android:inputType="text"
+				android:layout_weight="1"
+				android:textSize="14sp"
+				android:hint="@string/card_number_hint"
+				android:textColorHint="@color/box_gray"/>
+	</LinearLayout>
+
+
+
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:padding="10.0dip" >
+
+		<Button
+				android:id="@+id/btn_unbind"
+				android:background="@drawable/btn_light_orange_round"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="10dp"
+				android:layout_weight="1"
+				android:onClick="register"
+				android:paddingBottom="10dp"
+				android:paddingTop="10dp"
+				android:text="@string/btn_unbind"
+				android:textSize="16sp"
+				android:textColor="@color/chart_white"/>
+
+		<Button
+				android:id="@+id/btn_bind"
+				android:background="@drawable/btn_orange_round_corner"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:layout_weight="1"
+				android:onClick="login"
+				android:paddingBottom="10dp"
+				android:paddingTop="10dp"
+				android:text="@string/btn_bind"
+				android:textColor="@android:color/white"
+				android:textSize="16.0sp" />
+	</LinearLayout>
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="10dp"
+			android:drawableRight="@null"
+			android:textSize="12sp"
+			android:textColor="@color/setting_text"
+			android:text="@string/cardbind_hint" />
 </LinearLayout>

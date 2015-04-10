@@ -55,6 +55,8 @@ public class LotteryLeakRequester {
                         String jsonData = new String(responseBody, charset);
                         intent.putExtra("success", true);
                         intent.putExtra("JSON", jsonData);
+                        //将lotterytype传过去做标记
+                        intent.putExtra("type", lottery);
                         Log.e("haha", jsonData);
                     }
                     catch (UnsupportedEncodingException e)

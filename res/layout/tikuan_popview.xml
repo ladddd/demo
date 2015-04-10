@@ -6,14 +6,13 @@
         android:scrollbarStyle="@null"
         android:layout_width="fill_parent"
         android:layout_gravity="bottom"
-        android:numColumns="auto_fit"
-        android:columnWidth="80dp"
-        android:verticalSpacing="4dp"
+        android:numColumns="3"
+        android:verticalSpacing="2dp"
         android:horizontalSpacing="2dp"
         android:listSelector="@android:color/transparent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_height="fill_parent">
+        android:padding="2dp"
+        android:layout_height="fill_parent"
+		android:background="@drawable/bank_popwindow_bg"
+		android:overScrollMode="never">
 
     </GridView>
